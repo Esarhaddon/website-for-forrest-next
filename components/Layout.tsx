@@ -8,50 +8,33 @@ export default props => (
           padding: 0;
         }
 
-        /* layout */
-        .wrapper {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          height: 420px;
-        }
-
         /* Parallax Styles */
         .parallax-container {
-          position: relative;
-          width: 100%;
-          height: 100%;
+          height: 100vh;
           overflow-x: hidden;
           overflow-y: scroll;
           perspective: 1px;
           perspective-origin: 0 0;
-          display: flex;
         }
 
         .background {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
+          height: 110vh;
           transform-origin: 0 0;
           transform: translateZ(-2px) scale(3);
+          background-image: url(../static/layer2.png);
+          background-size: cover;
+          background-repeat: no-repeat;
         }
 
         .foreground {
-          margin-top: auto;
-          margin-bottom: 50px;
-
-          transform-origin: 0 0;
-          transform: translateZ(0);
-
-          /* Uncomment the code below to see the difference the scale property makes! */
-          /* transform: translateZ(3px); */
-          /* transform: translateZ(0) scale(1); */
-        }
-
-        .foreground h1 {
-          font-size: 36px;
+          position: absolute;
+          top: 0;
+          left: 0;
+          height: 110vh;
+          width: 100vw;
+          background-image: url(../static/layer1.png);
+          background-size: cover;
+          background-repeat: no-repeat;
         }
       `}
     </style>
