@@ -18,11 +18,12 @@ export default props => (
         }
 
         .background {
-          height: 110vh;
+          height: 100vh;
           transform-origin: 0 0;
-          transform: translateZ(-2px) scale(3);
-          background-image: url(../static/layer2.png);
+          transform: translateZ(-1px) scale(2);
+          background-image: url(../static/landing-background-cropped.png);
           background-size: cover;
+          background-positon: top;
           background-repeat: no-repeat;
         }
 
@@ -30,10 +31,11 @@ export default props => (
           position: absolute;
           top: 0;
           left: 0;
-          height: 110vh;
+          height: 100vh;
           width: 100vw;
           background-image: url(../static/layer1.png);
           background-size: cover;
+          background-position: top;
           background-repeat: no-repeat;
         }
       `}
