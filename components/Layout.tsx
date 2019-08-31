@@ -23,8 +23,8 @@ export default props => (
           height: 100%;
           overflow-x: hidden;
           overflow-y: scroll;
-          perspective: 8px;
-          perspective-origin: 0%;
+          perspective: 1px;
+          perspective-origin: 0 0;
           display: flex;
         }
 
@@ -34,15 +34,16 @@ export default props => (
           left: 0;
           width: 100%;
           height: 100%;
-          transform: translateZ(0px);
+          transform-origin: 0 0;
+          transform: translateZ(-2px) scale(3);
         }
 
         .foreground {
           margin-top: auto;
           margin-bottom: 50px;
 
-          transform-origin: 0;
-          transform: translateZ(3px) scale(0.625);
+          transform-origin: 0 0;
+          transform: translateZ(0);
 
           /* Uncomment the code below to see the difference the scale property makes! */
           /* transform: translateZ(3px); */
