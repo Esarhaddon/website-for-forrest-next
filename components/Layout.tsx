@@ -27,7 +27,7 @@ export default props => (
           background-repeat: no-repeat;
         }
 
-        .foreground {
+        .middleground {
           position: absolute;
           top: 0;
           left: 0;
@@ -39,14 +39,7 @@ export default props => (
           background-repeat: no-repeat;
         }
 
-        .navbar {
-          position: absolute;
-          top: 72vh;
-          height: 17vh;
-          width: 100vw;
-          background-color: gray;
-          // border: 1px solid red;
-          z-index: 3;
+        .foreground {
           transform-origin: 0 0;
           transform: translateZ(1px) scale(0.5);
         }
