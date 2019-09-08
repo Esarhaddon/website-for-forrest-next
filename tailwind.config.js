@@ -3,7 +3,8 @@ module.exports = {
     extend: {}
   },
   variants: {
-    borderWidth: ["hover"]
+    borderWidth: ["hover"],
+    backgroundColor: ["group-hover"]
   },
   plugins: []
 };

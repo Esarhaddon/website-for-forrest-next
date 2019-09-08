@@ -13,6 +13,7 @@ export default props => (
           height: 100vh;
           overflow-x: hidden;
           overflow-y: scroll;
+          //overscroll-behavior: none;
           perspective: 2px;
           perspective-origin: 0 0;
         }
