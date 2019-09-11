@@ -23,80 +23,45 @@ export default (props: NavbarProps) => {
               top: 17vh;
             }
 
-            .menu-container:hover .menu {
-              //position: absolute;
+            .menu:hover {
+              position: absolute;
               bottom: 17vh;
               top: auto;
             }
 
-            .non-option:hover .bottom-item {
-              text-decoration: underline;
+            .menu-option:hover .menu {
+              position: absolute;
+              bottom: 17vh;
+              top: auto;
             }
 
-            .higher-item:hover ~ .bottom-item {
-              text-decoration: none;
+            .menu-option {
+              position: relative;
+              height: 100%;
             }
           `}</style>
           <div
             style={{
               width: "75%",
               height: "100%"
-              // top: "-2px"
             }}
-            className="non-option menu-container flex justify-center items-center relative text-black text-2xl"
+            className="menu-option off-non-option off-menu-container flex justify-center items-center relative text-black text-2xl"
           >
-            <div>WORK</div>
-            <div className="menu text-xl text-black bg-white">
-              <div
-                className="higher-item pl-4 pr-4 hover:underline"
-                style={{ padding: "1.5rem 2rem .25rem 2rem" }}
-              >
-                ILLUSTRATION
-              </div>
-              <div
-                className="higher-item pl-4 pr-4 hover:underline"
-                style={{ padding: ".25rem 2rem" }}
-              >
-                ANIMATION
-              </div>
-              <div
-                className="bottom-item pl-4 pr-4 hover:underline"
-                style={{ padding: ".25rem 2rem" }}
-              >
-                FINE ART
+            <div>
+              WORK
+              <div className="menu absolute">
+                <div className="menu-item hover:underline">ILLUSTRATION</div>
+                <div className="menu-item hover:underline">ANIMATION</div>
+                <div className="menu-item hover:underline">FINE ART</div>
               </div>
             </div>
           </div>
-          {/* <div
-            style={{ paddingTop: "1.25rem" }}
-            className="menu absolute text-xl bg-white"
-          >
-            <div
-              className="pl-4 pr-4"
-              style={{ padding: ".25rem 2rem" }}
-            >
-              ILLUSTRATION
-            </div>
-            <div
-              className="pl-4 pr-4"
-              style={{ padding: ".25rem 2rem" }}
-            >
-              ANIMATION
-            </div>
-            <div
-              className="pl-4 pr-4"
-              style={{ padding: ".25rem 2rem" }}
-            >
-              FINE ART
-            </div>
-          </div> */}
         </div>
         <div className="flex-grow flex justify-center items-center">
           <div
             style={{
               width: "75%",
               height: "100%"
-              // top: "-2px"
             }}
             className="flex justify-center items-center relative text-black text-2xl hover:underline"
           >
@@ -108,7 +73,6 @@ export default (props: NavbarProps) => {
             style={{
               width: "75%",
               height: "100%"
-              // top: "-2px"
             }}
             className="flex justify-center items-center relative text-black text-2xl hover:underline"
           >
