@@ -6,7 +6,7 @@ interface NavbarProps {
 export default (props: NavbarProps) => {
   return (
     <div
-      className={`navbar absolute bg-white flex justify-center ${props.className}`}
+      className={`navbar absolute bg-white flex justify-center  border-solid border-t border-gray-500 ${props.className}`}
       style={{
         height: "17vh",
         width: "100vw",
@@ -21,23 +21,23 @@ export default (props: NavbarProps) => {
             .menu {
               position: absolute;
               top: 17vh;
+              left: -1.5rem;
+              //box-shadow: inset 0 0 1em 1em gray;
             }
 
-            .menu:hover {
+            .menu-container:hover .menu {
               position: absolute;
-              bottom: 17vh;
+              bottom: calc(17vh - 1px);
+              //bottom: 17vh;
               top: auto;
             }
 
-            .menu-option:hover .menu {
-              position: absolute;
-              bottom: 17vh;
-              top: auto;
+            .bottom-item {
+              text-decoration: underline;
             }
 
-            .menu-option {
-              position: relative;
-              height: 100%;
+            .upper-item:hover ~ .bottom-item {
+              text-decoration: none;
             }
           `}</style>
           <div
@@ -45,14 +45,20 @@ export default (props: NavbarProps) => {
               width: "75%",
               height: "100%"
             }}
-            className="menu-option off-non-option off-menu-container flex justify-center items-center relative text-black text-2xl"
+            className="menu-container flex justify-center items-center relative text-black text-4xl"
           >
-            <div>
+            <div className="h-full flex items-center relative">
               WORK
-              <div className="menu absolute">
-                <div className="menu-item hover:underline">ILLUSTRATION</div>
-                <div className="menu-item hover:underline">ANIMATION</div>
-                <div className="menu-item hover:underline">FINE ART</div>
+              <div className="menu absolute bg-white border-b border-solid">
+                <div className="upper-item text-3xl tracking-tight pl-6 pr-6 pt-4 leading-relaxed hover:underline">
+                  ILLUSTRATION
+                </div>
+                <div className="upper-item  text-3xl tracking-tight pl-6 pr-6 leading-relaxed hover:underline">
+                  ANIMATION
+                </div>
+                <div className="bottom-item text-3xl tracking-tight pl-6 pr-6 pb-4 leading-relaxed  hover:underline">
+                  FINE ART
+                </div>
               </div>
             </div>
           </div>
@@ -63,7 +69,7 @@ export default (props: NavbarProps) => {
               width: "75%",
               height: "100%"
             }}
-            className="flex justify-center items-center relative text-black text-2xl hover:underline"
+            className="flex justify-center items-center relative text-black text-4xl hover:underline"
           >
             ABOUT
           </div>
@@ -74,7 +80,7 @@ export default (props: NavbarProps) => {
               width: "75%",
               height: "100%"
             }}
-            className="flex justify-center items-center relative text-black text-2xl hover:underline"
+            className="flex justify-center items-center relative text-black text-4xl hover:underline"
           >
             CONTACT
           </div>
