@@ -15,9 +15,13 @@ export default (props: NavbarProps) => {
       <div className="flex h-full w-4/5">
         <div className="flex-grow flex justify-center h-full w-9/12 items-center">
           <style jsx>{`
+            div {
+              font-family: Arial, Helvetica, sans-serif;
+            }
+
             .menu {
               top: 17vh;
-              left: -1rem;
+              left: -1.5rem;
             }
 
             .menu-container:hover .menu {
