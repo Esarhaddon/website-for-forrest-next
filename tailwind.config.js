@@ -4,7 +4,8 @@ module.exports = {
   },
   variants: {
     borderWidth: ["hover"],
-    backgroundColor: ["group-hover"]
+    backgroundColor: ["group-hover"],
+    display: ["group-hover"]
   },
   plugins: []
 };

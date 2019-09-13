@@ -1,16 +1,16 @@
 import Link from "next/Link";
 
 interface NavbarProps {
-  scroll: boolean;
+  parallax: boolean;
 }
 
-export default (props: any) => {
+export default (props: NavbarProps) => {
   return (
     <div
-      className={`foreground absolute bg-white flex justify-center w-screen  border-solid border-t border-gray-500 `}
+      className={`foreground absolute bg-white flex justify-center w-screen  border-solid border-t border-gray-500`}
       style={{
         height: "17vh",
-        top: "72vh"
+        top: `${props.parallax ? "72vh" : "42vh"}`
       }}
     >
       <div className="flex h-full w-4/5">
