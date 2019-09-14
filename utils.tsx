@@ -7,7 +7,7 @@ export function createThumbnailGroup(
     thumbnails.push(
       <div
         key={i}
-        className="relative bg-gray-400 border border-solid border-black"
+        className="relative bg-gray-400"
         style={{
           width: "15.25%",
           marginRight: "4.75%",
@@ -21,9 +21,10 @@ export function createThumbnailGroup(
   return (
     <>
       <div
-        className="flex items-center justify-center fixed w-full text-6xl text-gray-300 tracking-wide"
+        className="flex items-center justify-center text-gray-300 tracking-wide"
         style={{
-          height: "84vh",
+          marginTop: "5vw",
+          height: "7rem",
           fontSize: "10rem"
         }}
       >
