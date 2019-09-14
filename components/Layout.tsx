@@ -6,14 +6,19 @@ interface LayoutProps {
 }
 
 export default (props: LayoutProps) => (
-  <div className="flex flex-col">
+  <div className={`${props.isParallax ? "parallax-container" : ""}`}>
     <style jsx global>
       {`
         body,
         html {
           margin: 0;
           padding: 0;
+        }
+
+        body {
           font-family: Arial, Helvetica, sans-serif;
+          overflow-x: hidden;
+          overflow-y: ${props.isParallax ? "hidden" : "scroll"};
         }
 
         /* Parallax Styles */
@@ -25,6 +30,13 @@ export default (props: LayoutProps) => (
           //overscroll-behavior: none;
           perspective: 2px;
           perspective-origin: 0 0;
+        }
+
+        .non-parallax-container {
+          overflow-x: hidden;
+          height: 84vh;
+          overflow-y-scroll;
+          w-screen;
         }
 
         .background {
@@ -55,18 +67,20 @@ export default (props: LayoutProps) => (
         }
 
         .menu {
-          bottom: calc(100% - 1px);
+          bottom: 100%;
           left: -1.5rem;
         }
       `}
     </style>
-    <div
+    {/* <div
       className={`${
-        props.isParallax ? "parallax-container" : "overflow-y-scroll"
+        props.isParallax
+          ? "parallax-container"
+          : "overflow-y-scroll overflow-x-hidden w-screen"
       }`}
-    >
-      {props.children}
-      <Navbar isParallax={props.isParallax} />
-    </div>
+    > */}
+    {props.children}
+    <Navbar isParallax={props.isParallax} />
+    {/* </div> */}
   </div>
 );
