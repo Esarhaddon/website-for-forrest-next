@@ -1,3 +1,5 @@
+import Layout from "../components/Layout";
+
 export default () => {
-  return <div>Animation</div>;
+  return <Layout isParallax={false}></Layout>;
 };

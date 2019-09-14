@@ -1,12 +1,12 @@
 import Navbar from "../components/Navbar";
 
 interface LayoutProps {
-  parallax: boolean;
-  children: React.ReactNode;
+  isParallax: boolean;
+  children?: React.ReactNode;
 }
 
 export default (props: LayoutProps) => (
-  <div className="parallax-container">
+  <div className="flex flex-col">
     <style jsx global>
       {`
         body,
@@ -18,6 +18,7 @@ export default (props: LayoutProps) => (
 
         /* Parallax Styles */
         .parallax-container {
+          position: relative;
           height: 100vh;
           overflow-x: hidden;
           overflow-y: scroll;
@@ -59,7 +60,13 @@ export default (props: LayoutProps) => (
         }
       `}
     </style>
-    {props.children}
-    <Navbar parallax={props.parallax} />
+    <div
+      className={`${
+        props.isParallax ? "parallax-container" : "overflow-y-scroll"
+      }`}
+    >
+      {props.children}
+      <Navbar isParallax={props.isParallax} />
+    </div>
   </div>
 );

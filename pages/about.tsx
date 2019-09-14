@@ -1,3 +1,5 @@
+import Layout from "../components/Layout";
+
 export default () => {
-  return <div>About</div>;
+  return <Layout isParallax={false}></Layout>;
 };
