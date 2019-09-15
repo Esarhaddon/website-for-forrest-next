@@ -7,7 +7,7 @@ export function createThumbnailGroup(
     thumbnails.push(
       <div
         key={i}
-        className="relative bg-gray-400"
+        className="relative bg-gray-300"
         style={{
           width: "15.25%",
           marginRight: "4.75%",
