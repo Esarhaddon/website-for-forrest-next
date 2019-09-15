@@ -21,7 +21,7 @@ export function createThumbnailGroup(
   return (
     <>
       <div
-        className="flex items-center justify-center text-gray-300 tracking-wide"
+        className="flex items-center justify-center text-gray-400 tracking-wide"
         style={{
           marginTop: "5vw",
           height: "7rem",

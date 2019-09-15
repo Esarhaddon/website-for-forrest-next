@@ -4,7 +4,7 @@ export default () => {
   return (
     <Layout isParallax={false}>
       <div
-        className="bg-gray-200"
+        className="bg-gray-300"
         style={{
           margin: "4rem auto",
           width: "15rem",
@@ -12,7 +12,7 @@ export default () => {
         }}
       ></div>
       <div
-        className="leading-loose text-gray-300"
+        className="leading-loose text-gray-500"
         style={{
           textIndent: "4rem",
           textAlign: "justify",
