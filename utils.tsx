@@ -1,3 +1,5 @@
+import { relative } from "path";
+
 export function createThumbnailGroup(
   groupTitle: string,
   numOfThumbnails: number
@@ -7,35 +9,33 @@ export function createThumbnailGroup(
     thumbnails.push(
       <div
         key={i}
-        className="relative bg-gray-300"
+        className=""
         style={{
-          width: "15.25%",
-          marginRight: "4.75%",
-          marginBottom: "4.75%"
+          paddingTop: "100%",
+          position: "relative",
+          height: 0
         }}
       >
-        <div style={{ paddingTop: "100%" }}></div>
+        <div
+          className="absolute flex items-center justify-center w-full h-full"
+          style={{ top: 0, left: 0 }}
+        >
+          <div
+            className="absolute bg-gray-500"
+            style={{ top: "30px", bottom: "30px", left: "30px", right: "30px" }}
+          />
+        </div>
       </div>
     );
   }
   return (
     <>
       <div
-        className="flex items-center justify-center text-gray-400 tracking-wide"
         style={{
-          marginTop: "5vw",
-          height: "7rem",
-          fontSize: "10rem"
-        }}
-      >
-        {groupTitle}
-      </div>
-      <div
-        className="flex flex-wrap"
-        style={{
-          marginBottom: "16vh",
-          paddingLeft: "5%",
-          paddingTop: "5%"
+          display: "grid",
+          margin: "30px",
+          paddingBottom: "7.5rem",
+          gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr)"
         }}
       >
         {thumbnails}
