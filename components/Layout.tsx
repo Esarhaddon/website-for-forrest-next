@@ -6,7 +6,11 @@ interface LayoutProps {
 }
 
 export default (props: LayoutProps) => (
-  <div className={`${props.isParallax ? "parallax-container" : ""}`}>
+  <div
+    className={`font-sans ${
+      props.isParallax ? "parallax-container" : "non-parallax-container"
+    }`}
+  >
     <style jsx global>
       {`
         body,
@@ -16,13 +20,14 @@ export default (props: LayoutProps) => (
         }
 
         body {
-          font-family: Arial, Helvetica, sans-serif;
+          // font-family: Arial, Helvetica, sans-serif;
           overflow-x: hidden;
           overflow-y: ${props.isParallax ? "hidden" : "scroll"};
         }
 
         /* Parallax Styles */
         .parallax-container {
+          // border: 1px solid red;
           position: relative;
           height: 100vh;
           overflow-x: hidden;
@@ -33,10 +38,13 @@ export default (props: LayoutProps) => (
         }
 
         .non-parallax-container {
-          overflow-x: hidden;
-          height: 84vh;
-          overflow-y-scroll;
-          w-screen;
+          // perspective: 2px;
+          // perspective-origin: 0 0;
+          // overflow-x: hidden;
+          //height: calc(80vh - 3.75rem);
+          //overflow-y-scroll;
+          //w-screen;
+          height: 100vh;
         }
 
         .background {
