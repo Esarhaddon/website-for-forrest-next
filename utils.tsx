@@ -1,4 +1,5 @@
 import { relative } from "path";
+import { callbackify } from "util";
 
 export function createGrid(
   // groupTitle: string,
@@ -11,36 +12,29 @@ export function createGrid(
         key={i}
         className=""
         style={{
-          paddingTop: "100%",
+          paddingTop: "calc(150% - 5px)",
           position: "relative",
           height: 0
         }}
       >
         <div
-          className="absolute flex items-center justify-center w-full h-full"
-          style={{ top: 0, left: 0 }}
-        >
-          <div
-            className="absolute bg-white off-bg-gray-200"
-            style={{
-              top: "50px",
-              bottom: "50px",
-              left: "50px",
-              right: "50px"
-            }}
-          />
-        </div>
+          className="absolute bg-gray-500"
+          style={{
+            top: "5px",
+            left: "5px",
+            width: "calc(100% - 10px)",
+            height: "calc(100% - 10px)"
+          }}
+        />
       </div>
     );
   }
   return (
     <div
+      className="grid"
       style={{
         display: "grid",
-        padding: "50px",
-        paddingBottom: "calc(7.5rem + 50px)",
-        gridTemplateColumns: "repeat(auto-fit, minmax(275px, 1fr)",
-        backgroundColor: "rgba(0,0,0, .75)"
+        padding: "5vw"
       }}
     >
       {grid}
