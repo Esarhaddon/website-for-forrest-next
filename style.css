@@ -30,6 +30,7 @@ body {
 
 .logo-container:hover {
   color: rgba(225, 225, 225, 0.85);
+  fill: rgba(225, 225, 225, 0.85);
 }
 
 .background {
