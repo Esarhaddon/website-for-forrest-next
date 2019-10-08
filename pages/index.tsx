@@ -3,7 +3,7 @@ import Layout from "../components/Layout";
 import { callbackify } from "util";
 
 export default () => (
-  <Layout isParallax={true}>
+  <Layout>
     <div
       className="background absolute top-0 left-0 bg-cover bg-no-repeat w-full"
       style={{

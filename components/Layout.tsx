@@ -1,12 +1,7 @@
 import Navbar from "../components/Navbar";
 import { callbackify } from "util";
 
-interface LayoutProps {
-  isParallax: boolean;
-  children?: React.ReactNode;
-}
-
-export default (props: LayoutProps) => (
+export default props => (
   <div>
     <div
       className="h-screen w-full relative overflow-x-hidden overflow-y-scroll"

@@ -28,6 +28,10 @@ body {
   font-family: "Josefin Sans", sans-serif;
 }
 
+.logo-container:hover {
+  color: rgba(225, 225, 225, 0.85);
+}
+
 .background {
   transform-origin: 0 0;
   transform: translateZ(-2px) scale(2);
