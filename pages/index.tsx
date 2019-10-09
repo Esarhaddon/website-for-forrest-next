@@ -1,6 +1,5 @@
 import "../style.css";
 import Layout from "../components/Layout";
-import { callbackify } from "util";
 import TitleText from "../static/title.svg";
 
 export default () => (
@@ -27,8 +26,12 @@ export default () => (
         backgroundColor: "rgba(0, 0, 0, .15)"
       }}
     >
-      <TitleText style={{ height: "6rem", width: "auto", fill: "white" }} />
-      {/* forrest dickison */}
+      <TitleText
+        className="w-auto text-white fill-current"
+        style={{
+          height: "6rem"
+        }}
+      />
     </div>
   </Layout>
 );
