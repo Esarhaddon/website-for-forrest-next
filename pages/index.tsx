@@ -1,6 +1,7 @@
 import "../style.css";
 import Layout from "../components/Layout";
 import { callbackify } from "util";
+import TitleText from "../static/title.svg";
 
 export default () => (
   <Layout isFor="home">
@@ -26,7 +27,8 @@ export default () => (
         backgroundColor: "rgba(0, 0, 0, .15)"
       }}
     >
-      forrest dickison
+      <TitleText style={{ height: "6rem", width: "auto", fill: "white" }} />
+      {/* forrest dickison */}
     </div>
   </Layout>
 );
