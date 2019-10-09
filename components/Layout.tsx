@@ -3,6 +3,7 @@ import InstagramLogo from "../static/icons/001-instagram.svg";
 import FacebookLogo from "../static/icons/002-facebook-circular-logo.svg";
 import TwitterLogo from "../static/icons/003-twitter-circular-logo.svg";
 import EmailLogo from "../static/icons/004-email.svg";
+import TitleText from "../static/title.svg";
 import { ReactNode } from "react";
 
 interface LayoutProps {
@@ -11,73 +12,94 @@ interface LayoutProps {
 }
 
 export default (props: LayoutProps) => (
-  <div
-    className="h-screen w-full relative overflow-x-hidden overflow-y-scroll"
-    style={{
-      perspective: "2px",
-      perspectiveOrigin: "0 0"
-    }}
-  >
-    {props.children}
+  <div>
     {props.isFor === "home" ? (
       <div
-        className="foreground absolute w-full left-0 flex items-center justify-center text-white tracking-tighter leading-none"
+        className="flex justify-center w-full absolute top-0 left-0 z-10"
         style={{
-          height: "5rem",
-          bottom: "16vh"
+          top: "calc(50% - 3rem)",
+          pointerEvents: "none"
         }}
       >
-        <Link href="/work">
-          <a
-            className="border-2 border-solid border-white text-white pt-5 pb-4 px-5 tracking-widest leading-none cursor-pointer hover:bg-white hover:text-black"
-            style={{
-              transition:
-                "color 170ms ease-in-out, background-color 170ms ease-in-out"
-            }}
-          >
-            WORK
-          </a>
-        </Link>
-        <div className="flex items-center ml-12 text-white fill-current logo-container cursor-pointer">
-          <a
-            href="https://www.instagram.com/forrestdickison"
-            target="_blank"
-            className="w-12 pl-2 hover:text-white"
-            style={{
-              fill: "white",
-              transition: "color 170ms ease-in-out, opacity 170ms ease-in-out"
-            }}
-          >
-            <InstagramLogo className="h-8 w-8 fill-current" />
-          </a>
-          <div
-            className="w-12 pl-2 hover:text-white"
-            style={{
-              transition: "color 170ms ease-in-out, opacity 170ms ease-in-out"
-            }}
-          >
-            <FacebookLogo className="h-8 w-8 fill-current" />
-          </div>
-          <div
-            className="w-12 pl-2 hover:text-white"
-            style={{
-              transition: "color 170ms ease-in-out, opacity 170ms ease-in-out"
-            }}
-          >
-            <TwitterLogo className="h-8 w-8 fill-current" />
-          </div>
-          <div
-            className="w-12 pl-2 hover:text-white"
-            style={{
-              transition: "color 170ms ease-in-out, opacity 170ms ease-in-out"
-            }}
-          >
-            <a href="mailto:fddickison@gmail.com" target="_blank">
-              <EmailLogo className="h-8 w-8 fill-current" />
-            </a>
-          </div>
-        </div>
+        <TitleText
+          className="w-auto text-white fill-current"
+          style={{
+            height: "6rem"
+          }}
+        />
       </div>
     ) : null}
+    <div
+      className="relative top-0 left-0 h-screen w-full overflow-x-hidden overflow-y-scroll"
+      style={{
+        perspective: "2px",
+        perspectiveOrigin: "0 0"
+      }}
+    >
+      {props.children}
+      {props.isFor === "home" ? (
+        <div
+          className="foreground absolute w-full left-0 flex items-center justify-center text-white tracking-tighter leading-none"
+          style={{
+            height: "5rem",
+            bottom: "16vh"
+          }}
+        >
+          <Link href="/work">
+            <a
+              className="border-2 border-solid border-white text-white pt-5 pb-4 px-5 tracking-widest leading-none cursor-pointer hover:bg-white hover:text-black"
+              style={{
+                transition:
+                  "color 170ms ease-in-out, background-color 170ms ease-in-out"
+              }}
+            >
+              WORK
+            </a>
+          </Link>
+          <div className="flex items-center ml-12 text-white fill-current logo-container cursor-pointer">
+            <a
+              href="https://www.instagram.com/forrestdickison"
+              target="_blank"
+              className="w-12 pl-2 hover:text-white"
+              style={{
+                fill: "white",
+                transition: "color 170ms ease-in-out, opacity 170ms ease-in-out"
+              }}
+            >
+              <InstagramLogo className="h-8 w-8 fill-current" />
+            </a>
+            <div
+              className="w-12 pl-2 hover:text-white"
+              style={{
+                transition: "color 170ms ease-in-out, opacity 170ms ease-in-out"
+              }}
+            >
+              <FacebookLogo className="h-8 w-8 fill-current" />
+            </div>
+            <div
+              className="w-12 pl-2 hover:text-white"
+              style={{
+                transition: "color 170ms ease-in-out, opacity 170ms ease-in-out"
+              }}
+            >
+              <TwitterLogo className="h-8 w-8 fill-current" />
+            </div>
+            <div
+              className="w-12 pl-2 hover:text-white"
+              style={{
+                transition: "color 170ms ease-in-out, opacity 170ms ease-in-out"
+              }}
+            >
+              <a href="mailto:fddickison@gmail.com" target="_blank">
+                <EmailLogo className="h-8 w-8 fill-current" />
+              </a>
+            </div>
+          </div>
+        </div>
+      ) : null}
+      {props.isFor === "work" ? (
+        <div className="bg-black text-white opacity-75  top-0">work</div>
+      ) : null}
+    </div>
   </div>
 );

@@ -26,12 +26,12 @@ export default () => (
         backgroundColor: "rgba(0, 0, 0, .15)"
       }}
     >
-      <TitleText
+      {/* <TitleText
         className="w-auto text-white fill-current"
         style={{
           height: "6rem"
         }}
-      />
+      /> */}
     </div>
   </Layout>
 );
