@@ -18,7 +18,7 @@ export function createGrid(
         }}
       >
         <div
-          className="absolute bg-gray-500"
+          className="absolute bg-gray-600"
           style={{
             top: "5px",
             left: "5px",
@@ -34,7 +34,8 @@ export function createGrid(
       className="grid"
       style={{
         display: "grid",
-        padding: "5vw"
+        padding: "5px 5vw 5vw 5vw",
+        paddingBottom: "calc(3rem + 5px)"
       }}
     >
       {grid}
