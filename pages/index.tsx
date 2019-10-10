@@ -5,14 +5,14 @@ import TitleText from "../static/title.svg";
 export default () => (
   <Layout isFor="home">
     <div
-      className="background absolute top-0 left-0 bg-cover bg-no-repeat w-full"
+      className="background absolute top-0 left-0 bg-center bg-cover bg-no-repeat w-full"
       style={{
         height: "130vh",
         backgroundImage: "url(../static/landing-background-cropped.png)"
       }}
     />
     <div
-      className="bg-cover bg-no-repeat absolute top-0 left-0 w-full"
+      className="bg-cover bg-center bg-no-repeat absolute top-0 left-0 w-full"
       style={{
         height: "130vh",
         backgroundImage: "url(../static/layer1.png)"

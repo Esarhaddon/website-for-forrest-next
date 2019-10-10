@@ -18,7 +18,7 @@ export function createGrid(
         }}
       >
         <div
-          className="absolute bg-gray-600"
+          className="absolute bg-black opacity-50"
           style={{
             top: "5px",
             left: "5px",

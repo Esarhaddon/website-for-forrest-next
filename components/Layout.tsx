@@ -15,7 +15,7 @@ export default (props: LayoutProps) => (
   <div>
     {props.isFor === "home" ? (
       <div
-        className="flex justify-center w-full absolute top-0 left-0 z-10"
+        className="flex justify-center w-full h-full absolute top-0 left-0 z-10"
         style={{
           top: "calc(50% - 3rem)",
           pointerEvents: "none"
@@ -32,6 +32,7 @@ export default (props: LayoutProps) => (
     <div
       className="relative top-0 left-0 h-screen w-full overflow-x-hidden overflow-y-scroll"
       style={{
+        minHeight: "275px",
         ...(props.isFor === "home"
           ? {
               perspective: "2px",
@@ -46,7 +47,8 @@ export default (props: LayoutProps) => (
           className="foreground absolute w-full left-0 flex items-center justify-center text-white tracking-tighter leading-none"
           style={{
             height: "5rem",
-            bottom: "16vh"
+            // bottom: "16vh"
+            bottom: "calc(22vh - 2.5rem)"
           }}
         >
           <Link href="/work">
@@ -102,47 +104,49 @@ export default (props: LayoutProps) => (
       ) : null}
       {props.isFor === "work" ? (
         <div
-          className="flex items-center justify-center w-full h-12 text-white logo-container cursor-pointer fixed bottom-0"
+          className="flex items-center justify-center w-full h-12 fixed bottom-0"
           style={{
             backgroundColor: "rgba(0, 0, 0, .5)"
           }}
         >
-          <a
-            href="https://www.instagram.com/forrestdickison"
-            target="_blank"
-            className="w-12 pl-2 hover:text-white"
-            style={{
-              fill: "white",
-              transition: "color 170ms ease-in-out, opacity 170ms ease-in-out"
-            }}
-          >
-            <InstagramLogo className="h-8 w-8 fill-current" />
-          </a>
-          <div
-            className="w-12 pl-2 hover:text-white"
-            style={{
-              transition: "color 170ms ease-in-out, opacity 170ms ease-in-out"
-            }}
-          >
-            <FacebookLogo className="h-8 w-8 fill-current" />
-          </div>
-          <div
-            className="w-12 pl-2 hover:text-white"
-            style={{
-              transition: "color 170ms ease-in-out, opacity 170ms ease-in-out"
-            }}
-          >
-            <TwitterLogo className="h-8 w-8 fill-current" />
-          </div>
-          <div
-            className="w-12 pl-2 hover:text-white"
-            style={{
-              transition: "color 170ms ease-in-out, opacity 170ms ease-in-out"
-            }}
-          >
-            <a href="mailto:fddickison@gmail.com" target="_blank">
-              <EmailLogo className="h-8 w-8 fill-current" />
+          <div className="logo-container text-white flex items-center justify-center cursor-pointer">
+            <a
+              href="https://www.instagram.com/forrestdickison"
+              target="_blank"
+              className="w-12 pl-2 hover:text-white"
+              style={{
+                fill: "white",
+                transition: "color 170ms ease-in-out, opacity 170ms ease-in-out"
+              }}
+            >
+              <InstagramLogo className="h-8 w-8 fill-current" />
             </a>
+            <div
+              className="w-12 pl-2 hover:text-white"
+              style={{
+                transition: "color 170ms ease-in-out, opacity 170ms ease-in-out"
+              }}
+            >
+              <FacebookLogo className="h-8 w-8 fill-current" />
+            </div>
+            <div
+              className="w-12 pl-2 hover:text-white"
+              style={{
+                transition: "color 170ms ease-in-out, opacity 170ms ease-in-out"
+              }}
+            >
+              <TwitterLogo className="h-8 w-8 fill-current" />
+            </div>
+            <div
+              className="w-12 pl-2 hover:text-white"
+              style={{
+                transition: "color 170ms ease-in-out, opacity 170ms ease-in-out"
+              }}
+            >
+              <a href="mailto:fddickison@gmail.com" target="_blank">
+                <EmailLogo className="h-8 w-8 fill-current" />
+              </a>
+            </div>
           </div>
         </div>
       ) : null}

@@ -33,7 +33,6 @@ html {
 body {
   overflow: hidden;
   font-family: "Jost", "Josefin Sans", sans-serif;
-  scrollbar-width: none;
 }
 
 .logo-container:hover {
