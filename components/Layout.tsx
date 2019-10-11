@@ -7,6 +7,7 @@ import TitleText from "../static/title.svg";
 import LogoBlack from "../static/icons/logo-black.svg";
 import LogoWhite from "../static/icons/logo-white.svg";
 import { ReactNode } from "react";
+import { callbackify } from "util";
 
 interface LayoutProps {
   isFor: "home" | "illustration" | "animation" | "fine art";
@@ -17,17 +18,16 @@ export default (props: LayoutProps) => (
   <div>
     {props.isFor === "home" ? (
       <div
-        className="flex justify-center w-full h-screen absolute top-0 left-0 z-10"
+        className="flex justify-center items-center w-full off-h-screen absolute top-0 left-0 z-10"
         style={{
+          height: "calc(101vh)",
           minHeight: "300px",
-          // top: "calc(50% - 3rem)",
           pointerEvents: "none"
         }}
       >
         <TitleText
-          className="w-auto text-white fill-current absolute"
+          className="mx-16 text-white fill-current"
           style={{
-            top: "calc(50% - 3rem)",
             height: "6rem"
           }}
         />
