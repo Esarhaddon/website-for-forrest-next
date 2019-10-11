@@ -4,7 +4,8 @@ import FacebookLogo from "../static/icons/002-facebook-circular-logo.svg";
 import TwitterLogo from "../static/icons/003-twitter-circular-logo.svg";
 import EmailLogo from "../static/icons/004-email.svg";
 import TitleText from "../static/title.svg";
-import Logo from "../static/icons/logo_SVG.svg";
+import LogoBlack from "../static/icons/logo-black.svg";
+import LogoWhite from "../static/icons/logo-white.svg";
 import { ReactNode } from "react";
 
 interface LayoutProps {
@@ -69,7 +70,7 @@ export default (props: LayoutProps) => (
                 marginRight: "-4%"
               }}
             >
-              <Logo className="h-32 off--mt-5 off-mb-6 off-mx-12" />
+              <LogoBlack className="h-32" />
             </a>
           </Link>
           <div className="flex items-center">
@@ -112,7 +113,7 @@ export default (props: LayoutProps) => (
       {props.children}
       {props.isFor === "home" ? (
         <div
-          className="foreground absolute w-full left-0 flex items-center justify-center text-white tracking-tighter leading-none"
+          className="foreground absolute w-full left-0 flex items-center justify-center"
           style={{
             height: "5rem",
             // bottom: "16vh"
@@ -167,6 +168,13 @@ export default (props: LayoutProps) => (
                 <EmailLogo className="h-8 w-8 fill-current" />
               </a>
             </div>
+          </div>
+          <div className="absolute right-0 mr-4">
+            <Link href="/index">
+              <a>
+                <LogoWhite className="h-32" />
+              </a>
+            </Link>
           </div>
         </div>
       ) : null}
