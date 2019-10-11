@@ -34,8 +34,9 @@ export function createGrid(
       className="grid"
       style={{
         display: "grid",
-        padding: "5px 5vw 5vw 5vw",
-        paddingBottom: "calc(3rem + 5px)"
+        padding: "5vw",
+        paddingTop: 0
+        // paddingBottom: "calc(3rem + 5px)"
       }}
     >
       {grid}

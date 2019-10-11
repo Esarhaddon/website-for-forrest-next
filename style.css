@@ -32,12 +32,17 @@ html {
 
 body {
   overflow: hidden;
-  font-family: "Jost", "Josefin Sans", sans-serif;
+  font-family: Arial, sans-serif;
 }
 
-.logo-container:hover {
+.logo-container-white:hover {
   color: rgba(225, 225, 225, 0.85);
-  fill: rgba(225, 225, 225, 0.85);
+  /* fill: rgba(225, 225, 225, 0.85); */
+}
+
+.logo-container-black:hover {
+  color: rgba(0, 0, 0, 0.55);
+  /* fill: rgba(0, 0, 0, 0.85); */
 }
 
 .background {

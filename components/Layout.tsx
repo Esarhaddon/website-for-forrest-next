@@ -7,7 +7,7 @@ import TitleText from "../static/title.svg";
 import { ReactNode } from "react";
 
 interface LayoutProps {
-  isFor: "home" | "work";
+  isFor: "home" | "illustration" | "animation" | "fine art";
   children: ReactNode;
 }
 
@@ -41,6 +41,50 @@ export default (props: LayoutProps) => (
           : null)
       }}
     >
+      {props.isFor === "illustration" ||
+      props.isFor === "animation" ||
+      props.isFor === "fine art" ? (
+        <div
+          className="flex justify-left text-gray-800 pl-12 font-semibold"
+          style={{
+            paddingTop: "5vw",
+            paddingBottom: "1vw",
+            marginLeft: "5vw"
+          }}
+        >
+          <Link href="/illustration">
+            <a
+              className={`mr-3 ${
+                props.isFor === "illustration"
+                  ? "text-gray-700"
+                  : "text-gray-500"
+              } hover:text-gray-700`}
+            >
+              ILLUSTRATION
+            </a>
+          </Link>
+          <div className="mr-3 font-semibold text-gray-800">/</div>
+          <Link href="/animation">
+            <a
+              className={`mr-3 ${
+                props.isFor === "animation" ? "text-gray-700" : "text-gray-500"
+              } hover:text-gray-700`}
+            >
+              ANIMATION
+            </a>
+          </Link>
+          <div className="mr-3 font-semibold text-gray-800">/</div>
+          <Link href="/fine-art">
+            <a
+              className={`mr-3 ${
+                props.isFor === "fine art" ? "text-gray-700" : "text-gray-500"
+              } hover:text-gray-700`}
+            >
+              FINE ART
+            </a>
+          </Link>
+        </div>
+      ) : null}
       {props.children}
       {props.isFor === "home" ? (
         <div
@@ -51,9 +95,9 @@ export default (props: LayoutProps) => (
             bottom: "calc(22vh - 2.5rem)"
           }}
         >
-          <Link href="/work">
+          <Link href="/illustration">
             <a
-              className="border-2 border-solid border-white text-white pt-5 pb-4 px-5 tracking-widest leading-none cursor-pointer hover:bg-white hover:text-black"
+              className="border-2 border-solid border-white text-white pt-5 pb-4 px-5 tracking-widest leading-none cursor-pointer hover:bg-white hover:text-gray-800"
               style={{
                 transition:
                   "color 170ms ease-in-out, background-color 170ms ease-in-out"
@@ -62,7 +106,7 @@ export default (props: LayoutProps) => (
               WORK
             </a>
           </Link>
-          <div className="flex items-center ml-12 text-white logo-container cursor-pointer">
+          <div className="flex items-center ml-12 text-white logo-container-white cursor-pointer">
             <a
               href="https://www.instagram.com/forrestdickison"
               target="_blank"
@@ -102,27 +146,23 @@ export default (props: LayoutProps) => (
           </div>
         </div>
       ) : null}
-      {props.isFor === "work" ? (
-        <div
-          className="flex items-center justify-center w-full h-12 fixed bottom-0"
-          style={{
-            backgroundColor: "rgba(0, 0, 0, .5)"
-          }}
-        >
-          <div className="logo-container text-white flex items-center justify-center cursor-pointer">
+      {props.isFor === "illustration" ||
+      props.isFor === "animation" ||
+      props.isFor === "fine art" ? (
+        <div>
+          <div className="logo-container-black text-gray-900 flex items-center justify-center cursor-pointer w-full">
             <a
               href="https://www.instagram.com/forrestdickison"
               target="_blank"
-              className="w-12 pl-2 hover:text-white"
+              className="w-12 pl-2 hover:text-gray-900"
               style={{
-                fill: "white",
                 transition: "color 170ms ease-in-out, opacity 170ms ease-in-out"
               }}
             >
               <InstagramLogo className="h-8 w-8 fill-current" />
             </a>
             <div
-              className="w-12 pl-2 hover:text-white"
+              className="w-12 pl-2 hover:text-gray-900"
               style={{
                 transition: "color 170ms ease-in-out, opacity 170ms ease-in-out"
               }}
@@ -130,7 +170,7 @@ export default (props: LayoutProps) => (
               <FacebookLogo className="h-8 w-8 fill-current" />
             </div>
             <div
-              className="w-12 pl-2 hover:text-white"
+              className="w-12 pl-2 hover:text-gray-900"
               style={{
                 transition: "color 170ms ease-in-out, opacity 170ms ease-in-out"
               }}
@@ -138,7 +178,7 @@ export default (props: LayoutProps) => (
               <TwitterLogo className="h-8 w-8 fill-current" />
             </div>
             <div
-              className="w-12 pl-2 hover:text-white"
+              className="w-12 pl-2 hover:text-gray-900"
               style={{
                 transition: "color 170ms ease-in-out, opacity 170ms ease-in-out"
               }}
@@ -147,6 +187,15 @@ export default (props: LayoutProps) => (
                 <EmailLogo className="h-8 w-8 fill-current" />
               </a>
             </div>
+          </div>
+          <div
+            className="flex justify-center underline text-gray-800"
+            style={{
+              marginTop: "2.5vw",
+              marginBottom: "1vw"
+            }}
+          >
+            (C) 2019 by Forrest Dickison
           </div>
         </div>
       ) : null}
