@@ -15,15 +15,17 @@ export default (props: LayoutProps) => (
   <div>
     {props.isFor === "home" ? (
       <div
-        className="flex justify-center w-full h-full absolute top-0 left-0 z-10"
+        className="flex justify-center w-full h-screen absolute top-0 left-0 z-10"
         style={{
-          top: "calc(50% - 3rem)",
+          minHeight: "300px",
+          // top: "calc(50% - 3rem)",
           pointerEvents: "none"
         }}
       >
         <TitleText
-          className="w-auto text-white fill-current"
+          className="w-auto text-white fill-current absolute"
           style={{
+            top: "calc(50% - 3rem)",
             height: "6rem"
           }}
         />
@@ -32,7 +34,7 @@ export default (props: LayoutProps) => (
     <div
       className="relative top-0 left-0 h-screen w-full overflow-x-hidden overflow-y-scroll"
       style={{
-        minHeight: "275px",
+        minHeight: "300px",
         ...(props.isFor === "home"
           ? {
               perspective: "2px",
@@ -45,11 +47,11 @@ export default (props: LayoutProps) => (
       props.isFor === "animation" ||
       props.isFor === "fine art" ? (
         <div
-          className="flex justify-left text-gray-800 pl-12 font-semibold"
+          className="flex justify-end text-gray-800 pr-12 font-semibold"
           style={{
             paddingTop: "5vw",
             paddingBottom: "1vw",
-            marginLeft: "5vw"
+            marginRight: "5vw"
           }}
         >
           <Link href="/illustration">
