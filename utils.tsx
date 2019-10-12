@@ -18,14 +18,16 @@ export function createGrid(
         }}
       >
         <div
-          className="absolute bg-black opacity-50"
+          className="absolute flex items-center justify-center bg-black opacity-50 text-3xl text-white"
           style={{
             top: "5px",
             left: "5px",
             width: "calc(100% - 10px)",
             height: "calc(100% - 10px)"
           }}
-        />
+        >
+          [ {i + 1} ]
+        </div>
       </div>
     );
   }
