@@ -10,11 +10,13 @@ export default () => {
   const { image, updateImage } = useImage();
   // updateImage({ src: "Australia", name: "Dundee" });
 
-  if (image.name === "no name") {
+  if (image.name === "none") {
     updateImage({ src: "Australia", name: "Dundee" });
-    const { image } = useImage();
-    console.log("now image is", image);
+    // const { image } = useImage();
+    // console.log("now image is", image);
   }
+
+  // updateImage({ src: "Australia", name: "Dundee" });
 
   console.log("image name is", image.name);
   console.log("image src is", image.src);

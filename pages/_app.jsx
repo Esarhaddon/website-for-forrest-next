@@ -11,7 +11,7 @@ class MyApp extends App {
       //   <Component {...pageProps} />
       // </ImageContext.Provider>
       <ImageContextProvider
-        value={{ image: { src: "no src", name: "no name" } }}
+      // value={{ image: { src: "no src", name: "no name" } }}
       >
         <Component {...pageProps} />
       </ImageContextProvider>

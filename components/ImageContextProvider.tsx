@@ -12,14 +12,17 @@ interface ImageContextType {
 const ImageContext = createContext({} as ImageContextType);
 
 interface ImageContextProviderProps {
-  value: ImageContextType;
+  value: ImageContextType["image"];
   [x: string]: any;
   // children: ReactNode;
 }
 
-const ImageContextProvider = (props: ImageContextProviderProps) => {
-  const { value, ...restOfProps } = props;
-  const [image, updateImage] = useState(value.image);
+const ImageContextProvider = ({
+  value = { src: "none", name: "none" },
+  ...restOfProps
+}: ImageContextProviderProps) => {
+  // const { value, ...restOfProps } = props;
+  const [image, updateImage] = useState(value);
   console.log("image in Provider is", image);
   return (
     <ImageContext.Provider
