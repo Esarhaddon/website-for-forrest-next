@@ -1,12 +1,26 @@
 import "../style.css";
 import Layout from "../components/Layout";
 import TitleText from "../static/title.svg";
-import { useContext } from "react";
-import ImageContext from "../components/ImageContext";
+import { useImage } from "../components/ImageContextProvider";
+import ImageContext from "../components/ImageContextProvider";
 
 export default () => {
-  const { someContext } = useContext(ImageContext);
-  console.log("someContext is", someContext);
+  // const { someContext } = useContext(ImageContext);
+  // console.log("someContext is", someContext);
+  const { image, updateImage } = useImage();
+  // updateImage({ src: "Australia", name: "Dundee" });
+
+  if (image.name === "no name") {
+    updateImage({ src: "Australia", name: "Dundee" });
+    const { image } = useImage();
+    console.log("now image is", image);
+  }
+
+  console.log("image name is", image.name);
+  console.log("image src is", image.src);
+
+  // console.log("image name is now", image.name);
+  // console.log("image src is now", image.src);
   return (
     <Layout isFor="home">
       <div

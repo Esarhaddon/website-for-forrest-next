@@ -1,4 +1,12 @@
 import Layout from "../components/Layout";
 import { createGrid } from "../utils";
+import { useImage } from "../components/ImageContextProvider";
 
-export default () => <Layout isFor="illustration">{createGrid(15)}</Layout>;
+// console.log("hello from illustration");
+// console.log("image in illustration is", useImage().image);
+
+export default () => {
+  console.log("hello from illustration");
+  console.log("image in illustration is", useImage().image);
+  return <Layout isFor="illustration">{createGrid(15)}</Layout>;
+};
