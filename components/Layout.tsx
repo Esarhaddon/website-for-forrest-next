@@ -10,7 +10,7 @@ import { ReactNode } from "react";
 import { callbackify } from "util";
 
 interface LayoutProps {
-  isFor: "home" | "illustration" | "animation" | "fine art";
+  isFor: "home" | "illustration" | "animation" | "fine art" | "display";
   children: ReactNode;
 }
 
@@ -47,7 +47,8 @@ export default (props: LayoutProps) => (
     >
       {props.isFor === "illustration" ||
       props.isFor === "animation" ||
-      props.isFor === "fine art" ? (
+      props.isFor === "fine art" ||
+      props.isFor === "display" ? (
         <div
           className="flex justify-between text-gray-900 off-pl-8 off-pr-12 font-semibold"
           style={{
@@ -180,7 +181,8 @@ export default (props: LayoutProps) => (
       ) : null}
       {props.isFor === "illustration" ||
       props.isFor === "animation" ||
-      props.isFor === "fine art" ? (
+      props.isFor === "fine art" ||
+      props.isFor === "display" ? (
         <div>
           <div className="flex justify-center">
             <div className="flex logo-container-black text-gray-900 cursor-pointer">

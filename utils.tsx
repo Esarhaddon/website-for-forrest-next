@@ -1,10 +1,15 @@
-import { relative } from "path";
-import { callbackify } from "util";
+import Link from "next/Link";
+import { useImage } from "./components/ImageContextProvider";
 
 export function createGrid(
-  // groupTitle: string,
-  numOfImages: number
+  numOfImages: number,
+  gridForPage: "illustration" | "animation" | "fine art"
 ) {
+  const { image, updateImage } = useImage();
+  // const handleClick = () => {
+  //   updateImage({src: 'http://fake-url.com', name: })
+  //   // console.log("hello! I have been clicked!");
+  // };
   const grid: JSX.Element[] = [];
   for (let i = 0; i < numOfImages; i++) {
     grid.push(
@@ -17,17 +22,27 @@ export function createGrid(
           height: 0
         }}
       >
-        <div
-          className="absolute flex items-center justify-center bg-black opacity-50 text-3xl text-white"
-          style={{
-            top: "5px",
-            left: "5px",
-            width: "calc(100% - 10px)",
-            height: "calc(100% - 10px)"
-          }}
-        >
-          [ {i + 1} ]
-        </div>
+        <Link href="/display">
+          <a
+            onClick={() => {
+              updateImage({
+                src: "http://fake-url.com",
+                name: `${i + 1}`,
+                fromPage: gridForPage
+              });
+              // console.log("hello! I have been clicked!");
+            }}
+            className="absolute flex items-center justify-center bg-black opacity-50 text-3xl text-white"
+            style={{
+              top: "5px",
+              left: "5px",
+              width: "calc(100% - 10px)",
+              height: "calc(100% - 10px)"
+            }}
+          >
+            [ {i + 1} ]
+          </a>
+        </Link>
       </div>
     );
   }

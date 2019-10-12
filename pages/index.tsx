@@ -1,28 +1,7 @@
 import "../style.css";
 import Layout from "../components/Layout";
-import TitleText from "../static/title.svg";
-import { useImage } from "../components/ImageContextProvider";
-import ImageContext from "../components/ImageContextProvider";
 
 export default () => {
-  // const { someContext } = useContext(ImageContext);
-  // console.log("someContext is", someContext);
-  const { image, updateImage } = useImage();
-  // updateImage({ src: "Australia", name: "Dundee" });
-
-  if (image.name === "none") {
-    updateImage({ src: "Australia", name: "Dundee" });
-    // const { image } = useImage();
-    // console.log("now image is", image);
-  }
-
-  // updateImage({ src: "Australia", name: "Dundee" });
-
-  console.log("image name is", image.name);
-  console.log("image src is", image.src);
-
-  // console.log("image name is now", image.name);
-  // console.log("image src is now", image.src);
   return (
     <Layout isFor="home">
       <div
@@ -46,14 +25,7 @@ export default () => {
           fontSize: "6.875rem",
           backgroundColor: "rgba(0, 0, 0, .15)"
         }}
-      >
-        {/* <TitleText
-        className="w-auto text-white fill-current"
-        style={{
-          height: "6rem"
-        }}
-      /> */}
-      </div>
+      ></div>
     </Layout>
   );
 };

@@ -8,5 +8,5 @@ import { useImage } from "../components/ImageContextProvider";
 export default () => {
   console.log("hello from illustration");
   console.log("image in illustration is", useImage().image);
-  return <Layout isFor="illustration">{createGrid(15)}</Layout>;
+  return <Layout isFor="illustration">{createGrid(15, "illustration")}</Layout>;
 };

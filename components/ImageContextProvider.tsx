@@ -5,25 +5,24 @@ interface ImageContextType {
   image: {
     src: string;
     name: string;
-  };
+    fromPage: "illustration" | "animation" | "fine art" | null;
+  } | null;
   updateImage: (image: ImageContextType["image"]) => void;
 }
 
 const ImageContext = createContext({} as ImageContextType);
 
 interface ImageContextProviderProps {
-  value: ImageContextType["image"];
-  [x: string]: any;
-  // children: ReactNode;
+  value: { image: ImageContextType["image"] };
+  [x: string]: any | null;
 }
 
 const ImageContextProvider = ({
-  value = { src: "none", name: "none" },
+  value = { image: null },
   ...restOfProps
 }: ImageContextProviderProps) => {
-  // const { value, ...restOfProps } = props;
-  const [image, updateImage] = useState(value);
-  console.log("image in Provider is", image);
+  const [image, updateImage] = useState(value.image);
+  console.log("image in provider is", image);
   return (
     <ImageContext.Provider
       value={{
@@ -41,7 +40,3 @@ export const useImage = () => {
 };
 
 export default ImageContextProvider;
-
-// const ImageContext = createContext({} as ImageContextType);
-
-// export default ImageContext;
