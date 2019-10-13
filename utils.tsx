@@ -22,7 +22,7 @@ export function createGrid(
           height: 0
         }}
       >
-        <Link href="/display">
+        <Link href={`/display?fromPage=${gridForPage}`}>
           <a
             onClick={() => {
               updateImage({

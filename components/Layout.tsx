@@ -10,7 +10,7 @@ import { ReactNode } from "react";
 import { callbackify } from "util";
 
 interface LayoutProps {
-  isFor: "home" | "illustration" | "animation" | "fine art" | "display";
+  isFor: string | string[]; //"home" | "illustration" | "animation" | "fine art" | "display";
   children: ReactNode;
 }
 
