@@ -7,7 +7,6 @@ import TitleText from "../static/title.svg";
 import LogoBlack from "../static/icons/logo-black.svg";
 import LogoWhite from "../static/icons/logo-white.svg";
 import { ReactNode } from "react";
-import { callbackify } from "util";
 
 interface LayoutProps {
   isFor: string | string[]; //"home" | "illustration" | "animation" | "fine art" | "display";

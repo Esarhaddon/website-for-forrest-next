@@ -23,8 +23,11 @@ export function createGrid(
         }}
       >
         <Link
-          href={`/display?slug={"fromPage":"${gridForPage}", "imageName":"${i +
-            1}"}`}
+          // href={`/display?slug={"fromPage":"${gridForPage}", "imageName":"${i +
+          //   1}"}`}
+          href="/[page]/[image]"
+          as={`/${gridForPage}/image-${i + 1}`}
+          // as={`/${i + 1}`}
           // href={`/display?fromPage=${gridForPage}`}
         >
           <a
@@ -44,7 +47,7 @@ export function createGrid(
               height: "calc(100% - 10px)"
             }}
           >
-            [ {i + 1} ]
+            [ image-{i + 1} ]
           </a>
         </Link>
       </div>
