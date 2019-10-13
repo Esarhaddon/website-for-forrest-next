@@ -25,6 +25,7 @@ export function createGrid(
         <Link
           href={`/display?slug={"fromPage":"${gridForPage}", "imageName":"${i +
             1}"}`}
+          // href={`/display?fromPage=${gridForPage}`}
         >
           <a
             // onClick={() => {

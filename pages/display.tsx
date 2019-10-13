@@ -8,9 +8,11 @@ export default () => {
   let slug;
   if (typeof router.query.slug === "string") {
     slug = JSON.parse(router.query.slug);
-  } else {
+  } else if (slug) {
+    console.log("typeof slug is", router.query.slug);
     slug = JSON.parse(router.query.slug.join());
   }
+
   // const {fromPage, imageSource, imageName} = JSON.parse(router.query.slug.join(','))
   // const { image } = useImage();
   // console.log(image.name);
@@ -21,7 +23,8 @@ export default () => {
   return (
     <div>
       {/* {image === null ? router.push("/illustration") : null} */}
-      <Layout isFor={slug.fromPage}>
+      {/* {console.log('router.quert')} */}
+      <Layout isFor={slug ? slug.fromPage : ""}>
         {/* {image === null ? router.push("/animation") : null} */}
         {/* {image.name !== "2" ? router.push("/illustration") : null} */}
         {/* <div
@@ -61,7 +64,7 @@ export default () => {
               }}
             >
               <div className="absolute top-0 left-0 flex items-center justify-center text-white text-6xl w-full h-full">
-                [ {slug.imageName} ]{/* [ {image.name} ] */}
+                [ {slug ? slug.imageName : "no image"} ]
               </div>
             </div>
           </div>
