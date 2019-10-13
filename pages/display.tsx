@@ -1,11 +1,18 @@
 import Layout from "../components/Layout";
-import { useImage } from "../components/ImageContextProvider";
+// import { useImage } from "../components/ImageContextProvider";
 import { useRouter, Router } from "next/router";
 import { loadGetInitialProps } from "next-server/dist/lib/utils";
 
 export default () => {
   const router = useRouter();
-  const { image } = useImage();
+  let slug;
+  if (typeof router.query.slug === "string") {
+    slug = JSON.parse(router.query.slug);
+  } else {
+    slug = JSON.parse(router.query.slug.join());
+  }
+  // const {fromPage, imageSource, imageName} = JSON.parse(router.query.slug.join(','))
+  // const { image } = useImage();
   // console.log(image.name);
   // if (image === null) {
   //   router.push("/illustration");
@@ -14,7 +21,7 @@ export default () => {
   return (
     <div>
       {/* {image === null ? router.push("/illustration") : null} */}
-      <Layout isFor={router.query.fromPage}>
+      <Layout isFor={slug.fromPage}>
         {/* {image === null ? router.push("/animation") : null} */}
         {/* {image.name !== "2" ? router.push("/illustration") : null} */}
         {/* <div
@@ -54,7 +61,7 @@ export default () => {
               }}
             >
               <div className="absolute top-0 left-0 flex items-center justify-center text-white text-6xl w-full h-full">
-                [ image ]{/* [ {image.name} ] */}
+                [ {slug.imageName} ]{/* [ {image.name} ] */}
               </div>
             </div>
           </div>

@@ -1,11 +1,11 @@
 import Link from "next/Link";
-import { useImage } from "./components/ImageContextProvider";
+// import { useImage } from "./components/ImageContextProvider";
 
 export function createGrid(
   numOfImages: number,
   gridForPage: "illustration" | "animation" | "fine art"
 ) {
-  const { image, updateImage } = useImage();
+  // const { image, updateImage } = useImage();
   // const handleClick = () => {
   //   updateImage({src: 'http://fake-url.com', name: })
   //   // console.log("hello! I have been clicked!");
@@ -22,16 +22,19 @@ export function createGrid(
           height: 0
         }}
       >
-        <Link href={`/display?fromPage=${gridForPage}`}>
+        <Link
+          href={`/display?slug={"fromPage":"${gridForPage}", "imageName":"${i +
+            1}"}`}
+        >
           <a
-            onClick={() => {
-              updateImage({
-                src: "http://fake-url.com",
-                name: `${i + 1}`,
-                fromPage: gridForPage
-              });
-              // console.log("hello! I have been clicked!");
-            }}
+            // onClick={() => {
+            //   updateImage({
+            //     src: "http://fake-url.com",
+            //     name: `${i + 1}`,
+            //     fromPage: gridForPage
+            //   });
+            // console.log("hello! I have been clicked!");
+            // }}
             className="absolute flex items-center justify-center bg-black opacity-50 text-3xl text-white"
             style={{
               top: "5px",
