@@ -7,9 +7,10 @@ import TitleText from "../static/title.svg";
 import LogoBlack from "../static/icons/logo-black.svg";
 import LogoWhite from "../static/icons/logo-white.svg";
 import { ReactNode } from "react";
+import "../styles/style.css";
 
 interface LayoutProps {
-  isFor: string | string[]; //"home" | "illustration" | "animation" | "fine art" | "display";
+  isFor: string | string[]; //"home" | "illustration" | "animation" | "fine-art" | "display";
   children: ReactNode;
 }
 
@@ -46,7 +47,7 @@ export default (props: LayoutProps) => (
     >
       {props.isFor === "illustration" ||
       props.isFor === "animation" ||
-      props.isFor === "fine art" ||
+      props.isFor === "fine-art" ||
       props.isFor === "display" ? (
         <div
           className="flex justify-between text-gray-900 off-pl-8 off-pr-12 font-semibold"
@@ -101,7 +102,7 @@ export default (props: LayoutProps) => (
             <Link href="/fine-art">
               <a
                 className={`mr-8 ${
-                  props.isFor === "fine art" ? "text-gray-900" : "text-gray-500"
+                  props.isFor === "fine-art" ? "text-gray-900" : "text-gray-500"
                 } hover:text-gray-900`}
               >
                 FINE ART
@@ -180,7 +181,7 @@ export default (props: LayoutProps) => (
       ) : null}
       {props.isFor === "illustration" ||
       props.isFor === "animation" ||
-      props.isFor === "fine art" ||
+      props.isFor === "fine-art" ||
       props.isFor === "display" ? (
         <div>
           <div className="flex justify-center">
