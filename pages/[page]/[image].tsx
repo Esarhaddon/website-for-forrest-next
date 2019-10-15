@@ -39,10 +39,16 @@ export default () => {
           </div>
         </div>
         <div
-          className={`fixed top-0 left-0 w-full h-full bg-black ${
+          className={`fixed top-0 left-0 w-full h-full ${
             hideModal ? "hidden" : ""
           }`}
-          style={{ opacity: 0.95 }}
+          style={{
+            backgroundColor: "rgba(0, 0, 0, .95)"
+            // paddingTop: "1vw",
+            // paddingBottom: "1vw",
+            // paddingRight: "2vw",
+            // paddingLeft: "2vw"
+          }}
         >
           <ExitX
             className="absolute text-gray-200 fill-current cursor-pointer"
@@ -56,6 +62,23 @@ export default () => {
               setHideModal(true);
             }}
           />
+          <div
+            className="relative mx-auto"
+            style={{ maxWidth: "72vh", top: "2vh" }}
+          >
+            <div
+              className="h-0 w-full"
+              style={{
+                paddingTop: "133.333333%"
+              }}
+            />
+            <div
+              className="absolute top-0 left-0 w-full h-full text-white flex items-center justify-center text-xl"
+              style={{ backgroundColor: "rgba(127, 127, 127)" }}
+            >
+              [ {router.query ? router.query.image : "no image"} ]
+            </div>
+          </div>
         </div>
       </Layout>
     </div>
