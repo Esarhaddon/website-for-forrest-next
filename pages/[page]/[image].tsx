@@ -43,15 +43,13 @@ export default () => {
             hideModal ? "hidden" : ""
           }`}
           style={{
-            backgroundColor: "rgba(0, 0, 0, .95)"
-            // paddingTop: "1vw",
-            // paddingBottom: "1vw",
-            // paddingRight: "2vw",
-            // paddingLeft: "2vw"
+            backgroundColor: "rgba(0, 0, 0, .95)",
+            paddingRight: "2vw",
+            paddingLeft: "2vw"
           }}
         >
           <ExitX
-            className="absolute text-gray-200 fill-current cursor-pointer"
+            className="absolute z-10 text-gray-200 fill-current cursor-pointer"
             style={{
               top: "calc(2% + 1rem)",
               right: "2%",
@@ -64,7 +62,7 @@ export default () => {
           />
           <div
             className="relative mx-auto"
-            style={{ maxWidth: "72vh", top: "2vh" }}
+            style={{ maxWidth: "72vh", top: "0" }}
           >
             <div
               className="h-0 w-full"
@@ -74,7 +72,10 @@ export default () => {
             />
             <div
               className="absolute top-0 left-0 w-full h-full text-white flex items-center justify-center text-xl"
-              style={{ backgroundColor: "rgba(127, 127, 127)" }}
+              style={{
+                backgroundColor: "rgba(127, 127, 127)",
+                marginTop: "calc(50vh - 66.666666%)"
+              }}
             >
               [ {router.query ? router.query.image : "no image"} ]
             </div>
