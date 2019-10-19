@@ -75,7 +75,7 @@ export default (props: LayoutProps) => (
             </a>
           </Link>
           <div className="flex items-center">
-            <Link href="/illustration">
+            <Link href="/[page]" as="/illustration">
               <a
                 className={`mr-8 ${
                   props.isFor === "illustration"
@@ -87,7 +87,7 @@ export default (props: LayoutProps) => (
               </a>
             </Link>
             <div className="mr-8 font-semibold text-gray-900">/</div>
-            <Link href="/animation">
+            <Link href="/[page]" as="/animation">
               <a
                 className={`mr-8 ${
                   props.isFor === "animation"
@@ -99,7 +99,7 @@ export default (props: LayoutProps) => (
               </a>
             </Link>
             <div className="mr-8 font-semibold text-gray-900">/</div>
-            <Link href="/fine-art">
+            <Link href="/[page]" as="/fine-art">
               <a
                 className={`mr-8 ${
                   props.isFor === "fine-art" ? "text-gray-900" : "text-gray-500"
@@ -121,7 +121,7 @@ export default (props: LayoutProps) => (
             bottom: "calc(22vh - 2.5rem)"
           }}
         >
-          <Link href="/illustration">
+          <Link href="/[page]" as="/illustration">
             <a
               className="font-medium border-2 border-solid border-white text-white pt-5 pb-4 px-5 tracking-widest leading-none cursor-pointer hover:bg-white hover:text-gray-900"
               style={{

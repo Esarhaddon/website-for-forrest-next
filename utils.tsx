@@ -3,7 +3,7 @@ import Link from "next/Link";
 
 export function createGrid(
   numOfImages: number,
-  gridForPage: "illustration" | "animation" | "fine-art"
+  gridForPage: string // "illustration" | "animation" | "fine-art"
 ) {
   // const { image, updateImage } = useImage();
   // const handleClick = () => {
