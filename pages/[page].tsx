@@ -1,6 +1,5 @@
 import Layout from "../components/Layout";
 import { useRouter } from "next/router";
-import { createGrid } from "../utils";
 import { useImage } from "../components/ImageContextProvider";
 import Link from "next/Link";
 
