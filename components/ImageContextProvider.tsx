@@ -1,37 +1,25 @@
 import { createContext, useContext, ReactNode, useState } from "react";
 
 interface ImageContextType {
-  // someContext: null | string;
-  image: {
-    src: string;
-    name: string;
-    fromPage: "illustration" | "animation" | "fine art" | null;
+  images: {
+    illustration: { src: string; name: string }[] | null;
+    animation: ImageContextType["images"]["illustration"];
+    "fine-art": ImageContextType["images"]["illustration"];
   } | null;
-  updateImage: (image: ImageContextType["image"]) => void;
 }
 
 const ImageContext = createContext({} as ImageContextType);
 
 interface ImageContextProviderProps {
-  value: { image: ImageContextType["image"] };
+  value: ImageContextType;
   [x: string]: any | null;
 }
 
 const ImageContextProvider = ({
-  value = { image: null },
+  value = { images: null },
   ...restOfProps
 }: ImageContextProviderProps) => {
-  const [image, updateImage] = useState(value.image);
-  console.log("image in provider is", image);
-  return (
-    <ImageContext.Provider
-      value={{
-        image,
-        updateImage
-      }}
-      {...restOfProps}
-    />
-  );
+  return <ImageContext.Provider value={value} {...restOfProps} />;
 };
 
 export const useImage = () => {

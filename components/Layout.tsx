@@ -10,7 +10,7 @@ import { ReactNode } from "react";
 import "../styles/style.css";
 
 interface LayoutProps {
-  isFor: string | string[]; //"home" | "illustration" | "animation" | "fine-art" | "display";
+  isFor: string;
   children: ReactNode;
 }
 
@@ -117,7 +117,6 @@ export default (props: LayoutProps) => (
           className="foreground absolute w-full left-0 flex items-center justify-center"
           style={{
             height: "5rem",
-            // bottom: "16vh"
             bottom: "calc(22vh - 2.5rem)"
           }}
         >
