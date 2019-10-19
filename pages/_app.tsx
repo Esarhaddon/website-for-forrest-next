@@ -6,15 +6,7 @@ class MyApp extends App {
   render() {
     const { Component, pageProps } = this.props;
     return (
-      <ImageContextProvider
-        value={{
-          images: {
-            illustration: [{ src: "fake.com", name: "fake-image" }],
-            animation: null,
-            "fine-art": null
-          }
-        }}
-      >
+      <ImageContextProvider>
         <Component {...pageProps} />
       </ImageContextProvider>
     );
