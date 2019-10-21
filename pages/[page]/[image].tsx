@@ -2,19 +2,22 @@ import Layout from "../../components/Layout";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import ExitX from "../../static/icons/close.svg";
+import Arrow from "../../static/icons/arrow.svg";
+import { useImage } from "../../components/ImageContextProvider";
 
 export default () => {
   const router = useRouter();
   const page = router.query.page ? router.query.page.toString() : "";
-  const image = router.query.image ? router.query.image.toString() : null;
+  const imageName = router.query.image ? router.query.image.toString() : null;
+  const { images } = useImage();
+
   const [hideModal, setHideModal] = useState(true);
   return (
     <div>
       <Layout isFor={page}>
         <div
           style={{
-            padding: "5vw",
-            paddingTop: 0
+            padding: "0 5vw 2.5vw 5vw"
           }}
         >
           <div
@@ -35,9 +38,29 @@ export default () => {
                   setHideModal(false);
                 }}
               >
-                [ {image} ]
+                [ {imageName} ]
               </div>
             </div>
+          </div>
+        </div>
+        <div
+          className="flex justify-center items-center text-gray-700"
+          style={{
+            marginBottom: "3vw"
+          }}
+        >
+          <div className="text-lg mx-4">
+            <Arrow
+              className="h-5 inline fill-current"
+              style={{
+                transform: "scaleX(-1)"
+              }}
+            />
+            Prev
+          </div>
+          <div className="text-lg mx-4">
+            Next
+            <Arrow className="h-5 inline fill-current" />
           </div>
         </div>
         <div
@@ -79,7 +102,7 @@ export default () => {
                 marginTop: "calc(50vh - 66.666666%)"
               }}
             >
-              [ {image} ]
+              [ {imageName} ]
             </div>
           </div>
         </div>
