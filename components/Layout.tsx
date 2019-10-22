@@ -18,9 +18,8 @@ export default (props: LayoutProps) => (
   <div>
     {props.isFor === "home" ? (
       <div
-        className="flex justify-center items-center w-full off-h-screen absolute top-0 left-0 z-10"
+        className="flex justify-center items-center w-full h-screen absolute top-0 left-0 z-10"
         style={{
-          height: "calc(101vh)",
           minHeight: "300px",
           pointerEvents: "none"
         }}
@@ -52,8 +51,6 @@ export default (props: LayoutProps) => (
         <div
           className="flex justify-between text-gray-900 off-pl-8 off-pr-12 font-semibold"
           style={{
-            // paddingTop: "vw",
-            // paddingBottom: "1vw",
             marginRight: "calc(5vw + 5px)",
             marginLeft: "calc(5vw + 5px)",
             paddingTop: "calc(2.5vw + 5px)",
