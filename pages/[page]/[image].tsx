@@ -1,4 +1,5 @@
 import Layout from "../../components/Layout";
+import Link from "next/Link";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import ExitX from "../../static/icons/close.svg";
@@ -7,11 +8,34 @@ import { useImage } from "../../components/ImageContextProvider";
 
 export default () => {
   const router = useRouter();
-  const page = router.query.page ? router.query.page.toString() : "";
-  const imageName = router.query.image ? router.query.image.toString() : null;
   const { images } = useImage();
+  const page = router.query.page ? router.query.page.toString() : null;
+  const currentImage = router.query.image
+    ? images[page].find(image => image.name === router.query.image)
+    : null;
 
+  const nextImage = images[page]
+    ? images[page][
+        images[page].findIndex(image => {
+          if (image) {
+            return image.name === currentImage.name;
+          } else return -2;
+        }) + 1
+      ]
+    : null;
+  const previousImage = images[page]
+    ? images[page][
+        images[page].findIndex(image => {
+          if (image) {
+            return image.name === currentImage.name;
+          } else return -2;
+        }) - 1
+      ]
+    : null;
   const [hideModal, setHideModal] = useState(true);
+  console.log("page is", page);
+  console.log("images[page] is", images[page]);
+
   return (
     <div>
       <Layout isFor={page}>
@@ -38,7 +62,7 @@ export default () => {
                   setHideModal(false);
                 }}
               >
-                [ {imageName} ]
+                [ {currentImage ? currentImage.name : ""} ]
               </div>
             </div>
           </div>
@@ -49,19 +73,42 @@ export default () => {
             marginBottom: "3vw"
           }}
         >
-          <div className="text-lg mx-4">
-            <Arrow
-              className="h-5 inline fill-current"
-              style={{
-                transform: "scaleX(-1)"
-              }}
-            />
-            Prev
-          </div>
-          <div className="text-lg mx-4">
-            Next
-            <Arrow className="h-5 inline fill-current" />
-          </div>
+          {previousImage ? (
+            <Link href="/[page]/[image]" as={`/${page}/${previousImage.name}`}>
+              <a className="text-lg mx-4">
+                <Arrow
+                  className="h-5 inline fill-current"
+                  style={{
+                    transform: "scaleX(-1)"
+                  }}
+                />
+                Prev
+              </a>
+            </Link>
+          ) : (
+            <div className="text-lg mx-4 text-gray-500 cursor-pointer">
+              <Arrow
+                className="h-5 inline fill-current"
+                style={{
+                  transform: "scaleX(-1)"
+                }}
+              />
+              Prev
+            </div>
+          )}
+          {nextImage ? (
+            <Link href="/[page]/[image]" as={`/${page}/${nextImage.name}`}>
+              <a className="text-lg mx-4">
+                Next
+                <Arrow className="h-5 inline fill-current" />
+              </a>
+            </Link>
+          ) : (
+            <div className="text-lg mx-4 text-gray-500 cursor-pointer">
+              Next
+              <Arrow className="h-5 inline fill-current" />
+            </div>
+          )}
         </div>
         <div
           className={`fixed top-0 left-0 w-full h-full ${
@@ -102,7 +149,7 @@ export default () => {
                 marginTop: "calc(50vh - 66.666666%)"
               }}
             >
-              [ {imageName} ]
+              [ {currentImage ? currentImage.name : ""} ]
             </div>
           </div>
         </div>
