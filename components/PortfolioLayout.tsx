@@ -1,3 +1,4 @@
+import "../styles/style.css";
 import Link from "next/Link";
 import InstagramLogo from "../static/icons/001-instagram.svg";
 import FacebookLogo from "../static/icons/002-facebook-circular-logo.svg";
@@ -7,7 +8,7 @@ import TitleText from "../static/title.svg";
 import LogoBlack from "../static/icons/logo-black.svg";
 import LogoWhite from "../static/icons/logo-white.svg";
 import { ReactNode } from "react";
-import "../styles/style.css";
+import SocialAndEmail from "./SocialAndEmail";
 
 interface LayoutProps {
   isFor: string;
@@ -119,7 +120,7 @@ export default (props: LayoutProps) => (
         >
           <Link href="/[page]" as="/illustration">
             <a
-              className="font-medium border-2 border-solid border-white text-white pt-5 pb-4 px-5 tracking-widest leading-none cursor-pointer hover:bg-white hover:text-gray-900"
+              className="mr-12 font-medium border-2 border-solid border-white text-white pt-5 pb-4 px-5 tracking-widest leading-none cursor-pointer hover:bg-white hover:text-gray-900"
               style={{
                 transition:
                   "color 170ms ease-in-out, background-color 170ms ease-in-out"
@@ -128,51 +129,7 @@ export default (props: LayoutProps) => (
               WORK
             </a>
           </Link>
-          <div className="flex items-center ml-12 text-white logo-container-white cursor-pointer">
-            <a
-              href="https://www.instagram.com/forrestdickison"
-              target="_blank"
-              className="w-12 pl-2 hover:text-white"
-              style={{
-                transition: "color 170ms ease-in-out, opacity 170ms ease-in-out"
-              }}
-            >
-              <InstagramLogo className="h-8 w-8 fill-current" />
-            </a>
-            <div
-              className="w-12 pl-2 hover:text-white"
-              style={{
-                transition: "color 170ms ease-in-out, opacity 170ms ease-in-out"
-              }}
-            >
-              <FacebookLogo className="h-8 w-8 fill-current" />
-            </div>
-            <div
-              className="w-12 pl-2 hover:text-white"
-              style={{
-                transition: "color 170ms ease-in-out, opacity 170ms ease-in-out"
-              }}
-            >
-              <TwitterLogo className="h-8 w-8 fill-current" />
-            </div>
-            <div
-              className="w-12 pl-2 hover:text-white"
-              style={{
-                transition: "color 170ms ease-in-out, opacity 170ms ease-in-out"
-              }}
-            >
-              <a href="mailto:fddickison@gmail.com" target="_blank">
-                <EmailLogo className="h-8 w-8 fill-current" />
-              </a>
-            </div>
-          </div>
-          <div className="absolute right-0 mr-4">
-            <Link href="/index">
-              <a>
-                <LogoWhite className="h-32" />
-              </a>
-            </Link>
-          </div>
+          <SocialAndEmail isDark={false} />
         </div>
       ) : null}
       {props.isFor === "illustration" ||
@@ -180,50 +137,7 @@ export default (props: LayoutProps) => (
       props.isFor === "fine-art" ||
       props.isFor === "display" ? (
         <div>
-          <div className="flex justify-center">
-            <div className="flex logo-container-black text-gray-900 cursor-pointer">
-              <a
-                href="https://www.instagram.com/forrestdickison"
-                target="_blank"
-                className="w-12 pl-2 hover:text-gray-900"
-                style={{
-                  transition:
-                    "color 170ms ease-in-out, opacity 170ms ease-in-out"
-                }}
-              >
-                <InstagramLogo className="h-8 w-8 fill-current" />
-              </a>
-              <div
-                className="w-12 pl-2 hover:text-gray-900"
-                style={{
-                  transition:
-                    "color 170ms ease-in-out, opacity 170ms ease-in-out"
-                }}
-              >
-                <FacebookLogo className="h-8 w-8 fill-current" />
-              </div>
-              <div
-                className="w-12 pl-2 hover:text-gray-900"
-                style={{
-                  transition:
-                    "color 170ms ease-in-out, opacity 170ms ease-in-out"
-                }}
-              >
-                <TwitterLogo className="h-8 w-8 fill-current" />
-              </div>
-              <div
-                className="w-12 pl-2 hover:text-gray-900"
-                style={{
-                  transition:
-                    "color 170ms ease-in-out, opacity 170ms ease-in-out"
-                }}
-              >
-                <a href="mailto:fddickison@gmail.com" target="_blank">
-                  <EmailLogo className="h-8 w-8 fill-current" />
-                </a>
-              </div>
-            </div>
-          </div>
+          <SocialAndEmail isDark={true} />
           <div
             className="flex justify-center items-center text-gray-900"
             style={{

@@ -1,4 +1,5 @@
 module.exports = {
+  // important: true,
   theme: {
     extend: {}
   },
@@ -6,6 +7,7 @@ module.exports = {
     // borderWidth: ["hover"],
     // display: ["group-hover"],
     opacity: ["hover", "group-hover"]
+    // textColor: ["hover", "group-hover"]
   },
   plugins: []
 };

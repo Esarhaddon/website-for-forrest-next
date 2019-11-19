@@ -1,4 +1,4 @@
-import Layout from "../../components/Layout";
+import Layout from "../../components/PortfolioLayout";
 import Link from "next/Link";
 import { useRouter } from "next/router";
 import { useState } from "react";

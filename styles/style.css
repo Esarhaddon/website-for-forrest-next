@@ -99,14 +99,12 @@ body {
   font-family: "Montserrat", "Josefin Sans", Arial, sans-serif;
 }
 
-.logo-container-white:hover {
-  color: rgba(225, 225, 225, 0.85);
-  /* fill: rgba(225, 225, 225, 0.85); */
+.hover-text-transparent-light:hover {
+  color: rgba(255, 255, 255, 0.7);
 }
 
-.logo-container-black:hover {
-  color: rgba(0, 0, 0, 0.55);
-  /* fill: rgba(0, 0, 0, 0.85); */
+.hover-text-transparent-dark:hover {
+  color: rgba(0, 0, 0, 0.65);
 }
 
 .background {

@@ -1,5 +1,5 @@
 import "../styles/style.css";
-import Layout from "../components/Layout";
+import Layout from "../components/PortfolioLayout";
 
 export default () => {
   return (
