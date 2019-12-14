@@ -22,7 +22,7 @@ export default () => {
           }}
         />
         <div
-          className="off-bg-cover off-bg-center off-bg-no-repeat absolute top-0 left-0 w-full"
+          className="absolute top-0 left-0 w-full"
           style={{
             height: "130vh",
             background:

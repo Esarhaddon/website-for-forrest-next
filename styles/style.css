@@ -107,6 +107,17 @@ body {
   color: rgba(0, 0, 0, 0.65);
 }
 
+/* (perspective - distance) / perspective = scaleFactor*/
+.new-background {
+  transform-origin: 0 0;
+  transform: translateZ(-4px) scale(3);
+}
+
+.middle-ground {
+  transform-origin: 0 0;
+  transform: translateZ(-2px) scale(2);
+}
+
 .background {
   transform-origin: 0 0;
   transform: translateZ(-2px) scale(2);
