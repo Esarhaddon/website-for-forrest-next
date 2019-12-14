@@ -95,7 +95,7 @@ html {
 }
 
 body {
-  overflow: hidden;
+  /* overflow: hidden; */
   font-family: "Montserrat", "Josefin Sans", Arial, sans-serif;
 }
 
