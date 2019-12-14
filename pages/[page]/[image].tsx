@@ -33,8 +33,6 @@ export default () => {
       ]
     : null;
   const [hideModal, setHideModal] = useState(true);
-  console.log("page is", page);
-  console.log("images[page] is", images[page]);
 
   return (
     <div>

@@ -1,5 +1,4 @@
 import "../styles/style.css";
-import Layout from "../components/PortfolioLayout";
 import Link from "next/Link";
 import SocialAndEmail from "../components/SocialAndEmail";
 import TitleText from "../static/title.svg";
@@ -7,26 +6,13 @@ import TitleText from "../static/title.svg";
 export default () => {
   return (
     <div>
+      <TitleText
+        className="mx-auto max-w-full px-16 text-white fill-current pointer-events-none relative h-24 z-10"
+        style={{ top: "calc(50vh - 3rem)" }}
+      />
       <div
-        className="flex justify-center items-center w-full h-screen absolute top-0 left-0 z-10"
-        style={{
-          minHeight: "300px",
-          pointerEvents: "none"
-        }}
-      >
-        <TitleText
-          className="mx-16 text-white fill-current"
-          style={{
-            height: "6rem"
-          }}
-        />
-      </div>
-      <div
-        className="relative top-0 left-0 h-screen w-full overflow-x-hidden overflow-y-scroll"
-        style={{
-          perspective: "2px",
-          perspectiveOrigin: "0 0"
-        }}
+        className="absolute top-0 left-0 h-screen w-full overflow-x-hidden overflow-y-scroll"
+        style={{ perspective: "2px", perspectiveOrigin: "0 0" }}
       >
         <div
           className="background absolute top-0 left-0 bg-center bg-cover bg-no-repeat w-full"
@@ -36,25 +22,16 @@ export default () => {
           }}
         />
         <div
-          className="bg-cover bg-center bg-no-repeat absolute top-0 left-0 w-full"
+          className="off-bg-cover off-bg-center off-bg-no-repeat absolute top-0 left-0 w-full"
           style={{
             height: "130vh",
-            backgroundImage: "url(../static/layer1.png)"
+            background:
+              "linear-gradient(rgba(0, 0, 0, .15), rgba(0, 0, 0, .3)), url(../static/layer1.png) center / cover no-repeat"
           }}
         />
         <div
-          className="sticky left-0 top-0 w-full h-full "
-          style={{
-            pointerEvents: "none",
-            backgroundColor: "rgba(0, 0, 0, .15)"
-          }}
-        />
-        <div
-          className="foreground absolute w-full left-0 flex items-center justify-center"
-          style={{
-            height: "5rem",
-            bottom: "calc(22vh - 2.5rem)"
-          }}
+          className="foreground absolute h-20 w-full left-0 flex items-center justify-center"
+          style={{ bottom: "calc(22vh - 2.5rem)" }}
         >
           <Link href="/[page]" as="/illustration">
             <a
