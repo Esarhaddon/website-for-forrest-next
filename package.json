@@ -10,7 +10,7 @@
     "start": "next start"
   },
   "keywords": [],
-  "author": "",
+  "author": "<jaksondikison@gmail.com>",
   "license": "ISC",
   "dependencies": {
     "@svgr/webpack": "^4.3.3",
@@ -27,5 +27,6 @@
     "postcss-easy-import": "^3.0.0",
     "tailwindcss": "^1.1.2",
     "typescript": "^3.5.3"
-  }
+  },
+  "repository": "https://github.com/Esarhaddon/website-for-forrest-next.git"
 }
