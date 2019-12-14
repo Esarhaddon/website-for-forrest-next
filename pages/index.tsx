@@ -15,10 +15,12 @@ export default () => {
         style={{ perspective: "2px", perspectiveOrigin: "0 0" }}
       >
         <div
-          className="background absolute top-0 left-0 bg-center bg-cover bg-no-repeat w-full"
+          className="absolute top-0 left-0 bg-center bg-cover bg-no-repeat w-full"
           style={{
             height: "130vh",
-            backgroundImage: "url(../static/landing-background-cropped.png)"
+            backgroundImage: "url(../static/landing-background-cropped.png)",
+            transformOrigin: "0 0",
+            transform: "translateZ(-2px) scale(2)" // (perspective - distance) / perspective = scaleFactor
           }}
         />
         <div
@@ -26,12 +28,14 @@ export default () => {
           style={{
             height: "130vh",
             background:
-              "linear-gradient(rgba(0, 0, 0, .15), rgba(0, 0, 0, .3)), url(../static/layer1.png) center / cover no-repeat"
+              "linear-gradient(rgba(0, 0, 0, .15), rgba(0, 0, 0, .3)), url(../static/layer1.png) center / cover no-repeat",
+            transformOrigin: "0 0",
+            transform: "translateZ(-1px) scale(1.5)"
           }}
         />
         <div
-          className="foreground absolute h-20 w-full left-0 flex items-center justify-center"
-          style={{ bottom: "calc(22vh - 2.5rem)" }}
+          className="absolute h-20 w-full left-0 flex items-center justify-center"
+          style={{ top: "130vh" }}
         >
           <Link href="/[page]" as="/illustration">
             <a
