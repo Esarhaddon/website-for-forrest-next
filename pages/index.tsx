@@ -33,7 +33,7 @@ export default () => {
         }}
       />
       <div
-        className="text-center md:px-16 px-4 text-white md:text-8xl sm:text-7xl xsm:text-6xl text-5xl sticky z-50 off-tracking-tight leading-none font-semibold"
+        className="text-center px-2 text-white md:text-8xl sm:text-7xl xsm:text-6xl text-5-1/4xl sticky z-50 leading-none font-semibold"
         style={{ top: "calc(50% - 3rem)" }}
       >
         forrest dickison
@@ -44,7 +44,7 @@ export default () => {
       >
         <Link href="/[page]" as="/illustration">
           <a
-            className="mr-12 border-2 border-solid border-white text-white pt-5 pb-4 px-5 tracking-widest leading-none cursor-pointer hover:bg-white hover:text-gray-900"
+            className="mr-12 border-2 border-solid border-white text-white py-4 px-5 tracking-widest leading-none cursor-pointer hover:bg-white hover:text-gray-900"
             style={{
               transition:
                 "color 170ms ease-in-out, background-color 170ms ease-in-out"
