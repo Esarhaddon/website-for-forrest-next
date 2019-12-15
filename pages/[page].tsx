@@ -10,8 +10,6 @@ export default () => {
     ? router.query.page.toString()
     : "illustration";
 
-  console.log("page in [page].tsx is", page);
-
   return (
     <Layout isFor={page}>
       <div
