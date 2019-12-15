@@ -42,6 +42,12 @@
     U+FEFF, U+FFFD;
 }
 
+@keyframes show-nav {
+  50% {
+    top: 85%;
+  }
+}
+
 body,
 html {
   margin: 0;

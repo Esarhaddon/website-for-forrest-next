@@ -40,7 +40,10 @@ export default () => {
       </div>
       <div
         className="absolute left-0 h-20 w-full left-0 flex items-center justify-center"
-        style={{ top: "105%" }}
+        style={{
+          top: "105%",
+          animation: "1.5s ease show-nav"
+        }}
       >
         <Link href="/[page]" as="/illustration">
           <a
