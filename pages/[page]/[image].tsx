@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import ExitX from "../../static/icons/close.svg";
 import Arrow from "../../static/icons/arrow.svg";
-import { useImage } from "../../components/ImageContextProvider";
+import { useImage } from "../../providers/ImageContextProvider";
 
 export default () => {
   const router = useRouter();

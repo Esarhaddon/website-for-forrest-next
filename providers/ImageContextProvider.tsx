@@ -1,21 +1,17 @@
 import { createContext, useContext, ReactNode, useState } from "react";
 
-interface ImageContextType {
+interface IImageContext {
   images: {
     illustration: { src: string; name: string }[] | null;
-    animation: ImageContextType["images"]["illustration"];
-    "fine-art": ImageContextType["images"]["illustration"];
+    animation: IImageContext["images"]["illustration"];
+    "fine-art": IImageContext["images"]["illustration"];
   } | null;
 }
 
-const ImageContext = createContext({} as ImageContextType);
-
-interface ImageContextProviderProps {
-  children: ReactNode;
-}
+const ImageContext = createContext({} as IImageContext);
 
 const ImageContextProvider = ({ children }: { children: ReactNode }) => {
-  const context: ImageContextType = {
+  const context: IImageContext = {
     images: {
       illustration: [
         { src: "fake.com", name: "fake-image-1" },

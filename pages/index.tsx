@@ -1,15 +1,43 @@
 import "../styles/style.css";
 import Link from "next/Link";
 import SocialAndEmail from "../components/SocialAndEmail";
+import { useState, useEffect } from "react";
+import nextCookie from "next-cookies";
+import cookie from "js-cookie";
 
-export default () => {
+const Index = props => {
+  const [scrollable, setScrollable] = useState(false);
+  const indexHasLoaded = props.indexHasLoaded
+    ? parseInt(props.indexHasLoaded, 10)
+    : 0;
+
+  cookie.set("indexHasLoaded", indexHasLoaded + 1);
+
+  useEffect(() => {
+    console.log("adding event listener");
+    window.addEventListener("unload", () => {
+      cookie.remove("indexHasLoaded");
+    });
+  });
+
+  if (!indexHasLoaded) {
+    useEffect(() => {
+      setTimeout(() => setScrollable(true), 1000);
+    });
+  } else if (!scrollable) {
+    setScrollable(true);
+  }
+
   return (
     <div
-      className="absolute top-0 left-0 h-screen w-full overflow-x-hidden overflow-y-scroll"
+      className={`absolute top-0 left-0 h-screen w-full overflow-x-hidden overflow-y-scroll ${
+        indexHasLoaded ? "opacity-1" : "opacity-0"
+      } ${scrollable ? "" : "pointer-events-none"}`}
       style={{
         perspective: "2px",
         perspectiveOrigin: "0 0",
-        minHeight: "375px"
+        minHeight: "375px",
+        ...(indexHasLoaded ? null : { animation: "1s fade-in .75s forwards" })
       }}
     >
       <div
@@ -33,8 +61,12 @@ export default () => {
         }}
       />
       <div
-        className="text-center px-2 text-white md:text-8xl sm:text-7xl xsm:text-6xl text-5-1/4xl sticky z-50 leading-none font-semibold"
-        style={{ top: "calc(50% - 3rem)" }}
+        className="flex items-center justify-center text-center h-screen w-screen top-0 px-2 text-white md:text-8xl sm:text-7xl xsm:text-6xl text-5-1/4xl sticky leading-none font-semibold"
+        style={{
+          ...(!indexHasLoaded
+            ? { animation: "1s fade-bg .75s forwards" }
+            : null)
+        }}
       >
         forrest dickison
       </div>
@@ -42,7 +74,7 @@ export default () => {
         className="flex-wrap absolute left-0 off-h-20 w-full left-0 flex items-center justify-center pb-4"
         style={{
           top: "105%",
-          animation: "1.25s ease show-nav"
+          ...(!indexHasLoaded ? { animation: "1.25s ease .5s show-nav" } : null)
         }}
       >
         <Link href="/[page]" as="/illustration">
@@ -61,3 +93,15 @@ export default () => {
     </div>
   );
 };
+
+Index.getInitialProps = async ctx => {
+  console.log("getInitialProps called for Index page");
+  const { indexHasLoaded } = nextCookie(ctx);
+  const allCookies = nextCookie(ctx);
+  return {
+    indexHasLoaded,
+    allCookies
+  };
+};
+
+export default Index;
