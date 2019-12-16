@@ -9,7 +9,7 @@ export default () => {
       style={{
         perspective: "2px",
         perspectiveOrigin: "0 0",
-        minHeight: "300px"
+        minHeight: "375px"
       }}
     >
       <div
@@ -39,15 +39,15 @@ export default () => {
         forrest dickison
       </div>
       <div
-        className="absolute left-0 h-20 w-full left-0 flex items-center justify-center"
+        className="flex-wrap absolute left-0 off-h-20 w-full left-0 flex items-center justify-center pb-4"
         style={{
           top: "105%",
-          animation: "1.5s ease show-nav"
+          animation: "1.25s ease show-nav"
         }}
       >
         <Link href="/[page]" as="/illustration">
           <a
-            className="mr-12 border-2 border-solid border-white text-white py-4 px-5 tracking-widest leading-none cursor-pointer hover:bg-white hover:text-gray-900"
+            className="mx-12 my-6 border-2 border-solid border-white text-white py-4 px-5 tracking-widest leading-none cursor-pointer hover:bg-white hover:text-gray-900"
             style={{
               transition:
                 "color 170ms ease-in-out, background-color 170ms ease-in-out"
