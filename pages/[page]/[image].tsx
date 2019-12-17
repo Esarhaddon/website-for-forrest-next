@@ -39,7 +39,10 @@ export default () => {
       <Layout isFor={page}>
         <div
           style={{
-            padding: "0 5vw 2.5vw 5vw"
+            paddingTop: "0",
+            paddingBottom: "0",
+            paddingRight: "calc(5vw + 5px)",
+            paddingLeft: "calc(5vw + 5px)"
           }}
         >
           <div
