@@ -48,12 +48,6 @@
   }
 }
 
-@keyframes fade-bg {
-  100% {
-    background-color: transparent;
-  }
-}
-
 @keyframes fade-in {
   100% {
     opacity: 1;
