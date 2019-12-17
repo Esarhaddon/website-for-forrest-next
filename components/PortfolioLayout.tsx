@@ -3,6 +3,7 @@ import Link from "next/Link";
 import LogoBlack from "../static/icons/logo-black.svg";
 import { ReactNode } from "react";
 import SocialAndEmail from "./SocialAndEmail";
+import Hamburger from "../static/icons/hamburger.svg";
 
 interface LayoutProps {
   isFor: string;
@@ -16,15 +17,14 @@ export default (props: LayoutProps) => (
       style={{
         marginRight: "calc(5vw + 5px)",
         marginLeft: "calc(5vw + 5px)",
-        paddingTop: "calc(2.5vw + 5px)",
-        paddingBottom: "2.5vw"
+        marginTop: "5px"
       }}
     >
       <Link href="/index">
         <a
           style={{
-            marginTop: "-1.75rem",
-            marginBottom: "-2rem",
+            marginTop: "-1rem",
+            marginBottom: "-1.25rem",
             marginLeft: "-3rem",
             marginRight: "-3rem"
           }}
@@ -63,7 +63,7 @@ export default (props: LayoutProps) => (
           </a>
         </Link>
       </div>
-      <div className="sm:hidden bg-red-500 h-8 w-8"></div>
+      <Hamburger className="sm:hidden w-8" />
     </div>
     {props.children}
     <div style={{ marginTop: "calc(-5px + 1rem)" }}>
