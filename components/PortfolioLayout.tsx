@@ -63,16 +63,16 @@ export default (props: LayoutProps) => (
           </a>
         </Link>
       </div>
-      <Hamburger className="sm:hidden w-8" />
+      <Hamburger className="sm:hidden w-6" />
     </div>
     {props.children}
-    <div style={{ marginTop: "calc(-5px + 1rem)" }}>
+    <div style={{ paddingTop: "calc(3vw + .75rem)" }}>
       <SocialAndEmail isDark={true} />
       <div
         className="flex justify-center items-center text-gray-900"
         style={{
-          marginTop: "calc(3vw + 1rem)",
-          marginBottom: "calc(3vw + 1rem)"
+          marginTop: "calc(3vw + .75rem)",
+          marginBottom: "calc(3vw + .75rem)"
         }}
       >
         Copyright © 2019 Forrest Dickison

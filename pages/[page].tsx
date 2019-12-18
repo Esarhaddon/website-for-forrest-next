@@ -16,8 +16,10 @@ export default () => {
         className="grid"
         style={{
           display: "grid",
-          padding: "5vw",
-          paddingTop: 0
+          paddingRight: "5vw",
+          paddingLeft: "5vw",
+          paddingTop: 0,
+          paddingBottom: 0
         }}
       >
         {images[page]
