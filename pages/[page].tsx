@@ -18,8 +18,7 @@ export default () => {
           display: "grid",
           paddingRight: "5vw",
           paddingLeft: "5vw",
-          paddingTop: 0,
-          paddingBottom: 0
+          marginBottom: "-5px"
         }}
       >
         {images[page]

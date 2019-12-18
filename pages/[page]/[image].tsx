@@ -69,10 +69,10 @@ export default () => {
           </div>
         </div>
         <div
-          className="flex justify-center items-center text-gray-700"
+          className="flex justify-center items-center text-gray-700 leading-none"
           style={{
-            marginBottom: "3vw",
-            marginTop: "3vw"
+            marginBottom: "calc(3vw + .75rem)",
+            marginTop: "calc(3vw + .75rem + 5px)"
           }}
         >
           {previousImage ? (
