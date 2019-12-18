@@ -13,7 +13,7 @@ interface LayoutProps {
 export default (props: LayoutProps) => (
   <div className="relative top-0 left-0 h-screen w-full overflow-x-hidden overflow-y-scroll">
     <div
-      className="flex  sm:static sticky z-50 top-0 justify-between items-center text-gray-900 font-semibold sm:px-0 py-4 md:px-16 md:py-16"
+      className="flex  sm:static sticky z-40 top-0 justify-between items-center text-gray-900 font-semibold sm:px-0 py-4 md:px-16 md:py-16"
       style={{
         marginRight: "calc(5vw + 5px)",
         marginLeft: "calc(5vw + 5px)",

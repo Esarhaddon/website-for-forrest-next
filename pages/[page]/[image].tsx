@@ -71,7 +71,7 @@ export default () => {
         <div
           className="flex justify-center items-center text-gray-700 leading-none"
           style={{
-            marginBottom: "calc(3vw + .75rem)",
+            // marginBottom: "calc(3vw + .75rem)"
             marginTop: "calc(3vw + .75rem + 5px)"
           }}
         >
@@ -113,7 +113,7 @@ export default () => {
           )}
         </div>
         <div
-          className={`fixed top-0 left-0 w-full h-full ${
+          className={`fixed top-0 left-0 w-full h-full z-50 ${
             hideModal ? "hidden" : ""
           }`}
           style={{
