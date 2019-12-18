@@ -121,6 +121,9 @@ export default () => {
             paddingRight: "2vw",
             paddingLeft: "2vw"
           }}
+          onClick={() => {
+            setHideModal(true);
+          }}
         >
           <ExitX
             className="absolute z-10 text-gray-200 fill-current cursor-pointer"
@@ -129,9 +132,6 @@ export default () => {
               right: "2%",
               width: ".85rem",
               height: ".85rem"
-            }}
-            onClick={() => {
-              setHideModal(true);
             }}
           />
           <div
@@ -145,7 +145,7 @@ export default () => {
               }}
             />
             <div
-              className="absolute top-0 left-0 w-full h-full text-white flex items-center justify-center text-xl"
+              className="absolute top-0 left-0 w-full h-full text-white flex items-center justify-center text-xl cursor-pointer"
               style={{
                 backgroundColor: "rgba(127, 127, 127)",
                 marginTop: "calc(50vh - 66.666666%)"
