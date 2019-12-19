@@ -12,38 +12,47 @@ interface LayoutProps {
 }
 
 export default (props: LayoutProps) => {
-  const [lastScrollDirection, setLastScrollDirection] = useState("none");
+  const [lastScroll, setLastScroll] = useState("none");
   const [y, setY] = useState(0);
-  const scrollEl = useRef(null);
+  const [events, setEvents] = useState(0);
+  const [didStuff, setDidStuff] = useState(0);
+  const [wait, setWait] = useState(false);
+  const scrollableEl = useRef(null);
+  const header = useRef(null);
 
   const handleScroll = (event: React.UIEvent<HTMLDivElement>) => {
-    let timeout: NodeJS.Timeout;
-    if (timeout) {
+    const scrollTop = scrollableEl.current.scrollTop;
+    if (wait && scrollTop !== 0) {
       return;
     }
-    timeout = setTimeout(() => {
-      const scrollTop = scrollEl.current.scrollTop;
-      if (scrollTop > y) {
-        setLastScrollDirection("down");
-      } else if (scrollTop < y) {
-        setLastScrollDirection("up");
-      }
-      setY(scrollTop);
-    }, 250);
+
+    if (scrollTop > y) {
+      setLastScroll("down");
+    } else if (scrollTop < y) {
+      setLastScroll("up");
+    }
+
+    setY(scrollTop);
+    setWait(true);
+    setTimeout(() => setWait(false), 200);
   };
 
   return (
     <div
-      ref={scrollEl}
+      ref={scrollableEl}
       className="relative top-0 left-0 h-screen w-full overflow-x-hidden overflow-y-scroll"
       onScroll={handleScroll}
     >
       <div
-        className="flex  sm:static sticky z-40 top-0 justify-between items-center text-gray-900 font-semibold sm:px-0 py-4 md:px-16 md:py-16"
+        ref={header}
+        className="flex sm:static sticky z-40 off-top-0 justify-between items-center align-middle text-gray-900 font-semibold sm:px-0 py-4 md:px-16 md:py-16"
         style={{
+          ...(lastScroll === "down"
+            ? { top: -`${header.current.offsetHeight}` }
+            : { top: "0" }),
+          transition: "top .2s ease-in-out",
           marginRight: "calc(5vw + 5px)",
-          marginLeft: "calc(5vw + 5px)",
-          marginTop: "5px"
+          marginLeft: "calc(5vw + 5px)"
         }}
       >
         <Link href="/index">
@@ -91,7 +100,7 @@ export default (props: LayoutProps) => {
             </a>
           </Link>
         </div>
-        <Hamburger className="sm:hidden w-6" />
+        <Hamburger className="sm:hidden inline w-6" />
       </div>
       {props.children}
       <div style={{ paddingTop: "calc(3vw + .75rem)" }}>
