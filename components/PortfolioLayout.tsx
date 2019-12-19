@@ -14,8 +14,6 @@ interface LayoutProps {
 export default (props: LayoutProps) => {
   const [lastScroll, setLastScroll] = useState("none");
   const [y, setY] = useState(0);
-  const [events, setEvents] = useState(0);
-  const [didStuff, setDidStuff] = useState(0);
   const [wait, setWait] = useState(false);
   const scrollableEl = useRef(null);
   const header = useRef(null);
