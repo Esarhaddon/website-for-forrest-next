@@ -67,6 +67,7 @@ export default (props: LayoutProps) => {
               marginLeft: "-3rem",
               marginRight: "-3rem"
             }}
+            onClick={() => setShowMobileNav(false)}
           >
             <LogoBlack className="h-32" />
           </a>
@@ -130,7 +131,34 @@ export default (props: LayoutProps) => {
         </div>
       </div>
       {showMobileNav ? (
-        <div className="sm:hidden fixed top-0 z-0 bg-white w-full h-full off-w-full off-h-full"></div>
+        <div className="sm:hidden fixed top-0 z-0 bg-white w-full h-full off-w-full off-h-full off-text-center off-align-middle">
+          <div className="flex flex-col items-center justify-center h-full">
+            <Link href="/[page]" as="/illustration">
+              <a
+                className="leading-loose text-4xl font-bold text-gray-900 tracking-wider cursor-pointer"
+                onClick={() => setShowMobileNav(false)}
+              >
+                ILLUSTRATION
+              </a>
+            </Link>
+            <Link href="/[page]" as="/animation">
+              <a
+                className="leading-loose text-4xl font-bold text-gray-900 tracking-wider cursor-pointer"
+                onClick={() => setShowMobileNav(false)}
+              >
+                ANIMATION
+              </a>
+            </Link>
+            <Link href="/[page]" as="/fine-art">
+              <a
+                className="leading-loose text-4xl font-bold text-gray-900 tracking-wider cursor-pointer"
+                onClick={() => setShowMobileNav(false)}
+              >
+                FINE ART
+              </a>
+            </Link>
+          </div>
+        </div>
       ) : null}
     </div>
   );
