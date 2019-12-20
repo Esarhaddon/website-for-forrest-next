@@ -36,7 +36,7 @@ export default () => {
 
   return (
     <div>
-      <Layout isFor={page}>
+      <Layout isFor={page} relMobileNav={true}>
         <div
           style={{
             paddingTop: "0",

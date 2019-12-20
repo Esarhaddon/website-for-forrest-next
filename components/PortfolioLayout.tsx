@@ -4,10 +4,12 @@ import LogoBlack from "../static/icons/logo-black.svg";
 import { ReactNode } from "react";
 import SocialAndEmail from "./SocialAndEmail";
 import Hamburger from "../static/icons/hamburger.svg";
+import ExitX from "../static/icons/close.svg";
 import { useState, useRef } from "react";
 
 interface LayoutProps {
   isFor: string;
+  relMobileNav?: boolean;
   children: ReactNode;
 }
 
@@ -15,14 +17,14 @@ export default (props: LayoutProps) => {
   const [lastScroll, setLastScroll] = useState("none");
   const [y, setY] = useState(0);
   const [wait, setWait] = useState(false);
+  const [showMobileNav, setShowMobileNav] = useState(false);
   const scrollableEl = useRef(null);
   const header = useRef(null);
 
   const handleScroll = (event: React.UIEvent<HTMLDivElement>) => {
     const scrollTop = scrollableEl.current.scrollTop;
-    if (wait && scrollTop !== 0) {
-      return;
-    }
+    if (showMobileNav) return;
+    if (wait && scrollTop !== 0) return;
 
     if (scrollTop > y) {
       setLastScroll("down");
@@ -38,14 +40,18 @@ export default (props: LayoutProps) => {
   return (
     <div
       ref={scrollableEl}
-      className="relative top-0 left-0 h-screen w-full overflow-x-hidden overflow-y-scroll"
+      className={`relative top-0 left-0 h-screen w-full overflow-x-hidden ${
+        showMobileNav ? "overflow-y-hidden" : null
+      }`}
       onScroll={handleScroll}
     >
       <div
         ref={header}
-        className="flex sm:static sticky z-40 off-top-0 justify-between items-center align-middle text-gray-900 font-semibold sm:px-0 py-4 md:px-16 md:py-16"
+        className={`flex sm:static ${
+          props.relMobileNav ? "relative" : "sticky"
+        } z-40 off-top-0 justify-between items-center align-middle text-gray-900 font-semibold sm:px-0 py-4 md:px-16 md:py-16`}
         style={{
-          ...(lastScroll === "down"
+          ...(lastScroll === "down" && !props.relMobileNav
             ? { top: -`${header.current.offsetHeight}` }
             : { top: "0" }),
           transition: "top .2s ease-in-out",
@@ -98,7 +104,17 @@ export default (props: LayoutProps) => {
             </a>
           </Link>
         </div>
-        <Hamburger className="sm:hidden inline w-6" />
+        {showMobileNav ? (
+          <ExitX
+            className="sm:hidden text-black fill-current cursor-pointer w-4"
+            onClick={() => setShowMobileNav(false)}
+          />
+        ) : (
+          <Hamburger
+            className="sm:hidden off-inline w-6 cursor-pointer"
+            onClick={() => setShowMobileNav(true)}
+          />
+        )}
       </div>
       {props.children}
       <div style={{ paddingTop: "calc(3vw + .75rem)" }}>
@@ -113,6 +129,9 @@ export default (props: LayoutProps) => {
           Copyright © 2019 Forrest Dickison
         </div>
       </div>
+      {showMobileNav ? (
+        <div className="sm:hidden fixed top-0 z-0 bg-white w-full h-full off-w-full off-h-full"></div>
+      ) : null}
     </div>
   );
 };
