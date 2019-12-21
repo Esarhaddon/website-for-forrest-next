@@ -1,6 +1,6 @@
-import Layout from "../components/PortfolioLayout";
+import Layout from "../../components/PortfolioLayout";
 import { useRouter } from "next/router";
-import { useImage } from "../providers/ImageContextProvider";
+import { useImage } from "../../providers/ImageContextProvider";
 import Link from "next/Link";
 
 export default () => {

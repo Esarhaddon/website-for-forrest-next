@@ -75,7 +75,7 @@ export default () => {
           THE TITLE TEXT
         </div>
         <div
-          className="leading-tight text-center px-4 "
+          className="leading-tight text-center px-4"
           style={{ marginTop: "calc(1.5vw + .375rem)" }}
         >
           a super awesome work of art that you should be really impressed by and
