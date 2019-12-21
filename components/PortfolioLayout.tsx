@@ -34,7 +34,7 @@ export default (props: LayoutProps) => {
 
     setY(scrollTop);
     setWait(true);
-    setTimeout(() => setWait(false), 200);
+    setTimeout(() => setWait(false), 100);
   };
 
   return (
