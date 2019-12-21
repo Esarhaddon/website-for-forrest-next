@@ -69,15 +69,28 @@ export default () => {
           </div>
         </div>
         <div
-          className="flex justify-center items-center text-gray-700 leading-none"
+          className="leading-tight text-center  text-2xl font-semibold tracking-wider text-gray-900"
+          style={{ marginTop: "calc(3vw + .75rem)" }}
+        >
+          THE TITLE TEXT
+        </div>
+        <div
+          className="leading-tight text-center px-4 "
+          style={{ marginTop: "calc(1.5vw + .375rem)" }}
+        >
+          a super awesome work of art that you should be really impressed by and
+          pay a lot of money for
+        </div>
+        <div
+          className="flex justify-center items-center text-gray-700 leading-none "
           style={{
-            // marginBottom: "calc(3vw + .75rem)"
-            marginTop: "calc(3vw + .75rem + 5px)"
+            marginTop: "calc(5vw + 1.25rem + 5px)",
+            marginBottom: "calc(2vw + .75rem)"
           }}
         >
           {previousImage ? (
             <Link href="/[page]/[image]" as={`/${page}/${previousImage.name}`}>
-              <a className="text-lg mx-4">
+              <a className="text-lg px-8">
                 <Arrow
                   className="h-5 inline fill-current"
                   style={{
@@ -88,7 +101,7 @@ export default () => {
               </a>
             </Link>
           ) : (
-            <div className="text-lg mx-4 text-gray-500 cursor-pointer">
+            <div className="text-lg text-gray-500 cursor-pointer px-8">
               <Arrow
                 className="h-5 inline fill-current"
                 style={{
@@ -100,13 +113,13 @@ export default () => {
           )}
           {nextImage ? (
             <Link href="/[page]/[image]" as={`/${page}/${nextImage.name}`}>
-              <a className="text-lg mx-4">
+              <a className="text-lg  px-8">
                 Next
                 <Arrow className="h-5 inline fill-current" />
               </a>
             </Link>
           ) : (
-            <div className="text-lg mx-4 text-gray-500 cursor-pointer">
+            <div className="text-lg text-gray-500 cursor-pointer px-8">
               Next
               <Arrow className="h-5 inline fill-current" />
             </div>
@@ -118,8 +131,8 @@ export default () => {
           }`}
           style={{
             backgroundColor: "rgba(0, 0, 0, .95)",
-            paddingRight: "2vw",
-            paddingLeft: "2vw"
+            paddingRight: "5vw",
+            paddingLeft: "5vw"
           }}
           onClick={() => {
             setHideModal(true);

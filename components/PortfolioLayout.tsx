@@ -121,7 +121,7 @@ export default (props: LayoutProps) => {
       <div style={{ paddingTop: "calc(3vw + .75rem)" }}>
         <SocialAndEmail isDark={true} />
         <div
-          className="flex justify-center items-center text-gray-900 leading-none "
+          className="flex justify-center items-center text-gray-700 leading-none "
           style={{
             marginTop: "calc(3vw + .75rem)",
             marginBottom: "calc(3vw + .75rem)"

@@ -12,9 +12,9 @@ export default (props: SocialAndEmailProps) => {
   const baseColor = props.isDark ? "gray-900" : "white";
 
   return (
-    <div className="flex justify-center">
+    <div className="flex justify-center ">
       <div
-        className={`flex justify-center cursor-pointer hover-text-transparent-${brightness} text-${baseColor}`}
+        className={`flex justify-center cursor-pointer hover-text-transparent-${brightness} text-${baseColor} `}
       >
         <a
           href="https://www.instagram.com/forrestdickison"
