@@ -2,7 +2,9 @@ import { createContext, useContext, ReactNode, useState } from "react";
 
 interface IImageContext {
   images: {
-    illustration: { src: string; name: string }[] | null;
+    illustration:
+      | { src: string; name: string; title: string; description: string }[]
+      | null;
     animation: IImageContext["images"]["illustration"];
     "fine-art": IImageContext["images"]["illustration"];
   } | null;
@@ -14,41 +16,227 @@ const ImageContextProvider = ({ children }: { children: ReactNode }) => {
   const context: IImageContext = {
     images: {
       illustration: [
-        { src: "fake.com", name: "fake-image-1" },
-        { src: "fake.com", name: "fake-image-2" },
-        { src: "fake.com", name: "fake-image-3" },
-        { src: "fake.com", name: "fake-image-4" },
-        { src: "fake.com", name: "fake-image-5" },
-        { src: "fake.com", name: "fake-image-6" },
-        { src: "fake.com", name: "fake-image-7" },
-        { src: "fake.com", name: "fake-image-8" },
-        { src: "fake.com", name: "fake-image-9" },
-        { src: "fake.com", name: "fake-image-10" },
-        { src: "fake.com", name: "fake-image-11" },
-        { src: "fake.com", name: "fake-image-12" },
-        { src: "fake.com", name: "fake-image-13" }
+        {
+          src: "fake.com",
+          name: "fake-image-1",
+          title: "the title text",
+          description:
+            "a really amazing work of art that you should be really imppressed by and pay a lot of money for"
+        },
+        {
+          src: "fake.com",
+          name: "fake-image-2",
+          title: "the title text",
+          description:
+            "a really amazing work of art that you should be really imppressed by and pay a lot of money for"
+        },
+        {
+          src: "fake.com",
+          name: "fake-image-3",
+          title: "the title text",
+          description:
+            "a really amazing work of art that you should be really imppressed by and pay a lot of money for"
+        },
+        {
+          src: "fake.com",
+          name: "fake-image-4",
+          title: "the title text",
+          description:
+            "a really amazing work of art that you should be really imppressed by and pay a lot of money for"
+        },
+        {
+          src: "fake.com",
+          name: "fake-image-5",
+          title: "the title text",
+          description:
+            "a really amazing work of art that you should be really imppressed by and pay a lot of money for"
+        },
+        {
+          src: "fake.com",
+          name: "fake-image-6",
+          title: "the title text",
+          description:
+            "a really amazing work of art that you should be really imppressed by and pay a lot of money for"
+        },
+        {
+          src: "fake.com",
+          name: "fake-image-7",
+          title: "the title text",
+          description:
+            "a really amazing work of art that you should be really imppressed by and pay a lot of money for"
+        },
+        {
+          src: "fake.com",
+          name: "fake-image-8",
+          title: "the title text",
+          description:
+            "a really amazing work of art that you should be really imppressed by and pay a lot of money for"
+        },
+        {
+          src: "fake.com",
+          name: "fake-image-9",
+          title: "the title text",
+          description:
+            "a really amazing work of art that you should be really imppressed by and pay a lot of money for"
+        },
+        {
+          src: "fake.com",
+          name: "fake-image-10",
+          title: "the title text",
+          description:
+            "a really amazing work of art that you should be really imppressed by and pay a lot of money for"
+        },
+        {
+          src: "fake.com",
+          name: "fake-image-11",
+          title: "the title text",
+          description:
+            "a really amazing work of art that you should be really imppressed by and pay a lot of money for"
+        },
+        {
+          src: "fake.com",
+          name: "fake-image-12",
+          title: "the title text",
+          description:
+            "a really amazing work of art that you should be really imppressed by and pay a lot of money for"
+        },
+        {
+          src: "fake.com",
+          name: "fake-image-13",
+          title: "the title text",
+          description:
+            "a really amazing work of art that you should be really imppressed by and pay a lot of money for"
+        }
       ],
       animation: [
-        { src: "fake.com", name: "fake-image-1" },
-        { src: "fake.com", name: "fake-image-2" },
-        { src: "fake.com", name: "fake-image-3" },
-        { src: "fake.com", name: "fake-image-4" },
-        { src: "fake.com", name: "fake-image-5" },
-        { src: "fake.com", name: "fake-image-6" },
-        { src: "fake.com", name: "fake-image-7" },
-        { src: "fake.com", name: "fake-image-8" }
+        {
+          src: "fake.com",
+          name: "fake-image-1",
+          title: "the title text",
+          description:
+            "a really amazing work of art that you should be really imppressed by and pay a lot of money for"
+        },
+        {
+          src: "fake.com",
+          name: "fake-image-2",
+          title: "the title text",
+          description:
+            "a really amazing work of art that you should be really imppressed by and pay a lot of money for"
+        },
+        {
+          src: "fake.com",
+          name: "fake-image-3",
+          title: "the title text",
+          description:
+            "a really amazing work of art that you should be really imppressed by and pay a lot of money for"
+        },
+        {
+          src: "fake.com",
+          name: "fake-image-4",
+          title: "the title text",
+          description:
+            "a really amazing work of art that you should be really imppressed by and pay a lot of money for"
+        },
+        {
+          src: "fake.com",
+          name: "fake-image-5",
+          title: "the title text",
+          description:
+            "a really amazing work of art that you should be really imppressed by and pay a lot of money for"
+        },
+        {
+          src: "fake.com",
+          name: "fake-image-6",
+          title: "the title text",
+          description:
+            "a really amazing work of art that you should be really imppressed by and pay a lot of money for"
+        },
+        {
+          src: "fake.com",
+          name: "fake-image-7",
+          title: "the title text",
+          description:
+            "a really amazing work of art that you should be really imppressed by and pay a lot of money for"
+        },
+        {
+          src: "fake.com",
+          name: "fake-image-8",
+          title: "the title text",
+          description:
+            "a really amazing work of art that you should be really imppressed by and pay a lot of money for"
+        }
       ],
       "fine-art": [
-        { src: "fake.com", name: "fake-image-1" },
-        { src: "fake.com", name: "fake-image-2" },
-        { src: "fake.com", name: "fake-image-3" },
-        { src: "fake.com", name: "fake-image-4" },
-        { src: "fake.com", name: "fake-image-5" },
-        { src: "fake.com", name: "fake-image-6" },
-        { src: "fake.com", name: "fake-image-7" },
-        { src: "fake.com", name: "fake-image-8" },
-        { src: "fake.com", name: "fake-image-9" },
-        { src: "fake.com", name: "fake-image-10" }
+        {
+          src: "fake.com",
+          name: "fake-image-1",
+          title: "the title text",
+          description:
+            "a really amazing work of art that you should be really imppressed by and pay a lot of money for"
+        },
+        {
+          src: "fake.com",
+          name: "fake-image-2",
+          title: "the title text",
+          description:
+            "a really amazing work of art that you should be really imppressed by and pay a lot of money for"
+        },
+        {
+          src: "fake.com",
+          name: "fake-image-3",
+          title: "the title text",
+          description:
+            "a really amazing work of art that you should be really imppressed by and pay a lot of money for"
+        },
+        {
+          src: "fake.com",
+          name: "fake-image-4",
+          title: "the title text",
+          description:
+            "a really amazing work of art that you should be really imppressed by and pay a lot of money for"
+        },
+        {
+          src: "fake.com",
+          name: "fake-image-5",
+          title: "the title text",
+          description:
+            "a really amazing work of art that you should be really imppressed by and pay a lot of money for"
+        },
+        {
+          src: "fake.com",
+          name: "fake-image-6",
+          title: "the title text",
+          description:
+            "a really amazing work of art that you should be really imppressed by and pay a lot of money for"
+        },
+        {
+          src: "fake.com",
+          name: "fake-image-7",
+          title: "the title text",
+          description:
+            "a really amazing work of art that you should be really imppressed by and pay a lot of money for"
+        },
+        {
+          src: "fake.com",
+          name: "fake-image-8",
+          title: "the title text",
+          description:
+            "a really amazing work of art that you should be really imppressed by and pay a lot of money for"
+        },
+        {
+          src: "fake.com",
+          name: "fake-image-9",
+          title: "the title text",
+          description:
+            "a really amazing work of art that you should be really imppressed by and pay a lot of money for"
+        },
+        {
+          src: "fake.com",
+          name: "fake-image-10",
+          title: "the title text",
+          description:
+            "a really amazing work of art that you should be really imppressed by and pay a lot of money for"
+        }
       ]
     }
   };

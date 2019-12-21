@@ -72,14 +72,13 @@ export default () => {
           className="leading-tight text-center  text-2xl font-semibold tracking-wider text-gray-900"
           style={{ marginTop: "calc(3vw + .75rem)" }}
         >
-          THE TITLE TEXT
+          {currentImage ? currentImage.title.toUpperCase() : null}
         </div>
         <div
           className="leading-tight text-center px-4"
           style={{ marginTop: "calc(1.5vw + .375rem)" }}
         >
-          a super awesome work of art that you should be really impressed by and
-          pay a lot of money for
+          {currentImage ? currentImage.description : ""}
         </div>
         <div
           className="flex justify-center items-center text-gray-700 leading-none "
