@@ -1,16 +1,106 @@
-import { createContext, useContext, ReactNode, useState } from "react";
+import { createContext, useContext, ReactNode } from "react"
+import fetch from "node-fetch"
 
 interface IImageContext {
   images: {
-    illustration:
-      | { src: string; name: string; title: string; description: string }[]
-      | null;
-    animation: IImageContext["images"]["illustration"];
-    "fine-art": IImageContext["images"]["illustration"];
-  } | null;
+    illustration: Image[] | null
+    animation: Image[] | null
+    "fine-art": Image[] | null
+  } | null
 }
 
-const ImageContext = createContext({} as IImageContext);
+const ImageContext = createContext({} as IImageContext)
+
+interface ArtWork {
+  id: string
+  type: "Entry"
+  contentType: { sys: { id: "artWork" } }
+  fields: {
+    type: "illustration" | "animation" | "fine art"
+    title: "string"
+    description?: "string"
+    media: {
+      sys: {
+        id: string
+      }
+    }
+  }
+}
+
+interface Asset {
+  id: string
+  type: "Asset"
+  fields: {
+    title: string
+    file: {
+      url: string
+      details: {
+        size: number
+        image: {
+          width: number
+          height: number
+        }
+      }
+    }
+  }
+}
+
+interface Image {
+  src: string
+  name: string
+  title: string
+  description: string
+}
+
+const fetchImages = async () => {
+  const res = await fetch(`${process.env.CONTENTFUL_API}?include=1`, {
+    headers: {
+      Authorization: process.env.CONTENTFUL_API_KEY
+    }
+  })
+
+  const {
+    items,
+    includes
+  }: { items: any[]; includes: Asset[] } = await res.json()
+
+  const art: ArtWork[] = items.filter(
+    item => item.contentType.sys.id === "artWork"
+  )
+
+  const illustration: Image[] = []
+  const animation: Image[] = []
+  const fineArt: Image[] = []
+  for (let artWork of art) {
+    const asset = includes.find(
+      asset => asset.id === artWork.fields.media.sys.id
+    )
+
+    const image = {
+      src: asset.fields.file.url,
+      name: asset.fields.title,
+      title: artWork.fields.title,
+      ...{
+        description: artWork.fields.description
+          ? artWork.fields.description
+          : null
+      }
+    }
+
+    switch (artWork.fields.type) {
+      case "animation":
+        animation.push(image)
+        break
+      case "illustration":
+        illustration.push(image)
+        break
+      case "fine art":
+        fineArt.push(image)
+    }
+  }
+
+  return { animation, illustration, "fine art": fineArt }
+}
 
 const ImageContextProvider = ({ children }: { children: ReactNode }) => {
   const context: IImageContext = {
@@ -239,15 +329,15 @@ const ImageContextProvider = ({ children }: { children: ReactNode }) => {
         }
       ]
     }
-  };
+  }
   return (
     <ImageContext.Provider value={context}>{children}</ImageContext.Provider>
-  );
-};
+  )
+}
 
 export const useImage = () => {
-  const context = useContext(ImageContext);
-  return context;
-};
+  const context = useContext(ImageContext)
+  return context
+}
 
-export default ImageContextProvider;
+export default ImageContextProvider

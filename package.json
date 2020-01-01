@@ -14,10 +14,12 @@
   "license": "ISC",
   "dependencies": {
     "@svgr/webpack": "^4.3.3",
+    "@types/node-fetch": "^2.5.4",
     "@zeit/next-css": "^1.0.1",
     "js-cookie": "^2.2.1",
     "next": "^9.0.5",
     "next-cookies": "^2.0.3",
+    "node-fetch": "^2.6.0",
     "react": "^16.9.0",
     "react-dom": "^16.9.0"
   },
