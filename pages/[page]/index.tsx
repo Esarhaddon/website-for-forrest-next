@@ -1,14 +1,12 @@
-import Layout from "../../components/PortfolioLayout";
-import { useRouter } from "next/router";
-import { useImage } from "../../providers/ImageContextProvider";
-import Link from "next/Link";
+import Layout from "../../components/PortfolioLayout"
+import { useRouter } from "next/router"
+import { useImage } from "../../providers/ImageContextProvider"
+import Link from "next/Link"
 
 export default () => {
-  const { images } = useImage();
-  const router = useRouter();
-  const page = router.query.page
-    ? router.query.page.toString()
-    : "illustration";
+  const { images } = useImage()
+  const router = useRouter()
+  const page = router.query.page ? router.query.page.toString() : "illustration"
 
   return (
     <Layout isFor={page}>
@@ -22,33 +20,42 @@ export default () => {
         }}
       >
         {images[page]
-          ? images[page].map((image, i) => (
-              <div
-                key={i}
-                className=""
-                style={{
-                  paddingTop: "calc(150% - 5px)",
-                  position: "relative",
-                  height: 0
-                }}
-              >
-                <Link href="/[page]/[image]" as={`/${page}/${image.name}`}>
-                  <a
-                    className="absolute flex items-center justify-center bg-black opacity-50 text-3xl text-white"
-                    style={{
-                      top: "5px",
-                      left: "5px",
-                      width: "calc(100% - 10px)",
-                      height: "calc(100% - 10px)"
-                    }}
-                  >
-                    [ {image.name} ]
-                  </a>
-                </Link>
-              </div>
-            ))
+          ? images[page].map((image, i) => {
+              // TO DO: make a new Image to detect when the background image loads etc
+              return (
+                <div
+                  key={i}
+                  className=""
+                  style={{
+                    paddingTop: "calc(150% - 5px)",
+                    position: "relative",
+                    height: 0
+                  }}
+                >
+                  <Link href="/[page]/[image]" as={`/${page}/${image.name}`}>
+                    <a
+                      className="absolute flex items-center justify-center text-3xl text-white"
+                      style={{
+                        top: "5px",
+                        left: "5px",
+                        width: "calc(100% - 10px)",
+                        height: "calc(100% - 10px)"
+                      }}
+                    >
+                      <div
+                        className="absolute w-full h-full off-bg-cover bg-no-repeat bg-center text-black off-bg-auto"
+                        style={{
+                          backgroundImage: `url(${image.src}?h=520)`, // TO DO: use src set to set smaller images for phone size
+                          backgroundSize: "cover"
+                        }}
+                      />
+                    </a>
+                  </Link>
+                </div>
+              )
+            })
           : null}
       </div>
     </Layout>
-  );
-};
+  )
+}

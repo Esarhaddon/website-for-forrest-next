@@ -11,7 +11,7 @@ interface ArtWork {
     type: "illustration" | "animation" | "fine art"
     title: "string"
     description?: "string"
-    media: {
+    image: {
       sys: {
         id: string
       }
@@ -40,11 +40,6 @@ interface Asset {
 }
 
 export default async (): Promise<IImageContext> => {
-  console.log("process.env.CONTENTFUL_API is", process.env.CONTENTFUL_API)
-  console.log(
-    "process.env.CONTENTFUL_API_KEY is",
-    process.env.CONTENTFUL_API_KEY
-  )
   const res = await fetch(`${process.env.CONTENTFUL_API}?include=1`, {
     headers: {
       Authorization: `Bearer ${process.env.CONTENTFUL_API_KEY}`
@@ -52,19 +47,13 @@ export default async (): Promise<IImageContext> => {
   })
 
   const json = await res.json()
-  //   console.log("res.json() is", json)
 
   const {
     items,
     includes: { Asset }
   }: { items: any[]; includes: { Asset: Asset[] } } = json
 
-  //   console.log("items are", items)
-  //   console.log("Asset is", Asset)
-
   const art: ArtWork[] = items.filter(item => {
-    console.log("item.sys.contentType is", item.sys.contentType)
-    console.log("item is", item)
     return item.sys.contentType.sys.id === "artWork"
   })
 
@@ -73,7 +62,7 @@ export default async (): Promise<IImageContext> => {
   const fineArt: Image[] = []
   for (let artWork of art) {
     const asset = Asset.find(
-      asset => asset.sys.id === artWork.fields.media.sys.id
+      asset => asset.sys.id === artWork.fields.image.sys.id
     )
 
     const image = {

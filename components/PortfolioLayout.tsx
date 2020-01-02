@@ -1,41 +1,41 @@
-import "../styles/style.css";
-import Link from "next/Link";
-import LogoBlack from "../static/icons/logo-black.svg";
-import { ReactNode } from "react";
-import SocialAndEmail from "./SocialAndEmail";
-import Hamburger from "../static/icons/hamburger.svg";
-import ExitX from "../static/icons/close.svg";
-import { useState, useRef } from "react";
+import "../styles/style.css"
+import Link from "next/Link"
+import LogoBlack from "../static/icons/logo-black.svg"
+import { ReactNode } from "react"
+import SocialAndEmail from "./SocialAndEmail"
+import Hamburger from "../static/icons/hamburger.svg"
+import ExitX from "../static/icons/close.svg"
+import { useState, useRef } from "react"
 
 interface LayoutProps {
-  isFor: string;
-  relMobileNav?: boolean;
-  children: ReactNode;
+  isFor: string
+  relMobileNav?: boolean
+  children: ReactNode
 }
 
 export default (props: LayoutProps) => {
-  const [lastScroll, setLastScroll] = useState("none");
-  const [y, setY] = useState(0);
-  const [wait, setWait] = useState(false);
-  const [showMobileNav, setShowMobileNav] = useState(false);
-  const scrollableEl = useRef(null);
-  const header = useRef(null);
+  const [lastScroll, setLastScroll] = useState("none")
+  const [y, setY] = useState(0)
+  const [wait, setWait] = useState(false)
+  const [showMobileNav, setShowMobileNav] = useState(false)
+  const scrollableEl = useRef(null)
+  const header = useRef(null)
 
   const handleScroll = (event: React.UIEvent<HTMLDivElement>) => {
-    const scrollTop = scrollableEl.current.scrollTop;
-    if (showMobileNav) return;
-    if (wait && scrollTop !== 0) return;
+    const scrollTop = scrollableEl.current.scrollTop
+    if (showMobileNav) return
+    if (wait && scrollTop !== 0) return
 
     if (scrollTop > y) {
-      setLastScroll("down");
+      setLastScroll("down")
     } else if (scrollTop < y) {
-      setLastScroll("up");
+      setLastScroll("up")
     }
 
-    setY(scrollTop);
-    setWait(true);
-    setTimeout(() => setWait(false), 100);
-  };
+    setY(scrollTop)
+    setWait(true)
+    setTimeout(() => setWait(false), 100)
+  }
 
   return (
     <div
@@ -161,5 +161,5 @@ export default (props: LayoutProps) => {
         </div>
       ) : null}
     </div>
-  );
-};
+  )
+}
