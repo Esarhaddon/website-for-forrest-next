@@ -72,7 +72,7 @@ const Index = props => {
               : null)
           }}
         >
-          ß {/* <Link href="/[page]" as="/illustration"> */}
+          {/* <Link href="/[page]" as="/illustration"> */}
           <a
             className="mx-12 my-6 border-2 border-solid border-white text-white py-4 px-5 tracking-widest leading-none cursor-pointer hover:bg-white hover:text-gray-900"
             style={{
@@ -82,7 +82,7 @@ const Index = props => {
           >
             WORK
           </a>
-          ß {/* </Link> */}
+          {/* </Link> */}
           <SocialAndEmail isDark={false} />
         </div>
       </div>
