@@ -112,7 +112,7 @@ export default (props: LayoutProps) => {
           />
         ) : (
           <Hamburger
-            className="sm:hidden off-inline w-6 cursor-pointer"
+            className="sm:hidden w-6 cursor-pointer"
             onClick={() => setShowMobileNav(true)}
           />
         )}

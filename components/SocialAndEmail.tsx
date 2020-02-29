@@ -1,20 +1,20 @@
-import InstagramLogo from "../static/icons/001-instagram.svg";
-import FacebookLogo from "../static/icons/002-facebook-circular-logo.svg";
-import TwitterLogo from "../static/icons/003-twitter-circular-logo.svg";
-import EmailLogo from "../static/icons/004-email.svg";
+import InstagramLogo from "../static/icons/001-instagram.svg"
+import FacebookLogo from "../static/icons/002-facebook-circular-logo.svg"
+import TwitterLogo from "../static/icons/003-twitter-circular-logo.svg"
+import EmailLogo from "../static/icons/004-email.svg"
 
 interface SocialAndEmailProps {
-  isDark: boolean;
+  isDark: boolean
 }
 
 export default (props: SocialAndEmailProps) => {
-  const brightness = props.isDark ? "dark" : "light";
-  const baseColor = props.isDark ? "gray-900" : "white";
+  const brightness = props.isDark ? "dark" : "light"
+  const baseColor = props.isDark ? "gray-900" : "white"
 
   return (
-    <div className="flex justify-center ">
+    <div className="flex justify-center">
       <div
-        className={`flex justify-center cursor-pointer hover-text-transparent-${brightness} text-${baseColor} `}
+        className={`flex justify-center cursor-pointer hover-text-transparent-${brightness} text-${baseColor}`}
       >
         <a
           href="https://www.instagram.com/forrestdickison"
@@ -54,5 +54,5 @@ export default (props: SocialAndEmailProps) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}

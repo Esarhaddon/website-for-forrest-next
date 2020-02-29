@@ -1,38 +1,38 @@
-import Layout from "../../components/PortfolioLayout";
-import Link from "next/Link";
-import { useRouter } from "next/router";
-import { useState } from "react";
-import ExitX from "../../static/icons/close.svg";
-import Arrow from "../../static/icons/arrow.svg";
-import { useImage } from "../../providers/ImageContextProvider";
+import Layout from "../../components/PortfolioLayout"
+import Link from "next/Link"
+import { useRouter } from "next/router"
+import { useState } from "react"
+import ExitX from "../../static/icons/close.svg"
+import Arrow from "../../static/icons/arrow.svg"
+import { useImage } from "../../providers/ImageContextProvider"
 
 export default () => {
-  const router = useRouter();
-  const { images } = useImage();
-  const page = router.query.page ? router.query.page.toString() : null;
+  const router = useRouter()
+  const { images } = useImage()
+  const page = router.query.page ? router.query.page.toString() : null
   const currentImage = router.query.image
     ? images[page].find(image => image.name === router.query.image)
-    : null;
+    : null
 
   const nextImage = images[page]
     ? images[page][
         images[page].findIndex(image => {
           if (image) {
-            return image.name === currentImage.name;
-          } else return -2;
+            return image.name === currentImage.name
+          } else return -2
         }) + 1
       ]
-    : null;
+    : null
   const previousImage = images[page]
     ? images[page][
         images[page].findIndex(image => {
           if (image) {
-            return image.name === currentImage.name;
-          } else return -2;
+            return image.name === currentImage.name
+          } else return -2
         }) - 1
       ]
-    : null;
-  const [hideModal, setHideModal] = useState(true);
+    : null
+  const [hideModal, setHideModal] = useState(true)
 
   return (
     <div>
@@ -60,7 +60,7 @@ export default () => {
               <div
                 className="absolute top-0 left-0 flex items-center justify-center text-white text-6xl w-full h-full cursor-pointer"
                 onClick={() => {
-                  setHideModal(false);
+                  setHideModal(false)
                 }}
               >
                 [ {currentImage ? currentImage.name : ""} ]
@@ -81,7 +81,7 @@ export default () => {
           {currentImage ? currentImage.description : ""}
         </div>
         <div
-          className="flex justify-center items-center text-gray-700 leading-none "
+          className="flex justify-center items-center text-gray-700 leading-none"
           style={{
             marginTop: "calc(5vw + 1.25rem + 5px)",
             marginBottom: "calc(2vw + .75rem)"
@@ -134,7 +134,7 @@ export default () => {
             paddingLeft: "5vw"
           }}
           onClick={() => {
-            setHideModal(true);
+            setHideModal(true)
           }}
         >
           <ExitX
@@ -169,5 +169,5 @@ export default () => {
         </div>
       </Layout>
     </div>
-  );
-};
+  )
+}

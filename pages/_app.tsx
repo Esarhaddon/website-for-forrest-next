@@ -1,5 +1,6 @@
 import React from "react"
 import App from "next/app"
+import Head from "next/head"
 import ImageContextProvider from "../providers/ImageContextProvider"
 import fetchImages from "../utils/fetchImages"
 
@@ -16,9 +17,14 @@ class MyApp extends App {
   render() {
     const { Component, pageProps } = this.props
     return (
-      <ImageContextProvider context={(this.props as any).imageContext}>
-        <Component {...pageProps} />
-      </ImageContextProvider>
+      <div>
+        <Head>
+          <meta name="robots" content="noindex, nofollow" />
+        </Head>
+        <ImageContextProvider context={(this.props as any).imageContext}>
+          <Component {...pageProps} />
+        </ImageContextProvider>
+      </div>
     )
   }
 }
