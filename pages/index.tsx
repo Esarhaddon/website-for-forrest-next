@@ -1,5 +1,5 @@
 import "../styles/style.css"
-import Link from "next/link"
+// import Link from "next/link"
 import SocialAndEmail from "../components/SocialAndEmail"
 import { useState, useEffect } from "react"
 import nextCookie from "next-cookies"
@@ -72,17 +72,17 @@ const Index = props => {
               : null)
           }}
         >
-          <Link href="/[page]" as="/illustration">
-            <a
-              className="mx-12 my-6 border-2 border-solid border-white text-white py-4 px-5 tracking-widest leading-none cursor-pointer hover:bg-white hover:text-gray-900"
-              style={{
-                transition:
-                  "color 170ms ease-in-out, background-color 170ms ease-in-out"
-              }}
-            >
-              WORK
-            </a>
-          </Link>
+          ß {/* <Link href="/[page]" as="/illustration"> */}
+          <a
+            className="mx-12 my-6 border-2 border-solid border-white text-white py-4 px-5 tracking-widest leading-none cursor-pointer hover:bg-white hover:text-gray-900"
+            style={{
+              transition:
+                "color 170ms ease-in-out, background-color 170ms ease-in-out"
+            }}
+          >
+            WORK
+          </a>
+          ß {/* </Link> */}
           <SocialAndEmail isDark={false} />
         </div>
       </div>

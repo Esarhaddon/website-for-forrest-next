@@ -1,5 +1,5 @@
 import Layout from "../../components/PortfolioLayout"
-import Link from "next/link"
+// import Link from "next/link"
 import { useRouter } from "next/router"
 import { useState } from "react"
 import ExitX from "../../static/icons/close.svg"
@@ -37,7 +37,7 @@ export default () => {
   return (
     <div>
       <Layout isFor={page} relMobileNav={true}>
-        <div
+        {/* <div
           style={{
             paddingTop: "0",
             paddingBottom: "0",
@@ -86,8 +86,8 @@ export default () => {
             marginTop: "calc(5vw + 1.25rem + 5px)",
             marginBottom: "calc(2vw + .75rem)"
           }}
-        >
-          {previousImage ? (
+        > */}
+        {/* {previousImage ? (
             <Link href="/[page]/[image]" as={`/${page}/${previousImage.name}`}>
               <a className="text-lg px-8">
                 <Arrow
@@ -166,7 +166,7 @@ export default () => {
               [ {currentImage ? currentImage.name : ""} ]
             </div>
           </div>
-        </div>
+        </div> */}
       </Layout>
     </div>
   )

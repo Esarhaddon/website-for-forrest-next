@@ -1,7 +1,7 @@
 import Layout from "../../components/PortfolioLayout"
 import { useRouter } from "next/router"
 import { useImage } from "../../providers/ImageContextProvider"
-import Link from "next/link"
+// import Link from "next/link"
 
 export default () => {
   const { images } = useImage()
@@ -32,7 +32,7 @@ export default () => {
                     height: 0
                   }}
                 >
-                  <Link href="/[page]/[image]" as={`/${page}/${image.name}`}>
+                  {/* <Link href="/[page]/[image]" as={`/${page}/${image.name}`}>
                     <a
                       className="absolute flex items-center justify-center text-3xl text-white"
                       style={{
@@ -50,7 +50,7 @@ export default () => {
                         }}
                       />
                     </a>
-                  </Link>
+                  </Link> */}
                 </div>
               )
             })
