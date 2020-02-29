@@ -1,7 +1,7 @@
 import Layout from "../../components/PortfolioLayout"
 import { useRouter } from "next/router"
 import { useImage } from "../../providers/ImageContextProvider"
-import Link from "next/Link"
+import Link from "next/link"
 
 export default () => {
   const { images } = useImage()

@@ -1,5 +1,5 @@
 import Layout from "../../components/PortfolioLayout"
-import Link from "next/Link"
+import Link from "next/link"
 import { useRouter } from "next/router"
 import { useState } from "react"
 import ExitX from "../../static/icons/close.svg"

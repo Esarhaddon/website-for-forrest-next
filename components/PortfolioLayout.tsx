@@ -1,5 +1,5 @@
 import "../styles/style.css"
-import Link from "next/Link"
+import Link from "next/link"
 import LogoBlack from "../static/icons/logo-black.svg"
 import { ReactNode } from "react"
 import SocialAndEmail from "./SocialAndEmail"

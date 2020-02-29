@@ -1,30 +1,30 @@
-import "../styles/style.css";
-import Link from "next/Link";
-import SocialAndEmail from "../components/SocialAndEmail";
-import { useState, useEffect } from "react";
-import nextCookie from "next-cookies";
-import cookie from "js-cookie";
+import "../styles/style.css"
+import Link from "next/link"
+import SocialAndEmail from "../components/SocialAndEmail"
+import { useState, useEffect } from "react"
+import nextCookie from "next-cookies"
+import cookie from "js-cookie"
 
 const Index = props => {
-  const [scrollable, setScrollable] = useState(false);
+  const [scrollable, setScrollable] = useState(false)
   const indexHasLoaded = props.indexHasLoaded
     ? parseInt(props.indexHasLoaded, 10)
-    : 0;
+    : 0
 
-  cookie.set("indexHasLoaded", indexHasLoaded + 1);
+  cookie.set("indexHasLoaded", indexHasLoaded + 1)
 
   useEffect(() => {
     window.addEventListener("unload", () => {
-      cookie.remove("indexHasLoaded");
-    });
-  });
+      cookie.remove("indexHasLoaded")
+    })
+  })
 
   if (!indexHasLoaded) {
     useEffect(() => {
-      setTimeout(() => setScrollable(true), 1000);
-    });
+      setTimeout(() => setScrollable(true), 1000)
+    })
   } else if (!scrollable) {
-    setScrollable(true);
+    setScrollable(true)
   }
 
   return (
@@ -87,14 +87,14 @@ const Index = props => {
         </div>
       </div>
     </>
-  );
-};
+  )
+}
 
 Index.getInitialProps = async ctx => {
-  const { indexHasLoaded } = nextCookie(ctx);
+  const { indexHasLoaded } = nextCookie(ctx)
   return {
     indexHasLoaded
-  };
-};
+  }
+}
 
-export default Index;
+export default Index
