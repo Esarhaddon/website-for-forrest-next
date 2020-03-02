@@ -83,7 +83,7 @@ const Index = props => {
         </div>
         <div className="flex justify-center">
           {/* </Link> */}
-          <div className="flex items-center mt-4">
+          <div className="flex items-center mt-6">
             <SocialAndEmail isDark={false} />
           </div>
           {/* </div> */}
