@@ -81,14 +81,9 @@ const Index = props => {
             CONTACT
           </a>
         </div>
-        <div className="flex justify-center">
-          {/* </Link> */}
-          <div className="flex items-center mt-6">
-            <SocialAndEmail isDark={false} />
-          </div>
-          {/* </div> */}
-          {/* </div> */}
-        </div>
+      </div>
+      <div className="absolute bottom-0 right-0 pr-8 pb-8">
+        <SocialAndEmail isDark={false} />
       </div>
     </div>
   )
