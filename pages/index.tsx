@@ -43,18 +43,15 @@ const Index = props => {
       />
       <div
         style={{ top: "calc(33vh - 2.5rem)" }}
-        className="absolute w-full flex justify-center text-white md:text-8xl sm:text-7xl xsm:text-6xl text-5-1/4xl leading-none font-semibold"
+        className="absolute w-full flex justify-center text-center text-white md:text-8xl sm:text-7xl xsm:text-6xl text-5-1/4xl leading-none font-semibold"
       >
         forrest dickison
       </div>
 
-      <div
-        style={{ top: "calc(75vh - 2rem)" }}
-        className="absolute flex flex-col w-full"
-      >
-        <div className="flex justify-center">
+      <div className="absolute bottom-0 sm:mb-16 mb-4 flex flex-col w-full">
+        <div className="flex justify-center flex-wrap">
           <a
-            className="mx-4 border-2 border-solid border-white text-white py-4 px-5 tracking-widest leading-none cursor-pointer hover:bg-white hover:text-gray-900"
+            className="mx-4 border-2 border-solid border-white text-white py-4 px-5 tracking-widest mt-6 leading-none cursor-pointer hover:bg-white hover:text-gray-900"
             style={{
               transition:
                 "color 170ms ease-in-out, background-color 170ms ease-in-out"
@@ -63,7 +60,7 @@ const Index = props => {
             ILLUSTRATION
           </a>
           <a
-            className="mx-4 border-2 border-solid border-white text-white py-4 px-5 tracking-widest leading-none cursor-pointer hover:bg-white hover:text-gray-900"
+            className="mx-4 border-2 border-solid border-white text-white py-4 px-5 tracking-widest mt-6 leading-none cursor-pointer hover:bg-white hover:text-gray-900"
             style={{
               transition:
                 "color 170ms ease-in-out, background-color 170ms ease-in-out"
@@ -72,7 +69,7 @@ const Index = props => {
             ABOUT
           </a>
           <a
-            className="mx-4 border-2 border-solid border-white text-white py-4 px-5 tracking-widest leading-none cursor-pointer hover:bg-white hover:text-gray-900"
+            className="mx-4 border-2 border-solid border-white text-white py-4 px-5 tracking-widest mt-6 leading-none cursor-pointer hover:bg-white hover:text-gray-900"
             style={{
               transition:
                 "color 170ms ease-in-out, background-color 170ms ease-in-out"
@@ -81,9 +78,9 @@ const Index = props => {
             CONTACT
           </a>
         </div>
-      </div>
-      <div className="absolute bottom-0 right-0 pr-8 pb-8">
-        <SocialAndEmail isDark={false} />
+        <div className="mt-6">
+          <SocialAndEmail isDark={false} />
+        </div>
       </div>
     </div>
   )

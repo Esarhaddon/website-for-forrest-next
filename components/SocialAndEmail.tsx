@@ -15,41 +15,42 @@ export default (props: SocialAndEmailProps) => {
     <div className="flex justify-center">
       <div
         className={`flex justify-center cursor-pointer hover-text-transparent-${brightness} text-${baseColor}`}
+        // style={{ width: "9rem" }}
       >
         <a
           href="https://www.instagram.com/forrestdickison"
           target="_blank"
-          className={`w-12 pl-2 hover:text-${baseColor}`}
+          className={`w-12 off-pl-2 hover:text-${baseColor}`}
           style={{
             transition: "color 170ms ease-in-out, opacity 170ms ease-in-out"
           }}
         >
-          <InstagramLogo className="h-8 w-8 fill-current" />
+          <InstagramLogo className="h-8 w-8 fill-current mx-auto" />
         </a>
         <div
-          className={`w-12 pl-2 hover:text-${baseColor}`}
+          className={`w-12 off-pl-2 hover:text-${baseColor}`}
           style={{
             transition: "color 170ms ease-in-out, opacity 170ms ease-in-out"
           }}
         >
-          <FacebookLogo className="h-8 w-8 fill-current" />
+          <FacebookLogo className="h-8 w-8 fill-current mx-auto" />
         </div>
         <div
-          className={`w-12 pl-2 hover:text-${baseColor}`}
+          className={`w-12 off-pl-2 hover:text-${baseColor}`}
           style={{
             transition: "color 170ms ease-in-out, opacity 170ms ease-in-out"
           }}
         >
-          <TwitterLogo className="h-8 w-8 fill-current" />
+          <TwitterLogo className="h-8 w-8 fill-current mx-auto" />
         </div>
         {/* <div
-          className={`w-12 pl-2 hover:text-${baseColor}`}
+          className={`w-12 off-pl-2 hover:text-${baseColor}`}
           style={{
             transition: "color 170ms ease-in-out, opacity 170ms ease-in-out"
           }}
         >
           <a href="mailto:fddickison@gmail.com" target="_blank">
-            <EmailLogo className="h-8 w-8 fill-current" />
+            <EmailLogo className="h-8 w-8 fill-current mx-auto" />
           </a>
         </div> */}
       </div>
