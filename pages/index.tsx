@@ -51,7 +51,7 @@ const Index = props => {
       <div className="absolute bottom-0 sm:mb-16 mb-4 flex flex-col w-full">
         <div className="flex justify-center flex-wrap">
           <a
-            className="mx-3 md:mx-4 border-2 border-solid border-white text-white py-2 px-3 sm:py-4 sm:px-5 tracking-widest mt-6 leading-none cursor-pointer hover:bg-white hover:text-gray-900"
+            className="mx-4 border-2 border-solid border-white text-white py-2 px-3 sm:py-4 sm:px-5 tracking-widest mt-6 leading-none cursor-pointer hover:bg-white hover:text-gray-900"
             style={{
               transition:
                 "color 170ms ease-in-out, background-color 170ms ease-in-out"
@@ -60,7 +60,7 @@ const Index = props => {
             ILLUSTRATION
           </a>
           <a
-            className="mx-3 md:mx-4 border-2 border-solid border-white text-white py-2 px-3 sm:py-4 sm:px-5 tracking-widest mt-6 leading-none cursor-pointer hover:bg-white hover:text-gray-900"
+            className="mx-4 border-2 border-solid border-white text-white py-2 px-3 sm:py-4 sm:px-5 tracking-widest mt-6 leading-none cursor-pointer hover:bg-white hover:text-gray-900"
             style={{
               transition:
                 "color 170ms ease-in-out, background-color 170ms ease-in-out"
@@ -69,7 +69,7 @@ const Index = props => {
             ABOUT
           </a>
           <a
-            className="mx-3 md:mx-4 border-2 border-solid border-white text-white py-2 px-3 sm:py-4 sm:px-5 tracking-widest mt-6 leading-none cursor-pointer hover:bg-white hover:text-gray-900"
+            className="hidden sm:inline mx-4 border-2 border-solid border-white text-white py-2 px-3 sm:py-4 sm:px-5 tracking-widest mt-6 leading-none cursor-pointer hover:bg-white hover:text-gray-900"
             style={{
               transition:
                 "color 170ms ease-in-out, background-color 170ms ease-in-out"

@@ -43,8 +43,8 @@ export default (props: SocialAndEmailProps) => {
         >
           <TwitterLogo className="h-8 w-8 fill-current mx-auto" />
         </div>
-        {/* <div
-          className={`w-12 off-pl-2 hover:text-${baseColor}`}
+        <div
+          className={`w-12 off-pl-2 hover:text-${baseColor} sm:hidden`}
           style={{
             transition: "color 170ms ease-in-out, opacity 170ms ease-in-out"
           }}
@@ -52,7 +52,7 @@ export default (props: SocialAndEmailProps) => {
           <a href="mailto:fddickison@gmail.com" target="_blank">
             <EmailLogo className="h-8 w-8 fill-current mx-auto" />
           </a>
-        </div> */}
+        </div>
       </div>
     </div>
   )
