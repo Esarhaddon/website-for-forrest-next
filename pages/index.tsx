@@ -3,6 +3,7 @@ import SocialAndEmail from "../components/SocialAndEmail"
 import { useState, useEffect } from "react"
 import nextCookie from "next-cookies"
 import cookie from "js-cookie"
+import FD from "../static/forrest-dickison.svg"
 
 const Index = props => {
   const [scrollable, setScrollable] = useState(false)
@@ -41,42 +42,53 @@ const Index = props => {
             "linear-gradient(rgba(0, 0, 0, .25), rgba(0, 0, 0, .25)), url(../static/boy.png) 33.33%  25% / cover no-repeat"
         }}
       />
-      <div
+      {/* <div
         style={{ top: "calc(33vh - 2.5rem)" }}
-        className="absolute w-full flex justify-center text-center text-white md:text-8xl sm:text-7xl xsm:text-6xl text-5-1/4xl leading-none font-semibold"
-      >
-        forrest dickison
+        className="absolute w-full flex justify-center"
+      > */}
+      <div className="relative max-w-3xl mx-auto px-4" style={{ top: "33vh" }}>
+        <FD className="w-full" />
       </div>
+      {/* </div> */}
 
       <div className="absolute bottom-0 sm:mb-16 mb-4 flex flex-col w-full">
-        <div className="flex justify-center flex-wrap">
-          <a
-            className="mx-4 border-2 border-solid border-white text-white py-2 px-3 sm:py-4 sm:px-5 tracking-widest mt-6 leading-none cursor-pointer hover:bg-white hover:text-gray-900"
-            style={{
-              transition:
-                "color 170ms ease-in-out, background-color 170ms ease-in-out"
-            }}
-          >
-            ILLUSTRATION
-          </a>
-          <a
-            className="mx-4 border-2 border-solid border-white text-white py-2 px-3 sm:py-4 sm:px-5 tracking-widest mt-6 leading-none cursor-pointer hover:bg-white hover:text-gray-900"
-            style={{
-              transition:
-                "color 170ms ease-in-out, background-color 170ms ease-in-out"
-            }}
-          >
-            ABOUT
-          </a>
-          <a
-            className="hidden sm:inline mx-4 border-2 border-solid border-white text-white py-2 px-3 sm:py-4 sm:px-5 tracking-widest mt-6 leading-none cursor-pointer hover:bg-white hover:text-gray-900"
-            style={{
-              transition:
-                "color 170ms ease-in-out, background-color 170ms ease-in-out"
-            }}
-          >
-            CONTACT
-          </a>
+        <div className="flex flex-col sm:flex sm:flex-row sm:justify-center sm:flex-wrap">
+          <div className="text-center">
+            <button
+              type="button"
+              className="mx-4 border-2 border-solid border-white text-white py-2 px-3 sm:py-4 sm:px-5 tracking-widest mt-6 leading-none cursor-pointer hover:bg-white hover:text-gray-900"
+              style={{
+                transition:
+                  "color 170ms ease-in-out, background-color 170ms ease-in-out"
+              }}
+            >
+              ILLUSTRATION
+            </button>
+          </div>
+          <div className="text-center">
+            <button
+              type="button"
+              className="mx-4 border-2 border-solid border-white text-white py-2 px-3 sm:py-4 sm:px-5 tracking-widest mt-6 leading-none cursor-pointer hover:bg-white hover:text-gray-900"
+              style={{
+                transition:
+                  "color 170ms ease-in-out, background-color 170ms ease-in-out"
+              }}
+            >
+              ABOUT
+            </button>
+          </div>
+          <div className="text-center">
+            <button
+              type="button"
+              className="hidden sm:inline mx-4 border-2 border-solid border-white text-white py-2 px-3 sm:py-4 sm:px-5 tracking-widest mt-6 leading-none cursor-pointer hover:bg-white hover:text-gray-900"
+              style={{
+                transition:
+                  "color 170ms ease-in-out, background-color 170ms ease-in-out"
+              }}
+            >
+              CONTACT
+            </button>
+          </div>
         </div>
         <div className="mt-6">
           <SocialAndEmail isDark={false} />
