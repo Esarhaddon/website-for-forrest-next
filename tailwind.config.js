@@ -18,10 +18,10 @@ module.exports = {
     }
   },
   variants: {
-    // borderWidth: ["hover"],
+    // borderWidth: ["focus"],
     // display: ["group-hover"],
     opacity: ["hover", "group-hover"]
     // textColor: ["hover", "group-hover"]
   },
   plugins: []
-};
+}

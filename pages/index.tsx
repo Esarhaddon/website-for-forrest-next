@@ -56,7 +56,7 @@ const Index = props => {
           <div className="text-center">
             <button
               type="button"
-              className="mx-4 border-2 border-solid border-white text-white py-2 px-3 sm:py-4 sm:px-5 tracking-widest mt-6 leading-none cursor-pointer hover:bg-white hover:text-gray-900"
+              className="mx-4 border-2 focus:bg-white focus:text-black border-solid border-white text-white py-2 px-3 sm:py-4 sm:px-5 tracking-widest mt-6 leading-none cursor-pointer hover:bg-white hover:text-gray-900"
               style={{
                 transition:
                   "color 170ms ease-in-out, background-color 170ms ease-in-out"
@@ -68,7 +68,7 @@ const Index = props => {
           <div className="text-center">
             <button
               type="button"
-              className="mx-4 border-2 border-solid border-white text-white py-2 px-3 sm:py-4 sm:px-5 tracking-widest mt-6 leading-none cursor-pointer hover:bg-white hover:text-gray-900"
+              className="mx-4 border-2 focus:bg-white focus:text-black border-solid border-white text-white py-2 px-3 sm:py-4 sm:px-5 tracking-widest mt-6 leading-none cursor-pointer hover:bg-white hover:text-gray-900"
               style={{
                 transition:
                   "color 170ms ease-in-out, background-color 170ms ease-in-out"
@@ -80,7 +80,7 @@ const Index = props => {
           <div className="text-center">
             <button
               type="button"
-              className="hidden sm:inline mx-4 border-2 border-solid border-white text-white py-2 px-3 sm:py-4 sm:px-5 tracking-widest mt-6 leading-none cursor-pointer hover:bg-white hover:text-gray-900"
+              className="hidden sm:inline mx-4 border-2 focus:bg-white focus:text-black border-solid border-white text-white py-2 px-3 sm:py-4 sm:px-5 tracking-widest mt-6 leading-none cursor-pointer hover:bg-white hover:text-gray-900"
               style={{
                 transition:
                   "color 170ms ease-in-out, background-color 170ms ease-in-out"
