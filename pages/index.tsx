@@ -4,6 +4,7 @@ import { useState, useEffect } from "react"
 import nextCookie from "next-cookies"
 import cookie from "js-cookie"
 import FD from "../static/forrest-dickison.svg"
+import Link from "next/link"
 
 const Index = props => {
   const [scrollable, setScrollable] = useState(false)
@@ -65,29 +66,37 @@ const Index = props => {
               ILLUSTRATION
             </button>
           </div>
+          <Link href="/about">
+            <a>
+              <div className="text-center">
+                <button
+                  type="button"
+                  className="mx-4 border-2 focus:bg-white focus:text-black border-solid border-white text-white py-2 px-3 sm:py-4 sm:px-5 tracking-widest mt-6 leading-none cursor-pointer hover:bg-white hover:text-gray-900"
+                  style={{
+                    transition:
+                      "color 170ms ease-in-out, background-color 170ms ease-in-out"
+                  }}
+                >
+                  ABOUT
+                </button>
+              </div>
+            </a>
+          </Link>
           <div className="text-center">
-            <button
-              type="button"
-              className="mx-4 border-2 focus:bg-white focus:text-black border-solid border-white text-white py-2 px-3 sm:py-4 sm:px-5 tracking-widest mt-6 leading-none cursor-pointer hover:bg-white hover:text-gray-900"
-              style={{
-                transition:
-                  "color 170ms ease-in-out, background-color 170ms ease-in-out"
-              }}
-            >
-              ABOUT
-            </button>
-          </div>
-          <div className="text-center">
-            <button
-              type="button"
-              className="hidden sm:inline mx-4 border-2 focus:bg-white focus:text-black border-solid border-white text-white py-2 px-3 sm:py-4 sm:px-5 tracking-widest mt-6 leading-none cursor-pointer hover:bg-white hover:text-gray-900"
-              style={{
-                transition:
-                  "color 170ms ease-in-out, background-color 170ms ease-in-out"
-              }}
-            >
-              CONTACT
-            </button>
+            <Link href="/contact">
+              <a>
+                <button
+                  type="button"
+                  className="hidden sm:inline mx-4 border-2 focus:bg-white focus:text-black border-solid border-white text-white py-2 px-3 sm:py-4 sm:px-5 tracking-widest mt-6 leading-none cursor-pointer hover:bg-white hover:text-gray-900"
+                  style={{
+                    transition:
+                      "color 170ms ease-in-out, background-color 170ms ease-in-out"
+                  }}
+                >
+                  CONTACT
+                </button>
+              </a>
+            </Link>
           </div>
         </div>
         <div className="mt-6">
