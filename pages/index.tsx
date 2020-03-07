@@ -54,18 +54,22 @@ const Index = props => {
 
       <div className="absolute bottom-0 sm:mb-16 mb-4 flex flex-col w-full">
         <div className="flex flex-col sm:flex sm:flex-row sm:justify-center sm:flex-wrap">
-          <div className="text-center">
-            <button
-              type="button"
-              className="mx-4 border-2 focus:bg-white focus:text-black border-solid border-white text-white py-2 px-3 sm:py-4 sm:px-5 tracking-widest mt-6 leading-none cursor-pointer hover:bg-white hover:text-gray-900"
-              style={{
-                transition:
-                  "color 170ms ease-in-out, background-color 170ms ease-in-out"
-              }}
-            >
-              ILLUSTRATION
-            </button>
-          </div>
+          <Link href="/[grid]" as="/illustration">
+            <a>
+              <div className="text-center">
+                <button
+                  type="button"
+                  className="mx-4 border-2 focus:bg-white focus:text-black border-solid border-white text-white py-2 px-3 sm:py-4 sm:px-5 tracking-widest mt-6 leading-none cursor-pointer hover:bg-white hover:text-gray-900"
+                  style={{
+                    transition:
+                      "color 170ms ease-in-out, background-color 170ms ease-in-out"
+                  }}
+                >
+                  ILLUSTRATION
+                </button>
+              </div>
+            </a>
+          </Link>
           <Link href="/about">
             <a>
               <div className="text-center">
