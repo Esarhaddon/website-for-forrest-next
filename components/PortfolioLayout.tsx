@@ -21,6 +21,7 @@ export default (props: LayoutProps) => {
   const scrollableEl = useRef(null)
   const header = useRef(null)
 
+  // TO DO: figure out if this actually works to throttle scroll events
   const handleScroll = (event: React.UIEvent<HTMLDivElement>) => {
     const scrollTop = scrollableEl.current.scrollTop
     if (showMobileNav) return
