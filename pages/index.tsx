@@ -1,33 +1,9 @@
 import "../styles/style.css"
 import SocialAndEmail from "../components/SocialAndEmail"
-import { useState, useEffect } from "react"
-import nextCookie from "next-cookies"
-import cookie from "js-cookie"
 import FD from "../static/icons/forrest-dickison.svg"
 import Link from "next/link"
 
-const Index = props => {
-  const [scrollable, setScrollable] = useState(false)
-  const indexHasLoaded = props.indexHasLoaded
-    ? parseInt(props.indexHasLoaded, 10)
-    : 0
-
-  cookie.set("indexHasLoaded", indexHasLoaded + 1)
-
-  useEffect(() => {
-    window.addEventListener("unload", () => {
-      cookie.remove("indexHasLoaded")
-    })
-  })
-
-  if (!indexHasLoaded) {
-    useEffect(() => {
-      setTimeout(() => setScrollable(true), 1000)
-    })
-  } else if (!scrollable) {
-    setScrollable(true)
-  }
-
+const Index = () => {
   return (
     <div>
       <div
@@ -43,15 +19,9 @@ const Index = props => {
             "linear-gradient(rgba(0, 0, 0, .25), rgba(0, 0, 0, .25)), url(../static/boy.png) 33.33%  25% / cover no-repeat"
         }}
       />
-      {/* <div
-        style={{ top: "calc(33vh - 2.5rem)" }}
-        className="absolute w-full flex justify-center"
-      > */}
       <div className="relative max-w-3xl mx-auto px-4" style={{ top: "33vh" }}>
         <FD className="w-full" />
       </div>
-      {/* </div> */}
-
       <div className="absolute bottom-0 sm:mb-16 mb-4 flex flex-col w-full">
         <div className="flex flex-col sm:flex sm:flex-row sm:justify-center sm:flex-wrap">
           <Link href="/[grid]" as="/illustration">
@@ -109,13 +79,6 @@ const Index = props => {
       </div>
     </div>
   )
-}
-
-Index.getInitialProps = async ctx => {
-  const { indexHasLoaded } = nextCookie(ctx)
-  return {
-    indexHasLoaded
-  }
 }
 
 export default Index
