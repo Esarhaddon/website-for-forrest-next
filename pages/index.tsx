@@ -3,7 +3,7 @@ import SocialAndEmail from "../components/SocialAndEmail"
 import { useState, useEffect } from "react"
 import nextCookie from "next-cookies"
 import cookie from "js-cookie"
-import FD from "../static/forrest-dickison.svg"
+import FD from "../static/icons/forrest-dickison.svg"
 import Link from "next/link"
 
 const Index = props => {
