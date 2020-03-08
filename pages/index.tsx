@@ -74,7 +74,7 @@ const Index = () => {
           </div>
         </div>
         <div className="mt-6">
-          <SocialAndEmail isDark={false} />
+          <SocialAndEmail isDark={false} includesEmailOnMobile={true} />
         </div>
       </div>
     </div>

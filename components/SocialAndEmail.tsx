@@ -2,9 +2,11 @@ import InstagramLogo from "../static/icons/001-instagram.svg"
 import FacebookLogo from "../static/icons/002-facebook-circular-logo.svg"
 import TwitterLogo from "../static/icons/003-twitter-circular-logo.svg"
 import EmailLogo from "../static/icons/004-email.svg"
+import Link from "next/link"
 
 interface SocialAndEmailProps {
   isDark: boolean
+  includesEmailOnMobile: boolean
 }
 
 export default (props: SocialAndEmailProps) => {
@@ -20,7 +22,7 @@ export default (props: SocialAndEmailProps) => {
         <a
           href="https://www.instagram.com/forrestdickison"
           target="_blank"
-          className={`w-12 off-pl-2 hover:text-${baseColor}`}
+          className={`w-12 hover:text-${baseColor}`}
           style={{
             transition: "color 170ms ease-in-out, opacity 170ms ease-in-out"
           }}
@@ -28,7 +30,7 @@ export default (props: SocialAndEmailProps) => {
           <InstagramLogo className="h-8 w-8 fill-current mx-auto" />
         </a>
         <div
-          className={`w-12 off-pl-2 hover:text-${baseColor}`}
+          className={`w-12 hover:text-${baseColor}`}
           style={{
             transition: "color 170ms ease-in-out, opacity 170ms ease-in-out"
           }}
@@ -36,7 +38,7 @@ export default (props: SocialAndEmailProps) => {
           <FacebookLogo className="h-8 w-8 fill-current mx-auto" />
         </div>
         <div
-          className={`w-12 off-pl-2 hover:text-${baseColor}`}
+          className={`w-12 hover:text-${baseColor}`}
           style={{
             transition: "color 170ms ease-in-out, opacity 170ms ease-in-out"
           }}
@@ -44,14 +46,18 @@ export default (props: SocialAndEmailProps) => {
           <TwitterLogo className="h-8 w-8 fill-current mx-auto" />
         </div>
         <div
-          className={`w-12 off-pl-2 hover:text-${baseColor} sm:hidden`}
+          className={`w-12 hover:text-${baseColor} sm:hidden ${
+            !props.includesEmailOnMobile ? "hidden" : ""
+          }`}
           style={{
             transition: "color 170ms ease-in-out, opacity 170ms ease-in-out"
           }}
         >
-          <a href="mailto:fddickison@gmail.com" target="_blank">
-            <EmailLogo className="h-8 w-8 fill-current mx-auto" />
-          </a>
+          <Link href="/contact">
+            <a>
+              <EmailLogo className="h-8 w-8 fill-current mx-auto" />
+            </a>
+          </Link>
         </div>
       </div>
     </div>
