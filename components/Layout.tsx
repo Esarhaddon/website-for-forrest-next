@@ -150,7 +150,7 @@ export default (props: LayoutProps) => {
       </div>
       {props.children}
       <div style={{ paddingTop: "calc(3vw + .75rem)" }}>
-        <SocialAndEmail isDark={true} />
+        <SocialAndEmail isDark={true} includesEmailOnMobile={false} />
         <div
           className="flex justify-center items-center text-gray-700 leading-none "
           style={{
@@ -172,7 +172,7 @@ export default (props: LayoutProps) => {
                 ILLUSTRATION
               </a>
             </Link>
-            <Link href="/[page]" as="/animation">
+            {/* <Link href="/[page]" as="/animation">
               <a
                 className="leading-loose text-4xl font-bold text-gray-900 tracking-wider cursor-pointer"
                 onClick={() => setShowMobileNav(false)}
@@ -186,6 +186,22 @@ export default (props: LayoutProps) => {
                 onClick={() => setShowMobileNav(false)}
               >
                 FINE ART
+              </a>
+            </Link> */}
+            <Link href="/contact">
+              <a
+                className="leading-loose text-4xl font-bold text-gray-900 tracking-wider cursor-pointer"
+                onClick={() => setShowMobileNav(false)}
+              >
+                CONTACT
+              </a>
+            </Link>
+            <Link href="/about">
+              <a
+                className="leading-loose text-4xl font-bold text-gray-900 tracking-wider cursor-pointer"
+                onClick={() => setShowMobileNav(false)}
+              >
+                ABOUT
               </a>
             </Link>
           </div>
