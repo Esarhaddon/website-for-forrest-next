@@ -1,5 +1,5 @@
 import fetchImagesFor, { Image } from "../../utils/fetchImagesFor"
-import Layout from "../../components/PortfolioLayout"
+import Layout from "../../components/Layout"
 import Link from "next/link"
 
 interface GridProps {

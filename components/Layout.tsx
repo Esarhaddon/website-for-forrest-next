@@ -8,7 +8,7 @@ import ExitX from "../static/icons/close.svg"
 import { useState, useRef } from "react"
 
 interface LayoutProps {
-  isFor: string
+  isFor: "animation" | "illustration" | "fine art" | "about" | "contact"
   relMobileNav?: boolean
   children: ReactNode
 }
@@ -73,19 +73,46 @@ export default (props: LayoutProps) => {
             <LogoBlack className="h-32" />
           </a>
         </Link>
-        <div className="sm:flex hidden items-center">
-          <Link href="/[page]" as="/illustration">
-            <a
-              className={`mr-8 ${
-                props.isFor === "illustration"
-                  ? "text-gray-900"
-                  : "text-gray-500"
-              } hover:text-gray-900`}
-            >
-              ILLUSTRATION
-            </a>
-          </Link>
+        <div className="sm:flex hidden items-center justify-center">
+          <div>
+            <Link href="/[page]" as="/illustration">
+              <a
+                className={`mr-8 ${
+                  props.isFor === "illustration"
+                    ? "text-gray-900"
+                    : "text-gray-500"
+                } hover:text-gray-900`}
+              >
+                ILLUSTRATION
+              </a>
+            </Link>
+          </div>
           <div className="mr-8 font-semibold text-gray-900">/</div>
+          <div>
+            <Link href="/contact">
+              <a
+                className={`mr-8 ${
+                  props.isFor === "contact" ? "text-gray-900" : "text-gray-500"
+                } hover:text-gray-900`}
+              >
+                CONTACT
+              </a>
+            </Link>
+          </div>
+          <div className="mr-8 font-semibold text-gray-900">/</div>
+          <div>
+            <Link href="/about">
+              <a
+                className={`${
+                  props.isFor === "about" ? "text-gray-900" : "text-gray-500"
+                } hover:text-gray-900`}
+              >
+                ABOUT
+              </a>
+            </Link>
+          </div>
+          {/* <div className="mr-8 font-semibold text-gray-900">/</div>
+          <div>
           <Link href="/[page]" as="/animation">
             <a
               className={`mr-8 ${
@@ -95,7 +122,9 @@ export default (props: LayoutProps) => {
               ANIMATION
             </a>
           </Link>
+          </div>
           <div className="mr-8 font-semibold text-gray-900">/</div>
+          <div>
           <Link href="/[page]" as="/fine-art">
             <a
               className={`${
@@ -105,6 +134,7 @@ export default (props: LayoutProps) => {
               FINE ART
             </a>
           </Link>
+          </div> */}
         </div>
         {showMobileNav ? (
           <ExitX
