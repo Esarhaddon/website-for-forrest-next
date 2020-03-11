@@ -63,9 +63,9 @@ const Grid = ({ gridType, toDisplay }: GridProps) => {
               >
                 {/* REMEMBER: you will need do the opposite of this when querying for the image by title */}
                 <Link
-                  href="/[page]/[image]"
+                  href="/[grid]/[singleImage]"
                   as={`/${gridType}/${image.title
-                    .replace(/-/g, "-")
+                    .replace(/-/g, "|-")
                     .replace(/ /g, "-")}`}
                 >
                   <a
