@@ -4,6 +4,8 @@ import Link from "next/link"
 import React, { useState, useEffect } from "react"
 import Vibrant from "node-vibrant"
 
+// TO DO: get rid of scroll bounce on grid and mobile nav 'cause its wreaking havoc on those features
+
 interface GridProps {
   gridType: "illustration" | "animation" | "fine art"
   toDisplay: IImage[]
