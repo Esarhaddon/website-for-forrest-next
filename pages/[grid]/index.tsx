@@ -61,7 +61,13 @@ const Grid = ({ gridType, toDisplay }: GridProps) => {
                   height: 0
                 }}
               >
-                <Link href="/[page]/[image]" as={`/${gridType}/${image.title}`}>
+                {/* REMEMBER: you will need do the opposite of this when querying for the image by title */}
+                <Link
+                  href="/[page]/[image]"
+                  as={`/${gridType}/${image.title
+                    .replace(/-/g, "-")
+                    .replace(/ /g, "-")}`}
+                >
                   <a
                     className="absolute flex items-center justify-center text-3xl text-white"
                     style={{
