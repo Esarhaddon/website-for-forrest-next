@@ -2,5 +2,11 @@
   "env": {
     "CONTENTFUL_API": "@contentful-api",
     "CONTENTFUL_API_KEY": "@contentful-api-key"
+  },
+  "build": {
+    "env": {
+      "CONTENTFUL_API": "@contentful-api",
+      "CONTENTFUL_API_KEY": "@contentful-api-key"
+    }
   }
 }
