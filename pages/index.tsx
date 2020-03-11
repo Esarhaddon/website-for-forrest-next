@@ -3,6 +3,8 @@ import SocialAndEmail from "../components/SocialAndEmail"
 import FD from "../static/icons/forrest-dickison.svg"
 import Link from "next/link"
 
+// optimize background images for this page as well
+
 const Index = () => {
   return (
     <div>
