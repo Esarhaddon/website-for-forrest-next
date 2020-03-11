@@ -1,6 +1,6 @@
 import fetch from "node-fetch"
 
-export interface Image {
+export interface IImage {
   src: string
   title: string
   description?: string
@@ -46,7 +46,8 @@ interface Asset {
 
 export default async (
   imagesFor: "animation" | "illustration" | "fine art"
-): Promise<Image[]> => {
+): Promise<IImage[]> => {
+  console.log("process.env.CONTENTFUL_API is", process.env.CONTENTFUL_API)
   const res = await fetch(
     `${process.env.CONTENTFUL_API}?content_type=artWork&fields.type=${imagesFor}`,
     {
@@ -62,7 +63,7 @@ export default async (
     includes: { Asset }
   }: { items: ArtWork[]; includes: { Asset: Asset[] } } = json
 
-  const images: Image[] = items.map(item => {
+  const images: IImage[] = items.map(item => {
     const title = item.fields.title
     const description = item.fields.description
     const src = Asset.find(Asset => Asset.sys.id === item.fields.image.sys.id)
