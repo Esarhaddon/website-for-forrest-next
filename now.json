@@ -1,0 +1,6 @@
+{
+  "env": {
+    "CONTENTFUL_API": "@contentful-api",
+    "CONTENTFUL_API_KEY": "@contentful-api-key"
+  }
+}
