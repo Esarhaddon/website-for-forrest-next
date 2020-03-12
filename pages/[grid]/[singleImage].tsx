@@ -2,44 +2,10 @@ import React, { useEffect, useState } from "react"
 import Layout from "../../components/Layout"
 import fetchImagesFor, { Image } from "../../utils/fetchImagesFor"
 
-// interface Height {
-//   height: number
-// }
-
-// interface Width {
-//   width: number
-// }
-
-interface Dimension {
-  kind: "h" | "w"
-  value: number
-}
-
-interface EitherHeight {
+interface ImageDimensions {
   h: number
-  w?: never
-}
-
-interface OrWidth {
   w: number
-  h?: never
 }
-
-// type Dimensions = Height & Width
-
-// const calcMaxDimension = (
-//   windowDimensions: Dimensions,
-//   imageDimensions: Dimensions
-// ): EitherHeight | OrWidth => {
-// if(imageDimensions.height > windowDimensions.height * 1.3333) {
-//   return {height: windowDimensions.height}
-// }
-// if(imageDimensions.width > windowDimensions.width * .9) {
-//   return {width: windowDimensions.width * .9}
-// }
-
-//   return {height: imageDimensions.height}
-// }
 
 interface ImagePageProps {
   fromGrid: "illustration" | "animation" | "fine art"
@@ -49,35 +15,54 @@ interface ImagePageProps {
 }
 
 const ImagePage = ({ fromGrid, current, previous, next }: ImagePageProps) => {
-  const [imageDimension, setImageDimension] = useState(
-    {} as Dimension | undefined
-  )
+  const [imageDimensions, setImageDimensions] = useState({} as ImageDimensions)
+  const [imageHasLoaded, setImageHasLoaded] = useState(false)
   useEffect(() => {
-    if (current.originalHeight > window.innerHeight * 1.5) {
-      setImageDimension({
-        kind: "h",
-        value: Math.round(window.innerHeight * 1.5)
-      })
-    } else if (current.originalWidth > window.innerWidth * 0.9) {
-      setImageDimension({
-        kind: "w",
-        value: Math.round(window.innerWidth * 0.9)
-      })
+    const maxHeight = Math.round(window.innerHeight * 1.5)
+    const maxWidth = Math.round(window.innerWidth * 0.9)
+    const dimensions: ImageDimensions = {
+      h: current.originalHeight,
+      w: current.originalWidth
     }
+
+    if (dimensions.h > maxHeight) {
+      const shrinkFactor = maxHeight / dimensions.h
+      dimensions.h = maxHeight
+      dimensions.w = Math.round(dimensions.w * shrinkFactor)
+    }
+
+    if (dimensions.w > maxWidth) {
+      const shrinkFactor = maxWidth / dimensions.w
+      dimensions.w = maxWidth
+      dimensions.h = Math.round(dimensions.h * shrinkFactor)
+    }
+
+    setImageDimensions(dimensions)
   }, [])
   return (
     <Layout isFor={fromGrid}>
       <div
         className="flex justify-center items-center"
-        style={{ paddingRight: "5vw", paddingLeft: "5vw" }}
+        style={
+          imageHasLoaded ? { paddingRight: "5vw", paddingLeft: "5vw" } : null
+        }
       >
-        <img
-          src={`${current.src}${
-            imageDimension
-              ? `?${imageDimension.kind}=${imageDimension.value}`
-              : ""
+        <div
+          style={{
+            height: imageDimensions.h + "px",
+            width: imageDimensions.w + "px"
+          }}
+          className={`flex justify-center items-center ${
+            imageHasLoaded ? "" : "bg-gray-500"
           }`}
-        />
+        >
+          <img
+            src={`${current.src}${
+              imageDimensions.h ? `?h=${imageDimensions.h}` : ""
+            }`}
+            onLoad={() => setImageHasLoaded(true)}
+          />
+        </div>
       </div>
     </Layout>
   )

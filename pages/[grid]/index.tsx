@@ -34,12 +34,13 @@ const Grid = ({ gridType, toDisplay }: GridProps) => {
           const [loaded, setLoaded] = useState("")
           const [dominantColor, setDominantColor] = useState("")
           useEffect(() => {
+            // TO DO: Not sure this actualy works. Maybe try getting the dominant color from the loaeded image via new Vibrant(img)
             Vibrant.from(`${image.src}?h=5`)
               .getPalette()
               .then(palette => {
                 setDominantColor(palette.Vibrant.hex)
               })
-              .catch(e => setDominantColor("#898382"))
+              .catch(e => setDominantColor("#696969"))
           }, [])
 
           return (
@@ -78,7 +79,11 @@ const Grid = ({ gridType, toDisplay }: GridProps) => {
                   >
                     <div
                       className="absolute w-full h-full top-0 left-0"
-                      style={{ backgroundColor: dominantColor }}
+                      style={{
+                        backgroundColor: dominantColor
+                          ? dominantColor
+                          : "#A9A9A9"
+                      }}
                     >
                       <div
                         id={`thumbnail-${i}`}
