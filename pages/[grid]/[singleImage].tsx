@@ -1,20 +1,83 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import Layout from "../../components/Layout"
-import fetchImagesFor, { IImage } from "../../utils/fetchImagesFor"
+import fetchImagesFor, { Image } from "../../utils/fetchImagesFor"
+
+// interface Height {
+//   height: number
+// }
+
+// interface Width {
+//   width: number
+// }
+
+interface Dimension {
+  kind: "h" | "w"
+  value: number
+}
+
+interface EitherHeight {
+  h: number
+  w?: never
+}
+
+interface OrWidth {
+  w: number
+  h?: never
+}
+
+// type Dimensions = Height & Width
+
+// const calcMaxDimension = (
+//   windowDimensions: Dimensions,
+//   imageDimensions: Dimensions
+// ): EitherHeight | OrWidth => {
+// if(imageDimensions.height > windowDimensions.height * 1.3333) {
+//   return {height: windowDimensions.height}
+// }
+// if(imageDimensions.width > windowDimensions.width * .9) {
+//   return {width: windowDimensions.width * .9}
+// }
+
+//   return {height: imageDimensions.height}
+// }
 
 interface ImagePageProps {
   fromGrid: "illustration" | "animation" | "fine art"
-  current: IImage
+  current: Image
   previous: string | undefined
   next: string | undefined
 }
 
-const ImagePage = (props: ImagePageProps) => {
-  console.log("ImagePage props are", props)
+const ImagePage = ({ fromGrid, current, previous, next }: ImagePageProps) => {
+  const [imageDimension, setImageDimension] = useState(
+    {} as Dimension | undefined
+  )
+  useEffect(() => {
+    if (current.originalHeight > window.innerHeight * 1.5) {
+      setImageDimension({
+        kind: "h",
+        value: Math.round(window.innerHeight * 1.5)
+      })
+    } else if (current.originalWidth > window.innerWidth * 0.9) {
+      setImageDimension({
+        kind: "w",
+        value: Math.round(window.innerWidth * 0.9)
+      })
+    }
+  }, [])
   return (
-    <Layout isFor={props.fromGrid}>
-      <div className="w-full h-full flex justify-center items-center text-6xl text-bold text-gray-500">
-        [IMAGE]
+    <Layout isFor={fromGrid}>
+      <div
+        className="flex justify-center items-center"
+        style={{ paddingRight: "5vw", paddingLeft: "5vw" }}
+      >
+        <img
+          src={`${current.src}${
+            imageDimension
+              ? `?${imageDimension.kind}=${imageDimension.value}`
+              : ""
+          }`}
+        />
       </div>
     </Layout>
   )
@@ -27,12 +90,10 @@ ImagePage.getInitialProps = async (ctx): Promise<ImagePageProps> => {
     .replace("|-", "-")
   // TO DO: Will the contentful api let me fetch just only 3 entries I actually need? Would that make things any faster?
   const images = await fetchImagesFor(fromGrid)
-
   const currentIndex = images.findIndex(image => image.title === title)
-  console.log("currentIndex is", currentIndex)
   const current = images[currentIndex]
-  const previous: IImage | undefined = images[currentIndex - 1]
-  const next: IImage | undefined = images[currentIndex + 1]
+  const previous: Image | undefined = images[currentIndex - 1]
+  const next: Image | undefined = images[currentIndex + 1]
 
   return { fromGrid, current, previous: previous?.title, next: next?.title }
 }

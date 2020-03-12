@@ -1,9 +1,11 @@
 import fetch from "node-fetch"
 
-export interface IImage {
+export interface Image {
   src: string
   title: string
   description?: string
+  originalHeight: number
+  originalWidth: number
 }
 
 interface ArtWork {
@@ -46,8 +48,7 @@ interface Asset {
 
 export default async (
   imagesFor: "animation" | "illustration" | "fine art"
-): Promise<IImage[]> => {
-  console.log("process.env.CONTENTFUL_API is", process.env.CONTENTFUL_API)
+): Promise<Image[]> => {
   const res = await fetch(
     `${process.env.CONTENTFUL_API}?content_type=artWork&fields.type=${imagesFor}`,
     {
@@ -63,13 +64,15 @@ export default async (
     includes: { Asset }
   }: { items: ArtWork[]; includes: { Asset: Asset[] } } = json
 
-  const images: IImage[] = items.map(item => {
-    const title = item.fields.title
-    const description = item.fields.description
-    const src = Asset.find(Asset => Asset.sys.id === item.fields.image.sys.id)
-      .fields.file.url
-
-    return { title, description, src }
+  const images: Image[] = items.map(item => {
+    const asset = Asset.find(Asset => Asset.sys.id === item.fields.image.sys.id)
+    return {
+      title: item.fields.title,
+      description: item.fields.description,
+      src: asset.fields.file.url,
+      originalHeight: asset.fields.file.details.image.height,
+      originalWidth: asset.fields.file.details.image.width
+    }
   })
 
   return images

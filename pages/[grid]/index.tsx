@@ -1,4 +1,4 @@
-import fetchImagesFor, { IImage } from "../../utils/fetchImagesFor"
+import fetchImagesFor, { Image } from "../../utils/fetchImagesFor"
 import Layout from "../../components/Layout"
 import Link from "next/link"
 import React, { useState, useEffect } from "react"
@@ -8,13 +8,12 @@ import Vibrant from "node-vibrant"
 
 interface GridProps {
   gridType: "illustration" | "animation" | "fine art"
-  toDisplay: IImage[]
+  toDisplay: Image[]
 }
 
 const Grid = ({ gridType, toDisplay }: GridProps) => {
   const [displayHeight, setDisplayHeight] = useState(0)
   useEffect(() => {
-    console.log("running effect...")
     const thumbnail = document.getElementById("thumbnail-0")
     const thumbnailHeight = thumbnail.offsetHeight
     setDisplayHeight(thumbnailHeight)
