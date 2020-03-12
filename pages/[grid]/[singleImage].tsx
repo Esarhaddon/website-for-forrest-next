@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState, useRef } from "react"
 import Layout from "../../components/Layout"
 import fetchImagesFor, { Image } from "../../utils/fetchImagesFor"
+import Vibrant from "node-vibrant"
 
 interface ImageDimensions {
   h: number
@@ -17,6 +18,8 @@ interface ImagePageProps {
 const ImagePage = ({ fromGrid, current, previous, next }: ImagePageProps) => {
   const [imageDimensions, setImageDimensions] = useState({} as ImageDimensions)
   const [imageHasLoaded, setImageHasLoaded] = useState(false)
+  const [dominantColor, setDominantColor] = useState("")
+
   useEffect(() => {
     const maxHeight = Math.round(window.innerHeight * 1.5)
     const maxWidth = Math.round(window.innerWidth * 0.9)
@@ -39,6 +42,16 @@ const ImagePage = ({ fromGrid, current, previous, next }: ImagePageProps) => {
 
     setImageDimensions(dimensions)
   }, [])
+
+  useEffect(() => {
+    Vibrant.from(`${current.src}?h=5`)
+      .getPalette()
+      .then(palette => {
+        setDominantColor(palette.Vibrant.hex)
+      })
+      .catch(e => setDominantColor("#696969"))
+  }, [])
+
   return (
     <Layout isFor={fromGrid}>
       <div
@@ -49,12 +62,16 @@ const ImagePage = ({ fromGrid, current, previous, next }: ImagePageProps) => {
       >
         <div
           style={{
+            // TO DO: Start with height at 100vh to avoid tacky bounce thing?
             height: imageDimensions.h + "px",
-            width: imageDimensions.w + "px"
+            width: imageDimensions.w + "px",
+            ...(imageHasLoaded
+              ? null
+              : dominantColor
+              ? { backgroundColor: dominantColor }
+              : { backgroundColor: "#A9A9A9" })
           }}
-          className={`flex justify-center items-center ${
-            imageHasLoaded ? "" : "bg-gray-500"
-          }`}
+          className={`flex justify-center items-center`}
         >
           <img
             src={`${current.src}${
