@@ -2,6 +2,8 @@ import React, { useEffect, useState, useRef } from "react"
 import Layout from "../../components/Layout"
 import fetchImagesFor, { Image } from "../../utils/fetchImagesFor"
 import Vibrant from "node-vibrant"
+import Link from "next/link"
+import Arrow from "../../static/icons/arrow.svg"
 
 interface ImageDimensions {
   h: number
@@ -16,7 +18,10 @@ interface ImagePageProps {
 }
 
 const ImagePage = ({ fromGrid, current, previous, next }: ImagePageProps) => {
-  const [imageDimensions, setImageDimensions] = useState({} as ImageDimensions)
+  const [imageDimensions, setImageDimensions] = useState({
+    h: 0,
+    w: 0
+  })
   const [imageHasLoaded, setImageHasLoaded] = useState(false)
   const [dominantColor, setDominantColor] = useState("")
 
@@ -81,61 +86,75 @@ const ImagePage = ({ fromGrid, current, previous, next }: ImagePageProps) => {
           />
         </div>
         <div
-          className="leading-tight text-center  text-2xl font-semibold tracking-wider text-gray-900"
-          style={{ marginTop: "calc(3vw + .75rem)" }}
+          className="leading-tight text-center text-2xl font-semibold tracking-wider text-gray-900"
+          style={
+            imageDimensions.h
+              ? { marginTop: "calc(3vw + .75rem)" }
+              : { marginTop: "100vh" }
+          }
         >
           {current.title.toUpperCase()}
         </div>
-        {/* <div
-           className="leading-tight text-center px-4"
-           style={{ marginTop: "calc(1.5vw + .375rem)" }}
-         >
-           {currentImage ? currentImage.description : ""}
-         </div>
-         <div
-           className="flex justify-center items-center text-gray-700 leading-none"
-           style={{
-             marginTop: "calc(5vw + 1.25rem + 5px)",
-             marginBottom: "calc(2vw + .75rem)"
-           }}
-         > 
-          {previousImage ? (
-             <Link href="/[page]/[image]" as={`/${page}/${previousImage.name}`}>
-               <a className="text-lg px-8">
-                 <Arrow
-                   className="h-5 inline fill-current"
-                   style={{
-                     transform: "scaleX(-1)"
-                   }}
-                 />
-                 Prev
-               </a>
-             </Link>
-           ) : (
-             <div className="text-lg text-gray-500 cursor-pointer px-8">
-               <Arrow
-                 className="h-5 inline fill-current"
-                 style={{
-                   transform: "scaleX(-1)"
-                 }}
-               />
-               Prev
-             </div>
-           )}
-           {nextImage ? (
-             <Link href="/[page]/[image]" as={`/${page}/${nextImage.name}`}>
-               <a className="text-lg  px-8">
-                 Next
-                 <Arrow className="h-5 inline fill-current" />
-               </a>
-             </Link>
-           ) : (
-             <div className="text-lg text-gray-500 cursor-pointer px-8">
-               Next
-               <Arrow className="h-5 inline fill-current" />
-             </div>
-           )}
-         </div> */}
+        {current.description ? (
+          <div
+            className="leading-tight text-center px-4"
+            style={{ marginTop: "calc(1.5vw + .375rem)" }}
+          >
+            {current.description}
+          </div>
+        ) : null}
+        <div
+          className="flex justify-center items-center text-gray-700 leading-none"
+          style={{
+            marginTop: "calc(5vw + 1.25rem + 5px)",
+            marginBottom: "calc(2vw + .75rem)"
+          }}
+        >
+          {previous ? (
+            <Link
+              href="/[page]/[image]"
+              as={`/${fromGrid}/${previous
+                .replace(/-/g, "|-")
+                .replace(/ /g, "-")}`}
+            >
+              <a className="text-lg px-8">
+                <Arrow
+                  className="h-5 inline fill-current"
+                  style={{
+                    transform: "scaleX(-1)"
+                  }}
+                />
+                Prev
+              </a>
+            </Link>
+          ) : (
+            <div className="text-lg text-gray-500 cursor-pointer px-8">
+              <Arrow
+                className="h-5 inline fill-current"
+                style={{
+                  transform: "scaleX(-1)"
+                }}
+              />
+              Prev
+            </div>
+          )}
+          {next ? (
+            <Link
+              href="/[page]/[image]"
+              as={`/${fromGrid}/${next.replace(/-/g, "|-").replace(/ /g, "-")}`}
+            >
+              <a className="text-lg  px-8">
+                Next
+                <Arrow className="h-5 inline fill-current" />
+              </a>
+            </Link>
+          ) : (
+            <div className="text-lg text-gray-500 cursor-pointer px-8">
+              Next
+              <Arrow className="h-5 inline fill-current" />
+            </div>
+          )}
+        </div>
         {/* <div
            className={`fixed top-0 left-0 w-full h-full z-50 ${
              hideModal ? "hidden" : ""
