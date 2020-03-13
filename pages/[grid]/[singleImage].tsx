@@ -4,6 +4,7 @@ import fetchImagesFor, { Image } from "../../utils/fetchImagesFor"
 import Vibrant from "node-vibrant"
 import Link from "next/link"
 import Arrow from "../../static/icons/arrow.svg"
+import ExitX from "../../static/icons/close.svg"
 
 interface ImageDimensions {
   h: number
@@ -24,6 +25,7 @@ const ImagePage = ({ fromGrid, current, previous, next }: ImagePageProps) => {
   })
   const [imageHasLoaded, setImageHasLoaded] = useState(false)
   const [dominantColor, setDominantColor] = useState("")
+  const [hideModal, setHideModal] = useState(true)
 
   useEffect(() => {
     const maxHeight = Math.round(window.innerHeight * 1.5)
@@ -79,10 +81,12 @@ const ImagePage = ({ fromGrid, current, previous, next }: ImagePageProps) => {
           className={`flex justify-center items-center`}
         >
           <img
+            className="cursor-pointer"
             src={`${current.src}${
               imageDimensions.h ? `?h=${imageDimensions.h}` : ""
             }`}
             onLoad={() => setImageHasLoaded(true)}
+            onClick={() => setHideModal(false)}
           />
         </div>
         <div
@@ -155,49 +159,35 @@ const ImagePage = ({ fromGrid, current, previous, next }: ImagePageProps) => {
             </div>
           )}
         </div>
-        {/* <div
-           className={`fixed top-0 left-0 w-full h-full z-50 ${
-             hideModal ? "hidden" : ""
-           }`}
-           style={{
-             backgroundColor: "rgba(0, 0, 0, .95)",
-             paddingRight: "5vw",
-             paddingLeft: "5vw"
-           }}
-           onClick={() => {
-             setHideModal(true)
-           }}
-         >
-           <ExitX
-             className="absolute z-10 text-gray-200 fill-current cursor-pointer"
-             style={{
-               top: "calc(2% + 1rem)",
-               right: "2%",
-               width: ".85rem",
-               height: ".85rem"
-             }}
-           />
-           <div
-             className="relative mx-auto"
-             style={{ maxWidth: "72vh", top: "0" }}
-           >
-             <div
-               className="h-0 w-full"
-               style={{
-                 paddingTop: "133.333333%"
-               }}
-             />
-             <div
-               className="absolute top-0 left-0 w-full h-full text-white flex items-center justify-center text-xl cursor-pointer"
-               style={{
-                 backgroundColor: "rgba(127, 127, 127)",
-                 marginTop: "calc(50vh - 66.666666%)"
-               }}
-             >
-               [ {currentImage ? currentImage.name : ""} ]
-             </div>
-           </div>
-         </div> */}
+        <div
+          className={`fixed top-0 left-0 w-full h-full z-50 flex itmes-center justify-center ${
+            hideModal ? "hidden" : ""
+          }`}
+          style={{
+            backgroundColor: "rgba(0, 0, 0, .95)",
+            paddingRight: "5vw",
+            paddingLeft: "5vw",
+            paddingTop: "2vh",
+            paddingBottom: "2vh"
+          }}
+          onClick={() => {
+            setHideModal(true)
+          }}
+        >
+          <ExitX
+            className="absolute z-10 text-gray-200 fill-current cursor-pointer"
+            style={{
+              top: "calc(2% + 1rem)",
+              right: "2%",
+              width: ".85rem",
+              height: ".85rem"
+            }}
+          />
+          <img
+            className="max-h-full h-auto max-w-full w-auto"
+            src={`${current.src}?h=${imageDimensions.h}`}
+          />
+        </div>
       </div>
     </Layout>
   )
