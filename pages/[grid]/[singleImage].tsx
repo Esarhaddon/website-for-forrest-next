@@ -55,7 +55,7 @@ const ImagePage = ({ fromGrid, current, previous, next }: ImagePageProps) => {
   return (
     <Layout isFor={fromGrid}>
       <div
-        className="flex justify-center items-center"
+        className="flex flex-col justify-center items-center"
         style={
           imageHasLoaded ? { paddingRight: "5vw", paddingLeft: "5vw" } : null
         }
@@ -80,6 +80,105 @@ const ImagePage = ({ fromGrid, current, previous, next }: ImagePageProps) => {
             onLoad={() => setImageHasLoaded(true)}
           />
         </div>
+        <div
+          className="leading-tight text-center  text-2xl font-semibold tracking-wider text-gray-900"
+          style={{ marginTop: "calc(3vw + .75rem)" }}
+        >
+          {current.title.toUpperCase()}
+        </div>
+        {/* <div
+           className="leading-tight text-center px-4"
+           style={{ marginTop: "calc(1.5vw + .375rem)" }}
+         >
+           {currentImage ? currentImage.description : ""}
+         </div>
+         <div
+           className="flex justify-center items-center text-gray-700 leading-none"
+           style={{
+             marginTop: "calc(5vw + 1.25rem + 5px)",
+             marginBottom: "calc(2vw + .75rem)"
+           }}
+         > 
+          {previousImage ? (
+             <Link href="/[page]/[image]" as={`/${page}/${previousImage.name}`}>
+               <a className="text-lg px-8">
+                 <Arrow
+                   className="h-5 inline fill-current"
+                   style={{
+                     transform: "scaleX(-1)"
+                   }}
+                 />
+                 Prev
+               </a>
+             </Link>
+           ) : (
+             <div className="text-lg text-gray-500 cursor-pointer px-8">
+               <Arrow
+                 className="h-5 inline fill-current"
+                 style={{
+                   transform: "scaleX(-1)"
+                 }}
+               />
+               Prev
+             </div>
+           )}
+           {nextImage ? (
+             <Link href="/[page]/[image]" as={`/${page}/${nextImage.name}`}>
+               <a className="text-lg  px-8">
+                 Next
+                 <Arrow className="h-5 inline fill-current" />
+               </a>
+             </Link>
+           ) : (
+             <div className="text-lg text-gray-500 cursor-pointer px-8">
+               Next
+               <Arrow className="h-5 inline fill-current" />
+             </div>
+           )}
+         </div> */}
+        {/* <div
+           className={`fixed top-0 left-0 w-full h-full z-50 ${
+             hideModal ? "hidden" : ""
+           }`}
+           style={{
+             backgroundColor: "rgba(0, 0, 0, .95)",
+             paddingRight: "5vw",
+             paddingLeft: "5vw"
+           }}
+           onClick={() => {
+             setHideModal(true)
+           }}
+         >
+           <ExitX
+             className="absolute z-10 text-gray-200 fill-current cursor-pointer"
+             style={{
+               top: "calc(2% + 1rem)",
+               right: "2%",
+               width: ".85rem",
+               height: ".85rem"
+             }}
+           />
+           <div
+             className="relative mx-auto"
+             style={{ maxWidth: "72vh", top: "0" }}
+           >
+             <div
+               className="h-0 w-full"
+               style={{
+                 paddingTop: "133.333333%"
+               }}
+             />
+             <div
+               className="absolute top-0 left-0 w-full h-full text-white flex items-center justify-center text-xl cursor-pointer"
+               style={{
+                 backgroundColor: "rgba(127, 127, 127)",
+                 marginTop: "calc(50vh - 66.666666%)"
+               }}
+             >
+               [ {currentImage ? currentImage.name : ""} ]
+             </div>
+           </div>
+         </div> */}
       </div>
     </Layout>
   )
