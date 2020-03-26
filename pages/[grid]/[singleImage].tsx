@@ -70,8 +70,8 @@ const ImagePage = ({ fromGrid, current, previous, next }: ImagePageProps) => {
         <div
           style={{
             // TO DO: Start with height at 100vh to avoid tacky bounce thing?
-            height: imageDimensions.h + "px",
-            width: imageDimensions.w + "px",
+            maxHeight: imageDimensions.h + "px",
+            maxWidth: imageDimensions.w + "px",
             ...(imageHasLoaded
               ? null
               : dominantColor
