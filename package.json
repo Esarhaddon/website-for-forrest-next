@@ -18,6 +18,7 @@
     "@types/node-fetch": "^2.5.4",
     "@zeit/next-css": "^1.0.1",
     "dotenv": "^8.2.0",
+    "formik": "^2.1.4",
     "next": "^9.0.5",
     "node-fetch": "^2.6.0",
     "node-vibrant": "^3.1.5",
