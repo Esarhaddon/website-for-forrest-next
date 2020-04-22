@@ -9,14 +9,14 @@ export default () => (
         lastName: "",
         emailAddress: "",
         subjectLine: "",
-        text: ""
+        text: "",
       }}
       onSubmit={() => console.log("Bang! Yur dead.")}
     >
       <Form className="flex flex-col w-11/12 sm:w-7/12 mx-auto">
         <div className="flex flex-wrap">
-          <div className="flex flex-col flex-1 pr-1">
-            <label className="text-xl font-light" htmlFor="firstName">
+          <div className="flex flex-col mb-8 flex-1 pr-3">
+            <label className="text-xl font-light mb-1" htmlFor="firstName">
               First Name
             </label>
             <Field
@@ -25,8 +25,8 @@ export default () => (
               name="firstName"
             />
           </div>
-          <div className="flex flex-col flex-1 pl-1">
-            <label className="text-xl font-light" htmlFor="lastName">
+          <div className="flex flex-col mb-8 flex-1 pl-3">
+            <label className="text-xl font-light mb-1" htmlFor="lastName">
               Last Name
             </label>
             <Field
@@ -36,8 +36,8 @@ export default () => (
             />
           </div>
         </div>
-        <div className="flex flex-col">
-          <label className="text-xl font-light" htmlFor="emailAddress">
+        <div className="flex flex-col mb-8">
+          <label className="text-xl font-light mb-1" htmlFor="emailAddress">
             Email Address
           </label>
           <Field
@@ -46,8 +46,8 @@ export default () => (
             name="emailAddress"
           />
         </div>
-        <div className="flex flex-col">
-          <label className="text-xl font-light" htmlFor="subjectLine">
+        <div className="flex flex-col mb-8">
+          <label className="text-xl font-light mb-1" htmlFor="subjectLine">
             Subject{" "}
           </label>
           <Field
@@ -56,16 +56,29 @@ export default () => (
             name="subjectLine"
           />
         </div>
-        <div className="flex flex-col">
-          <label className="text-xl font-light" htmlFor="text"></label>
+        <div className="flex flex-col mb-8">
+          <label className="text-xl font-light mb-1" htmlFor="text">
+            Message
+          </label>
           <Field
             component="textarea"
             id="text"
-            className="border border-solid border-gray-400 bg-gray-100 rounded-sm leading-none text-sm p-3"
+            className="h-24 border border-solid border-gray-400 bg-gray-100 rounded-sm leading-none text-sm p-3"
             name="text"
           />
         </div>
-        <button type="submit">Send</button>
+        <div>
+          <button
+            className="border-2 border-solid border-gray-800 text-gray-800 py-3 px-6 tracking-widest leading-none cursor-pointer hover:bg-gray-800 hover:text-white"
+            style={{
+              transition:
+                "color 170ms ease-in-out, background-color 170ms ease-in-out",
+            }}
+            type="submit"
+          >
+            SEND
+          </button>
+        </div>
       </Form>
     </Formik>
   </Layout>
