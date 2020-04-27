@@ -1,23 +1,7 @@
 import { useState } from "react"
 import Layout from "../components/Layout"
 import { Field, Form, Formik } from "formik"
-import nodemailer from "nodemailer"
-
-interface UserEmail {
-  from: string
-  subject: string
-  text: string
-}
-
-const transporter = nodemailer.createTransport({
-  host: "smtp.ethereal.email",
-  port: 465,
-  secure: true,
-  auth: {
-    user: process.env.SMTP_USER,
-    pass: process.env.SMTP_PASSWORD,
-  },
-})
+import { UserEmail } from "./api/contact"
 
 const validate = (value: string) => {
   if (!value) {
@@ -34,15 +18,7 @@ const useEmail = (email: UserEmail) => {
     return { isSending, didSend, error }
   }
 
-  transporter
-    .sendMail({
-      to: process.env.SMTP_DESTINATION,
-      from: email.from,
-      subject: email.subject,
-      text: email.text,
-    })
-    .then(() => setDidSend(true))
-    .catch((e) => setError(new Error("Your email failed to send.")))
+  // make api call here
 
   return { didSend, error }
 }
@@ -170,7 +146,7 @@ export default () => {
                   type="submit"
                   disabled={isSubmitting || isSending}
                 >
-                  SEND
+                  {isSubmitting || isSending ? "SENDING..." : "SEND"}
                 </button>
               </div>
             </Form>
