@@ -16,9 +16,7 @@ interface NextMessage {
 type Request = IncomingMessage & NextMessage
 
 const transporter = nodemailer.createTransport({
-  host: "smtp.ethereal.email", // not this one
-  port: 465,
-  secure: true,
+  service: "Outlook365",
   auth: {
     user: process.env.SMTP_USER,
     pass: process.env.SMTP_PASSWORD,
@@ -26,15 +24,9 @@ const transporter = nodemailer.createTransport({
 })
 
 export default async (req: Request, res: ServerResponse) => {
+  console.log("process.env.SMTP_HOST is", process.env.SMTP_HOST)
   if (req.method === "POST") {
-    console.log("req.body is", req.body)
     const { from, text, subject } = req.body
-    console.log("from is", from)
-    console.log("text is", text)
-    console.log("subject is", subject)
-    console.log("req.body.from is", req.body.from)
-    console.log("req.body.text is", req.body.text)
-    console.log("req.body.subject is", req.body.subject)
     if (!from || !text || !subject) {
       res.statusCode = 400
       res.setHeader("Content-Type", "application/json")
@@ -46,15 +38,35 @@ export default async (req: Request, res: ServerResponse) => {
       )
     }
 
-    res.statusCode = 200
-    res.setHeader("Content-Type", "application/json")
-    return res.end(
-      JSON.stringify({
-        message: "Congrats, you made a POST request",
-        reqBody: req.body,
+    try {
+      // apparently "from" can't be an address other than the SMTP user
+      await transporter.sendMail({
+        from: process.env.SMTP_USER,
+        subject,
+        // is there a better way to do this?
+        text: text + "\n-- " + from,
+        to: process.env.MAIL_TO,
       })
-    )
+
+      res.statusCode = 200
+      res.setHeader("Content-Type", "application/json")
+      return res.end(
+        JSON.stringify({
+          message: "Congrats, you made a POST request",
+          reqBody: req.body,
+        })
+      )
+    } catch (e) {
+      res.statusCode = 500
+      res.setHeader("Content-Type", "application/json")
+      return res.end(
+        JSON.stringify({
+          message: e,
+        })
+      )
+    }
   }
+
   res.statusCode = 400
   res.end(
     JSON.stringify({
