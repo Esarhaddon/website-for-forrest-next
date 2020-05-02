@@ -26,25 +26,23 @@ const transporter = nodemailer.createTransport({
 export default async (req: Request, res: ServerResponse) => {
   console.log("process.env.SMTP_HOST is", process.env.SMTP_HOST)
   if (req.method === "POST") {
-    const { from, text, subject } = req.body
-    if (!from || !text || !subject) {
+    const { user_email, first_name, last_name, message, subject } = req.body
+    if (!user_email || !message || !subject || !first_name || !last_name) {
       res.statusCode = 400
       res.setHeader("Content-Type", "application/json")
       return res.end(
         JSON.stringify({
           message:
-            'req.body must be a json object of the form {"from": string, "subject": string, "text": string}. Fields cannot be blank',
+            "req.body must be a json object with user_email, first_name, last_name, subject, and message.",
         })
       )
     }
 
     try {
-      // apparently "from" can't be an address other than the SMTP user
       await transporter.sendMail({
         from: process.env.SMTP_USER,
         subject,
-        // is there a better way to do this?
-        text: text + "\n-- " + from,
+        text: `${message}\n\n-- ${first_name} ${last_name}\n${user_email}`,
         to: process.env.MAIL_TO,
       })
 
