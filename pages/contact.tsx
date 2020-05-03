@@ -1,7 +1,8 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Layout from "../components/Layout"
 import { Field, Form, Formik } from "formik"
-import { UserEmail } from "./api/contact"
+import { Email } from "./api/contact"
+import fetch from "node-fetch"
 
 const validate = (value: string) => {
   if (!value) {
@@ -9,41 +10,24 @@ const validate = (value: string) => {
   }
 }
 
-const useEmail = (email: UserEmail) => {
-  const [error, setError] = useState<undefined | Error>(undefined)
-  const [didSend, setDidSend] = useState(false)
-  const [isSending, setIsSending] = useState(false)
-
-  if (!email.text) {
-    return { isSending, didSend, error }
-  }
-
-  // make api call here
-
-  return { didSend, error }
-}
-
 export default () => {
-  const [email, setEmail] = useState<UserEmail>({
-    from: "",
-    text: "",
-    subject: "",
-  })
-  const { isSending, didSend, error } = useEmail(email)
-
   return (
     <Layout isFor="contact">
       <Formik
         initialValues={{
-          firstName: "",
-          lastName: "",
-          from: "",
+          first_name: "",
+          last_name: "",
+          user_email: "",
           subject: "",
-          text: "",
+          message: "",
         }}
-        onSubmit={(values, { setSubmitting }) => {
-          const { firstName, lastName, ...email } = values
-          setEmail({ ...email, text: `${email}\n-- ${firstName} ${lastName}` })
+        onSubmit={async (values, { setSubmitting }) => {
+          console.log("values are", values)
+          const res = await fetch(`${process.env.EMAIL_API}/contact.ts`, {
+            method: "POST",
+            body: JSON.stringify(values),
+          })
+
           setSubmitting(false)
         }}
       >
@@ -54,53 +38,56 @@ export default () => {
                 <div className="flex flex-col mb-8 flex-1 sm:pr-3">
                   <label
                     className="text-xl font-light mb-1"
-                    htmlFor="firstName"
+                    htmlFor="first_name"
                   >
                     First Name
                     <div className="inline ml-2 text-xl text-red-500">*</div>
                   </label>
                   <Field
                     validate={validate}
-                    id="firstName"
+                    id="first_name"
                     className={`border border-solid ${
-                      errors.firstName && touched.firstName
+                      errors.first_name && touched.first_name
                         ? "border-red-500 bg-red-100"
                         : "border-gray-400 bg-gray-100"
                     } rounded-sm leading-none text-sm p-3`}
-                    name="firstName"
+                    name="first_name"
                   />
                 </div>
                 <div className="flex flex-col mb-8 flex-1 sm:pl-3">
-                  <label className="text-xl font-light mb-1" htmlFor="lastName">
+                  <label
+                    className="text-xl font-light mb-1"
+                    htmlFor="last_name"
+                  >
                     Last Name
                     <div className="inline ml-2 text-xl text-red-500">*</div>
                   </label>
                   <Field
                     validate={validate}
-                    id="lastName"
+                    id="last_name"
                     className={`border border-solid ${
-                      errors.lastName && touched.lastName
+                      errors.last_name && touched.last_name
                         ? "border-red-500 bg-red-100"
                         : "border-gray-400 bg-gray-100"
                     } rounded-sm leading-none text-sm p-3`}
-                    name="lastName"
+                    name="last_name"
                   />
                 </div>
               </div>
               <div className="flex flex-col mb-8">
-                <label className="text-xl font-light mb-1" htmlFor="from">
+                <label className="text-xl font-light mb-1" htmlFor="user_email">
                   Email Address
                   <div className="inline ml-2 text-xl text-red-500">*</div>
                 </label>
                 <Field
                   validate={validate}
-                  id="from"
+                  id="user_email"
                   className={`border border-solid ${
-                    errors.from && touched.from
+                    errors.user_email && touched.user_email
                       ? "border-red-500 bg-red-100"
                       : "border-gray-400 bg-gray-100"
                   } rounded-sm leading-none text-sm p-3`}
-                  name="from"
+                  name="user_email"
                 />
               </div>
               <div className="flex flex-col mb-8">
@@ -120,20 +107,20 @@ export default () => {
                 />
               </div>
               <div className="flex flex-col mb-8">
-                <label className="text-xl font-light mb-1" htmlFor="text">
+                <label className="text-xl font-light mb-1" htmlFor="message">
                   Message
                   <div className="inline ml-2 text-xl text-red-500">*</div>
                 </label>
                 <Field
                   validate={validate}
                   component="textarea"
-                  id="text"
+                  id="message"
                   className={`border border-solid ${
-                    errors.text && touched.text
+                    errors.message && touched.message
                       ? "border-red-500 bg-red-100"
                       : "border-gray-400 bg-gray-100"
                   } h-24 rounded-sm leading-none text-sm p-3`}
-                  name="text"
+                  name="message"
                 />
               </div>
               <div className="flex sm:justify-start justify-center">
@@ -144,9 +131,9 @@ export default () => {
                       "color 170ms ease-in-out, background-color 170ms ease-in-out",
                   }}
                   type="submit"
-                  disabled={isSubmitting || isSending}
+                  disabled={isSubmitting}
                 >
-                  {isSubmitting || isSending ? "SENDING..." : "SEND"}
+                  {isSubmitting ? "SENDING..." : "SEND"}
                 </button>
               </div>
             </Form>

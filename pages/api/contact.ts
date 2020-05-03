@@ -1,10 +1,12 @@
 import nodemailer from "nodemailer"
 import { ServerResponse, IncomingMessage } from "http"
 
-export interface UserEmail {
-  from: string
+export interface Email {
+  user_email: string
+  first_name: string
+  last_name: string
   subject: string
-  text: string
+  message: string
 }
 
 interface NextMessage {
@@ -24,9 +26,10 @@ const transporter = nodemailer.createTransport({
 })
 
 export default async (req: Request, res: ServerResponse) => {
-  console.log("process.env.SMTP_HOST is", process.env.SMTP_HOST)
+  console.log("/api/contact.ts was pinged!")
   if (req.method === "POST") {
-    const { user_email, first_name, last_name, message, subject } = req.body
+    const email: Partial<Email> = req.body
+    const { user_email, first_name, last_name, message, subject } = email
     if (!user_email || !message || !subject || !first_name || !last_name) {
       res.statusCode = 400
       res.setHeader("Content-Type", "application/json")

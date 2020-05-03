@@ -10,6 +10,7 @@ module.exports = withCSS({
     SMTP_PASSWORD: process.env.SMTP_PASSWORD,
     SMTP_HOST: process.env.SMTP_HOST,
     MAILT_TO: process.env.MAILT_TO,
+    EMAIL_API: process.env.EMAIL_API,
   },
   webpack(config) {
     config.module.rules.push({
