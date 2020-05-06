@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react"
+import React, { useEffect, useState } from "react"
 import Layout from "../../components/Layout"
 import fetchImagesFor, { Image } from "../../utils/fetchImagesFor"
 import Vibrant from "node-vibrant"
