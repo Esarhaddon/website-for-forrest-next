@@ -29,6 +29,7 @@ export default async (req: Request, res: ServerResponse) => {
   console.log("/api/contact.ts was pinged!")
   if (req.method === "POST") {
     const email: Partial<Email> = req.body
+    console.log("req.body is", req.body)
     const { user_email, first_name, last_name, message, subject } = email
     if (!user_email || !message || !subject || !first_name || !last_name) {
       res.statusCode = 400

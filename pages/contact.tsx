@@ -39,6 +39,9 @@ export default () => {
           fetch(`${process.env.EMAIL_API}/contact`, {
             method: "POST",
             body: JSON.stringify(values),
+            headers: {
+              "Content-Type": "application/json",
+            },
           })
 
           setSubmitting(false)
