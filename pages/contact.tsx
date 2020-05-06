@@ -10,20 +10,33 @@ const validate = (value: string) => {
   }
 }
 
+const wait = (time: number) => {
+  console.log("waiting...")
+  return new Promise((resolve, reject) =>
+    setTimeout(() => {
+      console.log("done waiting")
+      resolve()
+    }, time)
+  )
+}
+
 export default () => {
+  // const [mailError, setMailError] = useState<Error | undefined>(undefined)
   return (
     <Layout isFor="contact">
       <Formik
-        initialValues={{
-          first_name: "",
-          last_name: "",
-          user_email: "",
-          subject: "",
-          message: "",
-        }}
+        initialValues={
+          {
+            first_name: "",
+            last_name: "",
+            user_email: "",
+            subject: "",
+            message: "",
+          } as Email
+        }
         onSubmit={async (values, { setSubmitting }) => {
           console.log("values are", values)
-          const res = await fetch(`${process.env.EMAIL_API}/contact.ts`, {
+          fetch(`${process.env.EMAIL_API}/contact`, {
             method: "POST",
             body: JSON.stringify(values),
           })

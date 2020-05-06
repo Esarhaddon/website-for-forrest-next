@@ -21,7 +21,7 @@ interface ImagePageProps {
 const ImagePage = ({ fromGrid, current, previous, next }: ImagePageProps) => {
   const [imageDimensions, setImageDimensions] = useState({
     h: 0,
-    w: 0
+    w: 0,
   })
   const [imageHasLoaded, setImageHasLoaded] = useState(false)
   const [dominantColor, setDominantColor] = useState("")
@@ -32,7 +32,7 @@ const ImagePage = ({ fromGrid, current, previous, next }: ImagePageProps) => {
     const maxWidth = Math.round(window.innerWidth * 0.9)
     const dimensions: ImageDimensions = {
       h: current.originalHeight,
-      w: current.originalWidth
+      w: current.originalWidth,
     }
 
     if (dimensions.h > maxHeight) {
@@ -53,10 +53,10 @@ const ImagePage = ({ fromGrid, current, previous, next }: ImagePageProps) => {
   useEffect(() => {
     Vibrant.from(`${current.src}?h=5`)
       .getPalette()
-      .then(palette => {
+      .then((palette) => {
         setDominantColor(palette.Vibrant.hex)
       })
-      .catch(e => setDominantColor("#696969"))
+      .catch((e) => setDominantColor("#696969"))
   }, [])
 
   return (
@@ -76,7 +76,7 @@ const ImagePage = ({ fromGrid, current, previous, next }: ImagePageProps) => {
               ? null
               : dominantColor
               ? { backgroundColor: dominantColor }
-              : { backgroundColor: "#A9A9A9" })
+              : { backgroundColor: "#A9A9A9" }),
           }}
           className={`flex justify-center items-center`}
         >
@@ -111,7 +111,7 @@ const ImagePage = ({ fromGrid, current, previous, next }: ImagePageProps) => {
           className="flex justify-center items-center text-gray-700 leading-none"
           style={{
             marginTop: "calc(5vw + 1.25rem + 5px)",
-            marginBottom: "calc(2vw + .75rem)"
+            marginBottom: "calc(2vw + .75rem)",
           }}
         >
           {previous ? (
@@ -125,7 +125,7 @@ const ImagePage = ({ fromGrid, current, previous, next }: ImagePageProps) => {
                 <Arrow
                   className="h-5 inline fill-current"
                   style={{
-                    transform: "scaleX(-1)"
+                    transform: "scaleX(-1)",
                   }}
                 />
                 Prev
@@ -136,7 +136,7 @@ const ImagePage = ({ fromGrid, current, previous, next }: ImagePageProps) => {
               <Arrow
                 className="h-5 inline fill-current"
                 style={{
-                  transform: "scaleX(-1)"
+                  transform: "scaleX(-1)",
                 }}
               />
               Prev
@@ -168,7 +168,7 @@ const ImagePage = ({ fromGrid, current, previous, next }: ImagePageProps) => {
             paddingRight: "5vw",
             paddingLeft: "5vw",
             paddingTop: "2vh",
-            paddingBottom: "2vh"
+            paddingBottom: "2vh",
           }}
           onClick={() => {
             setHideModal(true)
@@ -180,7 +180,7 @@ const ImagePage = ({ fromGrid, current, previous, next }: ImagePageProps) => {
               top: "calc(2% + 1rem)",
               right: "2%",
               width: ".85rem",
-              height: ".85rem"
+              height: ".85rem",
             }}
           />
           <img
@@ -200,7 +200,7 @@ ImagePage.getInitialProps = async (ctx): Promise<ImagePageProps> => {
     .replace("|-", "-")
   // TO DO: Will the contentful api let me fetch just only 3 entries I actually need? Would that make things any faster?
   const images = await fetchImagesFor(fromGrid)
-  const currentIndex = images.findIndex(image => image.title === title)
+  const currentIndex = images.findIndex((image) => image.title === title)
   const current = images[currentIndex]
   const previous: Image | undefined = images[currentIndex - 1]
   const next: Image | undefined = images[currentIndex + 1]

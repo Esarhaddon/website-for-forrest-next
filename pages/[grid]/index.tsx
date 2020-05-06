@@ -27,7 +27,7 @@ const Grid = ({ gridType, toDisplay }: GridProps) => {
           display: "grid",
           paddingRight: "5vw",
           paddingLeft: "5vw",
-          marginBottom: "-5px"
+          marginBottom: "-5px",
         }}
       >
         {toDisplay.map((image, i) => {
@@ -37,10 +37,10 @@ const Grid = ({ gridType, toDisplay }: GridProps) => {
             // TO DO: Not sure this actualy works. Maybe try getting the dominant color from the loaeded image via new Vibrant(img)
             Vibrant.from(`${image.src}?h=5`)
               .getPalette()
-              .then(palette => {
+              .then((palette) => {
                 setDominantColor(palette.Vibrant.hex)
               })
-              .catch(e => setDominantColor("#696969"))
+              .catch((e) => setDominantColor("#696969"))
           }, [])
 
           return (
@@ -58,7 +58,7 @@ const Grid = ({ gridType, toDisplay }: GridProps) => {
                 style={{
                   paddingTop: "calc(150% - 5px)",
                   position: "relative",
-                  height: 0
+                  height: 0,
                 }}
               >
                 {/* REMEMBER: you will need do the opposite of this when querying for the image by title */}
@@ -74,7 +74,7 @@ const Grid = ({ gridType, toDisplay }: GridProps) => {
                       top: "5px",
                       left: "5px",
                       width: "calc(100% - 10px)",
-                      height: "calc(100% - 10px)"
+                      height: "calc(100% - 10px)",
                     }}
                   >
                     <div
@@ -82,7 +82,7 @@ const Grid = ({ gridType, toDisplay }: GridProps) => {
                       style={{
                         backgroundColor: dominantColor
                           ? dominantColor
-                          : "#A9A9A9"
+                          : "#A9A9A9",
                       }}
                     >
                       <div
@@ -93,7 +93,7 @@ const Grid = ({ gridType, toDisplay }: GridProps) => {
                           loaded.slice(loaded.length - 4) !== "h=5"
                             ? { backgroundImage: `url(${loaded})` }
                             : null),
-                          backgroundSize: "cover"
+                          backgroundSize: "cover",
                         }}
                       />
                     </div>
