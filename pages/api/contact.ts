@@ -1,12 +1,12 @@
 import nodemailer from "nodemailer"
 import { ServerResponse, IncomingMessage } from "http"
 
-export interface Email {
-  user_email: string
+export interface UserEmail {
   first_name: string
   last_name: string
   subject: string
-  message: string
+  text: string
+  from: string
 }
 
 interface NextMessage {
@@ -18,7 +18,7 @@ interface NextMessage {
 type Request = IncomingMessage & NextMessage
 
 const transporter = nodemailer.createTransport({
-  service: "Outlook365",
+  service: "SendinBlue",
   auth: {
     user: process.env.SMTP_USER,
     pass: process.env.SMTP_PASSWORD,
@@ -26,12 +26,11 @@ const transporter = nodemailer.createTransport({
 })
 
 export default async (req: Request, res: ServerResponse) => {
-  console.log("/api/contact.ts was pinged!")
+  console.log("I was pinged...")
   if (req.method === "POST") {
-    const email: Partial<Email> = req.body
-    console.log("req.body is", req.body)
-    const { user_email, first_name, last_name, message, subject } = email
-    if (!user_email || !message || !subject || !first_name || !last_name) {
+    const email: Partial<UserEmail> = req.body
+    const { first_name, last_name, text, subject, from } = email
+    if (!from || !text || !subject || !first_name || !last_name) {
       res.statusCode = 400
       res.setHeader("Content-Type", "application/json")
       return res.end(
@@ -43,10 +42,10 @@ export default async (req: Request, res: ServerResponse) => {
     }
 
     try {
-      await transporter.sendMail({
-        from: process.env.SMTP_USER,
+      const result = await transporter.sendMail({
         subject,
-        text: `${message}\n\n-- ${first_name} ${last_name}\n${user_email}`,
+        from,
+        text: `${text}\n\n-- ${first_name} ${last_name}\n${from}`,
         to: process.env.MAIL_TO,
       })
 
@@ -56,6 +55,7 @@ export default async (req: Request, res: ServerResponse) => {
         JSON.stringify({
           message: "Congrats, you made a POST request",
           reqBody: req.body,
+          result,
         })
       )
     } catch (e) {

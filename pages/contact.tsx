@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 import Layout from "../components/Layout"
 import { Field, Form, Formik } from "formik"
-import { Email } from "./api/contact"
+import { UserEmail } from "./api/contact"
 import fetch from "node-fetch"
 
 const validate = (value: string) => {
@@ -10,18 +10,15 @@ const validate = (value: string) => {
   }
 }
 
-const wait = (time: number) => {
-  console.log("waiting...")
-  return new Promise((resolve, reject) =>
-    setTimeout(() => {
-      console.log("done waiting")
-      resolve()
-    }, time)
-  )
-}
-
 export default () => {
-  // const [mailError, setMailError] = useState<Error | undefined>(undefined)
+  const [mailError, setMailError] = useState<Error | undefined>(undefined)
+  const [showSent, setShowSent] = useState(false)
+  useEffect(() => {
+    if (showSent) {
+      setTimeout(() => setShowSent(false), 1500)
+    }
+  }, [showSent])
+
   return (
     <Layout isFor="contact">
       <Formik
@@ -29,21 +26,30 @@ export default () => {
           {
             first_name: "",
             last_name: "",
-            user_email: "",
+            from: "",
             subject: "",
-            message: "",
-          } as Email
+            text: "",
+          } as UserEmail
         }
-        onSubmit={async (values, { setSubmitting }) => {
-          console.log("values are", values)
-          fetch(`${process.env.EMAIL_API}/contact`, {
-            method: "POST",
-            body: JSON.stringify(values),
-            headers: {
-              "Content-Type": "application/json",
-            },
-          })
-
+        onSubmit={async (values, { setSubmitting, resetForm }) => {
+          setMailError(undefined)
+          try {
+            const res = await fetch(`${process.env.EMAIL_API}/contact`, {
+              method: "POST",
+              body: JSON.stringify(values),
+              headers: {
+                "Content-Type": "application/json",
+              },
+            })
+            console.log("res is", res)
+            if (!res.ok) {
+              throw new Error("Email failed to send")
+            }
+            resetForm()
+            setShowSent(true)
+          } catch (e) {
+            setMailError(e)
+          }
           setSubmitting(false)
         }}
       >
@@ -91,19 +97,19 @@ export default () => {
                 </div>
               </div>
               <div className="flex flex-col mb-8">
-                <label className="text-xl font-light mb-1" htmlFor="user_email">
+                <label className="text-xl font-light mb-1" htmlFor="from">
                   Email Address
                   <div className="inline ml-2 text-xl text-red-500">*</div>
                 </label>
                 <Field
                   validate={validate}
-                  id="user_email"
+                  id="from"
                   className={`border border-solid ${
-                    errors.user_email && touched.user_email
+                    errors.from && touched.from
                       ? "border-red-500 bg-red-100"
                       : "border-gray-400 bg-gray-100"
                   } rounded-sm leading-none text-sm p-3`}
-                  name="user_email"
+                  name="from"
                 />
               </div>
               <div className="flex flex-col mb-8">
@@ -122,26 +128,31 @@ export default () => {
                   name="subject"
                 />
               </div>
-              <div className="flex flex-col mb-8">
-                <label className="text-xl font-light mb-1" htmlFor="message">
+              <div className="flex flex-col">
+                <label className="text-xl font-light mb-1" htmlFor="text">
                   Message
                   <div className="inline ml-2 text-xl text-red-500">*</div>
                 </label>
                 <Field
                   validate={validate}
                   component="textarea"
-                  id="message"
+                  id="text"
                   className={`border border-solid ${
-                    errors.message && touched.message
+                    errors.text && touched.text
                       ? "border-red-500 bg-red-100"
                       : "border-gray-400 bg-gray-100"
                   } h-24 rounded-sm leading-none text-sm p-3`}
-                  name="message"
+                  name="text"
                 />
               </div>
+              {mailError ? (
+                <div className="mt-8 text-lg text-red-500">
+                  Your message failed to send. Please try again later.
+                </div>
+              ) : null}
               <div className="flex sm:justify-start justify-center">
                 <button
-                  className="border-2 border-solid border-gray-900 text-gray-800 py-3 px-6 tracking-widest leading-none cursor-pointer hover:bg-gray-900 hover:text-white mb-2"
+                  className="border-2 border-solid border-gray-900 text-gray-800 py-3 px-6 tracking-widest leading-none cursor-pointer hover:bg-gray-900 hover:text-white mt-8 mb-2"
                   style={{
                     transition:
                       "color 170ms ease-in-out, background-color 170ms ease-in-out",
@@ -149,7 +160,13 @@ export default () => {
                   type="submit"
                   disabled={isSubmitting}
                 >
-                  {isSubmitting ? "SENDING..." : "SEND"}
+                  {isSubmitting
+                    ? "SENDING..."
+                    : mailError
+                    ? "TRY AGAIN"
+                    : showSent
+                    ? "MESSAGE SENT"
+                    : "SEND"}
                 </button>
               </div>
             </Form>
