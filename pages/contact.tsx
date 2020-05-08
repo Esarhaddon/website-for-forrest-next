@@ -41,7 +41,6 @@ export default () => {
                 "Content-Type": "application/json",
               },
             })
-            console.log("res is", res)
             if (!res.ok) {
               throw new Error("Email failed to send")
             }

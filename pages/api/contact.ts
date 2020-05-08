@@ -26,7 +26,6 @@ const transporter = nodemailer.createTransport({
 })
 
 export default async (req: Request, res: ServerResponse) => {
-  console.log("I was pinged...")
   if (req.method === "POST") {
     const email: Partial<UserEmail> = req.body
     const { first_name, last_name, text, subject, from } = email
