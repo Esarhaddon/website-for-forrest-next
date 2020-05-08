@@ -34,7 +34,7 @@ export default () => {
         onSubmit={async (values, { setSubmitting, resetForm }) => {
           setMailError(undefined)
           try {
-            const res = await fetch(`${process.env.EMAIL_API}/contact`, {
+            const res = await fetch(`${process.env.NEXT_API}/contact`, {
               method: "POST",
               body: JSON.stringify(values),
               headers: {
