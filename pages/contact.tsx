@@ -151,7 +151,7 @@ export default () => {
               ) : null}
               <div className="flex sm:justify-start justify-center">
                 <button
-                  className="border-2 border-solid border-gray-900 text-gray-800 py-3 px-6 tracking-widest leading-none cursor-pointer hover:bg-gray-900 hover:text-white mt-8 mb-2"
+                  className="border-2 border-solid border-gray-900 text-gray-800 py-3 px-6 tracking-widest leading-none cursor-pointer hover:bg-gray-900 hover:text-white mt-8 mb-8"
                   style={{
                     transition:
                       "color 170ms ease-in-out, background-color 170ms ease-in-out",
