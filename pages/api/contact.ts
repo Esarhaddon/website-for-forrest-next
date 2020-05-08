@@ -36,7 +36,7 @@ export default async (req: Request, res: ServerResponse) => {
       return res.end(
         JSON.stringify({
           message:
-            "req.body must be a json object with user_email, first_name, last_name, subject, and message.",
+            "req.body must be a json object with first_name, last_name, subject, text, and from.",
         })
       )
     }
