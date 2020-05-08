@@ -62,7 +62,7 @@ export default () => {
                     htmlFor="first_name"
                   >
                     First Name
-                    <div className="inline ml-2 text-xl text-red-500">*</div>
+                    <div className="inline ml-1 text-xl text-red-500">*</div>
                   </label>
                   <Field
                     validate={validate}
@@ -81,7 +81,7 @@ export default () => {
                     htmlFor="last_name"
                   >
                     Last Name
-                    <div className="inline ml-2 text-xl text-red-500">*</div>
+                    <div className="inline ml-1 text-xl text-red-500">*</div>
                   </label>
                   <Field
                     validate={validate}
@@ -98,7 +98,7 @@ export default () => {
               <div className="flex flex-col mb-8">
                 <label className="text-xl font-light mb-1" htmlFor="from">
                   Email Address
-                  <div className="inline ml-2 text-xl text-red-500">*</div>
+                  <div className="inline ml-1 text-xl text-red-500">*</div>
                 </label>
                 <Field
                   validate={validate}
@@ -114,7 +114,7 @@ export default () => {
               <div className="flex flex-col mb-8">
                 <label className="text-xl font-light mb-1" htmlFor="subject">
                   Subject
-                  <div className="inline ml-2 text-xl text-red-500">*</div>
+                  <div className="inline ml-1 text-xl text-red-500">*</div>
                 </label>
                 <Field
                   validate={validate}
@@ -130,7 +130,7 @@ export default () => {
               <div className="flex flex-col">
                 <label className="text-xl font-light mb-1" htmlFor="text">
                   Message
-                  <div className="inline ml-2 text-xl text-red-500">*</div>
+                  <div className="inline ml-1 text-xl text-red-500">*</div>
                 </label>
                 <Field
                   validate={validate}
