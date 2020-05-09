@@ -54,7 +54,7 @@ export default () => {
       >
         {({ errors, touched, isSubmitting }) => {
           return (
-            <Form className="flex flex-col w-11/12 sm:w-7/12 md:w-6/12 mx-auto mt-2">
+            <Form className="flex flex-col w-11/12 sm:w-7/12 md:w-6/12 mx-auto">
               <div className="flex sm:flex-row flex-col">
                 <div className="flex flex-col mb-8 flex-1 sm:pr-3">
                   <label
