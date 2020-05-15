@@ -6,7 +6,7 @@ import Link from "next/link"
 import Arrow from "../../static/icons/arrow.svg"
 import ExitX from "../../static/icons/close.svg"
 
-interface ImageDimensions {
+interface Dimensions {
   h: number
   w: number
 }
@@ -19,35 +19,45 @@ interface ImagePageProps {
 }
 
 const ImagePage = ({ fromGrid, current, previous, next }: ImagePageProps) => {
-  const [imageDimensions, setImageDimensions] = useState({
+  const [imageDimensions, setImageDimensions] = useState<Dimensions>({
     h: 0,
     w: 0,
   })
+
+  useEffect(() => {
+    console.log("imageDimensions are", imageDimensions)
+  }, [imageDimensions])
+
   const [imageHasLoaded, setImageHasLoaded] = useState(false)
   const [dominantColor, setDominantColor] = useState("")
   const [hideModal, setHideModal] = useState(true)
 
   useEffect(() => {
-    const maxHeight = Math.round(window.innerHeight * 1.5)
-    const maxWidth = Math.round(window.innerWidth * 0.9)
-    const dimensions: ImageDimensions = {
-      h: current.originalHeight,
-      w: current.originalWidth,
-    }
+    console.log("running an effect...")
+    if (window && window.innerWidth) {
+      console.log("window is", window)
+      console.log("window.innerWidth is", window.innerWidth)
+      const maxHeight = Math.round(window.innerHeight * 1.5)
+      const maxWidth = Math.round(window.innerWidth * 0.9)
+      const dimensions: Dimensions = {
+        h: current.originalHeight,
+        w: current.originalWidth,
+      }
 
-    if (dimensions.h > maxHeight) {
-      const shrinkFactor = maxHeight / dimensions.h
-      dimensions.h = maxHeight
-      dimensions.w = Math.round(dimensions.w * shrinkFactor)
-    }
+      if (dimensions.h > maxHeight) {
+        const shrinkFactor = maxHeight / dimensions.h
+        dimensions.h = maxHeight
+        dimensions.w = Math.round(dimensions.w * shrinkFactor)
+      }
 
-    if (dimensions.w > maxWidth) {
-      const shrinkFactor = maxWidth / dimensions.w
-      dimensions.w = maxWidth
-      dimensions.h = Math.round(dimensions.h * shrinkFactor)
-    }
+      if (dimensions.w > maxWidth) {
+        const shrinkFactor = maxWidth / dimensions.w
+        dimensions.w = maxWidth
+        dimensions.h = Math.round(dimensions.h * shrinkFactor)
+      }
 
-    setImageDimensions(dimensions)
+      setImageDimensions(dimensions)
+    } else console.log("no such thing as window")
   }, [])
 
   useEffect(() => {
@@ -196,8 +206,9 @@ const ImagePage = ({ fromGrid, current, previous, next }: ImagePageProps) => {
 ImagePage.getInitialProps = async (ctx): Promise<ImagePageProps> => {
   const fromGrid = ctx.query.grid
   const title = ctx.query.singleImage
-    .replace(/(?<!\|)-/g, " ")
-    .replace("|-", "-")
+    // TODO: make "-" illegal for contentful art work titles
+    // also, get rid of replacement on the other end ([grid].tsx ?) where "-" is replaced with "-|" or something like that
+    .replace(/-/g, " ")
   // TO DO: Will the contentful api let me fetch just only 3 entries I actually need? Would that make things any faster?
   const images = await fetchImagesFor(fromGrid)
   const currentIndex = images.findIndex((image) => image.title === title)
