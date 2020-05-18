@@ -33,7 +33,7 @@ const ImagePage = ({ fromGrid, current, previous, next }: ImagePageProps) => {
   const [hideModal, setHideModal] = useState(true)
 
   useEffect(() => {
-    console.log("running an effect...")
+    console.log("running window effect...")
     if (window && window.innerWidth) {
       console.log("window is", window)
       console.log("window.innerWidth is", window.innerWidth)
@@ -58,7 +58,7 @@ const ImagePage = ({ fromGrid, current, previous, next }: ImagePageProps) => {
 
       setImageDimensions(dimensions)
     } else console.log("no such thing as window")
-  }, [])
+  }, [window])
 
   useEffect(() => {
     Vibrant.from(`${current.src}?h=5`)
