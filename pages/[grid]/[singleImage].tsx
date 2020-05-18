@@ -9,6 +9,7 @@ import ExitX from "../../static/icons/close.svg"
 interface Dimensions {
   h: number
   w: number
+  relW: string
 }
 
 interface ImagePageProps {
@@ -19,14 +20,15 @@ interface ImagePageProps {
 }
 
 const ImagePage = ({ fromGrid, current, previous, next }: ImagePageProps) => {
-  const [imageDimensions, setImageDimensions] = useState<Dimensions>({
+  const [dimensions, setDimensions] = useState<Dimensions>({
     h: 0,
     w: 0,
+    relW: "",
   })
 
   useEffect(() => {
-    console.log("imageDimensions are", imageDimensions)
-  }, [imageDimensions])
+    console.log("imageDimensions are", dimensions)
+  }, [dimensions])
 
   const [imageHasLoaded, setImageHasLoaded] = useState(false)
   const [dominantColor, setDominantColor] = useState("")
@@ -39,26 +41,31 @@ const ImagePage = ({ fromGrid, current, previous, next }: ImagePageProps) => {
       console.log("window.innerWidth is", window.innerWidth)
       const maxHeight = Math.round(window.innerHeight * 1.5)
       const maxWidth = Math.round(window.innerWidth * 0.9)
-      const dimensions: Dimensions = {
+      const dimensions = {
         h: current.originalHeight,
         w: current.originalWidth,
-      }
+      } as Dimensions
 
       if (dimensions.h > maxHeight) {
         const shrinkFactor = maxHeight / dimensions.h
         dimensions.h = maxHeight
         dimensions.w = Math.round(dimensions.w * shrinkFactor)
+        dimensions.relW = Math.round(dimensions.w / window.innerWidth) + "vw"
       }
 
       if (dimensions.w > maxWidth) {
         const shrinkFactor = maxWidth / dimensions.w
         dimensions.w = maxWidth
+        dimensions.relW = "90vw"
         dimensions.h = Math.round(dimensions.h * shrinkFactor)
       }
 
-      setImageDimensions(dimensions)
-    } else console.log("no such thing as window")
-  }, [window])
+      setDimensions(dimensions)
+    } else {
+      // TODO: could this happen ?
+      console.log("no such thing as window")
+    }
+  }, [])
 
   useEffect(() => {
     Vibrant.from(`${current.src}?h=5`)
@@ -77,32 +84,37 @@ const ImagePage = ({ fromGrid, current, previous, next }: ImagePageProps) => {
           imageHasLoaded ? { paddingRight: "5vw", paddingLeft: "5vw" } : null
         }
       >
+        <img
+          className="hidden"
+          src={`${current.src}${dimensions.h ? `?h=${dimensions.h}` : ""}`}
+          onLoad={() => setImageHasLoaded(true)}
+        />
         <div
           style={{
             // TO DO: Start with height at 100vh to avoid tacky bounce thing?
-            maxHeight: imageDimensions.h + "px",
-            maxWidth: imageDimensions.w + "px",
+            width: dimensions.relW,
             ...(imageHasLoaded
               ? null
               : dominantColor
               ? { backgroundColor: dominantColor }
               : { backgroundColor: "#A9A9A9" }),
           }}
-          className={`flex justify-center items-center`}
+          onClick={() => setHideModal(false)}
+          className={`cursor-pointer border border-solid border-red-500 relative`}
         >
-          <img
-            className="cursor-pointer"
-            src={`${current.src}${
-              imageDimensions.h ? `?h=${imageDimensions.h}` : ""
-            }`}
-            onLoad={() => setImageHasLoaded(true)}
-            onClick={() => setHideModal(false)}
+          <div
+            className="w-full bg-green-500 h-0"
+            style={{
+              paddingTop:
+                parseFloat((dimensions.h / dimensions.w).toFixed(6)) * 100 +
+                "%",
+            }}
           />
         </div>
         <div
           className="leading-tight text-center text-2xl font-semibold tracking-wider text-gray-900"
           style={
-            imageDimensions.h
+            dimensions.h
               ? { marginTop: "calc(3vw + .75rem)" }
               : { marginTop: "100vh" }
           }
@@ -195,7 +207,7 @@ const ImagePage = ({ fromGrid, current, previous, next }: ImagePageProps) => {
           />
           <img
             className="max-h-full h-auto max-w-full w-auto"
-            src={`${current.src}?h=${imageDimensions.h}`}
+            src={`${current.src}?h=${dimensions.h}`}
           />
         </div>
       </div>
