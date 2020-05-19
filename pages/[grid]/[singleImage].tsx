@@ -9,7 +9,6 @@ import ExitX from "../../static/icons/close.svg"
 interface Dimensions {
   h: number
   w: number
-  relW: string
 }
 
 interface ImagePageProps {
@@ -23,7 +22,6 @@ const ImagePage = ({ fromGrid, current, previous, next }: ImagePageProps) => {
   const [dimensions, setDimensions] = useState<Dimensions>({
     h: 0,
     w: 0,
-    relW: "",
   })
 
   useEffect(() => {
@@ -36,11 +34,11 @@ const ImagePage = ({ fromGrid, current, previous, next }: ImagePageProps) => {
 
   useEffect(() => {
     console.log("running window effect...")
-    if (window && window.innerWidth) {
+    if (screen && screen.height) {
       console.log("window is", window)
       console.log("window.innerWidth is", window.innerWidth)
-      const maxHeight = Math.round(window.innerHeight * 1.5)
-      const maxWidth = Math.round(window.innerWidth * 0.9)
+      const maxHeight = Math.round(screen.height * 1.5) // 1.3333 or 1.5 ?
+      const maxWidth = Math.round(screen.width * 0.9)
       const dimensions = {
         h: current.originalHeight,
         w: current.originalWidth,
@@ -50,20 +48,18 @@ const ImagePage = ({ fromGrid, current, previous, next }: ImagePageProps) => {
         const shrinkFactor = maxHeight / dimensions.h
         dimensions.h = maxHeight
         dimensions.w = Math.round(dimensions.w * shrinkFactor)
-        dimensions.relW = Math.round(dimensions.w / window.innerWidth) + "vw"
       }
 
       if (dimensions.w > maxWidth) {
         const shrinkFactor = maxWidth / dimensions.w
         dimensions.w = maxWidth
-        dimensions.relW = "90vw"
         dimensions.h = Math.round(dimensions.h * shrinkFactor)
       }
 
       setDimensions(dimensions)
     } else {
       // TODO: could this happen ?
-      console.log("no such thing as window")
+      console.log("no such thing as screen")
     }
   }, [])
 
@@ -75,6 +71,12 @@ const ImagePage = ({ fromGrid, current, previous, next }: ImagePageProps) => {
       })
       .catch((e) => setDominantColor("#696969"))
   }, [])
+
+  console.log("dimensions are", dimensions)
+  console.log(
+    "paddingTop will be",
+    parseFloat((dimensions.h / dimensions.w).toFixed(6)) * 100 + "%"
+  )
 
   return (
     <Layout isFor={fromGrid}>
@@ -92,7 +94,8 @@ const ImagePage = ({ fromGrid, current, previous, next }: ImagePageProps) => {
         <div
           style={{
             // TO DO: Start with height at 100vh to avoid tacky bounce thing?
-            width: dimensions.relW,
+            maxWidth: "90vw",
+            width: dimensions.w + "px",
             ...(imageHasLoaded
               ? null
               : dominantColor
@@ -100,14 +103,15 @@ const ImagePage = ({ fromGrid, current, previous, next }: ImagePageProps) => {
               : { backgroundColor: "#A9A9A9" }),
           }}
           onClick={() => setHideModal(false)}
-          className={`cursor-pointer border border-solid border-red-500 relative`}
+          className={`cursor-pointer relative`}
         >
           <div
-            className="w-full bg-green-500 h-0"
+            className="w-full h-0"
             style={{
               paddingTop:
                 parseFloat((dimensions.h / dimensions.w).toFixed(6)) * 100 +
                 "%",
+              background: `no-repeat center / contain url(${current.src}?h=${dimensions.h})`,
             }}
           />
         </div>
