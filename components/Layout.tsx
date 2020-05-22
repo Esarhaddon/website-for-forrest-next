@@ -7,8 +7,16 @@ import Hamburger from "../static/icons/hamburger.svg"
 import ExitX from "../static/icons/close.svg"
 import { useState, useRef } from "react"
 
+export type GridType =
+  | "animation"
+  | "illustration"
+  | "fine art"
+  | "about"
+  | "contact"
+  | ""
+
 interface LayoutProps {
-  isFor: "animation" | "illustration" | "fine art" | "about" | "contact"
+  isFor: "animation" | "illustration" | "fine art" | "about" | "contact" | ""
   relMobileNav?: boolean
   children: ReactNode
 }
@@ -57,7 +65,7 @@ export default (props: LayoutProps) => {
             : { top: "0" }),
           transition: "top .2s ease-in-out",
           marginRight: "calc(5vw + 5px)",
-          marginLeft: "calc(5vw + 5px)"
+          marginLeft: "calc(5vw + 5px)",
         }}
       >
         <Link href="/index">
@@ -66,7 +74,7 @@ export default (props: LayoutProps) => {
               marginTop: "-1rem",
               marginBottom: "-1.25rem",
               marginLeft: "-3rem",
-              marginRight: "-3rem"
+              marginRight: "-3rem",
             }}
             onClick={() => setShowMobileNav(false)}
           >
@@ -155,7 +163,7 @@ export default (props: LayoutProps) => {
           className="flex justify-center items-center text-gray-700 leading-none "
           style={{
             marginTop: "calc(3vw + .75rem)",
-            marginBottom: "calc(3vw + .75rem)"
+            marginBottom: "calc(3vw + .75rem)",
           }}
         >
           Copyright © 2019 Forrest Dickison

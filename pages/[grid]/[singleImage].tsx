@@ -37,7 +37,7 @@ const ImagePage = ({ fromGrid, current, previous, next }: ImagePageProps) => {
     if (screen && screen.height) {
       console.log("window is", window)
       console.log("window.innerWidth is", window.innerWidth)
-      const maxHeight = Math.round(screen.height * 1.5) // 1.3333 or 1.5 ?
+      const maxHeight = Math.round(screen.height * 1.5)
       const maxWidth = Math.round(screen.width * 0.9)
       const dimensions = {
         h: current.originalHeight,
@@ -223,7 +223,6 @@ ImagePage.getInitialProps = async (ctx): Promise<ImagePageProps> => {
   const fromGrid = ctx.query.grid
   const title = ctx.query.singleImage
     // TODO: make "-" illegal for contentful art work titles
-    // also, get rid of replacement on the other end ([grid].tsx ?) where "-" is replaced with "-|" or something like that
     .replace(/-/g, " ")
   // TO DO: Will the contentful api let me fetch just only 3 entries I actually need? Would that make things any faster?
   const images = await fetchImagesFor(fromGrid)
