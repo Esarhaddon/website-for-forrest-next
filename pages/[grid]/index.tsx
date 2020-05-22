@@ -1,18 +1,10 @@
 import fetchImagesFor, { Image } from "../../utils/fetchImagesFor"
 import Layout from "../../components/Layout"
-import Link from "next/link"
 import React, { useState, useEffect } from "react"
-import Vibrant from "node-vibrant"
 import { useRouter } from "next/router"
 import Thumbnail from "../../components/Thumbnail"
 
 // TO DO: get rid of scroll bounce on grid and mobile nav 'cause its wreaking havoc on those features
-
-// interface GridProps {
-//   gridType: "illustration" | "animation" | "fine art"
-//   toDisplay: Image[]
-// }
-
 const Grid = () => {
   const router = useRouter()
   const gridType = (router.query.grid as any) || ""
@@ -65,12 +57,5 @@ const Grid = () => {
     </Layout>
   )
 }
-
-// Grid.getInitialProps = async (ctx): Promise<GridProps> => {
-//   const gridType = ctx.query.grid
-//   const toDisplay = await fetchImagesFor(gridType)
-
-//   return { gridType, toDisplay }
-// }
 
 export default Grid
