@@ -1,6 +1,7 @@
 import React from "react"
 import App from "next/app"
 import Head from "next/head"
+import Layout from "../components/Layout"
 
 class MyApp extends App {
   render() {
@@ -10,7 +11,9 @@ class MyApp extends App {
         <Head>
           <meta name="robots" content="noindex, nofollow" />
         </Head>
-        <Component {...pageProps} />
+        <Layout key="adfadfa">
+          <Component {...pageProps} />
+        </Layout>
       </div>
     )
   }

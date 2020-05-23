@@ -8,7 +8,7 @@ import Thumbnail from "../../components/Thumbnail"
 const Grid = () => {
   const router = useRouter()
   const gridType = (router.query.grid as any) || ""
-  const [toDisplay, setToDisplay] = useState([] as Image[])
+  const [toDisplay, setToDisplay] = useState<Image[] | undefined>(undefined)
 
   useEffect(() => {
     if (gridType) {
@@ -34,27 +34,30 @@ const Grid = () => {
     }
   })
 
+  if (!toDisplay) {
+    // TO DO: loading component goes here
+    return <div className="w-full h-full" />
+  }
+
   return (
-    <Layout isFor={gridType}>
-      <div
-        className="grid"
-        style={{
-          display: "grid",
-          paddingRight: "5vw",
-          paddingLeft: "5vw",
-          marginBottom: "-5px",
-        }}
-      >
-        {toDisplay.map((image, index) => {
-          return (
-            <Thumbnail
-              key={image.title}
-              {...{ image, index, gridType, displayHeight }}
-            />
-          )
-        })}
-      </div>
-    </Layout>
+    <div
+      className="grid"
+      style={{
+        display: "grid",
+        paddingRight: "5vw",
+        paddingLeft: "5vw",
+        marginBottom: "-5px",
+      }}
+    >
+      {toDisplay.map((image, index) => {
+        return (
+          <Thumbnail
+            key={image.title}
+            {...{ image, index, gridType, displayHeight }}
+          />
+        )
+      })}
+    </div>
   )
 }
 

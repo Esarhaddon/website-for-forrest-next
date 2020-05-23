@@ -1,27 +1,33 @@
 import "../styles/style.css"
 import Link from "next/link"
 import LogoBlack from "../static/icons/logo-black.svg"
-import { ReactNode } from "react"
+import { ReactNode, useEffect } from "react"
 import SocialAndEmail from "./SocialAndEmail"
 import Hamburger from "../static/icons/hamburger.svg"
 import ExitX from "../static/icons/close.svg"
 import { useState, useRef } from "react"
+import Loading from "../components/Loading"
+import FD from "../static/icons/forrest-dickison.svg"
+import { useRouter } from "next/router"
 
-export type GridType =
-  | "animation"
-  | "illustration"
-  | "fine art"
-  | "about"
-  | "contact"
-  | ""
+export type GridType = "animation" | "illustration" | "fine art"
 
-interface LayoutProps {
-  isFor: "animation" | "illustration" | "fine art" | "about" | "contact" | ""
-  relMobileNav?: boolean
-  children: ReactNode
-}
+export type PageType = GridType | "about" | "contact" | "index"
 
-export default (props: LayoutProps) => {
+export default (props) => {
+  const [isFor, setIsFor] = useState<PageType>("index")
+
+  useEffect(() => {
+    console.log("isFor is", isFor)
+  }, [isFor])
+
+  const router = useRouter()
+  useEffect(() => {
+    console.log("router.asPath is:", router.asPath)
+    // asPath includes forward slash
+    setIsFor(router.asPath.slice(1) as PageType)
+  }, [router.query])
+
   const [lastScroll, setLastScroll] = useState("none")
   const [y, setY] = useState(0)
   const [wait, setWait] = useState(false)
@@ -46,6 +52,87 @@ export default (props: LayoutProps) => {
     setTimeout(() => setWait(false), 100)
   }
 
+  if (isFor === "index") {
+    return (
+      <div>
+        <div
+          className="absolute top-0 left-0 w-full h-full"
+          style={{
+            background: "url(../static/toad.png) 66.66%  25% / cover no-repeat",
+          }}
+        />
+        <div
+          className="absolute top-0 left-0 w-full h-full"
+          style={{
+            background:
+              "linear-gradient(rgba(0, 0, 0, .25), rgba(0, 0, 0, .25)), url(../static/boy.png) 33.33%  25% / cover no-repeat",
+          }}
+        />
+        <div
+          className="relative max-w-3xl mx-auto px-4"
+          style={{ top: "33vh" }}
+        >
+          <FD className="w-full" />
+        </div>
+        <div className="absolute bottom-0 sm:mb-16 mb-4 flex flex-col w-full">
+          <div className="flex flex-col sm:flex sm:flex-row sm:justify-center sm:flex-wrap">
+            <Link href="/[grid]" as="/illustration">
+              <a>
+                <div className="text-center">
+                  <button
+                    type="button"
+                    className="mx-4 border-2 focus:bg-white focus:text-black border-solid border-white text-white py-2 px-3 sm:py-4 sm:px-5 tracking-widest mt-6 leading-none cursor-pointer hover:bg-white hover:text-gray-900"
+                    style={{
+                      transition:
+                        "color 170ms ease-in-out, background-color 170ms ease-in-out",
+                    }}
+                  >
+                    ILLUSTRATION
+                  </button>
+                </div>
+              </a>
+            </Link>
+            <Link href="/about">
+              <a>
+                <div className="text-center">
+                  <button
+                    type="button"
+                    className="mx-4 border-2 focus:bg-white focus:text-black border-solid border-white text-white py-2 px-3 sm:py-4 sm:px-5 tracking-widest mt-6 leading-none cursor-pointer hover:bg-white hover:text-gray-900"
+                    style={{
+                      transition:
+                        "color 170ms ease-in-out, background-color 170ms ease-in-out",
+                    }}
+                  >
+                    ABOUT
+                  </button>
+                </div>
+              </a>
+            </Link>
+            <div className="text-center">
+              <Link href="/contact">
+                <a>
+                  <button
+                    type="button"
+                    className="hidden sm:inline mx-4 border-2 focus:bg-white focus:text-black border-solid border-white text-white py-2 px-3 sm:py-4 sm:px-5 tracking-widest mt-6 leading-none cursor-pointer hover:bg-white hover:text-gray-900"
+                    style={{
+                      transition:
+                        "color 170ms ease-in-out, background-color 170ms ease-in-out",
+                    }}
+                  >
+                    CONTACT
+                  </button>
+                </a>
+              </Link>
+            </div>
+          </div>
+          <div className="mt-6">
+            <SocialAndEmail isDark={false} includesEmailOnMobile={true} />
+          </div>
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div
       ref={scrollableEl}
@@ -56,11 +143,9 @@ export default (props: LayoutProps) => {
     >
       <div
         ref={header}
-        className={`flex sm:static ${
-          props.relMobileNav ? "relative" : "sticky"
-        } z-40 off-top-0 justify-between items-center align-middle text-gray-900 font-semibold sm:px-0 py-4 md:px-16 md:py-16`}
+        className={`flex sm:static sticky z-40 off-top-0 justify-between items-center align-middle text-gray-900 font-semibold sm:px-0 py-4 md:px-16 md:py-16`}
         style={{
-          ...(lastScroll === "down" && !props.relMobileNav
+          ...(lastScroll === "down"
             ? { top: -`${header.current.offsetHeight}` }
             : { top: "0" }),
           transition: "top .2s ease-in-out",
@@ -83,12 +168,10 @@ export default (props: LayoutProps) => {
         </Link>
         <div className="sm:flex hidden items-center justify-center">
           <div>
-            <Link href="/[page]" as="/illustration">
+            <Link href="/[grid]" as="/illustration">
               <a
                 className={`mr-8 ${
-                  props.isFor === "illustration"
-                    ? "text-gray-900"
-                    : "text-gray-500"
+                  isFor === "illustration" ? "text-gray-900" : "text-gray-500"
                 } hover:text-gray-900`}
               >
                 ILLUSTRATION
@@ -100,7 +183,7 @@ export default (props: LayoutProps) => {
             <Link href="/contact">
               <a
                 className={`mr-8 ${
-                  props.isFor === "contact" ? "text-gray-900" : "text-gray-500"
+                  isFor === "contact" ? "text-gray-900" : "text-gray-500"
                 } hover:text-gray-900`}
               >
                 CONTACT
@@ -112,7 +195,7 @@ export default (props: LayoutProps) => {
             <Link href="/about">
               <a
                 className={`${
-                  props.isFor === "about" ? "text-gray-900" : "text-gray-500"
+                  isFor === "about" ? "text-gray-900" : "text-gray-500"
                 } hover:text-gray-900`}
               >
                 ABOUT
@@ -121,10 +204,10 @@ export default (props: LayoutProps) => {
           </div>
           {/* <div className="mr-8 font-semibold text-gray-900">/</div>
           <div>
-          <Link href="/[page]" as="/animation">
+          <Link href="/[grid]" as="/animation">
             <a
               className={`mr-8 ${
-                props.isFor === "animation" ? "text-gray-900" : "text-gray-500"
+                isFor === "animation" ? "text-gray-900" : "text-gray-500"
               } hover:text-gray-900`}
             >
               ANIMATION
@@ -133,10 +216,10 @@ export default (props: LayoutProps) => {
           </div>
           <div className="mr-8 font-semibold text-gray-900">/</div>
           <div>
-          <Link href="/[page]" as="/fine-art">
+          <Link href="/[grid]" as="/fine-art">
             <a
               className={`${
-                props.isFor === "fine-art" ? "text-gray-900" : "text-gray-500"
+                isFor === "fine-art" ? "text-gray-900" : "text-gray-500"
               } hover:text-gray-900`}
             >
               FINE ART
@@ -172,7 +255,7 @@ export default (props: LayoutProps) => {
       {showMobileNav ? (
         <div className="sm:hidden fixed top-0 z-0 bg-white w-full h-full off-w-full off-h-full off-text-center off-align-middle">
           <div className="flex flex-col items-center justify-center h-full">
-            <Link href="/[page]" as="/illustration">
+            <Link href="/[grid]" as="/illustration">
               <a
                 className="leading-loose text-4xl font-bold text-gray-900 tracking-wider cursor-pointer"
                 onClick={() => setShowMobileNav(false)}
@@ -180,7 +263,7 @@ export default (props: LayoutProps) => {
                 ILLUSTRATION
               </a>
             </Link>
-            {/* <Link href="/[page]" as="/animation">
+            {/* <Link href="/[grid]" as="/animation">
               <a
                 className="leading-loose text-4xl font-bold text-gray-900 tracking-wider cursor-pointer"
                 onClick={() => setShowMobileNav(false)}
@@ -188,7 +271,7 @@ export default (props: LayoutProps) => {
                 ANIMATION
               </a>
             </Link>
-            <Link href="/[page]" as="/fine-art">
+            <Link href="/[grid]" as="/fine-art">
               <a
                 className="leading-loose text-4xl font-bold text-gray-900 tracking-wider cursor-pointer"
                 onClick={() => setShowMobileNav(false)}
