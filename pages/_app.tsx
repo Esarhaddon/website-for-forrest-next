@@ -11,7 +11,7 @@ class MyApp extends App {
         <Head>
           <meta name="robots" content="noindex, nofollow" />
         </Head>
-        <Layout key="adfadfa">
+        <Layout>
           <Component {...pageProps} />
         </Layout>
       </div>

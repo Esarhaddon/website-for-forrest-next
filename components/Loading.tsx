@@ -1,32 +1,52 @@
 import React, { useState, useEffect, useRef } from "react"
-import { Router } from "next/router"
 
 export default () => {
-  const [isLoading, setIsLoading] = useState(false)
   const [showText, setShowText] = useState(false)
-
-  const timeoutRef = useRef<any>()
+  const timeoutRef = useRef<NodeJS.Timeout | undefined>(undefined)
   useEffect(() => {
-    if (isLoading) {
-      timeoutRef.current = setTimeout(() => setShowText(true), 1000)
-    } else {
-      setShowText(false)
+    timeoutRef.current = setTimeout(() => setShowText(true), 1000)
+    return () => {
       clearTimeout(timeoutRef.current)
     }
-  }, [isLoading])
-
-  Router.events.on("routeChangeStart", () => setIsLoading(true))
-  Router.events.on("routeChangeComplete", () => setIsLoading(false))
+  })
 
   return (
-    <div
-      className={`flex items-center justify-center w-full h-full bg-white z-50 ${
-        !isLoading ? "hidden" : ""
-      }`}
-    >
-      <div className={`text-gray-800 ${!showText ? "hidden" : ""}`}>
-        Loading...
+    <>
+      <div className="w-screen h-screen pointer-events-none" />
+      <div
+        className={`${
+          showText ? "opacity-100" : "opacity-0"
+        } w-screen h-screen absolute top-0 right-0 flex items-center justify-center pointer-events-none`}
+        style={{
+          transition: "opacity .2s linear",
+        }}
+      >
+        Loading
+        <span
+          style={{
+            marginLeft: ".1rem",
+            animation: "dot-one 2s linear infinite",
+          }}
+        >
+          .
+        </span>
+        <span
+          style={{
+            marginLeft: ".1rem",
+            animation: "dot-two 2s linear  infinite",
+          }}
+        >
+          .
+        </span>
+        <span
+          style={{
+            marginLeft: ".1rem",
+            animation: "dot-three 2s linear infinite",
+          }}
+        >
+          .
+        </span>
       </div>
-    </div>
+    </>
   )
 }

@@ -8,7 +8,7 @@ import ExitX from "../static/icons/close.svg"
 import { useState, useRef } from "react"
 import Loading from "../components/Loading"
 import FD from "../static/icons/forrest-dickison.svg"
-import { useRouter } from "next/router"
+import { useRouter, Router } from "next/router"
 
 export type GridType = "animation" | "illustration" | "fine art"
 
@@ -17,15 +17,9 @@ export type PageType = GridType | "about" | "contact" | "index"
 export default (props) => {
   const [isFor, setIsFor] = useState<PageType>("index")
 
-  useEffect(() => {
-    console.log("isFor is", isFor)
-  }, [isFor])
-
   const router = useRouter()
   useEffect(() => {
-    console.log("router.asPath is:", router.asPath)
-    // asPath includes forward slash
-    setIsFor(router.asPath.slice(1) as PageType)
+    setIsFor(router.asPath.split("/")[1] as PageType)
   }, [router.query])
 
   const [lastScroll, setLastScroll] = useState("none")
@@ -34,6 +28,15 @@ export default (props) => {
   const [showMobileNav, setShowMobileNav] = useState(false)
   const scrollableEl = useRef(null)
   const header = useRef(null)
+
+  const [isLoading, setIsLoading] = useState(false)
+
+  Router.events.on("routeChangeStart", () => setIsLoading(true))
+  Router.events.on("routeChangeComplete", () => setIsLoading(false))
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [isLoading])
 
   // TO DO: figure out if this actually works to throttle scroll events
   const handleScroll = (event: React.UIEvent<HTMLDivElement>) => {
@@ -136,14 +139,17 @@ export default (props) => {
   return (
     <div
       ref={scrollableEl}
-      className={`relative top-0 left-0 h-screen w-full overflow-x-hidden ${
-        showMobileNav ? "overflow-y-hidden" : null
+      className={`${
+        showMobileNav
+          ? "overflow-y-hidden sm:overflow-y-scroll h-screen sm:h-auto"
+          : ""
       }`}
       onScroll={handleScroll}
     >
       <div
         ref={header}
-        className={`flex sm:static sticky z-40 off-top-0 justify-between items-center align-middle text-gray-900 font-semibold sm:px-0 py-4 md:px-16 md:py-16`}
+        className={`
+        flex sm:static sticky z-40 justify-between items-center align-middle text-gray-900 font-semibold sm:px-0 py-4 md:px-16 md:py-16`}
         style={{
           ...(lastScroll === "down"
             ? { top: -`${header.current.offsetHeight}` }
@@ -227,19 +233,12 @@ export default (props) => {
           </Link>
           </div> */}
         </div>
-        {showMobileNav ? (
-          <ExitX
-            className="sm:hidden text-black fill-current cursor-pointer w-4"
-            onClick={() => setShowMobileNav(false)}
-          />
-        ) : (
-          <Hamburger
-            className="sm:hidden w-6 cursor-pointer"
-            onClick={() => setShowMobileNav(true)}
-          />
-        )}
+        <Hamburger
+          className="sm:hidden w-6 cursor-pointer"
+          onClick={() => setShowMobileNav(true)}
+        />
       </div>
-      {props.children}
+      {isLoading ? <Loading /> : props.children}
       <div style={{ paddingTop: "calc(3vw + .75rem)" }}>
         <SocialAndEmail isDark={true} includesEmailOnMobile={false} />
         <div
@@ -253,8 +252,33 @@ export default (props) => {
         </div>
       </div>
       {showMobileNav ? (
-        <div className="sm:hidden fixed top-0 z-0 bg-white w-full h-full off-w-full off-h-full off-text-center off-align-middle">
-          <div className="flex flex-col items-center justify-center h-full">
+        <div className="sm:hidden fixed absolute top-0 z-50 bg-white w-full h-full">
+          <div
+            className={`absolute z-50 right-0 top-0 w-full flex justify-between items-center align-middle text-gray-900 font-semibold sm:px-0 py-4`}
+            style={{
+              paddingRight: "calc(5vw + 5px)",
+              paddingLeft: "calc(5vw + 5px)",
+            }}
+          >
+            <Link href="/index">
+              <a
+                style={{
+                  marginTop: "-1rem",
+                  marginBottom: "-1.25rem",
+                  marginLeft: "-3rem",
+                  marginRight: "-3rem",
+                }}
+                onClick={() => setShowMobileNav(false)}
+              >
+                <LogoBlack className="h-32" />
+              </a>
+            </Link>
+            <ExitX
+              className="text-black fill-current cursor-pointer w-4"
+              onClick={() => setShowMobileNav(false)}
+            />
+          </div>
+          <div className="z-0 absolute top-0 right-0 flex flex-col items-center justify-center h-full w-full">
             <Link href="/[grid]" as="/illustration">
               <a
                 className="leading-loose text-4xl font-bold text-gray-900 tracking-wider cursor-pointer"

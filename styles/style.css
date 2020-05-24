@@ -130,3 +130,62 @@ body {
     grid-template-columns: repeat(2, 1fr);
   }
 }
+
+/* for animated ellipsis */
+/* @keyframes dot {
+  0% {
+    opacity: 0.25;
+  }
+  25% {
+    opacity: 1;
+  }
+  75% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.25;
+  }
+} */
+
+@keyframes dot-one {
+  0% {
+    opacity: 0.4;
+  }
+  6.66%,
+  26.66% {
+    opacity: 1;
+  }
+  33.33%,
+  100% {
+    opacity: 0.4;
+  }
+}
+
+@keyframes dot-two {
+  0%,
+  33.33% {
+    opacity: 0.4;
+  }
+  39.99%,
+  60% {
+    opacity: 1;
+  }
+  66.66%,
+  100% {
+    opacity: 0.4;
+  }
+}
+
+@keyframes dot-three {
+  0%,
+  66.66% {
+    opacity: 0.4;
+  }
+  73.66%,
+  93.33% {
+    opacity: 1;
+  }
+  100% {
+    opaciy: 0.4;
+  }
+}

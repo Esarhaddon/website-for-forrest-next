@@ -6,40 +6,29 @@ import Link from "next/link"
 import { useRouter } from "next/router"
 import Arrow from "../../static/icons/arrow.svg"
 import ExitX from "../../static/icons/close.svg"
-import Loading from "../../components/Loading"
 
 interface Dimensions {
   h: number
   w: number
 }
 
-export default () => {
-  const [fromGrid, setFromGrid] = useState<GridType | undefined>(undefined)
-  const [current, setCurrent] = useState<Image | undefined>(undefined)
-  const [previous, setPrevious] = useState<Image | undefined>(undefined)
-  const [next, setNext] = useState<Image | undefined>(undefined)
-  const router = useRouter()
+interface SingleImageProps {
+  fromGrid: GridType
+  previous: Image
+  current: Image
+  next: Image
+}
 
-  useEffect(() => {
-    if (router.query.grid && router.query.singleImage) {
-      const grid = router.query.grid as GridType
-      const title = (router.query.singleImage as string).replace(/-/g, " ")
-      fetchImagesFor(grid).then((images) => {
-        const currentIndex = images.findIndex((image) => image.title === title)
-        setPrevious(images[currentIndex - 1])
-        setCurrent(images[currentIndex])
-        setNext(images[currentIndex + 1])
-        setFromGrid(grid)
-      })
-    }
-  }, [router.query])
-
+const SingleImage = ({
+  fromGrid,
+  previous,
+  current,
+  next,
+}: SingleImageProps) => {
   const [dimensions, setDimensions] = useState<Dimensions>({
-    h: 0,
-    w: 0,
+    h: 1,
+    w: 1,
   })
-
-  useEffect(() => {}, [dimensions])
 
   const [imageHasLoaded, setImageHasLoaded] = useState(false)
   const [dominantColor, setDominantColor] = useState("")
@@ -68,7 +57,7 @@ export default () => {
 
       setDimensions(dimensions)
     }
-  }, [current])
+  }, [])
 
   useEffect(() => {
     if (current) {
@@ -80,12 +69,6 @@ export default () => {
         .catch((e) => setDominantColor("#696969"))
     }
   }, [current])
-
-  if (!current) {
-    // TO DO: do you want some kind of loading indicator here?
-    console.log("using placeholder...")
-    return <div className="w-full h-full" />
-  }
 
   return (
     <div
@@ -229,3 +212,16 @@ export default () => {
     </div>
   )
 }
+
+SingleImage.getInitialProps = async (ctx): Promise<SingleImageProps> => {
+  const fromGrid = ctx.query.grid
+  const title = ctx.query.singleImage.replace(/-/g, " ")
+  const images = await fetchImagesFor(fromGrid)
+  const currentIndex = images.findIndex((image) => image.title === title)
+  const previous = images[currentIndex - 1]
+  const current = images[currentIndex]
+  const next = images[currentIndex + 1]
+  return { previous, current, next, fromGrid }
+}
+
+export default SingleImage

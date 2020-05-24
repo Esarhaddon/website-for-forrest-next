@@ -1,30 +1,15 @@
 import fetchImagesFor, { Image } from "../../utils/fetchImagesFor"
-import Layout from "../../components/Layout"
+import { GridType } from "../../components/Layout"
 import React, { useState, useEffect } from "react"
-import { useRouter } from "next/router"
 import Thumbnail from "../../components/Thumbnail"
 
+interface GridProps {
+  gridType: GridType
+  toDisplay: Image[]
+}
+
 // TO DO: get rid of scroll bounce on grid and mobile nav 'cause its wreaking havoc on those features
-const Grid = () => {
-  const router = useRouter()
-  const gridType = (router.query.grid as any) || ""
-  const [toDisplay, setToDisplay] = useState<Image[] | undefined>(undefined)
-
-  useEffect(() => {
-    if (gridType) {
-      fetchImagesFor(gridType)
-        .then((images) => {
-          setToDisplay(images)
-        })
-        .catch((e) => {
-          // TO DO: figure out how you are actually going to handle errors
-          console.log(
-            `Something went wrong while fetching artwork for ${gridType}`
-          )
-        })
-    }
-  }, [gridType])
-
+const Grid = ({ gridType, toDisplay }: GridProps) => {
   const [displayHeight, setDisplayHeight] = useState(0)
   useEffect(() => {
     const thumbnail = document.getElementById("thumbnail-0")
@@ -32,12 +17,7 @@ const Grid = () => {
       const thumbnailHeight = thumbnail.offsetHeight
       setDisplayHeight(thumbnailHeight)
     }
-  })
-
-  if (!toDisplay) {
-    // TO DO: loading component goes here
-    return <div className="w-full h-full" />
-  }
+  }, [document])
 
   return (
     <div
@@ -59,6 +39,13 @@ const Grid = () => {
       })}
     </div>
   )
+}
+
+Grid.getInitialProps = async (ctx): Promise<GridProps> => {
+  const gridType = ctx.query.grid
+  const toDisplay = await fetchImagesFor(gridType)
+
+  return { gridType, toDisplay }
 }
 
 export default Grid
