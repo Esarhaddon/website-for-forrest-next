@@ -4,7 +4,7 @@ export default () => {
   const [showText, setShowText] = useState(false)
   const timeoutRef = useRef<NodeJS.Timeout | undefined>(undefined)
   useEffect(() => {
-    timeoutRef.current = setTimeout(() => setShowText(true), 1000)
+    timeoutRef.current = setTimeout(() => setShowText(true), 500)
     return () => {
       clearTimeout(timeoutRef.current)
     }
