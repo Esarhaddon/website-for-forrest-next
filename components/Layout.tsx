@@ -35,6 +35,7 @@ export default (props) => {
   Router.events.on("routeChangeComplete", () => setIsLoading(false))
 
   useEffect(() => {
+    console.log("scrolling to top...")
     window.scrollTo(0, 0)
   }, [isLoading])
 
@@ -141,7 +142,7 @@ export default (props) => {
       ref={scrollableEl}
       className={`${
         showMobileNav
-          ? "overflow-y-hidden sm:overflow-y-scroll h-screen sm:h-auto"
+          ? "overflow-y-hidden sm:overflow-y-scroll w-screen h-screen sm:h-auto"
           : ""
       }`}
       onScroll={handleScroll}
@@ -238,23 +239,10 @@ export default (props) => {
           onClick={() => setShowMobileNav(true)}
         />
       </div>
-      {isLoading ? <Loading /> : props.children}
-      <div style={{ paddingTop: "calc(3vw + .75rem)" }}>
-        <SocialAndEmail isDark={true} includesEmailOnMobile={false} />
-        <div
-          className="flex justify-center items-center text-gray-700 leading-none "
-          style={{
-            marginTop: "calc(3vw + .75rem)",
-            marginBottom: "calc(3vw + .75rem)",
-          }}
-        >
-          Copyright © 2019 Forrest Dickison
-        </div>
-      </div>
       {showMobileNav ? (
-        <div className="sm:hidden fixed absolute top-0 z-50 bg-white w-full h-full">
+        <div className="sm:hidden fixed absolute top-0 z-50 bg-white h-screen w-full">
           <div
-            className={`absolute z-50 right-0 top-0 w-full flex justify-between items-center align-middle text-gray-900 font-semibold sm:px-0 py-4`}
+            className={`absolute z-50 right-0 top-0 w-full flex justify-between items-center align-middle text-gray-900 font-semibold py-4`}
             style={{
               paddingRight: "calc(5vw + 5px)",
               paddingLeft: "calc(5vw + 5px)",
@@ -322,6 +310,19 @@ export default (props) => {
           </div>
         </div>
       ) : null}
+      {isLoading ? <Loading /> : props.children}
+      <div style={{ paddingTop: "calc(3vw + .75rem)" }}>
+        <SocialAndEmail isDark={true} includesEmailOnMobile={false} />
+        <div
+          className="flex justify-center items-center text-gray-700 leading-none "
+          style={{
+            marginTop: "calc(3vw + .75rem)",
+            marginBottom: "calc(3vw + .75rem)",
+          }}
+        >
+          Copyright © 2019 Forrest Dickison
+        </div>
+      </div>
     </div>
   )
 }
