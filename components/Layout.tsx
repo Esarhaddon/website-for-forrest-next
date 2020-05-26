@@ -15,47 +15,24 @@ export type GridType = "animation" | "illustration" | "fine art"
 export type PageType = GridType | "about" | "contact" | "index"
 
 export default (props) => {
+  // TO DO: don't use index as default value; it causes index page flash on relaod for any other page
   const [isFor, setIsFor] = useState<PageType>("index")
 
   const router = useRouter()
   useEffect(() => {
     setIsFor(router.asPath.split("/")[1] as PageType)
   }, [router.query])
-
-  const [lastScroll, setLastScroll] = useState("none")
-  const [y, setY] = useState(0)
-  const [wait, setWait] = useState(false)
   const [showMobileNav, setShowMobileNav] = useState(false)
-  const scrollableEl = useRef(null)
-  const header = useRef(null)
-
   const [isLoading, setIsLoading] = useState(false)
 
   Router.events.on("routeChangeStart", () => setIsLoading(true))
   Router.events.on("routeChangeComplete", () => setIsLoading(false))
 
   useEffect(() => {
-    console.log("scrolling to top...")
     window.scrollTo(0, 0)
   }, [isLoading])
 
-  // TO DO: figure out if this actually works to throttle scroll events
-  const handleScroll = (event: React.UIEvent<HTMLDivElement>) => {
-    const scrollTop = scrollableEl.current.scrollTop
-    if (showMobileNav) return
-    if (wait && scrollTop !== 0) return
-
-    if (scrollTop > y) {
-      setLastScroll("down")
-    } else if (scrollTop < y) {
-      setLastScroll("up")
-    }
-
-    setY(scrollTop)
-    setWait(true)
-    setTimeout(() => setWait(false), 100)
-  }
-
+  // TO DO: make index its own page and just return that
   if (isFor === "index") {
     return (
       <div>
@@ -139,27 +116,10 @@ export default (props) => {
 
   return (
     <MobileNavWrapper {...{ showMobileNav, setShowMobileNav }}>
-      <div
-        ref={scrollableEl}
-        className={`${
-          showMobileNav
-            ? "overflow-y-hidden sm:overflow-y-scroll w-screen h-screen sm:h-auto"
-            : ""
-        }`}
-        onScroll={handleScroll}
-      >
+      <div onScroll={() => console.log("I was scrolled...")}>
         <div
-          ref={header}
           className={`
-        flex sm:static sticky z-40 justify-between items-center align-middle text-gray-900 font-semibold sm:px-0 py-4 md:px-16 md:py-16`}
-          style={{
-            ...(lastScroll === "down"
-              ? { top: -`${header.current.offsetHeight}` }
-              : { top: "0" }),
-            transition: "top .2s ease-in-out",
-            marginRight: "calc(5vw + 5px)",
-            marginLeft: "calc(5vw + 5px)",
-          }}
+         hidden sm:flex z-40 justify-between items-center align-middle text-gray-900 font-semibold py-4 px-12 md:px-16 md:py-10 lg:py-16`}
         >
           <Link href="/index">
             <a
@@ -174,7 +134,7 @@ export default (props) => {
               <LogoBlack className="h-32" />
             </a>
           </Link>
-          <div className="sm:flex hidden items-center justify-center">
+          <div className="flex items-center justify-center">
             <div>
               <Link href="/[grid]" as="/illustration">
                 <a
@@ -235,10 +195,6 @@ export default (props) => {
           </Link>
           </div> */}
           </div>
-          <Hamburger
-            className="sm:hidden w-6 cursor-pointer"
-            onClick={() => setShowMobileNav(true)}
-          />
         </div>
         {isLoading ? <Loading /> : props.children}
         <div style={{ paddingTop: "calc(3vw + .75rem)" }}>
