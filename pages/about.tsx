@@ -1,4 +1,3 @@
-import Layout from "../components/Layout"
 export default () => (
   <div className="flex flex-col items-center px-4">
     <div className="w-11/12 sm:w-7/12 md:w-6/12 leading-loose flex flex-col items-center lg:block lg:ml-16 mt-20 md:mt-8 sm:mt-20 lg:text-left text-justify mb-4">

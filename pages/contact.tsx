@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react"
-import Layout from "../components/Layout"
 import { Field, Form, Formik } from "formik"
 import { UserEmail } from "./api/contact"
 import fetch from "node-fetch"

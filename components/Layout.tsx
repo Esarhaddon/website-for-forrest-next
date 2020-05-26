@@ -1,14 +1,14 @@
 import "../styles/style.css"
 import Link from "next/link"
 import LogoBlack from "../static/icons/logo-black.svg"
-import { ReactNode, useEffect } from "react"
+import { useEffect } from "react"
 import SocialAndEmail from "./SocialAndEmail"
 import Hamburger from "../static/icons/hamburger.svg"
-import ExitX from "../static/icons/close.svg"
 import { useState, useRef } from "react"
 import Loading from "../components/Loading"
 import FD from "../static/icons/forrest-dickison.svg"
 import { useRouter, Router } from "next/router"
+import MobileNavWrapper from "../components/MobileNavWrapper"
 
 export type GridType = "animation" | "illustration" | "fine art"
 
@@ -138,78 +138,79 @@ export default (props) => {
   }
 
   return (
-    <div
-      ref={scrollableEl}
-      className={`${
-        showMobileNav
-          ? "overflow-y-hidden sm:overflow-y-scroll w-screen h-screen sm:h-auto"
-          : ""
-      }`}
-      onScroll={handleScroll}
-    >
+    <MobileNavWrapper {...{ showMobileNav, setShowMobileNav }}>
       <div
-        ref={header}
-        className={`
-        flex sm:static sticky z-40 justify-between items-center align-middle text-gray-900 font-semibold sm:px-0 py-4 md:px-16 md:py-16`}
-        style={{
-          ...(lastScroll === "down"
-            ? { top: -`${header.current.offsetHeight}` }
-            : { top: "0" }),
-          transition: "top .2s ease-in-out",
-          marginRight: "calc(5vw + 5px)",
-          marginLeft: "calc(5vw + 5px)",
-        }}
+        ref={scrollableEl}
+        className={`${
+          showMobileNav
+            ? "overflow-y-hidden sm:overflow-y-scroll w-screen h-screen sm:h-auto"
+            : ""
+        }`}
+        onScroll={handleScroll}
       >
-        <Link href="/index">
-          <a
-            style={{
-              marginTop: "-1rem",
-              marginBottom: "-1.25rem",
-              marginLeft: "-3rem",
-              marginRight: "-3rem",
-            }}
-            onClick={() => setShowMobileNav(false)}
-          >
-            <LogoBlack className="h-32" />
-          </a>
-        </Link>
-        <div className="sm:flex hidden items-center justify-center">
-          <div>
-            <Link href="/[grid]" as="/illustration">
-              <a
-                className={`mr-8 ${
-                  isFor === "illustration" ? "text-gray-900" : "text-gray-500"
-                } hover:text-gray-900`}
-              >
-                ILLUSTRATION
-              </a>
-            </Link>
-          </div>
-          <div className="mr-8 font-semibold text-gray-900">/</div>
-          <div>
-            <Link href="/contact">
-              <a
-                className={`mr-8 ${
-                  isFor === "contact" ? "text-gray-900" : "text-gray-500"
-                } hover:text-gray-900`}
-              >
-                CONTACT
-              </a>
-            </Link>
-          </div>
-          <div className="mr-8 font-semibold text-gray-900">/</div>
-          <div>
-            <Link href="/about">
-              <a
-                className={`${
-                  isFor === "about" ? "text-gray-900" : "text-gray-500"
-                } hover:text-gray-900`}
-              >
-                ABOUT
-              </a>
-            </Link>
-          </div>
-          {/* <div className="mr-8 font-semibold text-gray-900">/</div>
+        <div
+          ref={header}
+          className={`
+        flex sm:static sticky z-40 justify-between items-center align-middle text-gray-900 font-semibold sm:px-0 py-4 md:px-16 md:py-16`}
+          style={{
+            ...(lastScroll === "down"
+              ? { top: -`${header.current.offsetHeight}` }
+              : { top: "0" }),
+            transition: "top .2s ease-in-out",
+            marginRight: "calc(5vw + 5px)",
+            marginLeft: "calc(5vw + 5px)",
+          }}
+        >
+          <Link href="/index">
+            <a
+              style={{
+                marginTop: "-1rem",
+                marginBottom: "-1.25rem",
+                marginLeft: "-3rem",
+                marginRight: "-3rem",
+              }}
+              onClick={() => setShowMobileNav(false)}
+            >
+              <LogoBlack className="h-32" />
+            </a>
+          </Link>
+          <div className="sm:flex hidden items-center justify-center">
+            <div>
+              <Link href="/[grid]" as="/illustration">
+                <a
+                  className={`mr-8 ${
+                    isFor === "illustration" ? "text-gray-900" : "text-gray-500"
+                  } hover:text-gray-900`}
+                >
+                  ILLUSTRATION
+                </a>
+              </Link>
+            </div>
+            <div className="mr-8 font-semibold text-gray-900">/</div>
+            <div>
+              <Link href="/contact">
+                <a
+                  className={`mr-8 ${
+                    isFor === "contact" ? "text-gray-900" : "text-gray-500"
+                  } hover:text-gray-900`}
+                >
+                  CONTACT
+                </a>
+              </Link>
+            </div>
+            <div className="mr-8 font-semibold text-gray-900">/</div>
+            <div>
+              <Link href="/about">
+                <a
+                  className={`${
+                    isFor === "about" ? "text-gray-900" : "text-gray-500"
+                  } hover:text-gray-900`}
+                >
+                  ABOUT
+                </a>
+              </Link>
+            </div>
+            {/* <div className="mr-8 font-semibold text-gray-900">/</div>
           <div>
           <Link href="/[grid]" as="/animation">
             <a
@@ -233,96 +234,26 @@ export default (props) => {
             </a>
           </Link>
           </div> */}
+          </div>
+          <Hamburger
+            className="sm:hidden w-6 cursor-pointer"
+            onClick={() => setShowMobileNav(true)}
+          />
         </div>
-        <Hamburger
-          className="sm:hidden w-6 cursor-pointer"
-          onClick={() => setShowMobileNav(true)}
-        />
-      </div>
-      {showMobileNav ? (
-        <div className="sm:hidden fixed absolute top-0 z-50 bg-white h-screen w-full">
+        {isLoading ? <Loading /> : props.children}
+        <div style={{ paddingTop: "calc(3vw + .75rem)" }}>
+          <SocialAndEmail isDark={true} includesEmailOnMobile={false} />
           <div
-            className={`absolute z-50 right-0 top-0 w-full flex justify-between items-center align-middle text-gray-900 font-semibold py-4`}
+            className="flex justify-center items-center text-gray-700 leading-none "
             style={{
-              paddingRight: "calc(5vw + 5px)",
-              paddingLeft: "calc(5vw + 5px)",
+              marginTop: "calc(3vw + .75rem)",
+              marginBottom: "calc(3vw + .75rem)",
             }}
           >
-            <Link href="/index">
-              <a
-                style={{
-                  marginTop: "-1rem",
-                  marginBottom: "-1.25rem",
-                  marginLeft: "-3rem",
-                  marginRight: "-3rem",
-                }}
-                onClick={() => setShowMobileNav(false)}
-              >
-                <LogoBlack className="h-32" />
-              </a>
-            </Link>
-            <ExitX
-              className="text-black fill-current cursor-pointer w-4"
-              onClick={() => setShowMobileNav(false)}
-            />
+            Copyright © 2019 Forrest Dickison
           </div>
-          <div className="z-0 absolute top-0 right-0 flex flex-col items-center justify-center h-full w-full">
-            <Link href="/[grid]" as="/illustration">
-              <a
-                className="leading-loose text-4xl font-bold text-gray-900 tracking-wider cursor-pointer"
-                onClick={() => setShowMobileNav(false)}
-              >
-                ILLUSTRATION
-              </a>
-            </Link>
-            {/* <Link href="/[grid]" as="/animation">
-              <a
-                className="leading-loose text-4xl font-bold text-gray-900 tracking-wider cursor-pointer"
-                onClick={() => setShowMobileNav(false)}
-              >
-                ANIMATION
-              </a>
-            </Link>
-            <Link href="/[grid]" as="/fine-art">
-              <a
-                className="leading-loose text-4xl font-bold text-gray-900 tracking-wider cursor-pointer"
-                onClick={() => setShowMobileNav(false)}
-              >
-                FINE ART
-              </a>
-            </Link> */}
-            <Link href="/contact">
-              <a
-                className="leading-loose text-4xl font-bold text-gray-900 tracking-wider cursor-pointer"
-                onClick={() => setShowMobileNav(false)}
-              >
-                CONTACT
-              </a>
-            </Link>
-            <Link href="/about">
-              <a
-                className="leading-loose text-4xl font-bold text-gray-900 tracking-wider cursor-pointer"
-                onClick={() => setShowMobileNav(false)}
-              >
-                ABOUT
-              </a>
-            </Link>
-          </div>
-        </div>
-      ) : null}
-      {isLoading ? <Loading /> : props.children}
-      <div style={{ paddingTop: "calc(3vw + .75rem)" }}>
-        <SocialAndEmail isDark={true} includesEmailOnMobile={false} />
-        <div
-          className="flex justify-center items-center text-gray-700 leading-none "
-          style={{
-            marginTop: "calc(3vw + .75rem)",
-            marginBottom: "calc(3vw + .75rem)",
-          }}
-        >
-          Copyright © 2019 Forrest Dickison
         </div>
       </div>
-    </div>
+    </MobileNavWrapper>
   )
 }
