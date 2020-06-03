@@ -15,7 +15,7 @@ export type PageType = GridType | "about" | "contact" | "index"
 
 export default (props) => {
   // TO DO: don't use index as default value; it causes index page flash on relaod for any other page
-  const [isFor, setIsFor] = useState<PageType>("index")
+  const [isFor, setIsFor] = useState<PageType | undefined>(undefined)
 
   const router = useRouter()
   useEffect(() => {
@@ -113,8 +113,9 @@ export default (props) => {
   }
 
   return (
-    <MobileNavWrapper>
-      <div onScroll={() => console.log("I was scrolled...")}>
+    // this will have to change when pages for fine art etc. are added
+    <MobileNavWrapper pinnedNav={isFor === "illustration"}>
+      <div>
         <div
           className={`
          hidden sm:flex z-40 justify-between items-center align-middle text-gray-900 font-semibold py-4 px-12 md:px-16 md:py-10 lg:py-16`}

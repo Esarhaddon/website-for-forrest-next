@@ -1,10 +1,15 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, ReactNode } from "react"
 import Link from "next/link"
 import LogoBlack from "../static/icons/logo-black.svg"
 import ExitX from "../static/icons/close.svg"
 import Hamburger from "../static/icons/hamburger.svg"
 
-export default (props) => {
+interface MobileNavWrapperProps {
+  pinnedNav?: boolean
+  children: ReactNode
+}
+
+export default (props: MobileNavWrapperProps) => {
   const [showMobileNav, setShowMobileNav] = useState(false)
   const [lastScroll, setLastScroll] = useState<"up" | "down" | undefined>(
     undefined
@@ -44,24 +49,26 @@ export default (props) => {
 
   // if intersectionObserver isn't supported, than nothing happens and header stays absolutely positioned
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const entry = entries[0]
-        setIsIntersecting(entries[0].isIntersecting)
-        // unpin header if user scrolls all the way to the top again
-        if (Math.round(entry.intersectionRatio) === 1) {
-          setHeaderIsInitial(true)
-          setHeaderPinned(false)
-        }
-        // otherwise, pin the header
-        else {
-          setHeaderPinned(true)
-        }
-      },
-      { threshold: [0, 1] }
-    )
-    const target = document.getElementById("nav-spacer")
-    observer.observe(target)
+    if (props.pinnedNav) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          const entry = entries[0]
+          setIsIntersecting(entries[0].isIntersecting)
+          // unpin header if user scrolls all the way to the top again
+          if (Math.round(entry.intersectionRatio) === 1) {
+            setHeaderIsInitial(true)
+            setHeaderPinned(false)
+          }
+          // otherwise, pin the header
+          else {
+            setHeaderPinned(true)
+          }
+        },
+        { threshold: [0, 1] }
+      )
+      const target = document.getElementById("nav-spacer")
+      observer.observe(target)
+    }
   }, [])
 
   // hide or show header based on scroll direction
