@@ -7,7 +7,7 @@ import Link from "next/link"
 
 const Index = () => {
   return (
-    <div>
+    <div className="absolute w-full h-full top-0 right-0 z-50">
       <div
         className="absolute top-0 left-0 w-full h-full"
         style={{
