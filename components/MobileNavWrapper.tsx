@@ -52,18 +52,18 @@ export default ({
     window.addEventListener("scroll", throttledHandleScroll(200))
   }, [])
 
+  // if intersectionObserver isn't supported, than nothing happens and header stays absolutely positioned
   useEffect(() => {
-    // TO DO: handle case of intersection observer not being supported
     const observer = new IntersectionObserver(
       (entries) => {
         const entry = entries[0]
         setIsIntersecting(entries[0].isIntersecting)
-        // unpin header if user has scrolled all the way to the top again
+        // unpin header if user scrolls all the way to the top again
         if (Math.round(entry.intersectionRatio) === 1) {
           setHeaderIsInitial(true)
           setHeaderPinned(false)
         }
-        // otherwise, header stays pinned
+        // otherwise, pin the header
         else {
           setHeaderPinned(true)
         }
@@ -74,6 +74,7 @@ export default ({
     observer.observe(target)
   }, [])
 
+  // hide or show header based on scroll direction
   useEffect(() => {
     if (!animationRunning) {
       // don't hide the header if the user is still close to the top
@@ -91,12 +92,11 @@ export default ({
     setTimeout(() => setAnimationRunning(false), 150)
   }, [headerTop])
 
+  // Aarrrg! not really sure why a seperate effect is necessary, lastScroll seems to be one behind
   useEffect(() => {
     if (headerPinned && headerIsInitial) {
       setHeaderTop("-7.75rem")
       setHeaderIsInitial(false)
-    } else if (!headerPinned) {
-      setHeaderTop(0)
     }
   }, [headerPinned, headerIsInitial])
 
