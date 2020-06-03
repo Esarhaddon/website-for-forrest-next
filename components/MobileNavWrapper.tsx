@@ -4,19 +4,8 @@ import LogoBlack from "../static/icons/logo-black.svg"
 import ExitX from "../static/icons/close.svg"
 import Hamburger from "../static/icons/hamburger.svg"
 
-interface NavWrapperProps {
-  // TO DO: don't think this state needs to be somewhere else
-  showMobileNav: boolean
-  setShowMobileNav: React.Dispatch<React.SetStateAction<boolean>>
-  children: ReactNode
-}
-
-export default ({
-  showMobileNav,
-  setShowMobileNav,
-  children,
-}: NavWrapperProps) => {
-  type VoidFunc = () => void
+export default (props) => {
+  const [showMobileNav, setShowMobileNav] = useState(false)
   const [lastScroll, setLastScroll] = useState<"up" | "down" | undefined>(
     undefined
   )
@@ -26,6 +15,7 @@ export default ({
   const [headerPinned, setHeaderPinned] = useState(false)
   const [headerTop, setHeaderTop] = useState<0 | "-7.75rem">(0)
 
+  type VoidFunc = () => void
   // TO DO: move this inside the useEffect?
   const throttledHandleScroll = (wait: number): VoidFunc => {
     let y = 0
@@ -151,7 +141,7 @@ export default ({
         style={{ height: "7.75rem" }}
       ></div>
       <div className={`${showMobileNav ? "hidden" : "block"} sm:block`}>
-        {children}
+        {props.children}
       </div>
       <div
         className={`${

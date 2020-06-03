@@ -3,8 +3,7 @@ import Link from "next/link"
 import LogoBlack from "../static/icons/logo-black.svg"
 import { useEffect } from "react"
 import SocialAndEmail from "./SocialAndEmail"
-import Hamburger from "../static/icons/hamburger.svg"
-import { useState, useRef } from "react"
+import { useState } from "react"
 import Loading from "../components/Loading"
 import FD from "../static/icons/forrest-dickison.svg"
 import { useRouter, Router } from "next/router"
@@ -22,7 +21,6 @@ export default (props) => {
   useEffect(() => {
     setIsFor(router.asPath.split("/")[1] as PageType)
   }, [router.query])
-  const [showMobileNav, setShowMobileNav] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
 
   Router.events.on("routeChangeStart", () => setIsLoading(true))
@@ -115,7 +113,7 @@ export default (props) => {
   }
 
   return (
-    <MobileNavWrapper {...{ showMobileNav, setShowMobileNav }}>
+    <MobileNavWrapper>
       <div onScroll={() => console.log("I was scrolled...")}>
         <div
           className={`
@@ -129,7 +127,6 @@ export default (props) => {
                 marginLeft: "-3rem",
                 marginRight: "-3rem",
               }}
-              onClick={() => setShowMobileNav(false)}
             >
               <LogoBlack className="h-32" />
             </a>
