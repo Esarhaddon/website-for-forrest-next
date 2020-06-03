@@ -1,4 +1,4 @@
-import React, { ReactNode, useState, useRef, useEffect } from "react"
+import React, { ReactNode, useState, useEffect } from "react"
 import Link from "next/link"
 import LogoBlack from "../static/icons/logo-black.svg"
 import ExitX from "../static/icons/close.svg"
@@ -20,10 +20,14 @@ export default ({
   const [lastScroll, setLastScroll] = useState<"up" | "down" | undefined>(
     undefined
   )
-  const [showHeader, setShowHeader] = useState(true)
-  const [animationInProgress, setInProgress] = useState(false)
+  const [isIntersecting, setIsIntersecting] = useState(true)
+  const [headerIsInitial, setHeaderIsInitial] = useState(true)
+  const [animationRunning, setAnimationRunning] = useState(false)
+  const [headerPinned, setHeaderPinned] = useState(false)
+  const [headerTop, setHeaderTop] = useState<0 | "-7.75rem">(0)
 
-  const getHandleScroll = (wait: number): VoidFunc => {
+  // TO DO: move this inside the useEffect?
+  const throttledHandleScroll = (wait: number): VoidFunc => {
     let y = 0
     let shouldWait = false
     return () => {
@@ -45,34 +49,76 @@ export default ({
   }
 
   useEffect(() => {
-    window.addEventListener("scroll", getHandleScroll(200))
+    window.addEventListener("scroll", throttledHandleScroll(200))
   }, [])
 
   useEffect(() => {
-    if (!animationInProgress) {
-      if (lastScroll === "down") {
-        setShowHeader(false)
-      } else if (lastScroll === "up") {
-        setShowHeader(true)
-      }
-    }
-  }, [lastScroll])
+    // TO DO: handle case of intersection observer not being supported
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0]
+        setIsIntersecting(entries[0].isIntersecting)
+        // unpin header if user has scrolled all the way to the top again
+        if (Math.round(entry.intersectionRatio) === 1) {
+          setHeaderIsInitial(true)
+          setHeaderPinned(false)
+        }
+        // otherwise, header stays pinned
+        else {
+          setHeaderPinned(true)
+        }
+      },
+      { threshold: [0, 1] }
+    )
+    const target = document.getElementById("nav-spacer")
+    observer.observe(target)
+  }, [])
 
   useEffect(() => {
-    setInProgress(true)
-    setTimeout(() => setInProgress(false), 150)
-  }, [showHeader])
+    if (!animationRunning) {
+      // don't hide the header if the user is still close to the top
+      if (lastScroll === "down" && !isIntersecting) {
+        setHeaderTop("-7.75rem")
+      } else if (lastScroll === "up") {
+        setHeaderTop(0)
+      }
+    }
+  }, [lastScroll, animationRunning, isIntersecting])
+
+  // whenever headerTop changes, set a timeout to keep track of when header animation is finished
+  useEffect(() => {
+    setAnimationRunning(true)
+    setTimeout(() => setAnimationRunning(false), 150)
+  }, [headerTop])
+
+  useEffect(() => {
+    if (headerPinned && headerIsInitial) {
+      setHeaderTop("-7.75rem")
+      setHeaderIsInitial(false)
+    } else if (!headerPinned) {
+      setHeaderTop(0)
+    }
+  }, [headerPinned, headerIsInitial])
 
   return (
     <div>
       <div
-        className={`sm:hidden z-50 fixed right-0 off-top-0 w-full flex justify-between items-center align-middle text-gray-900 font-semibold py-4 bg-white`}
-        style={{
-          transition: "top .15s linear",
-          top: showHeader || showMobileNav ? 0 : "-7.75rem",
-          paddingRight: "calc(5vw + 5px)",
-          paddingLeft: "calc(5vw + 5px)",
-        }}
+        className={`sm:hidden z-40 right-0 w-full flex justify-between items-center align-middle text-gray-900 font-semibold py-4 bg-white`}
+        style={
+          headerPinned
+            ? {
+                position: "fixed",
+                transition: "top .15s linear",
+                top: headerTop,
+                paddingRight: "calc(5vw + 5px)",
+                paddingLeft: "calc(5vw + 5px)",
+              }
+            : {
+                position: "absolute",
+                paddingRight: "calc(5vw + 5px)",
+                paddingLeft: "calc(5vw + 5px)",
+              }
+        }
       >
         <Link href="/index">
           <a
@@ -99,11 +145,12 @@ export default ({
           />
         )}
       </div>
-      <div className="block sm:hidden" style={{ height: "7.75rem" }}></div>
       <div
-        onScroll={() => console.log("no, I was scrolled!")}
-        className={`${showMobileNav ? "hidden" : "block"} sm:block`}
-      >
+        id="nav-spacer"
+        className={`block sm:hidden`}
+        style={{ height: "7.75rem" }}
+      ></div>
+      <div className={`${showMobileNav ? "hidden" : "block"} sm:block`}>
         {children}
       </div>
       <div
