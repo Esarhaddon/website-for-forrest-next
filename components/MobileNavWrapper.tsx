@@ -1,4 +1,4 @@
-import React, { ReactNode, useState, useEffect } from "react"
+import React, { useState, useEffect } from "react"
 import Link from "next/link"
 import LogoBlack from "../static/icons/logo-black.svg"
 import ExitX from "../static/icons/close.svg"
