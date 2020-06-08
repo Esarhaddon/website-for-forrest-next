@@ -31,7 +31,7 @@ export default (props) => {
   }, [isLoading])
 
   if (isFor === "index") {
-    return props.children
+    return isLoading ? <Loading /> : props.children
   }
 
   return (
