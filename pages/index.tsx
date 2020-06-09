@@ -43,6 +43,14 @@ const Index = () => {
           }}
         />
       </div>
+      <div
+        className="w-full sticky top-0 right-0 border-b border-solid border-black"
+        style={{ height: "33.33%" }}
+      />
+      <div
+        className="w-full sticky right-0 border-b border-solid border-black"
+        style={{ height: "33.33%", top: "33.33%" }}
+      />
     </div>
   )
 }
