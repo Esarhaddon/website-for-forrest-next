@@ -7,51 +7,55 @@ import Link from "next/link"
 
 const Index = () => {
   return (
-    <div
-      className="relative overflow-y-scroll overflow-x-hidden h-screen"
-      style={{ perspective: "1px", perspectiveOrigin: "bottom right" }}
-    >
+    <div>
       <div
-        className="absolute top-0 right-0 w-screen overflow-hidden"
-        style={{
-          transformOrigin: "bottom right",
-          transform: "translateZ(-1px) scale(2)",
-          height: "110vh",
-          marginTop: "10vh",
-        }}
+        className="relative overflow-y-scroll overflow-x-hidden h-screen"
+        style={{ perspective: "1px", perspectiveOrigin: "bottom right" }}
       >
         <div
-          className="absolute top-0 right-0 w-full bg-green-500"
+          className="absolute top-0 right-0 w-screen overflow-hidden"
           style={{
-            background: "url(../static/toad.png) 66.66%  25% / cover no-repeat",
-            height: "130vh",
+            transformOrigin: "bottom right",
+            transform: "translateZ(-1px) scale(2)",
+            height: "110vh",
+            marginTop: "10vh",
           }}
-        />
-      </div>
-      <div
-        className="absolute top-0 right-0 w-full h-screen"
-        style={{
-          transformOrigin: "bottom right",
-          transform: "translateZ(0)",
-        }}
-      >
+        >
+          <div
+            className="absolute top-0 right-0 w-full bg-green-500"
+            style={{
+              background:
+                "url(../static/toad.png) 66.66%  25% / cover no-repeat",
+              height: "130vh",
+            }}
+          />
+        </div>
         <div
-          className="w-full absolute top-0 right-0"
+          className="absolute top-0 right-0 w-full h-screen"
           style={{
-            background: "url(../static/boy.png) 33.33%  25% / cover no-repeat",
-            height: "130vh",
+            transformOrigin: "bottom right",
+            transform: "translateZ(0)",
           }}
-        />
-      </div>
-      <div className="relative max-w-3xl mx-auto px-4" style={{ top: "33vh" }}>
-        <FDickison className="w-full" />
+        >
+          <div
+            className="w-full absolute top-0 right-0"
+            style={{
+              background:
+                "linear-gradient(rgba(0, 0, 0, .25), rgba(0, 0, 0, .25)), url(../static/boy.png) 33.33%  25% / cover no-repeat",
+              height: "130vh",
+            }}
+          />
+        </div>
+        <div className="sticky max-w-3xl mx-auto px-4" style={{ top: "33vh" }}>
+          <FDickison className="w-full" />
+        </div>
       </div>
       <div
-        className="w-full sticky top-0 right-0 border-b border-solid border-black"
+        className="w-full absolute top-0 right-0 border-b border-solid border-black pointer-events-none"
         style={{ height: "33.33%" }}
       />
       <div
-        className="w-full sticky right-0 border-b border-solid border-black"
+        className="w-full absolute right-0 border-b border-solid border-black pointer-events-none"
         style={{ height: "33.33%", top: "33.33%" }}
       />
     </div>
