@@ -12,36 +12,34 @@ const Index = () => {
       style={{ perspective: "1px", perspectiveOrigin: "bottom right" }}
     >
       <div
-        className="relative w-screen"
+        className="absolute top-0 right-0 w-screen overflow-hidden"
         style={{
           transformOrigin: "bottom right",
           transform: "translateZ(-1px) scale(2)",
+          height: "110vh",
+          marginTop: "10vh",
         }}
       >
-        <div className="h-screen overflow-hidden">
-          <div
-            className="w-full bg-green-500 flex items-center justify-center"
-            style={{
-              background:
-                "url(../static/toad.png) 66.66%  25% / cover no-repeat",
-              height: "130vh",
-            }}
-          />
-        </div>
+        <div
+          className="absolute top-0 right-0 w-full bg-green-500"
+          style={{
+            background: "url(../static/toad.png) 66.66%  25% / cover no-repeat",
+            height: "130vh",
+          }}
+        />
       </div>
       <div
-        className="absolute top-0 right-0 w-full h-screen flex items-center justify-center"
+        className="absolute top-0 right-0 w-full h-screen"
         style={{
           transformOrigin: "bottom right",
           transform: "translateZ(0)",
         }}
       >
         <div
-          className="w-full"
+          className="w-full absolute top-0 right-0"
           style={{
             background: "url(../static/boy.png) 33.33%  25% / cover no-repeat",
             height: "130vh",
-            marginTop: "30vh",
           }}
         />
       </div>
