@@ -8,33 +8,39 @@ import Link from "next/link"
 const Index = () => {
   return (
     <div
-      className="relative overflow-y-scroll overflow-x-hidden h-screen border border-solid border-black"
+      className="relative overflow-y-scroll overflow-x-hidden h-screen"
       style={{ perspective: "1px", perspectiveOrigin: "bottom right" }}
     >
       <div
-        className="relative w-screen pt-16"
+        className="relative w-screen"
         style={{
           transformOrigin: "bottom right",
           transform: "translateZ(-1px) scale(2)",
         }}
       >
         <div
-          className="h-screen w-full bg-green-500 flex items-center justify-center"
+          className="w-full bg-green-500 flex items-center justify-center"
           style={{
             background: "url(../static/toad.png) 66.66%  25% / cover no-repeat",
+            height: "100vh",
           }}
         />
       </div>
       <div
-        className="absolute top-0 right-0 w-full h-screen border border-solid border-black flex items-center justify-center bg-gray-500"
+        className="absolute top-0 right-0 w-full h-screen flex items-center justify-center"
         style={{
-          opacity: 0.5,
-          background:
-            "linear-gradient(rgba(0, 0, 0, .25), rgba(0, 0, 0, .25)), url(../static/boy.png) 33.33%  25% / cover no-repeat",
-          transformOrigin: "0 0",
+          transformOrigin: "bottom right",
           transform: "translateZ(0)",
         }}
-      />
+      >
+        <div
+          className="w-full"
+          style={{
+            background: "url(../static/boy.png) 33.33%  25% / cover no-repeat",
+            height: "130vh",
+          }}
+        />
+      </div>
     </div>
   )
 }
