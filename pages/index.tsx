@@ -12,33 +12,20 @@ const Index = () => {
       style={{ perspective: "1px", perspectiveOrigin: "bottom right" }}
     >
       <div
-        className="relative w-screen"
+        className="relative w-screen pt-16"
         style={{
           transformOrigin: "bottom right",
           transform: "translateZ(-1px) scale(2)",
         }}
       >
-        <div
-          className="bg-red-500 flex items-center justify-center w-full"
-          style={{
-            height: "75vh",
-          }}
-        >
-          background panel 1
-        </div>
-        <div
-          className="bg-green-500 flex items-center justify-center w-full"
-          style={{
-            height: "75vh",
-          }}
-        >
-          background panel 2
+        <div className="h-screen w-full bg-green-500 flex items-center justify-center">
+          [background image]
         </div>
       </div>
       <div
-        className="absolute w-full h-16 border border-solid border-black flex items-center justify-center"
+        className="absolute top-0 right-0 w-full h-screen border border-solid border-black flex items-center justify-center bg-gray-500"
         style={{
-          top: "calc(50% - 4rem)",
+          opacity: 0.5,
           transformOrigin: "0 0",
           transform: "translateZ(0)",
         }}
