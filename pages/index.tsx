@@ -17,8 +17,8 @@ const Index = () => {
           style={{
             transformOrigin: "bottom right",
             transform: "translateZ(-1px) scale(2)",
-            height: "110vh",
-            marginTop: "10vh",
+            height: "115vh",
+            marginTop: "15vh",
           }}
         >
           <div
