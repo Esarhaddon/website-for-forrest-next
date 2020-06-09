@@ -1,6 +1,6 @@
 import "../styles/style.css"
 import SocialAndEmail from "../components/SocialAndEmail"
-import FD from "../static/icons/forrest-dickison.svg"
+import FDickison from "../static/icons/forrest-dickison.svg"
 import Link from "next/link"
 
 // TO DO: optimize background images for this page as well?
@@ -48,9 +48,11 @@ const Index = () => {
         style={{ height: "33.33%" }}
       />
       <div
-        className="w-full sticky right-0 border-b border-solid border-black"
+        className="w-full sticky right-0 border-b border-solid border-black flex items-center justify-center text-white"
         style={{ height: "33.33%", top: "33.33%" }}
-      />
+      >
+        <FDickison />
+      </div>
     </div>
   )
 }
