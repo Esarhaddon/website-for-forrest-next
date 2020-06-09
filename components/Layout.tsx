@@ -11,7 +11,7 @@ import MobileNavWrapper from "../components/MobileNavWrapper"
 
 export type GridType = "animation" | "illustration" | "fine art"
 
-export type PageType = GridType | "about" | "contact" | "index"
+export type PageType = GridType | "about" | "contact" | "index" | ""
 
 export default (props) => {
   // TO DO: don't use index as default value; it causes index page flash on relaod for any other page
@@ -19,6 +19,7 @@ export default (props) => {
 
   const router = useRouter()
   useEffect(() => {
+    console.log(`setting isFor to ${router.asPath.split("/")[1]}`)
     setIsFor(router.asPath.split("/")[1] as PageType)
   }, [router.query])
   const [isLoading, setIsLoading] = useState(false)
@@ -30,7 +31,7 @@ export default (props) => {
     window.scrollTo(0, 0)
   }, [isLoading])
 
-  if (isFor === "index") {
+  if (isFor === "index" || isFor === "") {
     return isLoading ? <Loading /> : props.children
   }
 

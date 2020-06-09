@@ -7,24 +7,71 @@ import Link from "next/link"
 
 const Index = () => {
   return (
-    <div className="absolute w-full h-full top-0 right-0 z-50">
+    <div
+      className="relative overflow-y-scroll overflow-x-hidden h-screen border border-solid border-black"
+      style={{ perspective: "1px", perspectiveOrigin: "bottom right" }}
+    >
       <div
-        className="absolute top-0 left-0 w-full h-full"
+        className="relative w-screen"
         style={{
-          background: "url(../static/toad.png) 66.66%  25% / cover no-repeat",
+          transformOrigin: "bottom right",
+          transform: "translateZ(-1px) scale(2)",
         }}
-      />
-      <div
-        className="absolute top-0 left-0 w-full h-full"
-        style={{
-          background:
-            "linear-gradient(rgba(0, 0, 0, .25), rgba(0, 0, 0, .25)), url(../static/boy.png) 33.33%  25% / cover no-repeat",
-        }}
-      />
-      <div className="relative max-w-3xl mx-auto px-4" style={{ top: "33vh" }}>
-        <FD className="w-full" />
+      >
+        <div
+          className="bg-red-500 flex items-center justify-center w-full"
+          style={{
+            height: "75vh",
+          }}
+        >
+          background panel 1
+        </div>
+        <div
+          className="bg-green-500 flex items-center justify-center w-full"
+          style={{
+            height: "75vh",
+          }}
+        >
+          background panel 2
+        </div>
       </div>
-      <div className="absolute bottom-0 sm:mb-16 mb-4 flex flex-col w-full">
+      <div
+        className="absolute w-full h-16 border border-solid border-black flex items-center justify-center"
+        style={{
+          top: "calc(50% - 4rem)",
+          transformOrigin: "0 0",
+          transform: "translateZ(0)",
+        }}
+      >
+        middleground
+      </div>
+    </div>
+  )
+}
+
+export default Index
+
+// <div className="absolute w-full h-full top-0 right-0 z-50">
+//   <div
+//     className="absolute top-0 left-0 w-full h-full"
+//     style={{
+//       background: "url(../static/toad.png) 66.66%  25% / cover no-repeat",
+//     }}
+//   />
+//   <div
+//     className="absolute top-0 left-0 w-full h-full"
+//     style={{
+//       background:
+//         "linear-gradient(rgba(0, 0, 0, .25), rgba(0, 0, 0, .25)), url(../static/boy.png) 33.33%  25% / cover no-repeat",
+//     }}
+//   />
+//   <div className="relative max-w-3xl mx-auto px-4" style={{ top: "33vh" }}>
+//     <FD className="w-full" />
+//   </div>
+// </div>
+
+{
+  /* <div className="absolute bottom-0 sm:mb-16 mb-4 flex flex-col w-full">
         <div className="flex flex-col sm:flex sm:flex-row sm:justify-center sm:flex-wrap">
           <Link href="/[grid]" as="/illustration">
             <a>
@@ -78,9 +125,5 @@ const Index = () => {
         <div className="mt-6">
           <SocialAndEmail isDark={false} includesEmailOnMobile={true} />
         </div>
-      </div>
-    </div>
-  )
+                </div> */
 }
-
-export default Index

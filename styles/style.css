@@ -18,7 +18,6 @@
 }
 
 /* figure out which of these you're actually using */
-
 @font-face {
   font-family: "Source Sans Pro";
   font-style: normal;
@@ -112,6 +111,21 @@ body {
 .hover-text-transparent-dark:hover {
   color: rgba(0, 0, 0, 0.55);
 }
+
+/* for index.ts parallax */
+/* .container {
+  width: 100vw;
+  height: 100vh;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  perspective: 1px;
+  perspective-origin: 0 0;
+}
+
+.parallax-child {
+  transform-origin: 0 0;
+  transform: translateZ(-2px) scale(3);
+} */
 
 @media only screen and (min-width: 1025px) {
   .grid {
