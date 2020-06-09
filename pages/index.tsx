@@ -49,25 +49,6 @@ const Index = () => {
 
 export default Index
 
-// <div className="absolute w-full h-full top-0 right-0 z-50">
-//   <div
-//     className="absolute top-0 left-0 w-full h-full"
-//     style={{
-//       background: "url(../static/toad.png) 66.66%  25% / cover no-repeat",
-//     }}
-//   />
-//   <div
-//     className="absolute top-0 left-0 w-full h-full"
-//     style={{
-//       background:
-//         "linear-gradient(rgba(0, 0, 0, .25), rgba(0, 0, 0, .25)), url(../static/boy.png) 33.33%  25% / cover no-repeat",
-//     }}
-//   />
-//   <div className="relative max-w-3xl mx-auto px-4" style={{ top: "33vh" }}>
-//     <FD className="w-full" />
-//   </div>
-// </div>
-
 {
   /* <div className="absolute bottom-0 sm:mb-16 mb-4 flex flex-col w-full">
         <div className="flex flex-col sm:flex sm:flex-row sm:justify-center sm:flex-wrap">
