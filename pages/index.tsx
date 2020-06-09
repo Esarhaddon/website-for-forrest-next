@@ -18,20 +18,23 @@ const Index = () => {
           transform: "translateZ(-1px) scale(2)",
         }}
       >
-        <div className="h-screen w-full bg-green-500 flex items-center justify-center">
-          [background image]
-        </div>
+        <div
+          className="h-screen w-full bg-green-500 flex items-center justify-center"
+          style={{
+            background: "url(../static/toad.png) 66.66%  25% / cover no-repeat",
+          }}
+        />
       </div>
       <div
         className="absolute top-0 right-0 w-full h-screen border border-solid border-black flex items-center justify-center bg-gray-500"
         style={{
           opacity: 0.5,
+          background:
+            "linear-gradient(rgba(0, 0, 0, .25), rgba(0, 0, 0, .25)), url(../static/boy.png) 33.33%  25% / cover no-repeat",
           transformOrigin: "0 0",
           transform: "translateZ(0)",
         }}
-      >
-        middleground
-      </div>
+      />
     </div>
   )
 }
