@@ -18,13 +18,16 @@ const Index = () => {
           transform: "translateZ(-1px) scale(2)",
         }}
       >
-        <div
-          className="w-full bg-green-500 flex items-center justify-center"
-          style={{
-            background: "url(../static/toad.png) 66.66%  25% / cover no-repeat",
-            height: "100vh",
-          }}
-        />
+        <div className="h-screen overflow-hidden">
+          <div
+            className="w-full bg-green-500 flex items-center justify-center"
+            style={{
+              background:
+                "url(../static/toad.png) 66.66%  25% / cover no-repeat",
+              height: "130vh",
+            }}
+          />
+        </div>
       </div>
       <div
         className="absolute top-0 right-0 w-full h-screen flex items-center justify-center"
@@ -38,6 +41,7 @@ const Index = () => {
           style={{
             background: "url(../static/boy.png) 33.33%  25% / cover no-repeat",
             height: "130vh",
+            marginTop: "30vh",
           }}
         />
       </div>
