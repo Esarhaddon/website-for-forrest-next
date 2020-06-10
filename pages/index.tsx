@@ -5,18 +5,20 @@ import Link from "next/link"
 
 // TO DO: optimize background images for this page as well?
 
+// (perspective — distance) / perspective = scaleFactor
+
 const Index = () => {
   return (
     <div>
       <div
         className="relative overflow-y-scroll overflow-x-hidden h-screen"
-        style={{ perspective: "1px", perspectiveOrigin: "bottom right" }}
+        style={{ perspective: "2px", perspectiveOrigin: "bottom right" }}
       >
         <div
-          className="absolute top-0 right-0 w-screen overflow-hidden"
+          className="absolute top-0 right-0 w-full overflow-hidden"
           style={{
             transformOrigin: "bottom right",
-            transform: "translateZ(-1px) scale(2)",
+            transform: "translateZ(-1.5px) scale(1.75)",
             height: "115vh",
             marginTop: "15vh",
           }}
@@ -46,10 +48,12 @@ const Index = () => {
             }}
           />
         </div>
+        {/* this could also be absolutely positioned further up the tree? */}
         <div className="sticky max-w-3xl mx-auto px-4" style={{ top: "33vh" }}>
           <FDickison className="w-full" />
         </div>
       </div>
+      {/* some guides just for development */}
       <div
         className="w-full absolute top-0 right-0 border-b border-solid border-black pointer-events-none"
         style={{ height: "33.33%" }}
@@ -57,6 +61,10 @@ const Index = () => {
       <div
         className="w-full absolute right-0 border-b border-solid border-black pointer-events-none"
         style={{ height: "33.33%", top: "33.33%" }}
+      />
+      <div
+        className="h-full top-0 right-0 absolute border-l border-solid border-black pointer-events-none"
+        style={{ width: "50vw" }}
       />
     </div>
   )
