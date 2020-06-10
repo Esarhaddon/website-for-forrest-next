@@ -59,7 +59,7 @@ const Index = () => {
           <div />
         </div>
         <div
-          className="absolute w-screen border border-solid border-red-500"
+          className="absolute w-screen flex items-center justify-center"
           style={{
             top: "100%",
             height: "30vh",
@@ -67,10 +67,16 @@ const Index = () => {
             transformOrigin: "bottom right",
           }}
         >
-          <div
+          {/* <div
             className="border-r border-solid border-red-500 h-full"
             style={{ width: "50%" }}
-          />
+          /> */}
+          <div
+            className="flex items-center justify-center"
+            style={{ marginTop: "-1.66vh" }}
+          >
+            <IndexNav />
+          </div>
         </div>
         {/* this could also be absolutely positioned further up the tree? */}
         <div className="sticky max-w-3xl mx-auto px-4" style={{ top: "33vh" }}>
@@ -104,7 +110,7 @@ const IndexNav = () => (
           <div className="text-center">
             <button
               type="button"
-              className="mx-4 border-2 focus:bg-white focus:text-black border-solid border-white text-white py-2 px-3 sm:py-4 sm:px-5 tracking-widest mt-6 leading-none cursor-pointer hover:bg-white hover:text-gray-900"
+              className="mx-4 border-2 focus:bg-white focus:text-black border-solid border-white text-white py-2 px-3 sm:py-4 sm:px-5 tracking-widest leading-none cursor-pointer hover:bg-white hover:text-gray-900"
               style={{
                 transition:
                   "color 170ms ease-in-out, background-color 170ms ease-in-out",
@@ -120,7 +126,7 @@ const IndexNav = () => (
           <div className="text-center">
             <button
               type="button"
-              className="mx-4 border-2 focus:bg-white focus:text-black border-solid border-white text-white py-2 px-3 sm:py-4 sm:px-5 tracking-widest mt-6 leading-none cursor-pointer hover:bg-white hover:text-gray-900"
+              className="mx-4 border-2 focus:bg-white focus:text-black border-solid border-white text-white py-2 px-3 sm:py-4 sm:px-5 tracking-widest leading-none cursor-pointer hover:bg-white hover:text-gray-900"
               style={{
                 transition:
                   "color 170ms ease-in-out, background-color 170ms ease-in-out",
@@ -136,7 +142,7 @@ const IndexNav = () => (
           <a>
             <button
               type="button"
-              className="hidden sm:inline mx-4 border-2 focus:bg-white focus:text-black border-solid border-white text-white py-2 px-3 sm:py-4 sm:px-5 tracking-widest mt-6 leading-none cursor-pointer hover:bg-white hover:text-gray-900"
+              className="hidden sm:inline mx-4 border-2 focus:bg-white focus:text-black border-solid border-white text-white py-2 px-3 sm:py-4 sm:px-5 tracking-widest leading-none cursor-pointer hover:bg-white hover:text-gray-900"
               style={{
                 transition:
                   "color 170ms ease-in-out, background-color 170ms ease-in-out",
