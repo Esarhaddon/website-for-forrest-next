@@ -12,19 +12,23 @@ const Index = () => {
     <div>
       <div
         className="relative overflow-y-scroll overflow-x-hidden h-screen"
-        style={{ perspective: "2px", perspectiveOrigin: "bottom right" }}
+        style={{
+          perspective: "2px",
+          perspectiveOrigin: "bottom right",
+          WebkitOverflowScrolling: "touch",
+        }}
       >
         <div
           className="absolute top-0 right-0 w-full overflow-hidden"
           style={{
             transformOrigin: "bottom right",
-            transform: "translateZ(-1.5px) scale(1.75)",
+            transform: "translateZ(-1px) scale(1.5)",
             height: "115vh",
             marginTop: "15vh",
           }}
         >
           <div
-            className="absolute top-0 right-0 w-full bg-green-500"
+            className="absolute top-0 right-0 w-screen"
             style={{
               background:
                 "url(../static/toad.png) 66.66%  25% / cover no-repeat",
@@ -40,12 +44,32 @@ const Index = () => {
           }}
         >
           <div
-            className="w-full absolute top-0 right-0"
+            className="w-screen absolute top-0 right-0"
             style={{
               background:
                 "linear-gradient(rgba(0, 0, 0, .25), rgba(0, 0, 0, .25)), url(../static/boy.png) 33.33%  25% / cover no-repeat",
               height: "130vh",
             }}
+          >
+            <div
+              className="absolute bottom-0 w-full flex items-center justify-center"
+              style={{ height: "33.33vh" }}
+            />
+          </div>
+          <div />
+        </div>
+        <div
+          className="absolute w-screen border border-solid border-red-500"
+          style={{
+            top: "100%",
+            height: "30vh",
+            transform: "translateZ(1px) scale(.5)",
+            transformOrigin: "bottom right",
+          }}
+        >
+          <div
+            className="border-r border-solid border-red-500 h-full"
+            style={{ width: "50%" }}
           />
         </div>
         {/* this could also be absolutely positioned further up the tree? */}
@@ -72,60 +96,60 @@ const Index = () => {
 
 export default Index
 
-{
-  /* <div className="absolute bottom-0 sm:mb-16 mb-4 flex flex-col w-full">
-        <div className="flex flex-col sm:flex sm:flex-row sm:justify-center sm:flex-wrap">
-          <Link href="/[grid]" as="/illustration">
-            <a>
-              <div className="text-center">
-                <button
-                  type="button"
-                  className="mx-4 border-2 focus:bg-white focus:text-black border-solid border-white text-white py-2 px-3 sm:py-4 sm:px-5 tracking-widest mt-6 leading-none cursor-pointer hover:bg-white hover:text-gray-900"
-                  style={{
-                    transition:
-                      "color 170ms ease-in-out, background-color 170ms ease-in-out",
-                  }}
-                >
-                  ILLUSTRATION
-                </button>
-              </div>
-            </a>
-          </Link>
-          <Link href="/about">
-            <a>
-              <div className="text-center">
-                <button
-                  type="button"
-                  className="mx-4 border-2 focus:bg-white focus:text-black border-solid border-white text-white py-2 px-3 sm:py-4 sm:px-5 tracking-widest mt-6 leading-none cursor-pointer hover:bg-white hover:text-gray-900"
-                  style={{
-                    transition:
-                      "color 170ms ease-in-out, background-color 170ms ease-in-out",
-                  }}
-                >
-                  ABOUT
-                </button>
-              </div>
-            </a>
-          </Link>
+const IndexNav = () => (
+  <div className="flex flex-col w-full">
+    <div className="flex flex-col sm:flex sm:flex-row sm:justify-center sm:flex-wrap">
+      <Link href="/[grid]" as="/illustration">
+        <a>
           <div className="text-center">
-            <Link href="/contact">
-              <a>
-                <button
-                  type="button"
-                  className="hidden sm:inline mx-4 border-2 focus:bg-white focus:text-black border-solid border-white text-white py-2 px-3 sm:py-4 sm:px-5 tracking-widest mt-6 leading-none cursor-pointer hover:bg-white hover:text-gray-900"
-                  style={{
-                    transition:
-                      "color 170ms ease-in-out, background-color 170ms ease-in-out",
-                  }}
-                >
-                  CONTACT
-                </button>
-              </a>
-            </Link>
+            <button
+              type="button"
+              className="mx-4 border-2 focus:bg-white focus:text-black border-solid border-white text-white py-2 px-3 sm:py-4 sm:px-5 tracking-widest mt-6 leading-none cursor-pointer hover:bg-white hover:text-gray-900"
+              style={{
+                transition:
+                  "color 170ms ease-in-out, background-color 170ms ease-in-out",
+              }}
+            >
+              ILLUSTRATION
+            </button>
           </div>
-        </div>
-        <div className="mt-6">
-          <SocialAndEmail isDark={false} includesEmailOnMobile={true} />
-        </div>
-                </div> */
-}
+        </a>
+      </Link>
+      <Link href="/about">
+        <a>
+          <div className="text-center">
+            <button
+              type="button"
+              className="mx-4 border-2 focus:bg-white focus:text-black border-solid border-white text-white py-2 px-3 sm:py-4 sm:px-5 tracking-widest mt-6 leading-none cursor-pointer hover:bg-white hover:text-gray-900"
+              style={{
+                transition:
+                  "color 170ms ease-in-out, background-color 170ms ease-in-out",
+              }}
+            >
+              ABOUT
+            </button>
+          </div>
+        </a>
+      </Link>
+      <div className="text-center">
+        <Link href="/contact">
+          <a>
+            <button
+              type="button"
+              className="hidden sm:inline mx-4 border-2 focus:bg-white focus:text-black border-solid border-white text-white py-2 px-3 sm:py-4 sm:px-5 tracking-widest mt-6 leading-none cursor-pointer hover:bg-white hover:text-gray-900"
+              style={{
+                transition:
+                  "color 170ms ease-in-out, background-color 170ms ease-in-out",
+              }}
+            >
+              CONTACT
+            </button>
+          </a>
+        </Link>
+      </div>
+    </div>
+    <div className="mt-6">
+      <SocialAndEmail isDark={false} includesEmailOnMobile={true} />
+    </div>
+  </div>
+)
