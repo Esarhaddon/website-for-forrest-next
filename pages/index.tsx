@@ -9,9 +9,35 @@ import Link from "next/link"
 
 const Index = () => {
   return (
-    <div>
+    <div className="absolute h-full w-full top-0 right-0">
+      <div className="absolute w-full h-full bg-gray-400 sm:hidden overflow-hidden">
+        <div
+          className="absolute top-0 right-0 w-screen h-full"
+          style={{
+            background: "url(../static/toad.png) 66.66%  25% / cover no-repeat",
+            height: "120vh",
+          }}
+        />
+        <div
+          className="w-full h-full absolute top-0 right-0"
+          style={{
+            background:
+              "linear-gradient(rgba(0, 0, 0, .25), rgba(0, 0, 0, .25)), url(../static/boy.png) 33.33%  25% / cover no-repeat",
+            height: "120vh",
+          }}
+        ></div>
+        <div className="absolute w-full px-4" style={{ top: "33.33vh" }}>
+          <FDickison className="w-full" />
+        </div>
+        <div
+          className="absolute bottom-0 w-full flex items-center justify-center"
+          style={{ height: "33.33vh" }}
+        >
+          <IndexNav />
+        </div>
+      </div>
       <div
-        className="relative overflow-y-scroll overflow-x-hidden h-screen"
+        className="absolute w-full top-0 right-0 overflow-y-scroll overflow-x-hidden h-screen sm:block hidden"
         style={{
           perspective: "2px",
           perspectiveOrigin: "bottom right",
@@ -19,7 +45,7 @@ const Index = () => {
         }}
       >
         <div
-          className="absolute top-0 right-0 w-full overflow-hidden"
+          className="absolute top-0 right-0 w-screen overflow-hidden"
           style={{
             transformOrigin: "bottom right",
             transform: "translateZ(-1px) scale(1.5)",
@@ -67,19 +93,17 @@ const Index = () => {
             transformOrigin: "bottom right",
           }}
         >
-          {/* <div
-            className="border-r border-solid border-red-500 h-full"
-            style={{ width: "50%" }}
-          /> */}
           <div
             className="flex items-center justify-center"
-            style={{ marginTop: "-1.66vh" }}
+            style={{ marginTop: "calc(-1.66vh - 1rem)" }}
           >
             <IndexNav />
           </div>
         </div>
-        {/* this could also be absolutely positioned further up the tree? */}
-        <div className="sticky max-w-3xl mx-auto px-4" style={{ top: "33vh" }}>
+        <div
+          className="sticky max-w-3xl mx-auto px-4"
+          style={{ top: "33.33vh" }}
+        >
           <FDickison className="w-full" />
         </div>
       </div>
@@ -103,14 +127,14 @@ const Index = () => {
 export default Index
 
 const IndexNav = () => (
-  <div className="flex flex-col w-full">
-    <div className="flex flex-col sm:flex sm:flex-row sm:justify-center sm:flex-wrap">
+  <div className="flex flex-col w-full -mt-4">
+    <div className="flex  justify-center flex-wrap">
       <Link href="/[grid]" as="/illustration">
         <a>
           <div className="text-center">
             <button
               type="button"
-              className="mx-4 border-2 focus:bg-white focus:text-black border-solid border-white text-white py-2 px-3 sm:py-4 sm:px-5 tracking-widest leading-none cursor-pointer hover:bg-white hover:text-gray-900"
+              className="mx-2 mt-4 sm:mx-4 border-2 focus:bg-white focus:text-black border-solid border-white text-white py-2 px-3 sm:py-4 sm:px-5 tracking-widest leading-none cursor-pointer hover:bg-white hover:text-gray-900"
               style={{
                 transition:
                   "color 170ms ease-in-out, background-color 170ms ease-in-out",
@@ -126,7 +150,7 @@ const IndexNav = () => (
           <div className="text-center">
             <button
               type="button"
-              className="mx-4 border-2 focus:bg-white focus:text-black border-solid border-white text-white py-2 px-3 sm:py-4 sm:px-5 tracking-widest leading-none cursor-pointer hover:bg-white hover:text-gray-900"
+              className="mx-2 mt-4 sm:mx-4 border-2 focus:bg-white focus:text-black border-solid border-white text-white py-2 px-3 sm:py-4 sm:px-5 tracking-widest leading-none cursor-pointer hover:bg-white hover:text-gray-900"
               style={{
                 transition:
                   "color 170ms ease-in-out, background-color 170ms ease-in-out",
@@ -142,7 +166,7 @@ const IndexNav = () => (
           <a>
             <button
               type="button"
-              className="hidden sm:inline mx-4 border-2 focus:bg-white focus:text-black border-solid border-white text-white py-2 px-3 sm:py-4 sm:px-5 tracking-widest leading-none cursor-pointer hover:bg-white hover:text-gray-900"
+              className="mx-2 mt-4 sm:mx-4 border-2 focus:bg-white focus:text-black border-solid border-white text-white py-2 px-3 sm:py-4 sm:px-5 tracking-widest leading-none cursor-pointer hover:bg-white hover:text-gray-900"
               style={{
                 transition:
                   "color 170ms ease-in-out, background-color 170ms ease-in-out",
@@ -155,7 +179,8 @@ const IndexNav = () => (
       </div>
     </div>
     <div className="mt-6">
-      <SocialAndEmail isDark={false} includesEmailOnMobile={true} />
+      {/* TO DO: get rid of email prop */}
+      <SocialAndEmail isDark={false} includesEmailOnMobile={false} />
     </div>
   </div>
 )

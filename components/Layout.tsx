@@ -5,7 +5,6 @@ import { useEffect } from "react"
 import SocialAndEmail from "./SocialAndEmail"
 import { useState } from "react"
 import Loading from "../components/Loading"
-import FD from "../static/icons/forrest-dickison.svg"
 import { useRouter, Router } from "next/router"
 import MobileNavWrapper from "../components/MobileNavWrapper"
 
