@@ -49,8 +49,7 @@ const Index = () => {
           style={{
             transformOrigin: "bottom right",
             transform: "translateZ(-1px) scale(1.5)",
-            height: "115vh",
-            marginTop: "15vh",
+            height: "130vh",
           }}
         >
           <div
@@ -59,6 +58,7 @@ const Index = () => {
               background:
                 "url(../static/toad.png) 66.66%  25% / cover no-repeat",
               height: "130vh",
+              marginTop: "10vh",
             }}
           />
         </div>
@@ -128,7 +128,7 @@ export default Index
 
 const IndexNav = () => (
   <div className="flex flex-col w-full -mt-4">
-    <div className="flex  justify-center flex-wrap">
+    <div className="flex justify-center flex-wrap">
       <Link href="/[grid]" as="/illustration">
         <a>
           <div className="text-center">

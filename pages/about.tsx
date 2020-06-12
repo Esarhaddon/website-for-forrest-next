@@ -7,7 +7,7 @@ export default () => (
           style={{ paddingTop: "120%" }}
         >
           <div
-            className="bg-gray-500 absolute right-0 bottom-0 flex items-center justify-center text-gray-100 text-3xl"
+            className="bg-gray-500 absolute right-0 bottom-0 text-center flex items-center justify-center text-gray-100 text-3xl"
             style={{
               width: "calc(100% + 4rem)",
               height: "calc(100% + 4rem)",

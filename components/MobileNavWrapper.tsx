@@ -20,6 +20,11 @@ export default (props: MobileNavWrapperProps) => {
   const [headerPinned, setHeaderPinned] = useState(false)
   const [headerTop, setHeaderTop] = useState<0 | "-7.75rem">(0)
 
+  const { pinnedNav } = props
+  useEffect(() => {
+    console.log("pinnedNav is", pinnedNav)
+  }, [pinnedNav])
+
   type VoidFunc = () => void
   // TO DO: move this inside the useEffect?
   const throttledHandleScroll = (wait: number): VoidFunc => {
@@ -49,39 +54,41 @@ export default (props: MobileNavWrapperProps) => {
 
   // if intersectionObserver isn't supported, than nothing happens and header stays absolutely positioned
   useEffect(() => {
-    if (props.pinnedNav) {
-      const observer = new IntersectionObserver(
-        (entries) => {
-          const entry = entries[0]
-          setIsIntersecting(entries[0].isIntersecting)
-          // unpin header if user scrolls all the way to the top again
-          if (Math.round(entry.intersectionRatio) === 1) {
+    let observer: IntersectionObserver | undefined = undefined
+    const target = document.getElementById("nav-spacer")
+    observer = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0]
+        setIsIntersecting(entries[0].isIntersecting)
+        if (Math.round(entry.intersectionRatio) === 1) {
+          if (entry.isIntersecting) {
             setHeaderIsInitial(true)
             setHeaderPinned(false)
+            setLastScroll(undefined)
+            setHeaderTop("-7.75rem")
           }
-          // otherwise, pin the header
-          else {
+        } else if (Math.round(entry.intersectionRatio) === 0) {
+          if (!entry.isIntersecting) {
+            setHeaderIsInitial(false)
             setHeaderPinned(true)
           }
-        },
-        { threshold: [0, 1] }
-      )
-      const target = document.getElementById("nav-spacer")
-      observer.observe(target)
-    }
+        }
+      },
+      { threshold: [0, 1] }
+    )
+    observer.observe(target)
   }, [])
 
-  // hide or show header based on scroll direction
+  // hide or show pinned header based on scroll direction
   useEffect(() => {
-    if (!animationRunning) {
-      // don't hide the header if the user is still close to the top
-      if (lastScroll === "down" && !isIntersecting) {
+    if (!animationRunning && !headerIsInitial) {
+      if (lastScroll === "down") {
         setHeaderTop("-7.75rem")
       } else if (lastScroll === "up") {
         setHeaderTop(0)
       }
     }
-  }, [lastScroll, animationRunning, isIntersecting])
+  }, [lastScroll, animationRunning, headerIsInitial])
 
   // whenever headerTop changes, set a timeout to keep track of when header animation is finished
   useEffect(() => {
@@ -89,20 +96,18 @@ export default (props: MobileNavWrapperProps) => {
     setTimeout(() => setAnimationRunning(false), 150)
   }, [headerTop])
 
-  // Aarrrg! not really sure why a seperate effect is necessary, lastScroll seems to be one behind
-  useEffect(() => {
-    if (headerPinned && headerIsInitial) {
-      setHeaderTop("-7.75rem")
-      setHeaderIsInitial(false)
-    }
-  }, [headerPinned, headerIsInitial])
-
   return (
     <div>
       <div
         className={`sm:hidden z-40 right-0 w-full flex justify-between items-center align-middle text-gray-900 font-semibold py-4 bg-white`}
         style={
-          headerPinned
+          showMobileNav
+            ? {
+                position: "fixed",
+                paddingRight: "calc(5vw + 5px)",
+                paddingLeft: "calc(5vw + 5px)",
+              }
+            : headerPinned && props.pinnedNav
             ? {
                 position: "fixed",
                 transition: "top .15s linear",

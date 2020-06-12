@@ -8,7 +8,6 @@ interface GridProps {
   toDisplay: Image[]
 }
 
-// TO DO: get rid of scroll bounce on grid and mobile nav 'cause its wreaking havoc on those features
 const Grid = ({ gridType, toDisplay }: GridProps) => {
   const [displayHeight, setDisplayHeight] = useState(0)
   useEffect(() => {
@@ -17,7 +16,7 @@ const Grid = ({ gridType, toDisplay }: GridProps) => {
       const thumbnailHeight = thumbnail.offsetHeight
       setDisplayHeight(thumbnailHeight)
     }
-  }, [document])
+  })
 
   return (
     <div

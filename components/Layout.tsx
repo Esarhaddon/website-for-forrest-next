@@ -15,11 +15,12 @@ export type PageType = GridType | "about" | "contact" | "index" | ""
 export default (props) => {
   // TO DO: don't use index as default value; it causes index page flash on relaod for any other page
   const [isFor, setIsFor] = useState<PageType | undefined>(undefined)
+  const [isForSingle, setIsForSingle] = useState(false)
 
   const router = useRouter()
   useEffect(() => {
-    console.log(`setting isFor to ${router.asPath.split("/")[1]}`)
     setIsFor(router.asPath.split("/")[1] as PageType)
+    setIsForSingle(router.pathname.split("/")[2] === "[singleImage]")
   }, [router.query])
   const [isLoading, setIsLoading] = useState(false)
 
@@ -36,7 +37,9 @@ export default (props) => {
 
   return (
     // this will have to change when pages for fine art etc. are added
-    <MobileNavWrapper pinnedNav={isFor === "illustration"}>
+    <MobileNavWrapper
+      pinnedNav={(isFor === "illustration" || "about") && !isForSingle}
+    >
       <div>
         <div
           className={`
