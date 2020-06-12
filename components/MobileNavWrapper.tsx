@@ -14,16 +14,10 @@ export default (props: MobileNavWrapperProps) => {
   const [lastScroll, setLastScroll] = useState<"up" | "down" | undefined>(
     undefined
   )
-  const [isIntersecting, setIsIntersecting] = useState(true)
   const [headerIsInitial, setHeaderIsInitial] = useState(true)
   const [animationRunning, setAnimationRunning] = useState(false)
   const [headerPinned, setHeaderPinned] = useState(false)
   const [headerTop, setHeaderTop] = useState<0 | "-7.75rem">(0)
-
-  const { pinnedNav } = props
-  useEffect(() => {
-    console.log("pinnedNav is", pinnedNav)
-  }, [pinnedNav])
 
   type VoidFunc = () => void
   // TO DO: move this inside the useEffect?
@@ -59,7 +53,6 @@ export default (props: MobileNavWrapperProps) => {
     observer = new IntersectionObserver(
       (entries) => {
         const entry = entries[0]
-        setIsIntersecting(entries[0].isIntersecting)
         if (Math.round(entry.intersectionRatio) === 1) {
           if (entry.isIntersecting) {
             setHeaderIsInitial(true)
