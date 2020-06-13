@@ -2,6 +2,7 @@ import "../styles/style.css"
 import SocialAndEmail from "../components/SocialAndEmail"
 import FDickison from "../static/icons/forrest-dickison.svg"
 import Link from "next/link"
+import { useEffect, useState, useLayoutEffect } from "react"
 
 // TO DO: optimize background images for this page as well?
 
@@ -9,8 +10,8 @@ import Link from "next/link"
 
 const Index = () => {
   return (
-    <div className="absolute h-full w-full top-0 right-0">
-      <div className="absolute w-full h-full bg-gray-400 sm:hidden overflow-hidden">
+    <div className="w-screen h-full top-0 right-0 z-50">
+      <div className="absolute w-full h-full bg-gray-400 sm:hidden overflow-hidden top-0 right-0 z-50">
         <div
           className="absolute top-0 right-0 w-screen h-full"
           style={{
@@ -26,7 +27,10 @@ const Index = () => {
             height: "120vh",
           }}
         ></div>
-        <div className="absolute w-full px-4" style={{ top: "33.33vh" }}>
+        <div
+          className="sm:hidden z-50 absolute w-full px-4"
+          style={{ top: "33.33%" }}
+        >
           <FDickison className="w-full" />
         </div>
         <div
@@ -108,18 +112,18 @@ const Index = () => {
         </div>
       </div>
       {/* some guides just for development */}
-      <div
-        className="w-full absolute top-0 right-0 border-b border-solid border-black pointer-events-none"
+      {/* <div
+        className="w-full absolute top-0 right-0 border-b border-solid border-black pointer-events-none z-50"
         style={{ height: "33.33%" }}
       />
       <div
-        className="w-full absolute right-0 border-b border-solid border-black pointer-events-none"
+        className="w-full absolute right-0 border-b border-solid border-black pointer-events-none z-50"
         style={{ height: "33.33%", top: "33.33%" }}
       />
       <div
-        className="h-full top-0 right-0 absolute border-l border-solid border-black pointer-events-none"
+        className="h-full top-0 right-0 absolute border-l border-solid border-black pointer-events-none z-50"
         style={{ width: "50vw" }}
-      />
+      /> */}
     </div>
   )
 }
