@@ -204,9 +204,15 @@ const SingleImage = ({
             height: ".85rem",
           }}
         />
-        <img
-          className="max-h-full h-auto max-w-full w-auto"
-          src={`${current.src}?h=${dimensions.h}`}
+        <div
+          className="w-full h-full z-50"
+          style={{
+            // background: `url(${current.src}?h=${dimensions.h}) contain no-repeat`,
+            backgroundImage: `url(${current.src}?h=${dimensions.h})`,
+            backgroundSize: "contain",
+            backgroundRepeat: "no-repeat",
+            backgroundPosition: "center",
+          }}
         />
       </div>
     </div>
