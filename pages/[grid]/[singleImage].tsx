@@ -3,7 +3,6 @@ import { GridType } from "../../components/Layout"
 import fetchImagesFor, { Image } from "../../utils/fetchImagesFor"
 import Vibrant from "node-vibrant"
 import Link from "next/link"
-import { useRouter } from "next/router"
 import Arrow from "../../static/icons/arrow.svg"
 import ExitX from "../../static/icons/close.svg"
 
