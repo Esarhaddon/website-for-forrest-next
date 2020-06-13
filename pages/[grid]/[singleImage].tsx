@@ -34,28 +34,26 @@ const SingleImage = ({
   const [hideModal, setHideModal] = useState(true)
 
   useEffect(() => {
-    if (screen && screen.height && current) {
-      const maxHeight = Math.round(screen.height * 1.5)
-      const maxWidth = Math.round(screen.width * 0.9)
-      const dimensions = {
-        h: current.originalHeight,
-        w: current.originalWidth,
-      } as Dimensions
+    const maxHeight = Math.round(screen.height * 1.5)
+    const maxWidth = Math.round(screen.width * 0.9)
+    const dimensions = {
+      h: current.originalHeight,
+      w: current.originalWidth,
+    } as Dimensions
 
-      if (dimensions.h > maxHeight) {
-        const shrinkFactor = maxHeight / dimensions.h
-        dimensions.h = maxHeight
-        dimensions.w = Math.round(dimensions.w * shrinkFactor)
-      }
-
-      if (dimensions.w > maxWidth) {
-        const shrinkFactor = maxWidth / dimensions.w
-        dimensions.w = maxWidth
-        dimensions.h = Math.round(dimensions.h * shrinkFactor)
-      }
-
-      setDimensions(dimensions)
+    if (dimensions.h > maxHeight) {
+      const shrinkFactor = maxHeight / dimensions.h
+      dimensions.h = maxHeight
+      dimensions.w = Math.round(dimensions.w * shrinkFactor)
     }
+
+    if (dimensions.w > maxWidth) {
+      const shrinkFactor = maxWidth / dimensions.w
+      dimensions.w = maxWidth
+      dimensions.h = Math.round(dimensions.h * shrinkFactor)
+    }
+
+    setDimensions(dimensions)
   }, [])
 
   useEffect(() => {
