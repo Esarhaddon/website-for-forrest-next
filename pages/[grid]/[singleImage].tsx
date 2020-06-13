@@ -205,7 +205,7 @@ const SingleImage = ({
           }}
         />
         <div
-          className="w-full h-full z-50"
+          className="w-full h-full"
           style={{
             background: `center / contain no-repeat url(${current.src}?h=${dimensions.h})`,
           }}
