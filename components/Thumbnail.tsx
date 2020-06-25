@@ -65,7 +65,6 @@ export default ({ image, displayHeight, gridType, index }: ThumbnailProps) => {
                   ...(loaded && loaded.slice(loaded.length - 4) !== "h=5"
                     ? { backgroundImage: `url(${loaded})` }
                     : null),
-                  backgroundSize: "cover",
                 }}
               />
             </div>

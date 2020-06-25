@@ -7,7 +7,28 @@ export interface Image {
   originalHeight: number
   originalWidth: number
 }
+interface IllustrationPageContent {
+  total: number
+  items: [
+    {
+      fields: {
+        illustrations: Reference[]
+      }
+    }
+  ]
+  includes: {
+    Entry: ArtWork[]
+    Asset: Asset[]
+  }
+}
 
+interface Reference {
+  sys: {
+    id: string
+  }
+}
+
+// in future maybe a generic type Entry<U>
 interface ArtWork {
   sys: {
     id: string
@@ -15,7 +36,6 @@ interface ArtWork {
     contentType: { sys: { id: "artWork" } }
   }
   fields: {
-    type: "illustration" | "animation" | "fine art"
     title: "string"
     description?: "string"
     image: {
@@ -46,32 +66,36 @@ interface Asset {
   }
 }
 
-export default async (
-  imagesFor: "animation" | "illustration" | "fine art"
-): Promise<Image[]> => {
+export default async (imagesFor: "illustration"): Promise<Image[]> => {
   const res = await fetch(
-    `${process.env.CONTENTFUL_API}?content_type=artWork&fields.type=${imagesFor}`,
+    `${process.env.CONTENTFUL_API}?content_type=illustration&include=2`,
     {
       method: "GET",
       headers: {
-        Authorization: `Bearer ${process.env.CONTENTFUL_API_KEY}`
-      }
+        Authorization: `Bearer ${process.env.CONTENTFUL_API_KEY}`,
+      },
     }
   )
-  const json = await res.json()
-  const {
-    items,
-    includes: { Asset }
-  }: { items: ArtWork[]; includes: { Asset: Asset[] } } = json
 
-  const images: Image[] = items.map(item => {
-    const asset = Asset.find(Asset => Asset.sys.id === item.fields.image.sys.id)
+  // at some point you need to figure out pagination
+  const content: IllustrationPageContent = await res.json()
+  const illustrations: Reference[] = content.items[0].fields.illustrations
+  console.log("illustrations are", illustrations)
+  const entries: ArtWork[] = illustrations.map((illustration) =>
+    content.includes.Entry.find((entry) => illustration.sys.id === entry.sys.id)
+  )
+  console.log("entries are", entries)
+  const images: Image[] = entries.map((entry) => {
+    const asset = content.includes.Asset.find(
+      (asset) => asset.sys.id === entry.fields.image.sys.id
+    )
+    console.log("asset is", asset)
     return {
-      title: item.fields.title,
-      description: item.fields.description,
+      title: entry.fields.title,
+      description: entry.fields.description,
       src: asset.fields.file.url,
       originalHeight: asset.fields.file.details.image.height,
-      originalWidth: asset.fields.file.details.image.width
+      originalWidth: asset.fields.file.details.image.width,
     }
   })
 
