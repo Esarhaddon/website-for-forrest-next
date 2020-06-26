@@ -37,11 +37,6 @@ export default (props) => {
     return isLoading ? <Loading /> : props.children
   }
 
-  console.log(
-    "pinnedNav statement evaluates to",
-    (isFor === "illustration" || "about") && !isForSingle
-  )
-
   return (
     // this will have to change when pages for fine art etc. are added
     <MobileNavWrapper

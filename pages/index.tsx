@@ -2,7 +2,6 @@ import "../styles/style.css"
 import SocialAndEmail from "../components/SocialAndEmail"
 import FDickison from "../static/icons/forrest-dickison.svg"
 import Link from "next/link"
-import { useEffect, useState, useLayoutEffect } from "react"
 
 // TO DO: optimize background images for this page as well?
 

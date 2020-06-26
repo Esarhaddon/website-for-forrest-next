@@ -60,11 +60,14 @@ export default ({ image, displayHeight, gridType, index }: ThumbnailProps) => {
             >
               <div
                 id={`thumbnail-${index}`}
-                className="absolute w-full h-full top-0 left-0 bg-cover bg-no-repeat bg-center text-black"
+                className="absolute w-full h-full top-0 left-0 bg-cover bg-no-repeat text-black"
                 style={{
                   ...(loaded && loaded.slice(loaded.length - 4) !== "h=5"
                     ? { backgroundImage: `url(${loaded})` }
                     : null),
+                  backgroundPosition: image.offsets
+                    ? `left ${image.offsets.left}% top ${image.offsets.top}%`
+                    : "center",
                 }}
               />
             </div>

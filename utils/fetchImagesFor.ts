@@ -6,6 +6,7 @@ export interface Image {
   description?: string
   originalHeight: number
   originalWidth: number
+  offsets?: Offsets
 }
 interface IllustrationPageContent {
   total: number
@@ -38,12 +39,18 @@ interface ArtWork {
   fields: {
     title: "string"
     description?: "string"
+    offsets?: Offsets
     image: {
       sys: {
         id: string
       }
     }
   }
+}
+
+interface Offsets {
+  left: number
+  top: number
 }
 
 interface Asset {
@@ -96,6 +103,7 @@ export default async (imagesFor: "illustration"): Promise<Image[]> => {
       src: asset.fields.file.url,
       originalHeight: asset.fields.file.details.image.height,
       originalWidth: asset.fields.file.details.image.width,
+      offsets: entry.fields.offsets,
     }
   })
 
