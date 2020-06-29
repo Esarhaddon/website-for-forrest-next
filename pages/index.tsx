@@ -182,8 +182,7 @@ const IndexNav = () => (
       </div>
     </div>
     <div className="mt-6">
-      {/* TO DO: get rid of email prop */}
-      <SocialAndEmail isDark={false} includesEmailOnMobile={false} />
+      <SocialAndEmail isDark={false} />
     </div>
   </div>
 )

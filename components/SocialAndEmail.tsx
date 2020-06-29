@@ -1,12 +1,9 @@
 import InstagramLogo from "../static/icons/001-instagram.svg"
 import FacebookLogo from "../static/icons/002-facebook-circular-logo.svg"
 import TwitterLogo from "../static/icons/003-twitter-circular-logo.svg"
-import EmailLogo from "../static/icons/004-email.svg"
-import Link from "next/link"
 
 interface SocialAndEmailProps {
   isDark: boolean
-  includesEmailOnMobile: boolean
 }
 
 export default (props: SocialAndEmailProps) => {
@@ -59,20 +56,6 @@ export default (props: SocialAndEmailProps) => {
           >
             <TwitterLogo className="h-8 w-8 fill-current mx-auto" />
           </a>
-        </div>
-        <div
-          className={`w-12 hover:text-${baseColor} sm:hidden ${
-            !props.includesEmailOnMobile ? "hidden" : ""
-          }`}
-          style={{
-            transition: "color 170ms ease-in-out, opacity 170ms ease-in-out",
-          }}
-        >
-          <Link href="/contact">
-            <a>
-              <EmailLogo className="h-8 w-8 fill-current mx-auto" />
-            </a>
-          </Link>
         </div>
       </div>
     </div>

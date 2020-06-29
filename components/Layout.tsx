@@ -125,7 +125,7 @@ export default (props) => {
         </div>
         {isLoading ? <Loading /> : props.children}
         <div style={{ paddingTop: "calc(3vw + .75rem)" }}>
-          <SocialAndEmail isDark={true} includesEmailOnMobile={false} />
+          <SocialAndEmail isDark={true} />
           <div
             className="flex justify-center items-center text-gray-700 leading-none "
             style={{
