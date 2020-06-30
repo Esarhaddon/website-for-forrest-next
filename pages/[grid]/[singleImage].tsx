@@ -83,7 +83,6 @@ const SingleImage = ({
       ) : null}
       <div
         style={{
-          // TO DO: Start with height at 100vh to avoid tacky bounce thing?
           maxWidth: "90vw",
           width: dimensions.w + "px",
           ...(imageHasLoaded
@@ -202,7 +201,7 @@ const SingleImage = ({
           }}
         />
         <div
-          className="w-full h-full"
+          className="w-full h-full cursor-pointer"
           style={{
             background: `center / contain no-repeat url(${current.src}?h=${dimensions.h})`,
           }}
