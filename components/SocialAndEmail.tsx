@@ -1,6 +1,7 @@
 import InstagramLogo from "../static/icons/001-instagram.svg"
 import FacebookLogo from "../static/icons/002-facebook-circular-logo.svg"
 import TwitterLogo from "../static/icons/003-twitter-circular-logo.svg"
+import Twitter from "./icons/twitter"
 
 interface SocialAndEmailProps {
   isDark: boolean
@@ -54,7 +55,7 @@ export default (props: SocialAndEmailProps) => {
             target="_blank"
             rel="noopener"
           >
-            <TwitterLogo className="h-8 w-8 fill-current mx-auto" />
+            <Twitter className="h-8 w-8 fill-current mx-auto" />
           </a>
         </div>
       </div>
