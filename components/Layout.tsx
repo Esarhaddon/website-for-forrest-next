@@ -83,25 +83,25 @@ export default (props) => {
             </div>
             <div className="mr-8 font-semibold text-gray-900">/</div>
             <div>
-              <Link href="/contact">
+              <Link href="/about">
                 <a
                   className={`mr-8 ${
-                    isFor === "contact" ? "text-gray-900" : "text-gray-500"
+                    isFor === "about" ? "text-gray-900" : "text-gray-500"
                   } hover:text-gray-900`}
                 >
-                  CONTACT
+                  ABOUT
                 </a>
               </Link>
             </div>
             <div className="mr-8 font-semibold text-gray-900">/</div>
             <div>
-              <Link href="/about">
+              <Link href="/contact">
                 <a
                   className={`${
-                    isFor === "about" ? "text-gray-900" : "text-gray-500"
+                    isFor === "contact" ? "text-gray-900" : "text-gray-500"
                   } hover:text-gray-900`}
                 >
-                  ABOUT
+                  CONTACT
                 </a>
               </Link>
             </div>

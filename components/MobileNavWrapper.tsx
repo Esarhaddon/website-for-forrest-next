@@ -92,7 +92,6 @@ export default (props: MobileNavWrapperProps) => {
   useEffect(() => {
     setAnimationRunning(true)
     const timeoutId = setTimeout(() => setAnimationRunning(false), 150)
-    // ?
     return () => clearTimeout(timeoutId)
   }, [headerTop])
 

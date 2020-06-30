@@ -25,7 +25,7 @@ const Grid = ({ gridType, toDisplay }: GridProps) => {
         display: "grid",
         paddingRight: "5vw",
         paddingLeft: "5vw",
-        marginBottom: "-5px",
+        // marginBottom: "-5px",
       }}
     >
       {toDisplay.map((image, index) => {

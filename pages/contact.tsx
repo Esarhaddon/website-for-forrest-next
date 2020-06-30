@@ -13,9 +13,11 @@ export default () => {
   const [mailError, setMailError] = useState<Error | undefined>(undefined)
   const [showSent, setShowSent] = useState(false)
   useEffect(() => {
+    let timeoutId: NodeJS.Timeout | undefined = undefined
     if (showSent) {
-      setTimeout(() => setShowSent(false), 1500)
+      timeoutId = setTimeout(() => setShowSent(false), 1500)
     }
+    return () => clearTimeout(timeoutId)
   }, [showSent])
 
   return (
@@ -53,8 +55,8 @@ export default () => {
       {({ errors, touched, isSubmitting }) => {
         return (
           <Form className="flex flex-col w-11/12 sm:w-7/12 md:w-6/12 mx-auto">
-            <div className="flex sm:flex-row flex-col">
-              <div className="flex flex-col mb-8 flex-1 sm:pr-3">
+            <div className="flex flex-row flex-wrap mt-4">
+              <div className="flex flex-col w-1/2 mb-8 sm:pr-4 pr-3">
                 <label className="text-xl font-light mb-1" htmlFor="first_name">
                   First Name
                   <div className="inline ml-1 text-xl text-red-500">*</div>
@@ -70,7 +72,7 @@ export default () => {
                   name="first_name"
                 />
               </div>
-              <div className="flex flex-col mb-8 flex-1 sm:pl-3">
+              <div className="flex flex-col w-1/2 mb-8 sm:pl-4 pl-3">
                 <label className="text-xl font-light mb-1" htmlFor="last_name">
                   Last Name
                   <div className="inline ml-1 text-xl text-red-500">*</div>
@@ -141,9 +143,9 @@ export default () => {
                 Your message failed to send. Please try again later.
               </div>
             ) : null}
-            <div className="flex sm:justify-start justify-center">
+            <div className="flex justify-start">
               <button
-                className="border-2 border-solid border-gray-900 text-gray-800 py-3 px-6 tracking-widest leading-none cursor-pointer hover:bg-gray-900 hover:text-white mt-8 mb-8"
+                className="border-2 border-solid border-gray-900 text-gray-800 py-3 px-6 tracking-widest leading-none cursor-pointer hover:bg-gray-900 hover:text-white mt-8 mb-6"
                 style={{
                   transition:
                     "color 170ms ease-in-out, background-color 170ms ease-in-out",

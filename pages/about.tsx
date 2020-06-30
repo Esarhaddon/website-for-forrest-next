@@ -33,7 +33,7 @@ export default () => (
         nulla ut tempor sit minim cillum. Tempor sint laboris enim id elit et
         nisi eiusmod consequat adipisicing minim id deserunt cillum.
       </p>
-      <p className="mb-4">
+      <p>
         Anim non elit laborum irure reprehenderit sit nostrud qui amet elit
         magna amet aliquip deserunt. Esse esse velit est consequat veniam nulla
         laborum exercitation sit ea. Nisi ullamco dolore elit id proident est
