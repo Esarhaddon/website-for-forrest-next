@@ -13,7 +13,6 @@ export type GridType = "animation" | "illustration" | "fine art"
 export type PageType = GridType | "about" | "contact" | "index" | ""
 
 export default (props) => {
-  // TO DO: don't use index as default value; it causes index page flash on relaod for any other page
   const [isFor, setIsFor] = useState<PageType | undefined>(undefined)
   const [isForSingle, setIsForSingle] = useState(false)
 
@@ -24,8 +23,17 @@ export default (props) => {
   }, [router.query])
   const [isLoading, setIsLoading] = useState(false)
 
-  Router.events.on("routeChangeStart", () => setIsLoading(true))
-  Router.events.on("routeChangeComplete", () => setIsLoading(false))
+  useEffect(() => {
+    const handleChangeStart = () => setIsLoading(true)
+    const handleChangeComplete = () => setIsLoading(false)
+    Router.events.on("routeChangeStart", handleChangeStart)
+    Router.events.on("routeChangeComplete", handleChangeComplete)
+
+    return () => {
+      Router.events.off("routeChangeComplete", handleChangeStart)
+      Router.events.off("routerChangeComplete", handleChangeComplete)
+    }
+  }, [])
 
   useEffect(() => {
     if (isLoading) {

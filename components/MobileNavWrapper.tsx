@@ -20,30 +20,34 @@ export default (props: MobileNavWrapperProps) => {
   const [headerTop, setHeaderTop] = useState<0 | "-7.75rem">(0)
 
   type VoidFunc = () => void
-  // TO DO: move this inside the useEffect?
-  const throttledHandleScroll = (wait: number): VoidFunc => {
-    let y = 0
-    let shouldWait = false
-    return () => {
-      if (shouldWait) {
-        return
-      }
-      let offset = window.pageYOffset
-      if (offset > y) {
-        setLastScroll("down")
-      } else if (offset < y) {
-        setLastScroll("up")
-      }
-      y = offset
-      shouldWait = true
-      setTimeout(() => {
-        shouldWait = false
-      }, wait)
-    }
-  }
 
   useEffect(() => {
+    let timeoutId: NodeJS.Timeout | undefined = undefined
+    const throttledHandleScroll = (wait: number): VoidFunc => {
+      let y = 0
+      let shouldWait = false
+      return () => {
+        if (shouldWait) {
+          return
+        }
+        let offset = window.pageYOffset
+        if (offset > y) {
+          setLastScroll("down")
+        } else if (offset < y) {
+          setLastScroll("up")
+        }
+        y = offset
+        shouldWait = true
+        timeoutId = setTimeout(() => {
+          shouldWait = false
+        }, wait)
+      }
+    }
     window.addEventListener("scroll", throttledHandleScroll(200))
+    return () => {
+      window.removeEventListener("scroll", throttledHandleScroll(200))
+      clearTimeout(timeoutId)
+    }
   }, [])
 
   // if intersectionObserver isn't supported, than nothing happens and header stays absolutely positioned
@@ -70,6 +74,7 @@ export default (props: MobileNavWrapperProps) => {
       { threshold: [0, 1] }
     )
     observer.observe(target)
+    return () => observer.unobserve(target)
   }, [])
 
   // hide or show pinned header based on scroll direction
@@ -86,7 +91,9 @@ export default (props: MobileNavWrapperProps) => {
   // whenever headerTop changes, set a timeout to keep track of when header animation is finished
   useEffect(() => {
     setAnimationRunning(true)
-    setTimeout(() => setAnimationRunning(false), 150)
+    const timeoutId = setTimeout(() => setAnimationRunning(false), 150)
+    // ?
+    return () => clearTimeout(timeoutId)
   }, [headerTop])
 
   return (

@@ -85,7 +85,6 @@ export default async (imagesFor: "illustration"): Promise<Image[]> => {
   )
 
   const content: IllustrationPageContent = await res.json()
-  console.log("illustration page content is", content)
   const illustrations: Reference[] = content.items[0].fields.illustrations
   const entries: ArtWork[] = illustrations.map((illustration) =>
     content.includes.Entry.find((entry) => illustration.sys.id === entry.sys.id)

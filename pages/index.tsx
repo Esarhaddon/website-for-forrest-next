@@ -14,7 +14,8 @@ const Index = () => {
   const [canScroll, setCanScroll] = useState(false)
 
   useEffect(() => {
-    setTimeout(() => setCanScroll(true), 250)
+    const timeoutId = setTimeout(() => setCanScroll(true), 250)
+    return () => clearTimeout(timeoutId)
   }, [imageLoadCount])
 
   return (
@@ -66,8 +67,7 @@ const Index = () => {
         style={{
           perspective: "2px",
           perspectiveOrigin: "bottom right",
-          // is this actually necessary?
-          WebkitOverflowScrolling: "touch",
+          // WebkitOverflowScrolling: "touch",
         }}
       >
         <div
@@ -159,13 +159,17 @@ const BackgroundPlaceholder = ({
   const timeoutRef = useRef<NodeJS.Timeout>()
 
   useEffect(() => {
-    console.log("showPlaceholder is", showPlaceholder)
     if (showPlaceholder) {
       timeoutRef.current = setTimeout(() => setShowLoading(true), 250)
     } else {
-      console.log("setting showLoading to false")
       clearTimeout(timeoutRef.current)
       setShowLoading(false)
+    }
+
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current)
+      }
     }
   }, [showPlaceholder])
 
@@ -191,53 +195,38 @@ const IndexNav = () => (
   <div className="flex flex-col w-full -mt-4">
     <div className="flex justify-center flex-wrap">
       <Link href="/[grid]" as="/illustration">
-        <a>
-          <div className="text-center">
-            <button
-              type="button"
-              className="mx-2 mt-4 sm:mx-4 border-2 focus:bg-white focus:text-black border-solid border-white text-white py-2 px-3 sm:py-4 sm:px-5 tracking-widest leading-none cursor-pointer hover:bg-white hover:text-gray-900"
-              style={{
-                transition:
-                  "color 170ms ease-in-out, background-color 170ms ease-in-out",
-              }}
-            >
-              ILLUSTRATION
-            </button>
-          </div>
+        <a
+          className="text-center mx-2 mt-4 sm:mx-4 border-2 focus:bg-white focus:text-black border-solid border-white text-white py-2 px-3 sm:py-4 sm:px-5 tracking-widest leading-none cursor-pointer hover:bg-white hover:text-gray-900"
+          style={{
+            transition:
+              "color 170ms ease-in-out, background-color 170ms ease-in-out",
+          }}
+        >
+          ILLUSTRATION
         </a>
       </Link>
       <Link href="/about">
-        <a>
-          <div className="text-center">
-            <button
-              type="button"
-              className="mx-2 mt-4 sm:mx-4 border-2 focus:bg-white focus:text-black border-solid border-white text-white py-2 px-3 sm:py-4 sm:px-5 tracking-widest leading-none cursor-pointer hover:bg-white hover:text-gray-900"
-              style={{
-                transition:
-                  "color 170ms ease-in-out, background-color 170ms ease-in-out",
-              }}
-            >
-              ABOUT
-            </button>
-          </div>
+        <a
+          className="text-center mx-2 mt-4 sm:mx-4 border-2 focus:bg-white focus:text-black border-solid border-white text-white py-2 px-3 sm:py-4 sm:px-5 tracking-widest leading-none cursor-pointer hover:bg-white hover:text-gray-900"
+          style={{
+            transition:
+              "color 170ms ease-in-out, background-color 170ms ease-in-out",
+          }}
+        >
+          ABOUT
         </a>
       </Link>
-      <div className="text-center">
-        <Link href="/contact">
-          <a>
-            <button
-              type="button"
-              className="mx-2 mt-4 sm:mx-4 border-2 focus:bg-white focus:text-black border-solid border-white text-white py-2 px-3 sm:py-4 sm:px-5 tracking-widest leading-none cursor-pointer hover:bg-white hover:text-gray-900"
-              style={{
-                transition:
-                  "color 170ms ease-in-out, background-color 170ms ease-in-out",
-              }}
-            >
-              CONTACT
-            </button>
-          </a>
-        </Link>
-      </div>
+      <Link href="/contact">
+        <a
+          className="text-center mx-2 mt-4 sm:mx-4 border-2 focus:bg-white focus:text-black border-solid border-white text-white py-2 px-3 sm:py-4 sm:px-5 tracking-widest leading-none cursor-pointer hover:bg-white hover:text-gray-900"
+          style={{
+            transition:
+              "color 170ms ease-in-out, background-color 170ms ease-in-out",
+          }}
+        >
+          CONTACT
+        </a>
+      </Link>
     </div>
     <div className="mt-6">
       <SocialAndEmail isDark={false} />
