@@ -4,6 +4,7 @@ import FDickison from "../static/icons/forrest-dickison.svg"
 import Link from "next/link"
 import { useState, useEffect, useRef } from "react"
 import Loading from "../components/Loading"
+import "scroll-behavior-polyfill"
 
 // TO DO: optimize background images for this page as well?
 
@@ -11,15 +12,97 @@ import Loading from "../components/Loading"
 
 const Index = () => {
   const [imageLoadCount, setLoadCount] = useState(0)
-  const [canScroll, setCanScroll] = useState(false)
+  const [allowPointerE, setAllowPointerE] = useState(false)
+  const [lastScroll, setLastScroll] = useState<"none" | "up" | "down">("none")
+  const [scrollState, setScrollState] = useState({ isScrolling: false })
+
+  const scrollingEl = useRef<HTMLDivElement>()
+  const elToScroll = useRef<HTMLDivElement>()
+  const elToObserve = useRef<HTMLDivElement>()
 
   useEffect(() => {
-    const timeoutId = setTimeout(() => setCanScroll(true), 250)
+    const timeoutId = setTimeout(() => setAllowPointerE(true), 250)
     return () => clearTimeout(timeoutId)
   }, [imageLoadCount])
 
+  useEffect(() => {
+    if (!scrollState.isScrolling) {
+      const el = elToScroll.current
+      if (lastScroll === "down") {
+        if (el.scrollTop < el.scrollHeight) {
+          el.scrollTo({ top: el.scrollHeight, behavior: "smooth" })
+        }
+        window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" })
+      } else if (lastScroll === "up") {
+        if (el.scrollTop > 0) {
+          el.scrollTo({ top: 0, behavior: "smooth" })
+          window.scrollTo({ top: 0, behavior: "smooth" })
+        }
+      }
+    }
+  }, [lastScroll])
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const ratio = Math.round(entries[0].intersectionRatio)
+        if (!scrollState.isScrolling) {
+          if (ratio === 0) {
+            setLastScroll("down")
+          } else if (ratio === 1) {
+            setLastScroll("up")
+          }
+        }
+      },
+      {
+        root: scrollingEl.current,
+        threshold: [0, 1],
+      }
+    )
+    observer.observe(elToObserve.current)
+
+    return () => observer.unobserve(elToObserve.current)
+  }, [scrollState])
+
+  useEffect(() => {
+    let timeout: NodeJS.Timeout | undefined = undefined
+    if (scrollState.isScrolling) {
+      timeout = setTimeout(() => setScrollState({ isScrolling: false }), 100)
+    }
+
+    return () => clearTimeout(timeout)
+  }, [scrollState])
+
   return (
-    <div className="w-screen h-full top-0 right-0 z-50">
+    <div className="w-full absolute top-0 right-0 z-50">
+      <div
+        ref={scrollingEl}
+        className={`${
+          allowPointerE ? "" : "pointer-events-none"
+        } absolute top-0 right-0 w-full h-screen border border-solid border-red-500 overflow-y-scroll bg-green-500`}
+        style={{
+          zIndex: -100,
+        }}
+      >
+        <div className="absolute top-0 left-0 text-white">
+          last scroll: {lastScroll}
+        </div>
+        <div
+          ref={elToObserve}
+          className="border border-solid border-blue-500"
+          style={{ height: "1%" }}
+        />
+        <div
+          className="border border-solid border-green-500"
+          style={{
+            height: "101%",
+          }}
+        />
+      </div>
+      <div className="sticky text-white z-50">last scroll: {lastScroll}</div>
+      <div className="sticky text-white z-50">
+        is scrolling: {`${scrollState.isScrolling}`}
+      </div>
       <img
         className="hidden"
         src="../static/boy.png"
@@ -30,44 +113,16 @@ const Index = () => {
         src="../static/toad.png"
         onLoad={() => setLoadCount((count) => count + 1)}
       />
-      <div className="absolute w-full h-full bg-gray-400 sm:hidden overflow-hidden top-0 right-0 z-50">
-        <div
-          className="absolute top-0 right-0 w-screen"
-          style={{
-            background: "url(../static/toad.png) 66.66%  25% / cover no-repeat",
-            height: "120vh",
-          }}
-        />
-        <div
-          className="absolute top-0 right-0 w-screen"
-          style={{
-            background:
-              "linear-gradient(rgba(0, 0, 0, .25), rgba(0, 0, 0, .25)), url(../static/boy.png) 33.33%  25% / cover no-repeat",
-            height: "120vh",
-          }}
-        />
-        <div
-          className="sm:hidden z-50 absolute w-full px-4"
-          style={{ top: "33.33%" }}
-        >
-          <FDickison className="w-full" />
-        </div>
-        <div
-          className="absolute bottom-0 w-full flex items-center justify-center"
-          style={{ height: "33.33vh" }}
-        >
-          <IndexNav />
-        </div>
-        <BackgroundPlaceholder showPlaceholder={imageLoadCount < 2} />
-      </div>
       <div
-        className={`${
-          canScroll ? "" : "pointer-events-none"
-        } absolute w-full top-0 right-0 overflow-y-scroll overflow-x-hidden h-screen sm:block hidden`}
+        ref={elToScroll}
+        className="pointer-events-none absolute w-full top-0 right-0 overflow-y-scroll overflow-x-hidden h-screen"
         style={{
           perspective: "2px",
           perspectiveOrigin: "bottom right",
-          // WebkitOverflowScrolling: "touch",
+        }}
+        onScroll={() => {
+          const el = elToScroll.current
+          setScrollState({ isScrolling: true })
         }}
       >
         <div
@@ -140,7 +195,7 @@ const Index = () => {
       <div
         className="h-full top-0 right-0 absolute border-l border-solid border-black pointer-events-none z-50"
         style={{ width: "50vw" }}
-      /> */}
+      /> */}{" "}
     </div>
   )
 }
