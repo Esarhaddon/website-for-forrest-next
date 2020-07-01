@@ -79,14 +79,11 @@ const Index = () => {
         ref={scrollingEl}
         className={`${
           allowPointerE ? "" : "pointer-events-none"
-        } absolute top-0 right-0 w-full h-screen border border-solid border-red-500 overflow-y-scroll bg-green-500`}
+        } absolute top-0 right-0 w-full h-screen overflow-y-scroll`}
         style={{
           zIndex: -100,
         }}
       >
-        <div className="absolute top-0 left-0 text-white">
-          last scroll: {lastScroll}
-        </div>
         <div
           ref={elToObserve}
           className="border border-solid border-blue-500"
@@ -98,10 +95,6 @@ const Index = () => {
             height: "101%",
           }}
         />
-      </div>
-      <div className="sticky text-white z-50">last scroll: {lastScroll}</div>
-      <div className="sticky text-white z-50">
-        is scrolling: {`${scrollState.isScrolling}`}
       </div>
       <img
         className="hidden"
