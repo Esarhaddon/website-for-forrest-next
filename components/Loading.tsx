@@ -16,7 +16,7 @@ export default () => {
       <div
         className={`${
           showText ? "opacity-100" : "opacity-0"
-        } w-screen h-screen absolute top-0 right-0 flex items-center justify-center pointer-events-none`}
+        } w-screen h-full absolute top-0 right-0 flex items-center justify-center pointer-events-none`}
         style={{
           transition: "opacity .2s linear",
         }}
