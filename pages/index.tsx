@@ -42,7 +42,7 @@ const Index = () => {
           } else if (ratio === 1) {
             setLastScroll("up")
           }
-          setTimeout(() => setAllowAnimate(true), 350)
+          setTimeout(() => setAllowAnimate(true), 500)
         }
       },
       {
@@ -97,7 +97,7 @@ const Index = () => {
           className="pointer-events-none fixed w-full right-0 overflow-hidden h-screen sm:hidden"
           style={{
             top: lastScroll === "up" ? 0 : offsetHeight - scrollHeight,
-            transition: "top 700ms ease-out",
+            transition: "top 450ms ease-out",
           }}
         >
           <div
@@ -107,7 +107,7 @@ const Index = () => {
                 "url(../static/toad.png) 66.66%  25% / cover no-repeat",
               height: "130vh",
               top: lastScroll === "up" ? 0 : "-20vh",
-              transition: "top 700ms ease-out",
+              transition: "top 450ms ease-out",
             }}
           />
           <div
@@ -117,14 +117,14 @@ const Index = () => {
                 "linear-gradient(rgba(0, 0, 0, .25), rgba(0, 0, 0, .25)), url(../static/boy.png) 33.33%  25% / cover no-repeat",
               height: "130vh",
               top: lastScroll === "up" ? 0 : "-30vh",
-              transition: "top 700ms ease-out",
+              transition: "top 450ms ease-out",
             }}
           />
           <div
             className="pointer-events-auto absolute w-screen flex items-center justify-center"
             style={{
               top: lastScroll === "up" ? "120vh" : "70vh",
-              transition: "top 700ms ease-out",
+              transition: "top 450ms ease-out",
               height: "30vh",
             }}
           >
