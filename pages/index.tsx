@@ -125,6 +125,7 @@ const Index = () => {
             transformOrigin: "bottom right",
             transform: "translateZ(-1px) scale(1.5)",
             height: "130vh",
+            transformStyle: "preserve-3d",
           }}
         >
           <div
@@ -142,6 +143,7 @@ const Index = () => {
           style={{
             transformOrigin: "bottom right",
             transform: "translateZ(0)",
+            transformStyle: "preserve-3d",
           }}
         >
           <div
@@ -160,6 +162,7 @@ const Index = () => {
             height: "30vh",
             transform: "translateZ(1px) scale(.5)",
             transformOrigin: "bottom right",
+            transformStyle: "preserve-3d",
           }}
         >
           <div
