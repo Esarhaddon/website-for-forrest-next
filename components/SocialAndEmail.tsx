@@ -1,5 +1,6 @@
-import FacebookLogo from "../static/icons/002-facebook-circular-logo.svg"
 import Instagram from "./icons/instagram"
+import Facebook from "./icons/facebook"
+import FacebookLogo from "../static/icons/002-facebook-circular-logo.svg"
 import Twitter from "./icons/twitter"
 
 interface SocialAndEmailProps {
@@ -40,7 +41,7 @@ export default (props: SocialAndEmailProps) => {
             target="_blank"
             rel="noopener"
           >
-            <FacebookLogo className="h-8 w-8 fill-current mx-auto" />
+            <Facebook className="h-8 w-8 fill-current mx-auto" />
           </a>
         </div>
         <div
