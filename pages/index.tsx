@@ -75,6 +75,17 @@ const Index = () => {
 
   return (
     <div className="w-full absolute top-0 right-0 z-50">
+      <img
+        className="hidden"
+        src="../static/boy.png"
+        onLoad={() => setLoadCount((count) => count + 1)}
+      />
+      <img
+        className="hidden"
+        src="../static/toad.png"
+        onLoad={() => setLoadCount((count) => count + 1)}
+      />
+      {/* mobile layout */}
       <div
         ref={scrollingEl}
         className={`${
@@ -96,19 +107,9 @@ const Index = () => {
           }}
         />
       </div>
-      <img
-        className="hidden"
-        src="../static/boy.png"
-        onLoad={() => setLoadCount((count) => count + 1)}
-      />
-      <img
-        className="hidden"
-        src="../static/toad.png"
-        onLoad={() => setLoadCount((count) => count + 1)}
-      />
       <div
         ref={elToScroll}
-        className="pointer-events-none absolute w-full top-0 right-0 overflow-y-scroll overflow-x-hidden h-screen"
+        className="pointer-events-none absolute w-full top-0 right-0 overflow-y-scroll overflow-x-hidden h-screen sm:hidden"
         style={{
           perspective: "2px",
           perspectiveOrigin: "bottom right",
@@ -116,6 +117,75 @@ const Index = () => {
         onScroll={() => {
           const el = elToScroll.current
           setScrollState({ isScrolling: true })
+        }}
+      >
+        <div
+          className="absolute top-0 right-0 w-screen overflow-hidden"
+          style={{
+            transformOrigin: "bottom right",
+            transform: "translateZ(-1px) scale(1.5)",
+            height: "130vh",
+          }}
+        >
+          <div
+            className="absolute top-0 right-0 w-screen"
+            style={{
+              background:
+                "url(../static/toad.png) 66.66%  25% / cover no-repeat",
+              height: "130vh",
+              marginTop: "10vh",
+            }}
+          />
+        </div>
+        <div
+          className="absolute top-0 right-0 w-screen h-screen"
+          style={{
+            transformOrigin: "bottom right",
+            transform: "translateZ(0)",
+          }}
+        >
+          <div
+            className="w-screen absolute top-0 right-0"
+            style={{
+              background:
+                "linear-gradient(rgba(0, 0, 0, .25), rgba(0, 0, 0, .25)), url(../static/boy.png) 33.33%  25% / cover no-repeat",
+              height: "130vh",
+            }}
+          />
+        </div>
+        <div
+          className="absolute w-screen flex items-center justify-center"
+          style={{
+            top: "100%",
+            height: "30vh",
+            transform: "translateZ(1px) scale(.5)",
+            transformOrigin: "bottom right",
+          }}
+        >
+          <div
+            className="flex items-center justify-center"
+            style={{ marginTop: "calc(-1.66vh - 1rem)" }}
+          >
+            <IndexNav />
+          </div>
+        </div>
+        <BackgroundPlaceholder showPlaceholder={imageLoadCount < 2} />
+        <div
+          className="sticky max-w-3xl mx-auto px-6"
+          style={{ top: "33.33vh" }}
+        >
+          <FDickison className="w-full" />
+        </div>
+      </div>
+      {/* desktop layout */}
+      <div
+        className={`${
+          allowPointerE ? "" : "pointer-events-none"
+        } absolute w-full top-0 right-0 overflow-y-scroll overflow-x-hidden h-screen sm:block hidden`}
+        style={{
+          perspective: "2px",
+          perspectiveOrigin: "bottom right",
+          // WebkitOverflowScrolling: "touch",
         }}
       >
         <div
