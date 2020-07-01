@@ -1,6 +1,5 @@
 import Instagram from "./icons/instagram"
 import Facebook from "./icons/facebook"
-import FacebookLogo from "../static/icons/002-facebook-circular-logo.svg"
 import Twitter from "./icons/twitter"
 
 interface SocialAndEmailProps {
