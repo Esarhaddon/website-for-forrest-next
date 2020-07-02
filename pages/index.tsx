@@ -21,7 +21,8 @@ const Index = () => {
 
   useEffect(() => {
     setAllowToggle(false)
-    setTimeout(() => setAllowToggle(true), 450)
+    const timeout = setTimeout(() => setAllowToggle(true), 450)
+    return () => clearTimeout(timeout)
   }, [toggle])
 
   return (
