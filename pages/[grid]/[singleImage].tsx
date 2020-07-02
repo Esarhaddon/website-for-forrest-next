@@ -5,6 +5,7 @@ import Vibrant from "node-vibrant"
 import Link from "next/link"
 import Arrow from "../../static/icons/arrow.svg"
 import ExitX from "../../static/icons/close.svg"
+import ErrorMessage from "../../components/ErrorMessage"
 
 interface Dimensions {
   h: number
@@ -16,6 +17,8 @@ interface SingleImageProps {
   previous: Image
   current: Image
   next: Image
+  errorMessage?: string
+  errorCode?: number
 }
 
 const SingleImage = ({
@@ -23,6 +26,8 @@ const SingleImage = ({
   previous,
   current,
   next,
+  errorMessage,
+  errorCode,
 }: SingleImageProps) => {
   const [dimensions, setDimensions] = useState<Dimensions>({
     h: 1,
@@ -34,27 +39,29 @@ const SingleImage = ({
   const [hideModal, setHideModal] = useState(true)
 
   useEffect(() => {
-    const maxHeight = Math.round(screen.height * 1.5)
-    const maxWidth = Math.round(screen.width * 0.9)
-    const dimensions = {
-      h: current.originalHeight,
-      w: current.originalWidth,
-    } as Dimensions
+    if (current) {
+      const maxHeight = Math.round(screen.height * 1.5)
+      const maxWidth = Math.round(screen.width * 0.9)
+      const dimensions = {
+        h: current.originalHeight,
+        w: current.originalWidth,
+      } as Dimensions
 
-    if (dimensions.h > maxHeight) {
-      const shrinkFactor = maxHeight / dimensions.h
-      dimensions.h = maxHeight
-      dimensions.w = Math.round(dimensions.w * shrinkFactor)
+      if (dimensions.h > maxHeight) {
+        const shrinkFactor = maxHeight / dimensions.h
+        dimensions.h = maxHeight
+        dimensions.w = Math.round(dimensions.w * shrinkFactor)
+      }
+
+      if (dimensions.w > maxWidth) {
+        const shrinkFactor = maxWidth / dimensions.w
+        dimensions.w = maxWidth
+        dimensions.h = Math.round(dimensions.h * shrinkFactor)
+      }
+
+      setDimensions(dimensions)
     }
-
-    if (dimensions.w > maxWidth) {
-      const shrinkFactor = maxWidth / dimensions.w
-      dimensions.w = maxWidth
-      dimensions.h = Math.round(dimensions.h * shrinkFactor)
-    }
-
-    setDimensions(dimensions)
-  }, [])
+  }, [current])
 
   useEffect(() => {
     if (current) {
@@ -66,6 +73,19 @@ const SingleImage = ({
         .catch((e) => setDominantColor("#696969"))
     }
   }, [current])
+
+  if (errorMessage || errorCode) {
+    return (
+      <div
+        className="flex items-center justify-center"
+        style={{
+          height: "40vh",
+        }}
+      >
+        <ErrorMessage text={errorMessage} code={errorCode} />
+      </div>
+    )
+  }
 
   return (
     <div
@@ -211,15 +231,34 @@ const SingleImage = ({
   )
 }
 
-SingleImage.getInitialProps = async (ctx): Promise<SingleImageProps> => {
+SingleImage.getInitialProps = async (
+  ctx
+): Promise<Partial<SingleImageProps>> => {
   const fromGrid = ctx.query.grid
   const title = ctx.query.singleImage.replace(/-/g, " ")
-  const images = await fetchImagesFor(fromGrid)
-  const currentIndex = images.findIndex((image) => image.title === title)
-  const previous = images[currentIndex - 1]
-  const current = images[currentIndex]
-  const next = images[currentIndex + 1]
-  return { previous, current, next, fromGrid }
+
+  try {
+    const images = await fetchImagesFor(fromGrid)
+    const currentIndex = images.findIndex((image) => image.title === title)
+    if (currentIndex === undefined || currentIndex === null) {
+      throw new Error("404")
+    }
+    const previous = images[currentIndex - 1]
+    const current = images[currentIndex]
+    const next = images[currentIndex + 1]
+    return { previous, current, next, fromGrid }
+  } catch (e) {
+    let errorCode: number | undefined = undefined
+    const regex = /^[0-9]+$/
+    if (regex.test(e.message)) {
+      errorCode = parseInt(e.message)
+    }
+    const errorMessage =
+      errorCode === 404
+        ? `Sorry! couldn't find ${title}.`
+        : `Something went wrong while loading ${title}.`
+    return { errorCode, errorMessage }
+  }
 }
 
 export default SingleImage

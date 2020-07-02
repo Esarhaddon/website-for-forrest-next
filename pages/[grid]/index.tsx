@@ -2,7 +2,7 @@ import fetchImagesFor, { Image } from "../../utils/fetchImagesFor"
 import { GridType } from "../../components/Layout"
 import React, { useState, useEffect } from "react"
 import Thumbnail from "../../components/Thumbnail"
-import GenericErrorBox from "../../components/ErrorMessage"
+import ErrorMessage from "../../components/ErrorMessage"
 
 interface GridProps {
   gridType: GridType
@@ -29,7 +29,7 @@ const Grid = ({ gridType, toDisplay, errorMessage, errorCode }: GridProps) => {
           height: "40vh",
         }}
       >
-        <GenericErrorBox text={errorMessage} code={errorCode} />
+        <ErrorMessage text={errorMessage} code={errorCode} />
       </div>
     )
   }
@@ -71,7 +71,7 @@ Grid.getInitialProps = async (ctx): Promise<Partial<GridProps>> => {
     const errorMessage =
       errorCode === 404
         ? "Sorry! couldn't find what you're looking for."
-        : `Something went wrong while fetching content for ${gridType}.`
+        : `Something went wrong while trying to load content for ${gridType}.`
 
     return { gridType, errorMessage, errorCode }
   }
