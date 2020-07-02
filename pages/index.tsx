@@ -4,27 +4,15 @@ import FDickison from "../static/icons/forrest-dickison.svg"
 import Link from "next/link"
 import { useState, useEffect, useRef } from "react"
 import Loading from "../components/Loading"
+import DownArrow from "../components/icons/down-arrow"
 
 // TO DO: optimize background images for this page as well?
 
 const Index = () => {
   const [imageLoadCount, setLoadCount] = useState(0)
   const [allowPointerE, setAllowPointerE] = useState(false)
-  const [lastScroll, setLastScroll] = useState<"up" | "down">("up")
-  const [allowAnimate, setAllowAnimate] = useState(true)
-
-  const [offsetHeight, setOffsetHeight] = useState(0)
-  const [scrollHeight, setScrollHeight] = useState(0)
-
-  const scrollingEl = useRef<HTMLDivElement>()
-  const elToObserve = useRef<HTMLDivElement>()
-  const inner = useRef<HTMLDivElement>()
-  const outer = useRef<HTMLDivElement>()
-
-  useEffect(() => {
-    setOffsetHeight(inner.current.offsetHeight)
-    setScrollHeight(outer.current.offsetHeight)
-  }, [])
+  const [toggle, setToggle] = useState(true)
+  const [allowToggle, setAllowToggle] = useState(true)
 
   useEffect(() => {
     const timeoutId = setTimeout(() => setAllowPointerE(true), 250)
@@ -32,188 +20,156 @@ const Index = () => {
   }, [imageLoadCount])
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const ratio = Math.round(entries[0].intersectionRatio)
-        if (allowAnimate) {
-          setAllowAnimate(false)
-          if (ratio === 0) {
-            setLastScroll("down")
-          } else if (ratio === 1) {
-            setLastScroll("up")
-          }
-          setTimeout(() => setAllowAnimate(true), 500)
-        }
-      },
-      {
-        root: scrollingEl.current,
-        threshold: [0, 1],
-      }
-    )
-    observer.observe(elToObserve.current)
-
-    return () => observer.unobserve(elToObserve.current)
-  }, [allowAnimate])
+    setAllowToggle(false)
+    setTimeout(() => setAllowToggle(true), 450)
+  }, [toggle])
 
   return (
-    <>
-      <div
-        ref={inner}
-        className="absolute border border-solid border-red-500 w-full h-full"
+    <div className="w-full absolute top-0 right-0 z-50 sm:h-auto h-full">
+      <img
+        className="hidden"
+        src="../static/boy.png"
+        onLoad={() => setLoadCount((count) => count + 1)}
       />
+      <img
+        className="hidden"
+        src="../static/toad.png"
+        onLoad={() => setLoadCount((count) => count + 1)}
+      />
+      {/* mobile layout */}
       <div
-        ref={outer}
-        className="absolute border border-solid border-red-500 w-full h-screen"
-      ></div>
-      <div className="w-full absolute top-0 right-0 z-50">
-        <img
-          className="hidden"
-          src="../static/boy.png"
-          onLoad={() => setLoadCount((count) => count + 1)}
-        />
-        <img
-          className="hidden"
-          src="../static/toad.png"
-          onLoad={() => setLoadCount((count) => count + 1)}
-        />
-        {/* mobile layout */}
+        className={`${
+          allowToggle ? "" : "pointer-events-none"
+        } fixed w-full bottom-0 right-0 overflow-hidden h-full sm:hidden`}
+        style={{
+          transition: "bottom 450ms ease-out",
+        }}
+      >
         <div
-          ref={scrollingEl}
-          className={`${
-            allowPointerE ? "" : "pointer-events-none"
-          } absolute top-0 right-0 w-full h-screen overflow-y-scroll`}
+          className={`absolute right-0 w-screen`}
+          onTouchStart={() => setToggle(!toggle)}
+          onMouseDown={() => setToggle(!toggle)}
           style={{
-            zIndex: -100,
+            background: "url(../static/toad.png) 66.66%  25% / cover no-repeat",
+            height: "130vh",
+            bottom: toggle ? "-30vh" : "-10vh",
+            transition: "bottom 450ms ease-out",
+          }}
+        />
+        <div
+          className={`absolute right-0 w-screen h-screen`}
+          onTouchStart={() => setToggle(!toggle)}
+          onMouseDown={() => setToggle(!toggle)}
+          style={{
+            background:
+              "linear-gradient(rgba(0, 0, 0, .25), rgba(0, 0, 0, .25)), url(../static/boy.png) 33.33%  25% / cover no-repeat",
+            height: "130vh",
+            bottom: toggle ? "-30vh" : 0,
+            transition: "bottom 450ms ease-out",
+          }}
+        />
+        <div
+          className="pointer-events-auto absolute w-screen flex items-center justify-center"
+          style={{
+            bottom: toggle ? "-60vh" : 0,
+            transition: "bottom 450ms ease-out",
+            height: "30vh",
           }}
         >
-          <div ref={elToObserve} style={{ height: "1%" }} />
           <div
-            style={{
-              height: "101%",
-            }}
+            className="flex items-center justify-center"
+            style={{ marginTop: "calc(-1.66vh - 1rem)" }}
+          >
+            <IndexNav />
+          </div>
+        </div>
+        <BackgroundPlaceholder showPlaceholder={imageLoadCount < 2} />
+        <div
+          className="sticky max-w-3xl mx-auto px-6 pointer-events-none"
+          style={{ top: "33.33%" }}
+        >
+          <FDickison className="w-full tex-white" />
+        </div>
+        <div className="fixed w-full h-full pointer-events-none flex items-center justify-center">
+          <DownArrow
+            className={`${
+              toggle ? "opacity-100" : "opacity-0"
+            } mx-auto text-white fill-current h-8 w-8`}
+            style={{ transition: "opacity 325ms ease-out" }}
           />
         </div>
+      </div>
+      {/* desktop layout */}
+      {/* scaleFactor = (perspective — distance) / perspective */}
+      <div
+        className={`${
+          allowPointerE ? "" : "pointer-events-none"
+        } absolute w-full top-0 right-0 overflow-y-scroll overflow-x-hidden h-screen sm:block hidden`}
+        style={{
+          perspective: "2px",
+          perspectiveOrigin: "bottom right",
+        }}
+      >
         <div
-          className="pointer-events-none fixed w-full right-0 overflow-hidden h-screen sm:hidden"
+          className="absolute top-0 right-0 w-screen overflow-hidden"
           style={{
-            top: lastScroll === "up" ? 0 : offsetHeight - scrollHeight,
-            transition: "top 450ms ease-out",
+            transformOrigin: "bottom right",
+            transform: "translateZ(-1px) scale(1.5)",
+            height: "130vh",
           }}
         >
           <div
-            className="absolute right-0 w-screen overflow-hidden"
+            className="absolute top-0 right-0 w-screen"
             style={{
               background:
                 "url(../static/toad.png) 66.66%  25% / cover no-repeat",
               height: "130vh",
-              top: lastScroll === "up" ? 0 : "-20vh",
-              transition: "top 450ms ease-out",
+              marginTop: "10vh",
             }}
           />
+        </div>
+        <div
+          className="absolute top-0 right-0 w-screen h-screen"
+          style={{
+            transformOrigin: "bottom right",
+            transform: "translateZ(0)",
+          }}
+        >
           <div
-            className="absolute right-0 w-screen h-screen"
+            className="w-screen absolute top-0 right-0"
             style={{
               background:
                 "linear-gradient(rgba(0, 0, 0, .25), rgba(0, 0, 0, .25)), url(../static/boy.png) 33.33%  25% / cover no-repeat",
               height: "130vh",
-              top: lastScroll === "up" ? 0 : "-30vh",
-              transition: "top 450ms ease-out",
             }}
           />
-          <div
-            className="pointer-events-auto absolute w-screen flex items-center justify-center"
-            style={{
-              top: lastScroll === "up" ? "120vh" : "70vh",
-              transition: "top 450ms ease-out",
-              height: "30vh",
-            }}
-          >
-            <div
-              className="flex items-center justify-center"
-              style={{ marginTop: "calc(-1.66vh - 1rem)" }}
-            >
-              <IndexNav />
-            </div>
-          </div>
-          <BackgroundPlaceholder showPlaceholder={imageLoadCount < 2} />
-          <div
-            className="sticky max-w-3xl mx-auto px-6"
-            style={{ top: "33.33vh" }}
-          >
-            <FDickison className="w-full" />
-          </div>
         </div>
-        {/* desktop layout */}
-        {/* scaleFactor = (perspective — distance) / perspective */}
         <div
-          className={`${
-            allowPointerE ? "" : "pointer-events-none"
-          } absolute w-full top-0 right-0 overflow-y-scroll overflow-x-hidden h-screen sm:block hidden`}
+          className="absolute w-screen flex items-center justify-center"
           style={{
-            perspective: "2px",
-            perspectiveOrigin: "bottom right",
+            top: "100%",
+            height: "30vh",
+            transform: "translateZ(1px) scale(.5)",
+            transformOrigin: "bottom right",
           }}
         >
           <div
-            className="absolute top-0 right-0 w-screen overflow-hidden"
-            style={{
-              transformOrigin: "bottom right",
-              transform: "translateZ(-1px) scale(1.5)",
-              height: "130vh",
-            }}
+            className="flex items-center justify-center"
+            style={{ marginTop: "calc(-1.66vh - 1rem)" }}
           >
-            <div
-              className="absolute top-0 right-0 w-screen"
-              style={{
-                background:
-                  "url(../static/toad.png) 66.66%  25% / cover no-repeat",
-                height: "130vh",
-                marginTop: "10vh",
-              }}
-            />
-          </div>
-          <div
-            className="absolute top-0 right-0 w-screen h-screen"
-            style={{
-              transformOrigin: "bottom right",
-              transform: "translateZ(0)",
-            }}
-          >
-            <div
-              className="w-screen absolute top-0 right-0"
-              style={{
-                background:
-                  "linear-gradient(rgba(0, 0, 0, .25), rgba(0, 0, 0, .25)), url(../static/boy.png) 33.33%  25% / cover no-repeat",
-                height: "130vh",
-              }}
-            />
-          </div>
-          <div
-            className="absolute w-screen flex items-center justify-center"
-            style={{
-              top: "100%",
-              height: "30vh",
-              transform: "translateZ(1px) scale(.5)",
-              transformOrigin: "bottom right",
-            }}
-          >
-            <div
-              className="flex items-center justify-center"
-              style={{ marginTop: "calc(-1.66vh - 1rem)" }}
-            >
-              <IndexNav />
-            </div>
-          </div>
-          <BackgroundPlaceholder showPlaceholder={imageLoadCount < 2} />
-          <div
-            className="sticky max-w-3xl mx-auto px-6"
-            style={{ top: "33.33vh" }}
-          >
-            <FDickison className="w-full" />
+            <IndexNav />
           </div>
         </div>
-        {/* some guides just for development */}
-        {/* <div
+        <BackgroundPlaceholder showPlaceholder={imageLoadCount < 2} />
+        <div
+          className="sticky max-w-3xl mx-auto px-6"
+          style={{ top: "33.33vh" }}
+        >
+          <FDickison className="w-full" />
+        </div>
+      </div>
+      {/* some guides just for development */}
+      {/* <div
         className="w-full absolute top-0 right-0 border-b border-solid border-black pointer-events-none z-50"
         style={{ height: "33.33%" }}
       />
@@ -225,8 +181,7 @@ const Index = () => {
         className="h-full top-0 right-0 absolute border-l border-solid border-black pointer-events-none z-50"
         style={{ width: "50vw" }}
       /> */}{" "}
-      </div>
-    </>
+    </div>
   )
 }
 
