@@ -84,6 +84,10 @@ export default async (imagesFor: "illustration"): Promise<Image[]> => {
     }
   )
 
+  if (!res.ok) {
+    throw new Error(`${res.status}`)
+  }
+
   const content: IllustrationPageContent = await res.json()
   const illustrations: Reference[] = content.items[0].fields.illustrations
   const entries: ArtWork[] = illustrations.map((illustration) =>

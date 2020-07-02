@@ -8,8 +8,7 @@ import Loading from "../components/Loading"
 import { useRouter, Router } from "next/router"
 import MobileNavWrapper from "../components/MobileNavWrapper"
 
-export type GridType = "animation" | "illustration" | "fine art"
-
+export type GridType = "illustration" // | "animation" | "fine art"
 export type PageType = GridType | "about" | "contact" | "index" | ""
 
 export default (props) => {

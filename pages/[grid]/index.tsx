@@ -2,13 +2,16 @@ import fetchImagesFor, { Image } from "../../utils/fetchImagesFor"
 import { GridType } from "../../components/Layout"
 import React, { useState, useEffect } from "react"
 import Thumbnail from "../../components/Thumbnail"
+import GenericErrorBox from "../../components/ErrorMessage"
 
 interface GridProps {
   gridType: GridType
   toDisplay: Image[]
+  errorMessage?: string
+  errorCode?: number
 }
 
-const Grid = ({ gridType, toDisplay }: GridProps) => {
+const Grid = ({ gridType, toDisplay, errorMessage, errorCode }: GridProps) => {
   const [displayHeight, setDisplayHeight] = useState(0)
   useEffect(() => {
     const thumbnail = document.getElementById("thumbnail-0")
@@ -17,6 +20,19 @@ const Grid = ({ gridType, toDisplay }: GridProps) => {
       setDisplayHeight(thumbnailHeight)
     }
   })
+
+  if (errorMessage || errorCode) {
+    return (
+      <div
+        className="flex items-center justify-center"
+        style={{
+          height: "40vh",
+        }}
+      >
+        <GenericErrorBox text={errorMessage} code={errorCode} />
+      </div>
+    )
+  }
 
   return (
     <div
@@ -39,11 +55,26 @@ const Grid = ({ gridType, toDisplay }: GridProps) => {
   )
 }
 
-Grid.getInitialProps = async (ctx): Promise<GridProps> => {
+Grid.getInitialProps = async (ctx): Promise<Partial<GridProps>> => {
   const gridType = ctx.query.grid
-  const toDisplay = await fetchImagesFor(gridType)
+  try {
+    const toDisplay = await fetchImagesFor(gridType)
 
-  return { gridType, toDisplay }
+    return { gridType, toDisplay }
+  } catch (e) {
+    let errorCode: number | undefined = undefined
+    const regex = /^[0-9]+$/
+    if (regex.test(e.message)) {
+      errorCode = parseInt(e.message)
+    }
+
+    const errorMessage =
+      errorCode === 404
+        ? "Sorry! couldn't find what you're looking for."
+        : `Something went wrong while fetching content for ${gridType}.`
+
+    return { gridType, errorMessage, errorCode }
+  }
 }
 
 export default Grid
