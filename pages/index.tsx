@@ -225,12 +225,10 @@ const BackgroundPlaceholder = ({
     >
       {showLoading ? (
         <div
-          className="text-white"
-          style={
-            {
-              // height: '66.66%'
-            }
-          }
+          className="text-white absolute bottom-0"
+          style={{
+            height: "66.66vh",
+          }}
         >
           <Loading />
         </div>
