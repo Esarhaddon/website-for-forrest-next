@@ -2,6 +2,7 @@ import fetch from "node-fetch"
 import ErrorMessage from "../components/ErrorMessage"
 
 interface AboutPageProps {
+  imageSrc: string
   textContent: Paragraph[]
   errorMessage?: string
   errorCode?: number
@@ -27,9 +28,12 @@ interface Text {
 
 const AboutPage = ({
   textContent,
+  imageSrc,
   errorMessage,
   errorCode,
 }: AboutPageProps) => {
+  console.log("imageSrc is", imageSrc)
+
   if (errorMessage || errorCode) {
     return (
       <div
@@ -45,7 +49,7 @@ const AboutPage = ({
 
   return (
     <div className="flex flex-col items-center px-4">
-      <div className="w-11/12 sm:w-7/12 md:w-6/12 leading-loose flex flex-col items-center lg:block lg:ml-16 mt-20 md:mt-8 sm:mt-20 lg:text-left text-justify mb-4">
+      <div className="w-11/12 sm:w-7/12 md:w-6/12 leading-loose flex flex-col items-center lg:block lg:ml-16 mt-20 sm:mt-16 lg:mt-8 lg:text-left text-justify mb-4">
         <div className="relative w-6/12 lg:float-left lg:mr-6 lg:ml-0 ml-16 lg:mb-0 mb-6">
           <div
             className="border border-solid border-black w-full h-0"
@@ -63,14 +67,18 @@ const AboutPage = ({
           </div>
         </div>
         {textContent.map((paragraph, i) => (
-          <p className={`${i < textContent.length - 1 ? "mb-4" : ""}`}>
-            {paragraph.content.map((item) => {
+          <p
+            className={`${i < textContent.length - 1 ? "mb-4" : ""}`}
+            key={"paragraph_" + i}
+          >
+            {paragraph.content.map((item, j) => {
               if (item.nodeType === "text") {
                 return item.value
               } else {
                 return (
                   <a
                     className="underline text-gray-600 hover:text-black"
+                    key={"link_" + j}
                     href={item.data.uri}
                   >
                     {item.content[0].value}
@@ -85,7 +93,7 @@ const AboutPage = ({
   )
 }
 
-AboutPage.getInitialProps = async (): Promise<Partial<any>> => {
+AboutPage.getInitialProps = async (): Promise<Partial<AboutPageProps>> => {
   try {
     const res = await fetch(
       `${process.env.CONTENTFUL_API}?content_type=about`,
@@ -103,7 +111,12 @@ AboutPage.getInitialProps = async (): Promise<Partial<any>> => {
 
     const json = await res.json()
     const textContent = json.items[0].fields.bio.content
-    return { textContent }
+    const imageAsset = json.includes.Asset.find(
+      (asset) => asset.sys.id === json.items[0].fields.image.sys.id
+    )
+    const imageSrc = imageAsset.fields.file.url
+
+    return { textContent, imageSrc }
   } catch (e) {
     let errorCode: number | undefined = undefined
     const regex = /^[0-9]+&/
