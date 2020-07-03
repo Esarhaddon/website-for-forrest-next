@@ -75,7 +75,7 @@ interface Asset {
 
 export default async (imagesFor: "illustration"): Promise<Image[]> => {
   const res = await fetch(
-    `${process.env.CONTENTFUL_API}?content_type=illustration&include=2`,
+    `${process.env.CONTENTFUL_API}?content_type=${imagesFor}&include=2`,
     {
       method: "GET",
       headers: {

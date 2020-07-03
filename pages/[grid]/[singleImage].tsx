@@ -240,7 +240,7 @@ SingleImage.getInitialProps = async (
   try {
     const images = await fetchImagesFor(fromGrid)
     const currentIndex = images.findIndex((image) => image.title === title)
-    if (currentIndex === undefined || currentIndex === null) {
+    if (currentIndex === -1) {
       throw new Error("404")
     }
     const previous = images[currentIndex - 1]
@@ -256,7 +256,7 @@ SingleImage.getInitialProps = async (
     const errorMessage =
       errorCode === 404
         ? `Sorry! couldn't find ${title}.`
-        : `Something went wrong while loading ${title}.`
+        : `Something went wrong while trying to load ${title}.`
     return { errorCode, errorMessage }
   }
 }

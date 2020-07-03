@@ -12,6 +12,9 @@ interface GridProps {
 }
 
 const Grid = ({ gridType, toDisplay, errorMessage, errorCode }: GridProps) => {
+  console.log("gridType is", gridType)
+  console.log("toDisplay is", toDisplay)
+
   const [displayHeight, setDisplayHeight] = useState(0)
   useEffect(() => {
     const thumbnail = document.getElementById("thumbnail-0")
@@ -57,6 +60,7 @@ const Grid = ({ gridType, toDisplay, errorMessage, errorCode }: GridProps) => {
 
 Grid.getInitialProps = async (ctx): Promise<Partial<GridProps>> => {
   const gridType = ctx.query.grid
+  console.log("grid is", gridType)
   try {
     const toDisplay = await fetchImagesFor(gridType)
 
@@ -71,7 +75,7 @@ Grid.getInitialProps = async (ctx): Promise<Partial<GridProps>> => {
     const errorMessage =
       errorCode === 404
         ? "Sorry! couldn't find what you're looking for."
-        : `Something went wrong while trying to load content for ${gridType}.`
+        : `Something went wrong while trying to load content for /${gridType}.`
 
     return { gridType, errorMessage, errorCode }
   }
