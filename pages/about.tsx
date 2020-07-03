@@ -69,7 +69,10 @@ const AboutPage = ({
                 return item.value
               } else {
                 return (
-                  <a className="underline text-gray-700" href={item.data.uri}>
+                  <a
+                    className="underline text-gray-600 hover:text-black"
+                    href={item.data.uri}
+                  >
                     {item.content[0].value}
                   </a>
                 )
