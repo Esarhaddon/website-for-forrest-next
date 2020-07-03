@@ -41,7 +41,7 @@ export default ({ image, displayHeight, gridType, index }: ThumbnailProps) => {
       >
         <Link
           href="/[grid]/[singleImage]"
-          as={`/${gridType}/${image.title.replace(/ /g, "-")}`}
+          as={`/${gridType}/${image.title.replace(/ /g, "-").toLowerCase()}`}
         >
           <a
             className="absolute flex items-center justify-center text-3xl text-white"

@@ -239,7 +239,9 @@ SingleImage.getInitialProps = async (
 
   try {
     const images = await fetchImagesFor(fromGrid)
-    const currentIndex = images.findIndex((image) => image.title === title)
+    const currentIndex = images.findIndex(
+      (image) => image.title.toLocaleLowerCase() === title.toLocaleLowerCase()
+    )
     if (currentIndex === -1) {
       throw new Error("404")
     }
