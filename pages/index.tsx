@@ -114,37 +114,23 @@ const Index = () => {
         <div
           className="absolute top-0 right-0 w-screen overflow-hidden"
           style={{
+            background:
+              "url(../static/toad.png) 66.66% calc(10vh + 25%) / cover no-repeat",
             transformOrigin: "bottom right",
             transform: "translateZ(-1px) scale(1.5)",
             height: "130vh",
           }}
-        >
-          <div
-            className="absolute top-0 right-0 w-screen"
-            style={{
-              background:
-                "url(../static/toad.png) 66.66%  25% / cover no-repeat",
-              height: "130vh",
-              marginTop: "10vh",
-            }}
-          />
-        </div>
+        />
         <div
-          className="absolute top-0 right-0 w-screen h-screen"
+          className="absolute top-0 right-0 w-screen"
           style={{
+            height: "130vh",
+            background:
+              "linear-gradient(rgba(0, 0, 0, .25), rgba(0, 0, 0, .25)), url(../static/boy.png) 33.33% 25% / cover no-repeat",
             transformOrigin: "bottom right",
             transform: "translateZ(0)",
           }}
-        >
-          <div
-            className="w-screen absolute top-0 right-0"
-            style={{
-              background:
-                "linear-gradient(rgba(0, 0, 0, .25), rgba(0, 0, 0, .25)), url(../static/boy.png) 33.33%  25% / cover no-repeat",
-              height: "130vh",
-            }}
-          />
-        </div>
+        />
         <div
           className="absolute w-screen flex items-center justify-center"
           style={{
@@ -169,19 +155,6 @@ const Index = () => {
           <FDickison className="w-full" />
         </div>
       </div>
-      {/* some guides just for development */}
-      {/* <div
-        className="w-full absolute top-0 right-0 border-b border-solid border-black pointer-events-none z-50"
-        style={{ height: "33.33%" }}
-      />
-      <div
-        className="w-full absolute right-0 border-b border-solid border-black pointer-events-none z-50"
-        style={{ height: "33.33%", top: "33.33%" }}
-      />
-      <div
-        className="h-full top-0 right-0 absolute border-l border-solid border-black pointer-events-none z-50"
-        style={{ width: "50vw" }}
-      /> */}{" "}
     </div>
   )
 }
