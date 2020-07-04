@@ -51,19 +51,15 @@ const AboutPage = ({
     <div className="flex flex-col items-center px-4">
       <div className="w-11/12 sm:w-7/12 md:w-6/12 leading-loose flex flex-col items-center lg:block lg:ml-16 mt-20 sm:mt-16 lg:mt-8 lg:text-left text-justify mb-4">
         <div className="relative w-6/12 lg:float-left lg:mr-6 lg:ml-0 ml-16 lg:mb-0 mb-6">
-          <div
-            className="border border-solid border-black w-full h-0"
-            style={{ paddingTop: "120%" }}
-          >
+          <div className="w-full h-0" style={{ paddingTop: "120%" }}>
             <div
-              className="bg-gray-500 absolute right-0 bottom-0 text-center flex items-center justify-center text-gray-100 text-3xl"
+              className="absolute right-0 bottom-0"
               style={{
+                background: `center / cover no-repeat url(${imageSrc})`,
                 width: "calc(100% + 4rem)",
                 height: "calc(100% + 4rem)",
               }}
-            >
-              [a cool image]
-            </div>
+            />
           </div>
         </div>
         {textContent.map((paragraph, i) => (
