@@ -195,7 +195,7 @@ const Index = () => {
                 : "opacity-0"
             } text-white fill-current h-8 w-8 mx-auto`}
             style={{
-              transition: "opacity 325ms ease-in-out",
+              transition: "opacity 250ms ease-out",
               marginTop: "10vh",
             }}
           />
