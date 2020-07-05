@@ -5,6 +5,7 @@ import Link from "next/link"
 import { useState, useEffect, useRef } from "react"
 import Loading from "../components/Loading"
 import DownArrow from "../components/icons/down-arrow"
+import "scroll-behavior-polyfill"
 
 // TO DO: optimize background images for this page as well?
 
@@ -13,6 +14,12 @@ const Index = () => {
   const [allowPointerE, setAllowPointerE] = useState(false)
   const [toggle, setToggle] = useState(true)
   const [allowToggle, setAllowToggle] = useState(true)
+  const [scrollState, setScrollState] = useState({
+    prevTop: 0,
+    lastScroll: "up" as "up" | "down",
+  })
+
+  const scrollingElRef = useRef<HTMLDivElement>()
 
   useEffect(() => {
     const timeoutId = setTimeout(() => setAllowPointerE(true), 250)
@@ -23,6 +30,16 @@ const Index = () => {
     setAllowToggle(false)
     const timeout = setTimeout(() => setAllowToggle(true), 450)
     return () => clearTimeout(timeout)
+  }, [toggle])
+
+  useEffect(() => {
+    const el = scrollingElRef.current
+    if (el) {
+      el.scrollTo({
+        top: el.scrollHeight * ((!toggle as unknown) as number),
+        behavior: "smooth",
+      })
+    }
   }, [toggle])
 
   return (
@@ -103,6 +120,22 @@ const Index = () => {
       {/* desktop layout */}
       {/* scaleFactor = (perspective — distance) / perspective */}
       <div
+        ref={scrollingElRef}
+        onClick={() => {
+          if (allowToggle) {
+            setToggle(!toggle)
+          }
+        }}
+        onScroll={() => {
+          const el = scrollingElRef.current
+          const pos = el.scrollTop
+          const prevPos = scrollState.prevTop
+          if (pos > prevPos + 50) {
+            setScrollState({ prevTop: pos, lastScroll: "down" })
+          } else if (pos < prevPos - 50) {
+            setScrollState({ prevTop: pos, lastScroll: "up" })
+          }
+        }}
         className={`${
           allowPointerE ? "" : "pointer-events-none"
         } absolute w-full top-0 right-0 overflow-y-scroll overflow-x-hidden h-screen sm:block hidden`}
@@ -152,7 +185,20 @@ const Index = () => {
           className="sticky max-w-3xl mx-auto px-6"
           style={{ top: "33.33vh" }}
         >
-          <FDickison className="w-full" />
+          <div className="cursor-pointer">
+            <FDickison className="w-full" />
+          </div>
+          <DownArrow
+            className={`${
+              scrollState.lastScroll === "up"
+                ? "opacity-100 cursor-pointer"
+                : "opacity-0"
+            } text-white fill-current h-8 w-8 mx-auto`}
+            style={{
+              transition: "opacity 325ms ease-in-out",
+              marginTop: "10vh",
+            }}
+          />
         </div>
       </div>
     </div>
