@@ -32,15 +32,15 @@ const Index = () => {
     return () => clearTimeout(timeout)
   }, [toggle])
 
-  // useEffect(() => {
-  //   const el = scrollingElRef.current
-  //   if (el) {
-  //     el.scrollTo({
-  //       top: el.scrollHeight * ((!toggle as unknown) as number),
-  //       behavior: "smooth",
-  //     })
-  //   }
-  // }, [toggle])
+  useEffect(() => {
+    const el = scrollingElRef.current
+    if (el) {
+      el.scrollTo({
+        top: el.scrollHeight * ((!toggle as unknown) as number),
+        behavior: "smooth",
+      })
+    }
+  }, [toggle])
 
   return (
     <div className="w-full absolute top-0 right-0 z-50 sm:h-auto h-full">
