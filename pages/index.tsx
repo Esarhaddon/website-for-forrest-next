@@ -58,10 +58,7 @@ const Index = () => {
       <div
         className={`${
           allowToggle ? "" : "pointer-events-none"
-        } fixed w-full bottom-0 right-0 overflow-hidden h-full sm:hidden`}
-        style={{
-          transition: "bottom 450ms ease-out",
-        }}
+        } absolute w-full bottom-0 right-0 overflow-hidden h-full sm:hidden`}
       >
         <div
           className={`absolute right-0 w-screen`}
@@ -72,6 +69,7 @@ const Index = () => {
             height: "130vh",
             bottom: toggle ? "-30vh" : "-10vh",
             transition: "bottom 450ms ease-out",
+            WebkitTransition: "bottom 450ms ease-out",
           }}
         />
         <div
@@ -84,6 +82,7 @@ const Index = () => {
             height: "130vh",
             bottom: toggle ? "-30vh" : 0,
             transition: "bottom 450ms ease-out",
+            WebkitTransition: "bottom 450ms ease-out",
           }}
         />
         <div
@@ -91,6 +90,7 @@ const Index = () => {
           style={{
             bottom: toggle ? "-60vh" : 0,
             transition: "bottom 450ms ease-out",
+            WebkitTransition: "bottom 450ms ease-out",
             height: "30vh",
           }}
         >
