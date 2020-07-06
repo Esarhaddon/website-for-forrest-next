@@ -5,7 +5,7 @@ interface ErrorMessage {
 
 export default ({ text, code }: ErrorMessage) => {
   return (
-    <div className="flex items-center justify-center my-8">
+    <div className="flex items-center justify-center my-8 px-4">
       <div className="text-red-500">
         <div className="w-64 pl-8 pb-1 tracking-wide border-b-2 border-solid border-gray-800 text-2xl">
           Error<span className="px-2 text-black">:</span>
