@@ -32,15 +32,15 @@ const Index = () => {
     return () => clearTimeout(timeout)
   }, [toggle])
 
-  useEffect(() => {
-    const el = scrollingElRef.current
-    if (el) {
-      el.scrollTo({
-        top: el.scrollHeight * ((!toggle as unknown) as number),
-        behavior: "smooth",
-      })
-    }
-  }, [toggle])
+  // useEffect(() => {
+  //   const el = scrollingElRef.current
+  //   if (el) {
+  //     el.scrollTo({
+  //       top: el.scrollHeight * ((!toggle as unknown) as number),
+  //       behavior: "smooth",
+  //     })
+  //   }
+  // }, [toggle])
 
   return (
     <div className="w-full absolute top-0 right-0 z-50 sm:h-auto h-full">
@@ -108,13 +108,14 @@ const Index = () => {
         >
           <FDickison className="w-full tex-white" />
         </div>
-        <div className="fixed w-full h-full pointer-events-none flex items-center justify-center">
-          <DownArrow
-            className={`${
-              toggle ? "opacity-100" : "opacity-0"
-            } mx-auto text-white fill-current h-8 w-8`}
-            style={{ transition: "opacity 325ms ease-out" }}
-          />
+        <div
+          className={`${
+            // for some reason all the animations break on mobile chrome if you try to animate opacity
+            toggle ? "text-white" : "text-transparent"
+          } fixed w-full h-full pointer-events-none flex items-center justify-center`}
+          style={{ transition: "color 325ms ease-out" }}
+        >
+          <DownArrow className="mx-auto fill-current h-8 w-8" />
         </div>
       </div>
       {/* desktop layout */}
