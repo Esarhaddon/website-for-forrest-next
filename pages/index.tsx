@@ -111,7 +111,7 @@ const Index = () => {
         <div
           className={`${
             // for some reason all the animations break on mobile chrome if you try to animate opacity
-            toggle ? "text-white" : "text-transparent"
+            toggle && imageLoadCount >= 2 ? "text-white" : "text-transparent"
           } fixed w-full h-full pointer-events-none flex items-center justify-center`}
           style={{ transition: "color 325ms ease-out" }}
         >
@@ -191,7 +191,7 @@ const Index = () => {
           </div>
           <DownArrow
             className={`${
-              scrollState.lastScroll === "up"
+              scrollState.lastScroll === "up" && imageLoadCount >= 2
                 ? "opacity-100 cursor-pointer"
                 : "opacity-0"
             } text-white fill-current h-8 w-8 mx-auto`}
