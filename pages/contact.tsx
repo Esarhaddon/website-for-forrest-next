@@ -64,7 +64,7 @@ export default () => {
                 <Field
                   validate={validate}
                   id="first_name"
-                  className={`border border-solid ${
+                  className={`appearance-none border border-solid ${
                     errors.first_name && touched.first_name
                       ? "border-red-500 bg-red-100"
                       : "border-gray-400 bg-gray-100"
@@ -80,7 +80,7 @@ export default () => {
                 <Field
                   validate={validate}
                   id="last_name"
-                  className={`border border-solid ${
+                  className={`appearance-none border border-solid ${
                     errors.last_name && touched.last_name
                       ? "border-red-500 bg-red-100"
                       : "border-gray-400 bg-gray-100"
@@ -97,7 +97,7 @@ export default () => {
               <Field
                 validate={validate}
                 id="from"
-                className={`border border-solid ${
+                className={`appearance-none border border-solid ${
                   errors.from && touched.from
                     ? "border-red-500 bg-red-100"
                     : "border-gray-400 bg-gray-100"
@@ -113,7 +113,7 @@ export default () => {
               <Field
                 validate={validate}
                 id="subject"
-                className={`border border-solid ${
+                className={`appearance-none border border-solid ${
                   errors.subject && touched.subject
                     ? "border-red-500 bg-red-100"
                     : "border-gray-400 bg-gray-100"
@@ -130,7 +130,7 @@ export default () => {
                 validate={validate}
                 component="textarea"
                 id="text"
-                className={`border border-solid ${
+                className={`appearance-none border border-solid ${
                   errors.text && touched.text
                     ? "border-red-500 bg-red-100"
                     : "border-gray-400 bg-gray-100"
