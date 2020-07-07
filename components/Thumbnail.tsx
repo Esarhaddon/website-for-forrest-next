@@ -4,6 +4,20 @@ import { Image } from "../utils/fetchImagesFor"
 import { GridType } from "../components/Layout"
 import Vibrant from "node-vibrant"
 
+export const useDominantColor = (src: string) => {
+  const [dominantColor, setDominantColor] = useState("#A9A9A9")
+  useEffect(() => {
+    Vibrant.from(`${src}?h=5`)
+      .getPalette()
+      .then((palette) => {
+        setDominantColor(palette.Vibrant.hex)
+      })
+      .catch((e) => setDominantColor("#696969"))
+  }, [src])
+
+  return dominantColor
+}
+
 interface ThumbnailProps {
   image: Image
   displayHeight?: number
@@ -13,15 +27,7 @@ interface ThumbnailProps {
 
 export default ({ image, displayHeight, gridType, index }: ThumbnailProps) => {
   const [loaded, setLoaded] = useState("")
-  const [dominantColor, setDominantColor] = useState("")
-  useEffect(() => {
-    Vibrant.from(`${image.src}?h=5`)
-      .getPalette()
-      .then((palette) => {
-        setDominantColor(palette.Vibrant.hex)
-      })
-      .catch((e) => setDominantColor("#696969"))
-  }, [])
+  const imgLoadingColor = useDominantColor(image.src)
 
   return (
     <div>
@@ -55,7 +61,7 @@ export default ({ image, displayHeight, gridType, index }: ThumbnailProps) => {
             <div
               className="absolute w-full h-full top-0 left-0"
               style={{
-                backgroundColor: dominantColor ? dominantColor : "#A9A9A9",
+                backgroundColor: imgLoadingColor,
               }}
             >
               <div
