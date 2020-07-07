@@ -1,5 +1,7 @@
 import fetch from "node-fetch"
 import ErrorMessage from "../components/ErrorMessage"
+import { useState, useEffect, useRef } from "react"
+import { useDominantColor } from "../components/Thumbnail"
 
 interface AboutPageProps {
   imageSrc: string
@@ -32,7 +34,17 @@ const AboutPage = ({
   errorMessage,
   errorCode,
 }: AboutPageProps) => {
-  console.log("imageSrc is", imageSrc)
+  const imgLoadingColor: string = useDominantColor(imageSrc)
+  const [imgHeight, setImgHeight] = useState(100)
+
+  const thumbnailRef = useRef<HTMLDivElement>()
+
+  useEffect(() => {
+    const el = thumbnailRef.current
+    if (el) {
+      setImgHeight(el.offsetHeight)
+    }
+  }, [])
 
   if (errorMessage || errorCode) {
     return (
@@ -53,9 +65,11 @@ const AboutPage = ({
         <div className="relative w-6/12 lg:float-left lg:mr-6 lg:ml-0 ml-16 lg:mb-0 mb-6">
           <div className="w-full h-0" style={{ paddingTop: "120%" }}>
             <div
+              ref={thumbnailRef}
               className="absolute right-0 bottom-0"
               style={{
-                background: `center / cover no-repeat url(${imageSrc})`,
+                background: `center / cover no-repeat url(${imageSrc}?h=${imgHeight})`,
+                backgroundColor: imgLoadingColor,
                 width: "calc(100% + 4rem)",
                 height: "calc(100% + 4rem)",
               }}
