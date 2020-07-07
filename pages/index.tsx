@@ -58,7 +58,7 @@ const Index = () => {
       <div
         className={`${
           allowToggle ? "" : "pointer-events-none"
-        } absolute w-full bottom-0 right-0 overflow-hidden h-full sm:hidden`}
+        } fixed w-full bottom-0 right-0 overflow-hidden h-full sm:hidden bg-white`}
       >
         <div
           className={`absolute right-0 w-screen`}
@@ -139,46 +139,48 @@ const Index = () => {
         }}
         className={`${
           allowPointerE ? "" : "pointer-events-none"
-        } absolute w-full top-0 right-0 overflow-y-scroll overflow-x-hidden h-screen sm:block hidden`}
+        } bg-white absolute w-full top-0 right-0 overflow-y-scroll overflow-x-hidden h-screen sm:block hidden`}
         style={{
           perspective: "2px",
           perspectiveOrigin: "bottom right",
         }}
       >
-        <div
-          className="absolute top-0 right-0 w-screen overflow-hidden"
-          style={{
-            background:
-              "url(../static/toad.png) 66.66% calc(10vh + 25%) / cover no-repeat",
-            transformOrigin: "bottom right",
-            transform: "translateZ(-1px) scale(1.5)",
-            height: "130vh",
-          }}
-        />
-        <div
-          className="absolute top-0 right-0 w-screen"
-          style={{
-            height: "130vh",
-            background:
-              "linear-gradient(rgba(0, 0, 0, .25), rgba(0, 0, 0, .25)), url(../static/boy.png) 33.33% 25% / cover no-repeat",
-            transformOrigin: "bottom right",
-            transform: "translateZ(0)",
-          }}
-        />
-        <div
-          className="absolute w-screen flex items-center justify-center"
-          style={{
-            top: "100%",
-            height: "30vh",
-            transform: "translateZ(1px) scale(.5)",
-            transformOrigin: "bottom right",
-          }}
-        >
+        <div className={`${imageLoadCount < 2 ? "hidden" : ""}`}>
           <div
-            className="flex items-center justify-center"
-            style={{ marginTop: "calc(-1.66vh - 1rem)" }}
+            className="absolute top-0 right-0 w-screen overflow-hidden"
+            style={{
+              background:
+                "url(../static/toad.png) 66.66% calc(10vh + 25%) / cover no-repeat",
+              transformOrigin: "bottom right",
+              transform: "translateZ(-1px) scale(1.5)",
+              height: "130vh",
+            }}
+          />
+          <div
+            className="absolute top-0 right-0 w-screen"
+            style={{
+              height: "130vh",
+              background:
+                "linear-gradient(rgba(0, 0, 0, .25), rgba(0, 0, 0, .25)), url(../static/boy.png) 33.33% 25% / cover no-repeat",
+              transformOrigin: "bottom right",
+              transform: "translateZ(0)",
+            }}
+          />
+          <div
+            className="absolute w-screen flex items-center justify-center"
+            style={{
+              top: "100%",
+              height: "30vh",
+              transform: "translateZ(1px) scale(.5)",
+              transformOrigin: "bottom right",
+            }}
           >
-            <IndexNav />
+            <div
+              className="flex items-center justify-center"
+              style={{ marginTop: "calc(-1.66vh - 1rem)" }}
+            >
+              <IndexNav />
+            </div>
           </div>
         </div>
         <BackgroundPlaceholder showPlaceholder={imageLoadCount < 2} />
