@@ -43,7 +43,7 @@ const Index = () => {
   }, [toggle])
 
   return (
-    <div className="w-full absolute top-0 right-0 z-50 sm:h-auto h-full">
+    <div className="w-full absolute top-0 right-0 z-50 h-full">
       <img
         className="hidden"
         src="../static/boy.png"
@@ -139,10 +139,11 @@ const Index = () => {
         }}
         className={`${
           allowPointerE ? "" : "pointer-events-none"
-        } bg-white absolute w-full top-0 right-0 overflow-y-scroll overflow-x-hidden h-screen sm:block hidden`}
+        } bg-white absolute w-full top-0 right-0 overflow-y-scroll overflow-x-hidden h-full sm:block hidden`}
         style={{
           perspective: "2px",
           perspectiveOrigin: "bottom right",
+          minHeight: "25rem",
         }}
       >
         <div className={`${imageLoadCount < 2 ? "hidden" : ""}`}>
@@ -153,13 +154,13 @@ const Index = () => {
                 "url(../static/toad.png) 66.66% calc(10vh + 25%) / cover no-repeat",
               transformOrigin: "bottom right",
               transform: "translateZ(-1px) scale(1.5)",
-              height: "130vh",
+              height: "130%",
             }}
           />
           <div
             className="absolute top-0 right-0 w-screen"
             style={{
-              height: "130vh",
+              height: "130%",
               background:
                 "linear-gradient(rgba(0, 0, 0, .25), rgba(0, 0, 0, .25)), url(../static/boy.png) 33.33% 25% / cover no-repeat",
               transformOrigin: "bottom right",
@@ -170,14 +171,14 @@ const Index = () => {
             className="absolute w-screen flex items-center justify-center"
             style={{
               top: "100%",
-              height: "30vh",
+              height: "30%",
               transform: "translateZ(1px) scale(.5)",
               transformOrigin: "bottom right",
             }}
           >
             <div
               className="flex items-center justify-center"
-              style={{ marginTop: "calc(-1.66vh - 1rem)" }}
+              style={{ marginTop: "calc(-1.66% - 1rem)" }}
             >
               <IndexNav />
             </div>
@@ -186,7 +187,7 @@ const Index = () => {
         <BackgroundPlaceholder showPlaceholder={imageLoadCount < 2} />
         <div
           className="sticky max-w-3xl mx-auto px-6"
-          style={{ top: "33.33vh" }}
+          style={{ top: "33.33%" }}
         >
           <div className="cursor-pointer">
             <FDickison className="w-full" />
