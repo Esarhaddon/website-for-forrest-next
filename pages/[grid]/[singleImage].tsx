@@ -6,7 +6,6 @@ import Link from "next/link"
 import Arrow from "../../components/icons/arrow"
 import ExitX from "../../components/icons/close"
 import ErrorMessage from "../../components/ErrorMessage"
-import Head from "next/head"
 
 interface Dimensions {
   h: number
