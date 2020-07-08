@@ -98,7 +98,7 @@ const SingleImage = ({
       {dimensions.h ? (
         <img
           className="hidden"
-          src={`${current.src}?h=${dimensions.h}`}
+          src={`${current.src}?h=${dimensions.h * 2}`}
           onLoad={() => setImageHasLoaded(true)}
         />
       ) : null}
@@ -106,11 +106,6 @@ const SingleImage = ({
         style={{
           maxWidth: "90vw",
           width: dimensions.w + "px",
-          ...(imageHasLoaded
-            ? null
-            : dominantColor
-            ? { backgroundColor: dominantColor }
-            : { backgroundColor: "#A9A9A9" }),
         }}
         onClick={() => setHideModal(false)}
         className={`cursor-pointer relative`}
@@ -123,13 +118,14 @@ const SingleImage = ({
             background: `no-repeat center / contain url(${current.src}?h=${
               dimensions.h * 2
             })`,
+            backgroundColor: imageHasLoaded ? "transparent" : dominantColor,
           }}
         />
       </div>
       <div
         className="leading-tight text-center text-2xl font-semibold tracking-wider text-gray-900"
         style={
-          dimensions.h
+          dimensions.h > 1
             ? { marginTop: "calc(3vw + .75rem)" }
             : { marginTop: "100vh" }
         }
