@@ -1,12 +1,13 @@
 import "../styles/style.css"
 import Link from "next/link"
-import LogoBlack from "../static/icons/logo-black.svg"
+import LogoBlack from "../components/icons/logo-black"
 import { useEffect } from "react"
 import SocialAndEmail from "./SocialAndEmail"
 import { useState } from "react"
 import Loading from "../components/Loading"
 import { useRouter, Router } from "next/router"
 import MobileNavWrapper from "../components/MobileNavWrapper"
+import Head from "next/head"
 
 export type GridType = "illustration" // | "animation" | "fine art"
 export type PageType = GridType | "about" | "contact" | "index" | ""
@@ -51,6 +52,25 @@ export default (props) => {
         (isFor === "illustration" || isFor === "about") && !isForSingle
       }
     >
+      <Head>
+        <link
+          rel="apple-touch-icon"
+          sizes="180x180"
+          href="apple-touch-icon.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="32x32"
+          href="favicon-32x32.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="16x16"
+          href="favicon-16x16.png"
+        />
+      </Head>
       <div>
         <div
           className={`

@@ -1,8 +1,8 @@
 import React, { useState, useEffect, ReactNode } from "react"
 import Link from "next/link"
-import LogoBlack from "../static/icons/logo-black.svg"
-import ExitX from "../static/icons/close.svg"
-import Hamburger from "../static/icons/hamburger.svg"
+import LogoBlack from "./icons/logo-black"
+import ExitX from "./icons/close"
+import Hamburger from "./icons/hamburger"
 
 interface MobileNavWrapperProps {
   pinnedNav?: boolean

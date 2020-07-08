@@ -12,12 +12,4 @@ module.exports = withCSS({
     MAILT_TO: process.env.MAILT_TO,
     NEXT_API: process.env.NEXT_API,
   },
-  webpack(config) {
-    config.module.rules.push({
-      test: /\.svg$/,
-      use: ["@svgr/webpack"],
-    })
-
-    return config
-  },
 })
