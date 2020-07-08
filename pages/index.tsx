@@ -104,18 +104,18 @@ const Index = () => {
         <BackgroundPlaceholder showPlaceholder={imageLoadCount < 2} />
         <div
           className="sticky max-w-3xl mx-auto px-6 pointer-events-none"
-          style={{ top: "33.33%" }}
+          style={{ top: "30%" }}
         >
           <FDickison className="w-full tex-white" />
-        </div>
-        <div
-          className={`${
-            // for some reason all the animations break on mobile chrome if you try to animate opacity
-            toggle && imageLoadCount >= 2 ? "text-white" : "text-transparent"
-          } fixed w-full h-full pointer-events-none flex items-center justify-center`}
-          style={{ transition: "color 325ms ease-out" }}
-        >
-          <DownArrow className="mx-auto fill-current h-8 w-8" />
+          <div
+            className={`${
+              // for some reason all the animations break on mobile chrome if you try to animate opacity
+              toggle && imageLoadCount >= 2 ? "text-white" : "text-transparent"
+            }`}
+            style={{ transition: "color 325ms ease-out", marginTop: "10vh" }}
+          >
+            <DownArrow className="mx-auto fill-current h-8 w-8" />
+          </div>
         </div>
       </div>
       {/* desktop layout */}

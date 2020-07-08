@@ -20,12 +20,17 @@ export const useDominantColor = (src: string) => {
 
 interface ThumbnailProps {
   image: Image
-  displayHeight?: number
+  containerHeight?: number
   gridType: GridType
   index: number
 }
 
-export default ({ image, displayHeight, gridType, index }: ThumbnailProps) => {
+export default ({
+  image,
+  containerHeight,
+  gridType,
+  index,
+}: ThumbnailProps) => {
   const [loaded, setLoaded] = useState("")
   const imgLoadingColor = useDominantColor(image.src)
 
@@ -33,9 +38,11 @@ export default ({ image, displayHeight, gridType, index }: ThumbnailProps) => {
     <div>
       <img
         className="hidden"
-        src={`${image.src}?h=${displayHeight ? displayHeight : 5}`}
+        src={`${image.src}?h=${containerHeight ? containerHeight * 2 : 5}`}
         onLoad={() => {
-          setLoaded(`${image.src}?h=${displayHeight ? displayHeight : 5}`)
+          setLoaded(
+            `${image.src}?h=${containerHeight ? containerHeight * 2 : 5}`
+          )
         }}
       />
       <div

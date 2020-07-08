@@ -42,7 +42,8 @@ const AboutPage = ({
   useEffect(() => {
     const el = thumbnailRef.current
     if (el) {
-      setImgHeight(el.offsetHeight)
+      console.log("setting image height to", el.offsetHeight * 2)
+      setImgHeight(el.offsetHeight * 2)
     }
   }, [])
 

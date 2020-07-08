@@ -15,12 +15,12 @@ const Grid = ({ gridType, toDisplay, errorMessage, errorCode }: GridProps) => {
   console.log("gridType is", gridType)
   console.log("toDisplay is", toDisplay)
 
-  const [displayHeight, setDisplayHeight] = useState(0)
+  const [containerHeight, setContainerHeight] = useState(0)
   useEffect(() => {
     const thumbnail = document.getElementById("thumbnail-0")
     if (thumbnail) {
       const thumbnailHeight = thumbnail.offsetHeight
-      setDisplayHeight(thumbnailHeight)
+      setContainerHeight(thumbnailHeight)
     }
   })
 
@@ -50,7 +50,7 @@ const Grid = ({ gridType, toDisplay, errorMessage, errorCode }: GridProps) => {
         return (
           <Thumbnail
             key={image.title}
-            {...{ image, index, gridType, displayHeight }}
+            {...{ image, index, gridType, containerHeight }}
           />
         )
       })}

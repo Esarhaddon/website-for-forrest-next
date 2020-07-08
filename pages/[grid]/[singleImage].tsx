@@ -119,7 +119,9 @@ const SingleImage = ({
           style={{
             paddingTop:
               parseFloat((dimensions.h / dimensions.w).toFixed(6)) * 100 + "%",
-            background: `no-repeat center / contain url(${current.src}?h=${dimensions.h})`,
+            background: `no-repeat center / contain url(${current.src}?h=${
+              dimensions.h * 2
+            })`,
           }}
         />
       </div>
@@ -223,7 +225,9 @@ const SingleImage = ({
         <div
           className="w-full h-full cursor-pointer"
           style={{
-            background: `center / contain no-repeat url(${current.src}?h=${dimensions.h})`,
+            background: `center / contain no-repeat url(${current.src}?h=${
+              dimensions.h * 2
+            })`,
           }}
         />
       </div>
