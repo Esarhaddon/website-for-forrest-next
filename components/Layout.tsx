@@ -56,7 +56,7 @@ export default (props) => {
           className={`
          hidden sm:flex z-40 justify-between items-center align-middle text-gray-900 font-semibold py-4 px-12 md:px-16 md:py-10 lg:py-16`}
         >
-          <Link href="/index">
+          <Link href="/index" as="/">
             <a
               style={{
                 marginTop: "-1rem",

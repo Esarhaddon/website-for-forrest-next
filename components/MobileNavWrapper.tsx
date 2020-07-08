@@ -121,7 +121,7 @@ export default (props: MobileNavWrapperProps) => {
               }
         }
       >
-        <Link href="/index">
+        <Link href="/index" as="/">
           <a
             style={{
               marginTop: "-1rem",
