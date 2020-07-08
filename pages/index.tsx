@@ -46,12 +46,12 @@ const Index = () => {
     <div className="w-full absolute top-0 right-0 z-50 h-full">
       <img
         className="hidden"
-        src="../static/boy.png"
+        src="boy.png"
         onLoad={() => setLoadCount((count) => count + 1)}
       />
       <img
         className="hidden"
-        src="../static/toad.png"
+        src="toad.png"
         onLoad={() => setLoadCount((count) => count + 1)}
       />
       {/* mobile layout */}
@@ -65,7 +65,7 @@ const Index = () => {
           onTouchStart={() => setToggle(!toggle)}
           onMouseDown={() => setToggle(!toggle)}
           style={{
-            background: "url(../static/toad.png) 66.66%  25% / cover no-repeat",
+            background: "url(toad.png) 66.66%  25% / cover no-repeat",
             height: "130vh",
             bottom: toggle ? "-30vh" : "-10vh",
             transition: "bottom 450ms ease-out",
@@ -78,7 +78,7 @@ const Index = () => {
           onMouseDown={() => setToggle(!toggle)}
           style={{
             background:
-              "linear-gradient(rgba(0, 0, 0, .25), rgba(0, 0, 0, .25)), url(../static/boy.png) 33.33%  25% / cover no-repeat",
+              "linear-gradient(rgba(0, 0, 0, .25), rgba(0, 0, 0, .25)), url(boy.png) 33.33%  25% / cover no-repeat",
             height: "130vh",
             bottom: toggle ? "-30vh" : 0,
             transition: "bottom 450ms ease-out",
@@ -151,7 +151,7 @@ const Index = () => {
             className="absolute top-0 right-0 w-screen overflow-hidden"
             style={{
               background:
-                "url(../static/toad.png) 66.66% calc(10vh + 25%) / cover no-repeat",
+                "url(toad.png) 66.66% calc(10vh + 25%) / cover no-repeat",
               transformOrigin: "bottom right",
               transform: "translateZ(-1px) scale(1.5)",
               height: "130%",
@@ -162,7 +162,7 @@ const Index = () => {
             style={{
               height: "130%",
               background:
-                "linear-gradient(rgba(0, 0, 0, .25), rgba(0, 0, 0, .25)), url(../static/boy.png) 33.33% 25% / cover no-repeat",
+                "linear-gradient(rgba(0, 0, 0, .25), rgba(0, 0, 0, .25)), url(boy.png) 33.33% 25% / cover no-repeat",
               transformOrigin: "bottom right",
               transform: "translateZ(0)",
             }}
