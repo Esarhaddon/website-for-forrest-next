@@ -6,9 +6,9 @@ interface SvgProps {
   onClick?: () => void
 }
 
-export default ({ className, style }: SvgProps) => (
+export default ({ className, style, onClick }: SvgProps) => (
   <svg
-    {...{ className, style }}
+    {...{ className, style, onClick }}
     viewBox="0 0 329 329"
     version="1.1"
     xmlns="http://www.w3.org/2000/svg"
