@@ -84,7 +84,7 @@ const Index = () => {
         </div>
         <BackgroundPlaceholder showPlaceholder={imageLoadCount < 2} />
         <div
-          className="sticky max-w-3xl mx-auto px-6 pointer-events-none"
+          className="absolute max-w-3xl mx-auto px-6 pointer-events-none"
           style={{ top: "30%" }}
         >
           <FDickison className="w-full fill-current text-white" />
