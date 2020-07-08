@@ -6,7 +6,6 @@ import { useState, useEffect, useRef } from "react"
 import Loading from "../components/Loading"
 import DownArrow from "../components/icons/down-arrow"
 import "scroll-behavior-polyfill"
-import Head from "next/head"
 
 // TO DO: optimize background images for this page as well?
 
@@ -45,25 +44,6 @@ const Index = () => {
 
   return (
     <div className="w-full absolute top-0 right-0 z-50 h-full">
-      <Head>
-        <link
-          rel="apple-touch-icon"
-          sizes="180x180"
-          href="apple-touch-icon.png"
-        />
-        <link
-          rel="icon"
-          type="image/png"
-          sizes="32x32"
-          href="favicon-32x32.png"
-        />
-        <link
-          rel="icon"
-          type="image/png"
-          sizes="16x16"
-          href="favicon-16x16.png"
-        />
-      </Head>
       <img
         className="hidden"
         src="boy.png"

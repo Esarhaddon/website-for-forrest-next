@@ -39,9 +39,9 @@ export default ({
       {containerHeight ? (
         <img
           className="hidden"
-          src={`${image.src}?h=${containerHeight * 2}`}
+          src={`${image.src}?h=${Math.round(containerHeight * 1.75)}`}
           onLoad={() => {
-            setLoaded(`${image.src}?h=${containerHeight * 2}`)
+            setLoaded(`${image.src}?h=${Math.round(containerHeight * 1.75)}`)
           }}
         />
       ) : null}
