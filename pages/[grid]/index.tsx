@@ -12,9 +12,6 @@ interface GridProps {
 }
 
 const Grid = ({ gridType, toDisplay, errorMessage, errorCode }: GridProps) => {
-  console.log("gridType is", gridType)
-  console.log("toDisplay is", toDisplay)
-
   const [containerHeight, setContainerHeight] = useState(0)
   useEffect(() => {
     const thumbnail = document.getElementById("thumbnail-0")
@@ -60,7 +57,6 @@ const Grid = ({ gridType, toDisplay, errorMessage, errorCode }: GridProps) => {
 
 Grid.getInitialProps = async (ctx): Promise<Partial<GridProps>> => {
   const gridType = ctx.query.grid
-  console.log("grid is", gridType)
   try {
     const toDisplay = await fetchImagesFor(gridType)
 
