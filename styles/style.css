@@ -92,6 +92,18 @@ body {
   }
 }
 
+@media only screen and (orientation: landscape) {
+  .landscape\:hidden {
+    display: none;
+  }
+}
+
+@media only screen and (orientation: portrait) {
+  .portrait\:hidden {
+    display: none;
+  }
+}
+
 /* for animated ellipsis */
 @keyframes dot-one {
   0% {

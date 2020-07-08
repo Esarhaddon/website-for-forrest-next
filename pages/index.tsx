@@ -54,11 +54,47 @@ const Index = () => {
         src="toad.png"
         onLoad={() => setLoadCount((count) => count + 1)}
       />
-      {/* mobile layout */}
+      {/* mobile landscape layout */}
+      <div className="portrait:hidden absolute w-full h-full sm:hidden">
+        <div
+          className={`absolute right-0 top-0 w-full h-full`}
+          style={{
+            background: "url(toad.png) 66.66%  25% / cover no-repeat",
+          }}
+        />
+        <div
+          className={`absolute right-0 top-0 w-screen h-screen`}
+          style={{
+            background:
+              "linear-gradient(rgba(0, 0, 0, .25), rgba(0, 0, 0, .25)), url(boy.png) 33.33%  25% / cover no-repeat",
+          }}
+        />
+        <div
+          className="pointer-events-auto absolute bottom-0 w-screen flex items-center justify-center"
+          style={{
+            height: "30vh",
+          }}
+        >
+          <div
+            className="flex items-center justify-center"
+            style={{ marginTop: "calc(-1.66vh - 1rem)" }}
+          >
+            <IndexNav />
+          </div>
+        </div>
+        <BackgroundPlaceholder showPlaceholder={imageLoadCount < 2} />
+        <div
+          className="sticky max-w-3xl mx-auto px-6 pointer-events-none"
+          style={{ top: "30%" }}
+        >
+          <FDickison className="w-full fill-current text-white" />
+        </div>
+      </div>
+      {/* mobile portrait layout */}
       <div
         className={`${
           allowToggle ? "" : "pointer-events-none"
-        } fixed w-full bottom-0 right-0 overflow-hidden h-full sm:hidden bg-white`}
+        } landscape:hidden fixed w-full bottom-0 right-0 overflow-hidden h-full sm:hidden bg-white`}
       >
         <div
           className={`absolute right-0 w-screen`}
@@ -106,7 +142,7 @@ const Index = () => {
           className="sticky max-w-3xl mx-auto px-6 pointer-events-none"
           style={{ top: "30%" }}
         >
-          <FDickison className="w-full tex-white" />
+          <FDickison className="w-full fill-current text-white" />
           <div
             className={`${
               // for some reason all the animations break on mobile chrome if you try to animate opacity
