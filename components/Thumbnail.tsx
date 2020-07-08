@@ -36,15 +36,15 @@ export default ({
 
   return (
     <div>
-      <img
-        className="hidden"
-        src={`${image.src}?h=${containerHeight ? containerHeight * 2 : 5}`}
-        onLoad={() => {
-          setLoaded(
-            `${image.src}?h=${containerHeight ? containerHeight * 2 : 5}`
-          )
-        }}
-      />
+      {containerHeight ? (
+        <img
+          className="hidden"
+          src={`${image.src}?h=${containerHeight * 2}`}
+          onLoad={() => {
+            setLoaded(`${image.src}?h=${containerHeight * 2}`)
+          }}
+        />
+      ) : null}
       <div
         style={{
           paddingTop: "calc(150% - 5px)",
