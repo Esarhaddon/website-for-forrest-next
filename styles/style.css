@@ -98,6 +98,12 @@ body {
   }
 }
 
+@media only screen and (orientation: landscape) {
+  .landscape\:hidden {
+    display: none !important;
+  }
+}
+
 @media only screen and (orientation: landscape) and (max-height: 30rem) {
   .sm-landscape\:hidden {
     display: none !important;
