@@ -94,13 +94,16 @@ body {
 
 @media only screen and (orientation: portrait) {
   .portrait\:hidden {
-    display: none;
+    display: none !important;
   }
 }
 
-@media only screen and (orientation: landscape) {
-  .landscape\:hidden {
-    display: none;
+@media only screen and (orientation: landscape) and (max-height: 30rem) {
+  .sm-landscape\:hidden {
+    display: none !important;
+  }
+  .sm-landscape\:block {
+    display: block !important;
   }
 }
 

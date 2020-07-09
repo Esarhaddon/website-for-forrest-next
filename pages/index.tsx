@@ -18,7 +18,6 @@ const Index = () => {
     prevTop: 0,
     lastScroll: "up" as "up" | "down",
   })
-  // const [isPortrait, setIsPortrait] = useState(true)
 
   const scrollingElRef = useRef<HTMLDivElement>()
 
@@ -43,21 +42,6 @@ const Index = () => {
     }
   }, [toggle])
 
-  // useEffect(() => {
-  //   const setOrientation = () => {
-  //     const { width, height } = window.screen
-  //     if (width > height) {
-  //       setIsPortrait(false)
-  //     } else if (width < height) {
-  //       setIsPortrait(true)
-  //     }
-  //   }
-  //   setOrientation()
-  //   window.addEventListener("resize", setOrientation)
-
-  //   return () => window.removeEventListener("resize", setOrientation)
-  // }, [])
-
   return (
     <div className="w-full absolute top-0 right-0 z-50 h-full">
       <img
@@ -70,11 +54,47 @@ const Index = () => {
         src="toad.png"
         onLoad={() => setLoadCount((count) => count + 1)}
       />
-      {/* portrait mobile layout */}
+      {/* landscape layout */}
+      <div className="hidden sm-landscape:block absolute top-0 right-0 w-full h-full">
+        <div
+          className={`absolute right-0 top-0 w-full h-full`}
+          style={{
+            background: "url(toad.png) 66.66%  25% / cover no-repeat",
+          }}
+        />
+        <div
+          className={`absolute right-0 top-0 w-full h-full`}
+          style={{
+            background:
+              "linear-gradient(rgba(0, 0, 0, .25), rgba(0, 0, 0, .25)), url(boy.png) 33.33%  25% / cover no-repeat",
+          }}
+        />
+        <div
+          className="pointer-events-auto absolute bottom-0 w-screen flex items-center justify-center"
+          style={{
+            height: "30vh",
+          }}
+        >
+          <div
+            className="flex items-center justify-center"
+            style={{ marginTop: "calc(-1.66vh - 1rem)" }}
+          >
+            <IndexNav />
+          </div>
+        </div>
+        <BackgroundPlaceholder showPlaceholder={imageLoadCount < 2} />
+        <div
+          className="absolute px-6 pointer-events-none w-full"
+          style={{ top: "20%" }}
+        >
+          <FDickison className="max-w-2xl mx-auto fill-current text-white" />
+        </div>
+      </div>
+      {/* mobile layout */}
       <div
         className={`${
           allowToggle ? "" : "pointer-events-none"
-        } landscape:hidden fixed w-full bottom-0 right-0 overflow-hidden h-full sm:hidden bg-white`}
+        } sm-landscape:hidden fixed w-full bottom-0 right-0 overflow-hidden h-full sm:hidden bg-white`}
       >
         <div
           className={`absolute right-0 w-screen`}
@@ -134,42 +154,6 @@ const Index = () => {
           </div>
         </div>
       </div>
-      {/* landscape mobile layout */}
-      <div className="portrait:hidden absolute top-0 right-0 w-full h-full sm:hidden">
-        <div
-          className={`absolute right-0 top-0 w-full h-full`}
-          style={{
-            background: "url(toad.png) 66.66%  25% / cover no-repeat",
-          }}
-        />
-        <div
-          className={`absolute right-0 top-0 w-screen h-screen`}
-          style={{
-            background:
-              "linear-gradient(rgba(0, 0, 0, .25), rgba(0, 0, 0, .25)), url(boy.png) 33.33%  25% / cover no-repeat",
-          }}
-        />
-        <div
-          className="pointer-events-auto absolute bottom-0 w-screen flex items-center justify-center"
-          style={{
-            height: "30vh",
-          }}
-        >
-          <div
-            className="flex items-center justify-center"
-            style={{ marginTop: "calc(-1.66vh - 1rem)" }}
-          >
-            <IndexNav />
-          </div>
-        </div>
-        <BackgroundPlaceholder showPlaceholder={imageLoadCount < 2} />
-        <div
-          className="absolute max-w-3xl mx-auto px-6 pointer-events-none w-full"
-          style={{ top: "30%" }}
-        >
-          <FDickison className="max-w-3xl mx-auto fill-current text-white" />
-        </div>
-      </div>
       {/* desktop layout */}
       {/* scaleFactor = (perspective — distance) / perspective */}
       <div
@@ -191,11 +175,10 @@ const Index = () => {
         }}
         className={`${
           allowPointerE ? "" : "pointer-events-none"
-        } bg-white fixed w-full top-0 right-0 overflow-y-scroll overflow-x-hidden h-full sm:block hidden`}
+        } sm-landscape:hidden bg-white absolute w-full top-0 right-0 overflow-y-scroll overflow-x-hidden h-full sm:block hidden`}
         style={{
           perspective: "2px",
           perspectiveOrigin: "bottom right",
-          minHeight: "25rem",
         }}
       >
         <div className={`${imageLoadCount < 2 ? "hidden" : ""}`}>
