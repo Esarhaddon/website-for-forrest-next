@@ -92,14 +92,14 @@ body {
   }
 }
 
-@media only screen and (orientation: landscape) {
-  .landscape\:hidden {
+@media only screen and (orientation: portrait) {
+  .portrait\:hidden {
     display: none;
   }
 }
 
-@media only screen and (orientation: portrait) {
-  .portrait\:hidden {
+@media only screen and (orientation: landscape) {
+  .landscape\:hidden {
     display: none;
   }
 }
