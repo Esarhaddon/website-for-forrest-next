@@ -98,13 +98,14 @@ export default (props: MobileNavWrapperProps) => {
   return (
     <div>
       <div
-        className={`sm:hidden z-40 right-0 w-full flex justify-between items-center align-middle text-gray-900 font-semibold py-4 bg-white`}
+        className={`sm:hidden z-40 right-0 w-full flex justify-between items-center align-middle text-gray-900 font-semibold py-4`}
         style={
           showMobileNav
             ? {
                 position: "fixed",
                 paddingRight: "calc(5vw + 5px)",
                 paddingLeft: "calc(5vw + 5px)",
+                backgroundColor: "transparent",
               }
             : headerPinned && props.pinnedNav
             ? {
@@ -113,11 +114,13 @@ export default (props: MobileNavWrapperProps) => {
                 top: headerTop,
                 paddingRight: "calc(5vw + 5px)",
                 paddingLeft: "calc(5vw + 5px)",
+                backgroundColor: "white",
               }
             : {
                 position: "absolute",
                 paddingRight: "calc(5vw + 5px)",
                 paddingLeft: "calc(5vw + 5px)",
+                backgroundColor: "white",
               }
         }
       >
