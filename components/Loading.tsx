@@ -12,7 +12,7 @@ export default () => {
 
   return (
     <>
-      <div className="w-screen h-screen pointer-events-none" />
+      <div className="w-full h-screen pointer-events-none" />
       <div
         className={`${
           showText ? "opacity-100" : "opacity-0"
