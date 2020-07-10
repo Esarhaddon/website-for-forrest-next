@@ -133,14 +133,24 @@ const SingleImage = ({
         className={`cursor-pointer relative`}
       >
         <div
-          className="w-full h-0"
+          className="absolute h-0"
+          style={{
+            top: ".5%",
+            left: ".5%",
+            width: "99%",
+            paddingTop:
+              parseFloat((dimensions.h / dimensions.w).toFixed(6)) * 99 + "%",
+            backgroundColor: dominantColor,
+          }}
+        />
+        <div
+          className="relative top-0 right-0 w-full h-0"
           style={{
             paddingTop:
               parseFloat((dimensions.h / dimensions.w).toFixed(6)) * 100 + "%",
             background: `no-repeat center / contain url(${current.src}?h=${
               dimensions.h * 2
             })`,
-            backgroundColor: imageHasLoaded ? "transparent" : dominantColor,
           }}
         />
       </div>
