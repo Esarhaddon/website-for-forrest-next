@@ -135,11 +135,12 @@ const SingleImage = ({
         <div
           className="absolute h-0"
           style={{
-            top: ".5%",
-            left: ".5%",
-            width: "99%",
-            paddingTop:
-              parseFloat((dimensions.h / dimensions.w).toFixed(6)) * 99 + "%",
+            top: "2px",
+            left: "2px",
+            width: "calc(100% - 4px)",
+            paddingTop: `calc(${
+              parseFloat((dimensions.h / dimensions.w).toFixed(6)) * 100
+            }% - 4px)`,
             backgroundColor: dominantColor,
           }}
         />
