@@ -41,7 +41,13 @@ export default (props) => {
   }, [isLoading])
 
   if (isFor === "index" || isFor === "") {
-    return isLoading ? <Loading /> : props.children
+    return isLoading ? (
+      <div className="absolute top-0 right-0 w-full h-full bg-white z-50">
+        <Loading />
+      </div>
+    ) : (
+      props.children
+    )
   }
 
   return (
