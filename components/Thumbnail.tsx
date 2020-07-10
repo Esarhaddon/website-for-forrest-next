@@ -31,19 +31,14 @@ export default ({
   gridType,
   index,
 }: ThumbnailProps) => {
-  const [loaded, setLoaded] = useState("")
+  const [isLoaded, setIsLoaded] = useState(false)
   const imgLoadingColor = useDominantColor(image.src)
+  const imgSrc = `${image.src}?h=${Math.round(containerHeight * 1.75)}`
 
   return (
     <div>
       {containerHeight ? (
-        <img
-          className="hidden"
-          src={`${image.src}?h=${Math.round(containerHeight * 1.75)}`}
-          onLoad={() => {
-            setLoaded(`${image.src}?h=${Math.round(containerHeight * 1.75)}`)
-          }}
-        />
+        <img className="hidden" src={imgSrc} onLoad={() => setIsLoaded(true)} />
       ) : null}
       <div
         style={{
@@ -66,21 +61,20 @@ export default ({
             }}
           >
             <div
-              className="absolute w-full h-full top-0 left-0"
+              id={`thumbnail-${index}`}
+              className="absolute w-full h-full top-0 left-0 bg-cover bg-no-repeat"
               style={{
-                backgroundColor: imgLoadingColor,
+                ...(isLoaded ? { backgroundImage: `url(${imgSrc})` } : null),
+                backgroundPosition: image.offsets
+                  ? `left ${image.offsets.left}% top ${image.offsets.top}%`
+                  : "center",
               }}
             >
               <div
-                id={`thumbnail-${index}`}
-                className="absolute w-full h-full top-0 left-0 bg-cover bg-no-repeat text-black"
+                className="absolute w-full h-full top-0 left-0"
                 style={{
-                  ...(loaded && loaded.slice(loaded.length - 4) !== "h=5"
-                    ? { backgroundImage: `url(${loaded})` }
-                    : null),
-                  backgroundPosition: image.offsets
-                    ? `left ${image.offsets.left}% top ${image.offsets.top}%`
-                    : "center",
+                  backgroundColor: isLoaded ? "transparent" : imgLoadingColor,
+                  transition: "background-color 200ms ease-in",
                 }}
               />
             </div>
