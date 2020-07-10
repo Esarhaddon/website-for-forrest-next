@@ -7,6 +7,7 @@ import Arrow from "../../components/icons/arrow"
 import ExitX from "../../components/icons/close"
 import ErrorMessage from "../../components/ErrorMessage"
 import Head from "next/head"
+import { useScreenContext } from "../../providers/ScreenProvider"
 
 interface Dimensions {
   h: number
@@ -39,10 +40,12 @@ const SingleImage = ({
   const [dominantColor, setDominantColor] = useState("")
   const [hideModal, setHideModal] = useState(true)
 
+  const screenCxt = useScreenContext()
   useEffect(() => {
-    if (current) {
-      const maxHeight = Math.round(screen.height * 1.5)
-      const maxWidth = Math.round(screen.width * 0.9)
+    setImageHasLoaded(false)
+    if (current && screenCxt.value) {
+      const maxHeight = Math.round(screenCxt.value.height * 1.5)
+      const maxWidth = Math.round(screenCxt.value.width * 0.9)
       const dimensions = {
         h: current.originalHeight,
         w: current.originalWidth,
@@ -62,7 +65,7 @@ const SingleImage = ({
 
       setDimensions(dimensions)
     }
-  }, [current])
+  }, [current, screenCxt])
 
   useEffect(() => {
     if (current) {
