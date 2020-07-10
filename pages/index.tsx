@@ -54,7 +54,7 @@ const Index = () => {
         src="toad.png"
         onLoad={() => setLoadCount((count) => count + 1)}
       />
-      {/* landscape layout */}
+      {/* landscape layout (mostly just for mobile) */}
       <div className="hidden sm-landscape:block absolute top-0 right-0 w-full h-full">
         <div
           className={`absolute right-0 top-0 w-full h-full`}
@@ -84,10 +84,10 @@ const Index = () => {
         </div>
         <BackgroundPlaceholder showPlaceholder={imageLoadCount < 2} />
         <div
-          className="absolute px-6 pointer-events-none w-full"
+          className="absolute px-16 pointer-events-none w-full"
           style={{ top: "20%" }}
         >
-          <FDickison className="max-w-2xl mx-auto fill-current text-white" />
+          <FDickison className="max-w-xl mx-auto fill-current text-white" />
         </div>
       </div>
       {/* mobile layout */}
