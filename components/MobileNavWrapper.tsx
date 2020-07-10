@@ -43,9 +43,11 @@ export default (props: MobileNavWrapperProps) => {
         }, wait)
       }
     }
-    window.addEventListener("scroll", throttledHandleScroll(200))
+
+    const listener = throttledHandleScroll(200)
+    window.addEventListener("scroll", listener)
     return () => {
-      window.removeEventListener("scroll", throttledHandleScroll(200))
+      window.removeEventListener("scroll", listener)
       clearTimeout(timeoutId)
     }
   }, [])
