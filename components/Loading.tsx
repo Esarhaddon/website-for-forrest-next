@@ -12,11 +12,12 @@ export default () => {
 
   return (
     <>
+      {/* div to do nothing except keep the scroll bar from flashing off during loading */}
       <div className="w-full h-screen pointer-events-none" />
       <div
         className={`${
           showText ? "opacity-100" : "opacity-0"
-        } w-screen h-full absolute top-0 right-0 flex items-center justify-center pointer-events-none`}
+        } w-full h-full absolute top-0 right-0 flex items-center justify-center pointer-events-none`}
         style={{
           transition: "opacity .2s linear",
         }}
