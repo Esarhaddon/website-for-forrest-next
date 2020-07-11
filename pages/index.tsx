@@ -262,14 +262,16 @@ const BackgroundPlaceholder = ({
         transition: "background-color 250ms ease-in-out",
       }}
     >
-      <div
-        className="text-white absolute bottom-0"
-        style={{
-          height: "66.66vh",
-        }}
-      >
-        <Loading />
-      </div>
+      {showPlaceholder ? (
+        <div
+          className="text-white absolute bottom-0 w-full"
+          style={{
+            height: "66.66vh",
+          }}
+        >
+          <Loading />
+        </div>
+      ) : null}
     </div>
   )
 }
