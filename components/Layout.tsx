@@ -29,7 +29,7 @@ export default (props) => {
     Router.events.on("routeChangeComplete", handleChangeComplete)
 
     return () => {
-      Router.events.off("routeChangeComplete", handleChangeStart)
+      Router.events.off("routeChangeStart", handleChangeStart)
       Router.events.off("routerChangeComplete", handleChangeComplete)
     }
   }, [])
