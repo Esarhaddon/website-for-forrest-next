@@ -253,25 +253,6 @@ interface BackgroundPlaceholderProps {
 const BackgroundPlaceholder = ({
   showPlaceholder,
 }: BackgroundPlaceholderProps) => {
-  const [showLoading, setShowLoading] = useState(false)
-
-  const timeoutRef = useRef<NodeJS.Timeout>()
-
-  useEffect(() => {
-    if (showPlaceholder) {
-      timeoutRef.current = setTimeout(() => setShowLoading(true), 250)
-    } else {
-      clearTimeout(timeoutRef.current)
-      setShowLoading(false)
-    }
-
-    return () => {
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current)
-      }
-    }
-  }, [showPlaceholder])
-
   return (
     <div
       className={`${
@@ -281,16 +262,14 @@ const BackgroundPlaceholder = ({
         transition: "background-color 250ms ease-in-out",
       }}
     >
-      {showLoading ? (
-        <div
-          className="text-white absolute bottom-0"
-          style={{
-            height: "66.66vh",
-          }}
-        >
-          <Loading />
-        </div>
-      ) : null}
+      <div
+        className="text-white absolute bottom-0"
+        style={{
+          height: "66.66vh",
+        }}
+      >
+        <Loading />
+      </div>
     </div>
   )
 }
