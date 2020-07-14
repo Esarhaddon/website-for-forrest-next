@@ -32,7 +32,7 @@ const SingleImage = ({
   errorMessage,
   errorCode,
 }: SingleImageProps) => {
-  const dominantColor = useDominantColor(current.src)
+  const dominantColor = useDominantColor(current ? current.src : "")
   const [dimensions, setDimensions] = useState<Dimensions>({
     h: 1,
     w: 1,
@@ -100,6 +100,7 @@ const SingleImage = ({
           sizes="16x16"
           href="../favicon-16x16.png"
         />
+        <title key="title">{current.title}</title>
       </Head>
       {dimensions.h ? (
         <img

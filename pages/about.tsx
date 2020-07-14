@@ -3,6 +3,7 @@ import ErrorMessage from "../components/ErrorMessage"
 import { useState, useEffect, useRef } from "react"
 import { useDominantColor } from "../components/Thumbnail"
 import LayoutPaddingContainer from "../components/LayoutPaddingContainer"
+import Head from "next/head"
 
 interface AboutPageProps {
   imageSrc: string
@@ -58,6 +59,9 @@ const AboutPage = ({
 
   return (
     <div className="flex flex-col items-center px-4">
+      <Head>
+        <title key="title">About</title>
+      </Head>
       {imgContainerHeight ? (
         <img
           className="hidden"

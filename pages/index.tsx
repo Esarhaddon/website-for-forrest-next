@@ -4,6 +4,7 @@ import Link from "next/link"
 import { useState, useEffect, useRef } from "react"
 import Loading from "../components/Loading"
 import DownArrow from "../components/icons/down-arrow"
+import Head from "next/head"
 import "scroll-behavior-polyfill"
 
 // TO DO: optimize background images for this page as well?
@@ -43,6 +44,9 @@ const Index = () => {
 
   return (
     <div className="w-full absolute top-0 right-0 z-50 h-full">
+      <Head>
+        <title key="title">Forrest Dickison</title>
+      </Head>
       <img
         className="hidden"
         src="boy.png"

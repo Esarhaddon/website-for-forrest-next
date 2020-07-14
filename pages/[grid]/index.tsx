@@ -4,6 +4,8 @@ import React, { useState, useEffect } from "react"
 import Thumbnail from "../../components/Thumbnail"
 import ErrorMessage from "../../components/ErrorMessage"
 import LayoutPaddingContainer from "../../components/LayoutPaddingContainer"
+import toTitleCase from "../../utils/toTitleCase"
+import Head from "next/head"
 
 interface GridProps {
   gridType: GridType
@@ -39,6 +41,9 @@ const Grid = ({ gridType, toDisplay, errorMessage, errorCode }: GridProps) => {
         paddingLeft: "5vw",
       }}
     >
+      <Head>
+        <title key="title">{toTitleCase(gridType)}</title>
+      </Head>
       {toDisplay.map((image, index) => {
         return (
           <Thumbnail

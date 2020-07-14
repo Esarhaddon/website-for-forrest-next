@@ -3,6 +3,7 @@ import { Field, Form, Formik } from "formik"
 import { UserEmail } from "./api/contact"
 import fetch from "node-fetch"
 import LayoutPaddingContainer from "../components/LayoutPaddingContainer"
+import Head from "next/head"
 
 const validate = (value: string) => {
   if (!value) {
@@ -23,6 +24,9 @@ export default () => {
 
   return (
     <LayoutPaddingContainer>
+      <Head>
+        <title key="title">Contact</title>
+      </Head>
       <Formik
         initialValues={
           {
