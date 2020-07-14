@@ -165,7 +165,7 @@ export default (props) => {
                     marginBottom: "calc(3vw + .75rem)",
                   }}
                 >
-                  Copyright © 2019 Forrest Dickison
+                  Copyright © {new Date().getFullYear()} Forrest Dickison
                 </div>
               </div>
             </>
