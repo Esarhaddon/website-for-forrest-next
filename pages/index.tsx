@@ -46,6 +46,10 @@ const Index = () => {
     <div className="w-full absolute top-0 right-0 z-50 h-full">
       <Head>
         <title key="title">Forrest Dickison</title>
+        <meta
+          name="description"
+          content="forrestdickison.com showcases the art work of illustrator, animator, and fine artist Forrest Dickison."
+        />
       </Head>
       <img
         className="hidden"
