@@ -182,8 +182,8 @@ const SingleImage = ({
             <Link
               href="/[grid]/[singleImage]"
               as={`/${fromGrid}/${previous.title
-                .replace(/-/g, "|-")
-                .replace(/ /g, "-")}`}
+                .replace(/ /g, "-")
+                .toLowerCase()}`}
             >
               <a className="text-lg px-8">
                 <Arrow
@@ -209,9 +209,7 @@ const SingleImage = ({
           {next ? (
             <Link
               href="/[grid]/[singleImage]"
-              as={`/${fromGrid}/${next.title
-                .replace(/-/g, "|-")
-                .replace(/ /g, "-")}`}
+              as={`/${fromGrid}/${next.title.replace(/ /g, "-").toLowerCase()}`}
             >
               <a className="text-lg  px-8">
                 Next
