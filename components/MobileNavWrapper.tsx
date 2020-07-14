@@ -155,16 +155,16 @@ export default (props: MobileNavWrapperProps) => {
         id="nav-spacer"
         className={`block sm:hidden`}
         style={{ height: "7.75rem" }}
-      ></div>
+      />
       <div className={`${showMobileNav ? "hidden" : "block"} sm:block`}>
         {props.children}
       </div>
       <div
         className={`${
           showMobileNav ? "block" : "hidden"
-        } fixed sm:hidden top-0 right-0 h-screen w-full bg-white`}
+        } fixed sm:hidden top-0 right-0 h-screen w-full z-50`}
       >
-        <div className="z-0 absolute top-0 right-0 flex flex-col items-center justify-center h-full w-full">
+        <div className="absolute top-0 right-0 flex flex-col items-center justify-center h-full w-full">
           <Link href="/[grid]" as="/illustration">
             <a
               className="leading-loose text-4xl font-bold text-gray-900 tracking-wider cursor-pointer"
