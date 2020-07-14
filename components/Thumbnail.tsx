@@ -49,7 +49,7 @@ export default ({
       >
         <Link
           href="/[grid]/[singleImage]"
-          as={`/${gridType}/${image.title.replace(/ /g, "-").toLowerCase()}`}
+          as={`/${gridType}/${image.title.replace(/ /g, "-")}`}
         >
           <a
             className="absolute flex items-center justify-center text-3xl text-white"
