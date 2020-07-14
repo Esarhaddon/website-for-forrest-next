@@ -173,9 +173,9 @@ const Index = () => {
             setScrollState({ prevTop: pos, lastScroll: "up" })
           }
         }}
-        className={`${
-          allowPointerE ? "" : "pointer-events-none"
-        } sm-landscape:hidden bg-white absolute w-full top-0 right-0 overflow-y-scroll overflow-x-hidden h-full sm:block hidden`}
+        className={`${allowPointerE ? "" : "pointer-events-none"} ${
+          imageLoadCount < 2 ? "pointer-events-none" : ""
+        } sm-landscape:hidden bg-white w-full top-0 right-0 absolute overflow-y-scroll overflow-x-hidden h-full sm:block hidden`}
         style={{
           perspective: "2px",
           perspectiveOrigin: "bottom right",
@@ -183,7 +183,7 @@ const Index = () => {
       >
         <div className={`${imageLoadCount < 2 ? "hidden" : ""}`}>
           <div
-            className="absolute top-0 right-0 w-screen overflow-hidden"
+            className="absolute top-0 right-0 w-screen"
             style={{
               background:
                 "url(toad.png) 66.66% calc(10vh + 25%) / cover no-repeat",
@@ -257,7 +257,7 @@ const BackgroundPlaceholder = ({
     <div
       className={`${
         showPlaceholder ? "bg-teal-500" : "bg-transparent"
-      } pointer-events-none absolute h-full top-0 right-0 w-screen text-white`}
+      } pointer-events-none fixed h-full top-0 right-0 w-screen text-white`}
       style={{
         transition: "background-color 250ms ease-in-out",
       }}
