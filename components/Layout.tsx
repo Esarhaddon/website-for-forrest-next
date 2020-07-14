@@ -34,12 +34,6 @@ export default (props) => {
     }
   }, [])
 
-  useEffect(() => {
-    if (isLoading) {
-      window.scrollTo(0, 0)
-    }
-  }, [isLoading])
-
   if (isFor === undefined) {
     return <Loading />
   }
