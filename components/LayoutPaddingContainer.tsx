@@ -66,7 +66,7 @@ export default (props: any) => {
           ? `calc(${winHeight}px - 9vw - 5rem - ${
               breakpoint === "lg" ? 13.75 : breakpoint === "md" ? 10.75 : 7.75
             }rem)`
-          : "120vh",
+          : "100vh",
       }}
     >
       {props.children}
