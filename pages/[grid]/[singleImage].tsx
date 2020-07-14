@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react"
 import { GridType } from "../../components/Layout"
 import fetchImagesFor, { Image } from "../../utils/fetchImagesFor"
-import Vibrant from "node-vibrant"
 import Link from "next/link"
 import Arrow from "../../components/icons/arrow"
 import ExitX from "../../components/icons/close"
@@ -9,6 +8,7 @@ import ErrorMessage from "../../components/ErrorMessage"
 import Head from "next/head"
 import { useScreenContext } from "../../providers/ScreenProvider"
 import LayoutPaddingContainer from "../../components/LayoutPaddingContainer"
+import { useDominantColor } from "../../components/Thumbnail"
 
 interface Dimensions {
   h: number
@@ -32,13 +32,12 @@ const SingleImage = ({
   errorMessage,
   errorCode,
 }: SingleImageProps) => {
+  const dominantColor = useDominantColor(current.src)
   const [dimensions, setDimensions] = useState<Dimensions>({
     h: 1,
     w: 1,
   })
-
   const [imageHasLoaded, setImageHasLoaded] = useState(false)
-  const [dominantColor, setDominantColor] = useState("")
   const [hideModal, setHideModal] = useState(true)
 
   const screenCxt = useScreenContext()
@@ -67,17 +66,6 @@ const SingleImage = ({
       setDimensions(dimensions)
     }
   }, [current, screenCxt])
-
-  useEffect(() => {
-    if (current) {
-      Vibrant.from(`${current.src}?h=5`)
-        .getPalette()
-        .then((palette) => {
-          setDominantColor(palette.Vibrant.hex)
-        })
-        .catch((e) => setDominantColor("#696969"))
-    }
-  }, [current])
 
   if (errorMessage || errorCode) {
     return (
