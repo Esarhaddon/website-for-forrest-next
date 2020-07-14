@@ -3,6 +3,7 @@ import { GridType } from "../../components/Layout"
 import React, { useState, useEffect } from "react"
 import Thumbnail from "../../components/Thumbnail"
 import ErrorMessage from "../../components/ErrorMessage"
+import LayoutPaddingContainer from "../../components/LayoutPaddingContainer"
 
 interface GridProps {
   gridType: GridType
@@ -23,14 +24,9 @@ const Grid = ({ gridType, toDisplay, errorMessage, errorCode }: GridProps) => {
 
   if (errorMessage || errorCode) {
     return (
-      <div
-        className="flex items-center justify-center"
-        style={{
-          height: "40vh",
-        }}
-      >
+      <LayoutPaddingContainer>
         <ErrorMessage text={errorMessage} code={errorCode} />
-      </div>
+      </LayoutPaddingContainer>
     )
   }
 

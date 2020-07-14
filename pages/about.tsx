@@ -2,6 +2,7 @@ import fetch from "node-fetch"
 import ErrorMessage from "../components/ErrorMessage"
 import { useState, useEffect, useRef } from "react"
 import { useDominantColor } from "../components/Thumbnail"
+import LayoutPaddingContainer from "../components/LayoutPaddingContainer"
 
 interface AboutPageProps {
   imageSrc: string
@@ -49,14 +50,9 @@ const AboutPage = ({
 
   if (errorMessage || errorCode) {
     return (
-      <div
-        className="flex items-center justify-center"
-        style={{
-          height: "40vh",
-        }}
-      >
+      <LayoutPaddingContainer>
         <ErrorMessage text={errorMessage} code={errorCode} />
-      </div>
+      </LayoutPaddingContainer>
     )
   }
 

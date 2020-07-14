@@ -8,6 +8,7 @@ import ExitX from "../../components/icons/close"
 import ErrorMessage from "../../components/ErrorMessage"
 import Head from "next/head"
 import { useScreenContext } from "../../providers/ScreenProvider"
+import LayoutPaddingContainer from "../../components/LayoutPaddingContainer"
 
 interface Dimensions {
   h: number
@@ -80,14 +81,9 @@ const SingleImage = ({
 
   if (errorMessage || errorCode) {
     return (
-      <div
-        className="flex items-center justify-center"
-        style={{
-          height: "40vh",
-        }}
-      >
+      <LayoutPaddingContainer>
         <ErrorMessage text={errorMessage} code={errorCode} />
-      </div>
+      </LayoutPaddingContainer>
     )
   }
 
@@ -124,71 +120,83 @@ const SingleImage = ({
           onLoad={() => setImageHasLoaded(true)}
         />
       ) : null}
-      <div
-        style={{
-          maxWidth: "90vw",
-          width: dimensions.w + "px",
-        }}
-        onClick={() => setHideModal(false)}
-        className={`cursor-pointer relative`}
-      >
+      <LayoutPaddingContainer>
         <div
-          className="absolute h-0"
           style={{
-            top: "1px",
-            left: "1px",
-            width: "calc(100% - 2px)",
-            paddingTop: `calc(${
-              parseFloat((dimensions.h / dimensions.w).toFixed(6)) * 100
-            }% - 2px)`,
-            backgroundColor: dominantColor,
+            maxWidth: "90vw",
+            width: dimensions.w + "px",
           }}
-        />
-        <div
-          className="relative top-0 right-0 w-full h-0"
-          style={{
-            paddingTop:
-              parseFloat((dimensions.h / dimensions.w).toFixed(6)) * 100 + "%",
-            background: `no-repeat center / contain url(${current.src}?h=${
-              dimensions.h * 2
-            })`,
-          }}
-        />
-      </div>
-      <div
-        className="leading-tight text-center text-2xl font-semibold tracking-wider text-gray-900"
-        style={
-          dimensions.h > 1
-            ? { marginTop: "calc(3vw + .75rem)" }
-            : { marginTop: "100vh" }
-        }
-      >
-        {current.title.toUpperCase()}
-      </div>
-      {current.description ? (
-        <div
-          className="leading-tight text-center px-4"
-          style={{ marginTop: "calc(1.5vw + .375rem)" }}
+          onClick={() => setHideModal(false)}
+          className={`cursor-pointer relative`}
         >
-          {current.description}
+          <div
+            className="absolute h-0"
+            style={{
+              top: "1px",
+              left: "1px",
+              width: "calc(100% - 2px)",
+              paddingTop: `calc(${
+                parseFloat((dimensions.h / dimensions.w).toFixed(6)) * 100
+              }% - 2px)`,
+              backgroundColor: dominantColor,
+            }}
+          />
+          <div
+            className="relative top-0 right-0 w-full h-0"
+            style={{
+              paddingTop:
+                parseFloat((dimensions.h / dimensions.w).toFixed(6)) * 100 +
+                "%",
+              background: `no-repeat center / contain url(${current.src}?h=${
+                dimensions.h * 2
+              })`,
+            }}
+          />
         </div>
-      ) : null}
-
-      <div
-        className="flex justify-center items-center text-gray-700 leading-none"
-        style={{
-          marginTop: "calc(5vw + 1.25rem + 5px)",
-          marginBottom: "calc(2vw + .75rem)",
-        }}
-      >
-        {previous ? (
-          <Link
-            href="/[grid]/[singleImage]"
-            as={`/${fromGrid}/${previous.title
-              .replace(/-/g, "|-")
-              .replace(/ /g, "-")}`}
+        <div
+          className="leading-tight text-center text-2xl font-semibold tracking-wider text-gray-900"
+          style={
+            dimensions.h > 1
+              ? { marginTop: "calc(3vw + .75rem)" }
+              : { marginTop: "100vh" }
+          }
+        >
+          {current.title.toUpperCase()}
+        </div>
+        {current.description ? (
+          <div
+            className="leading-tight text-center px-4"
+            style={{ marginTop: "calc(1.5vw + .375rem)" }}
           >
-            <a className="text-lg px-8">
+            {current.description}
+          </div>
+        ) : null}
+        <div
+          className="flex justify-center items-center text-gray-700 leading-none"
+          style={{
+            marginTop: "calc(5vw + 1.25rem + 5px)",
+            marginBottom: "calc(2vw + .75rem)",
+          }}
+        >
+          {previous ? (
+            <Link
+              href="/[grid]/[singleImage]"
+              as={`/${fromGrid}/${previous.title
+                .replace(/-/g, "|-")
+                .replace(/ /g, "-")}`}
+            >
+              <a className="text-lg px-8">
+                <Arrow
+                  className="h-5 inline fill-current"
+                  style={{
+                    transform: "scaleX(-1)",
+                  }}
+                />
+                Prev
+              </a>
+            </Link>
+          ) : (
+            <div className="text-lg text-gray-500 cursor-pointer px-8">
               <Arrow
                 className="h-5 inline fill-current"
                 style={{
@@ -196,38 +204,28 @@ const SingleImage = ({
                 }}
               />
               Prev
-            </a>
-          </Link>
-        ) : (
-          <div className="text-lg text-gray-500 cursor-pointer px-8">
-            <Arrow
-              className="h-5 inline fill-current"
-              style={{
-                transform: "scaleX(-1)",
-              }}
-            />
-            Prev
-          </div>
-        )}
-        {next ? (
-          <Link
-            href="/[grid]/[singleImage]"
-            as={`/${fromGrid}/${next.title
-              .replace(/-/g, "|-")
-              .replace(/ /g, "-")}`}
-          >
-            <a className="text-lg  px-8">
+            </div>
+          )}
+          {next ? (
+            <Link
+              href="/[grid]/[singleImage]"
+              as={`/${fromGrid}/${next.title
+                .replace(/-/g, "|-")
+                .replace(/ /g, "-")}`}
+            >
+              <a className="text-lg  px-8">
+                Next
+                <Arrow className="h-5 inline fill-current" />
+              </a>
+            </Link>
+          ) : (
+            <div className="text-lg text-gray-500 cursor-pointer px-8">
               Next
               <Arrow className="h-5 inline fill-current" />
-            </a>
-          </Link>
-        ) : (
-          <div className="text-lg text-gray-500 cursor-pointer px-8">
-            Next
-            <Arrow className="h-5 inline fill-current" />
-          </div>
-        )}
-      </div>
+            </div>
+          )}
+        </div>
+      </LayoutPaddingContainer>
       <div
         className={`fixed top-0 left-0 w-full h-full z-50 flex itmes-center justify-center ${
           hideModal ? "hidden" : ""
@@ -253,7 +251,7 @@ const SingleImage = ({
           }}
         />
         <div
-          className="w-full h-full cursor-pointer"
+          className="w-full h-full"
           style={{
             background: `center / contain no-repeat url(${current.src}?h=${
               dimensions.h * 2
