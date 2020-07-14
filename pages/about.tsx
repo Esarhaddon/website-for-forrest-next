@@ -65,7 +65,7 @@ const AboutPage = ({
           onLoad={() => setImgIsLoaded(true)}
         />
       ) : null}
-      <div className="w-11/12 sm:w-7/12 md:w-6/12 leading-loose flex flex-col items-center lg:block lg:ml-16 mt-20 sm:mt-16 lg:mt-8 lg:text-left text-justify mb-4">
+      <div className="max-w-3xl w-11/12 sm:w-7/12 md:w-6/12 leading-loose flex flex-col items-center lg:block lg:ml-16 mt-20 sm:mt-16 lg:mt-8 lg:text-left text-justify mb-4">
         <div className="relative w-6/12 lg:float-left lg:mr-6 lg:ml-0 ml-16 lg:mb-0 mb-6">
           <div className="w-full h-0" style={{ paddingTop: "120%" }}>
             <div
