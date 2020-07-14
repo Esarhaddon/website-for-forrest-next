@@ -3,7 +3,7 @@ module.exports = {
   plugins: [
     // purging with tailwind as well
     tailwindcss("./tailwind.config.js"),
-    ...(process.env === "production" ? [require("cssnano")] : []),
+    ...(process.env.NODE_ENV === "production" ? [require("cssnano")] : []),
     require("autoprefixer"),
   ],
 }
