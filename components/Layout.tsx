@@ -162,7 +162,7 @@ export default (props) => {
                   className="flex justify-center items-center text-gray-700 leading-none "
                   style={{
                     marginTop: "calc(3vw + .75rem)",
-                    marginBottom: "calc(3vw + .75rem)",
+                    paddingBottom: "calc(3vw + .75rem)",
                   }}
                 >
                   Copyright © {new Date().getFullYear()} Forrest Dickison
