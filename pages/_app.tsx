@@ -3,6 +3,7 @@ import App from "next/app"
 import Head from "next/head"
 import Layout from "../components/Layout"
 import ScreenProvider from "../providers/ScreenProvider"
+import "../styles/style.css"
 
 class MyApp extends App {
   render() {

@@ -1,4 +1,3 @@
-import "../styles/style.css"
 import SocialAndEmail from "../components/SocialAndEmail"
 import FDickison from "../components/icons/forrest-dickison"
 import Link from "next/link"

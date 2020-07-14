@@ -46,7 +46,7 @@ export default (props) => {
 
   if (isFor === "index" || isFor === "") {
     return isLoading ? (
-      <div className="absolute top-0 right-0 w-full h-full bg-white z-50">
+      <div className="fixed top-0 right-0 w-full h-full bg-white z-50">
         <Loading />
       </div>
     ) : (
@@ -54,67 +54,78 @@ export default (props) => {
     )
   }
 
+  // this will have to change when pages for fine art etc. are added
   return (
-    // this will have to change when pages for fine art etc. are added
-    <MobileNavWrapper
-      pinnedNav={
-        (isFor === "illustration" || isFor === "about") && !isForSingle
-      }
-    >
-      <div>
+    <div>
+      {/* div with no other purpose than to prevent scroll bar from flashing while pages load */}
+      {isLoading ? (
         <div
-          className={`
-         hidden sm:flex z-40 justify-between items-center align-middle text-gray-900 font-semibold py-4 px-12 md:px-16 md:py-10 lg:py-16`}
+          style={{
+            height: "105vh",
+          }}
+        />
+      ) : null}
+      <div className={`${isLoading ? "fixed w-full h-full top-0 z-50" : ""}`}>
+        <MobileNavWrapper
+          pinnedNav={
+            (isFor === "illustration" || isFor === "about") && !isForSingle
+          }
         >
-          <Link href="/index" as="/">
-            <a
-              style={{
-                marginTop: "-1rem",
-                marginBottom: "-1.25rem",
-                marginLeft: "-3rem",
-                marginRight: "-3rem",
-              }}
-            >
-              <LogoBlack className="h-32" />
-            </a>
-          </Link>
-          <div className="flex items-center justify-center">
-            <div>
-              <Link href="/[grid]" as="/illustration">
-                <a
-                  className={`mr-8 ${
-                    isFor === "illustration" ? "text-gray-900" : "text-gray-500"
-                  } hover:text-gray-900`}
-                >
-                  ILLUSTRATION
-                </a>
-              </Link>
-            </div>
-            <div className="mr-8 font-semibold text-gray-900">/</div>
-            <div>
-              <Link href="/about">
-                <a
-                  className={`mr-8 ${
-                    isFor === "about" ? "text-gray-900" : "text-gray-500"
-                  } hover:text-gray-900`}
-                >
-                  ABOUT
-                </a>
-              </Link>
-            </div>
-            <div className="mr-8 font-semibold text-gray-900">/</div>
-            <div>
-              <Link href="/contact">
-                <a
-                  className={`${
-                    isFor === "contact" ? "text-gray-900" : "text-gray-500"
-                  } hover:text-gray-900`}
-                >
-                  CONTACT
-                </a>
-              </Link>
-            </div>
-            {/* <div className="mr-8 font-semibold text-gray-900">/</div>
+          <div
+            className={`
+         w-full hidden sm:flex z-40 justify-between items-center align-middle text-gray-900 font-semibold py-4 px-12 md:px-16 md:py-10 lg:py-16`}
+          >
+            <Link href="/index" as="/">
+              <a
+                style={{
+                  marginTop: "-1rem",
+                  marginBottom: "-1.25rem",
+                  marginLeft: "-3rem",
+                  marginRight: "-3rem",
+                }}
+              >
+                <LogoBlack className="h-32" />
+              </a>
+            </Link>
+            <div className="flex items-center justify-center">
+              <div>
+                <Link href="/[grid]" as="/illustration">
+                  <a
+                    className={`mr-8 ${
+                      isFor === "illustration"
+                        ? "text-gray-900"
+                        : "text-gray-500"
+                    } hover:text-gray-900`}
+                  >
+                    ILLUSTRATION
+                  </a>
+                </Link>
+              </div>
+              <div className="mr-8 font-semibold text-gray-900">/</div>
+              <div>
+                <Link href="/about">
+                  <a
+                    className={`mr-8 ${
+                      isFor === "about" ? "text-gray-900" : "text-gray-500"
+                    } hover:text-gray-900`}
+                  >
+                    ABOUT
+                  </a>
+                </Link>
+              </div>
+              <div className="mr-8 font-semibold text-gray-900">/</div>
+              <div>
+                <Link href="/contact">
+                  <a
+                    className={`${
+                      isFor === "contact" ? "text-gray-900" : "text-gray-500"
+                    } hover:text-gray-900`}
+                  >
+                    CONTACT
+                  </a>
+                </Link>
+              </div>
+              {/* <div className="mr-8 font-semibold text-gray-900">/</div>
           <div>
           <Link href="/[grid]" as="/animation">
             <a
@@ -138,22 +149,29 @@ export default (props) => {
             </a>
           </Link>
           </div> */}
+            </div>
           </div>
-        </div>
-        {isLoading ? <Loading /> : props.children}
-        <div style={{ paddingTop: "calc(3vw + .75rem)" }}>
-          <SocialAndEmail isDark={true} />
-          <div
-            className="flex justify-center items-center text-gray-700 leading-none "
-            style={{
-              marginTop: "calc(3vw + .75rem)",
-              marginBottom: "calc(3vw + .75rem)",
-            }}
-          >
-            Copyright © 2019 Forrest Dickison
-          </div>
-        </div>
+          {isLoading ? (
+            <Loading />
+          ) : (
+            <>
+              {props.children}
+              <div style={{ paddingTop: "calc(3vw + .75rem)" }}>
+                <SocialAndEmail isDark={true} />
+                <div
+                  className="flex justify-center items-center text-gray-700 leading-none "
+                  style={{
+                    marginTop: "calc(3vw + .75rem)",
+                    marginBottom: "calc(3vw + .75rem)",
+                  }}
+                >
+                  Copyright © 2019 Forrest Dickison
+                </div>
+              </div>
+            </>
+          )}
+        </MobileNavWrapper>
       </div>
-    </MobileNavWrapper>
+    </div>
   )
 }
