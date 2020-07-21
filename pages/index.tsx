@@ -288,7 +288,7 @@ const IndexNav = () => (
     <div className="flex justify-center flex-wrap">
       <Link href="/[grid]" as="/illustration">
         <a
-          className="text-center mx-2 mt-4 xsm:mx-4 border-2 focus:bg-white focus:text-black border-solid border-white text-white py-2 px-3 xsm:py-4 xsm:px-5 tracking-widest leading-none cursor-pointer hover:bg-white hover:text-gray-900"
+          className="text-center mx-2 mt-4 xsm:mx-4 border-2 bg-white-opacity-20 focus:bg-white focus:text-black border-solid border-white text-white py-2 px-3 xsm:py-4 xsm:px-5 tracking-widest leading-none cursor-pointer hover:bg-white hover:text-gray-900"
           style={{
             transition:
               "color 170ms ease-in-out, background-color 170ms ease-in-out",
@@ -299,7 +299,7 @@ const IndexNav = () => (
       </Link>
       <Link href="/about">
         <a
-          className="text-center mx-2 mt-4 xsm:mx-4 border-2 focus:bg-white focus:text-black border-solid border-white text-white py-2 px-3 xsm:py-4 xsm:px-5 tracking-widest leading-none cursor-pointer hover:bg-white hover:text-gray-900"
+          className="text-center mx-2 mt-4 xsm:mx-4 border-2 bg-white-opacity-20 focus:bg-white focus:text-black border-solid border-white text-white py-2 px-3 xsm:py-4 xsm:px-5 tracking-widest leading-none cursor-pointer hover:bg-white hover:text-gray-900"
           style={{
             transition:
               "color 170ms ease-in-out, background-color 170ms ease-in-out",
@@ -310,7 +310,7 @@ const IndexNav = () => (
       </Link>
       <Link href="/contact">
         <a
-          className="text-center mx-2 mt-4 xsm:mx-4 border-2 focus:bg-white focus:text-black border-solid border-white text-white py-2 px-3 xsm:py-4 xsm:px-5 tracking-widest leading-none cursor-pointer hover:bg-white hover:text-gray-900"
+          className="text-center mx-2 mt-4 xsm:mx-4 border-2 bg-white-opacity-20 focus:bg-white focus:text-black border-solid border-white text-white py-2 px-3 xsm:py-4 xsm:px-5 tracking-widest leading-none cursor-pointer hover:bg-white hover:text-gray-900"
           style={{
             transition:
               "color 170ms ease-in-out, background-color 170ms ease-in-out",
