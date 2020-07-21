@@ -153,13 +153,14 @@ export default (props) => {
               <div style={{ paddingTop: "calc(3vw + .75rem)" }}>
                 <SocialAndEmail isDark={true} />
                 <div
-                  className="flex justify-center items-center text-gray-700 leading-none "
+                  className="flex justify-center items-center text-gray-700 leading-none px-4 text-center "
                   style={{
                     marginTop: "calc(3vw + .75rem)",
                     paddingBottom: "calc(3vw + .75rem)",
                   }}
                 >
-                  Copyright © {new Date().getFullYear()} Forrest Dickison
+                  Copyright © {new Date().getFullYear()} Forrest Dickison. All
+                  rights reserved.
                 </div>
               </div>
             </>
