@@ -19,7 +19,19 @@ const Index = () => {
     lastScroll: "up" as "up" | "down",
   })
 
+  const img1 = useRef<HTMLImageElement>()
+  const img2 = useRef<HTMLImageElement>()
   const scrollingElRef = useRef<HTMLDivElement>()
+
+  // seems that with SSR image onLoad events might not fire (https://github.com/facebook/react/issues/15446)
+  useEffect(() => {
+    if (img1.current.complete) {
+      setLoadCount((count) => count + 1)
+    }
+    if (img2.current.complete) {
+      setLoadCount((count) => count + 1)
+    }
+  }, [])
 
   useEffect(() => {
     const timeoutId = setTimeout(() => setAllowPointerE(true), 250)
@@ -52,11 +64,13 @@ const Index = () => {
         />
       </Head>
       <img
+        ref={img1}
         className="hidden"
         src="boy.png"
         onLoad={() => setLoadCount((count) => count + 1)}
       />
       <img
+        ref={img2}
         className="hidden"
         src="toad.png"
         onLoad={() => setLoadCount((count) => count + 1)}
