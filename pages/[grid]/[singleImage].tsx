@@ -9,6 +9,7 @@ import Head from "next/head"
 import { useScreenContext } from "../../providers/ScreenProvider"
 import LayoutPaddingContainer from "../../components/LayoutPaddingContainer"
 import { useDominantColor } from "../../hooks/useDominantColor"
+import { useImgOnLoad } from "../../hooks/useImgOnLoad"
 
 interface Dimensions {
   h: number
@@ -39,6 +40,8 @@ const SingleImage = ({
   })
   const [imageHasLoaded, setImageHasLoaded] = useState(false)
   const [hideModal, setHideModal] = useState(true)
+
+  const imgRef = useImgOnLoad(() => setImageHasLoaded(true))
 
   const screenCxt = useScreenContext()
   useEffect(() => {
@@ -104,9 +107,9 @@ const SingleImage = ({
       </Head>
       {dimensions.h ? (
         <img
+          ref={imgRef}
           className="hidden"
           src={`${current.src}?h=${dimensions.h * 2}`}
-          onLoad={() => setImageHasLoaded(true)}
         />
       ) : null}
       <LayoutPaddingContainer>
