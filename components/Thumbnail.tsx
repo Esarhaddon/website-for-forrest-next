@@ -1,4 +1,10 @@
-import React, { useState, useEffect } from "react"
+import React, {
+  useState,
+  useEffect,
+  MutableRefObject,
+  useRef,
+  useCallback,
+} from "react"
 import Link from "next/link"
 import { Image } from "../utils/fetchImagesFor"
 import { GridType } from "../components/Layout"
@@ -18,6 +24,28 @@ export const useDominantColor = (src: string) => {
   return dominantColor
 }
 
+// seems that with SSR image onLoad events sometimes might not fire (https://github.com/facebook/react/issues/15446)
+export const useImgOnLoad = (cb: () => void) => {
+  const listener = useRef<() => void>(null)
+  const prevImg = useRef<HTMLImageElement>(null)
+
+  const callbackRef = useCallback((img: HTMLImageElement | null) => {
+    if (img) {
+      prevImg.current = img
+      if (img.complete) {
+        cb()
+      } else {
+        listener.current = cb
+        img.addEventListener("load", listener.current)
+      }
+    } else if (prevImg.current && listener.current) {
+      prevImg.current.removeEventListener("load", listener.current)
+    }
+  }, [])
+
+  return callbackRef
+}
+
 interface ThumbnailProps {
   image: Image
   containerHeight?: number
@@ -35,10 +63,12 @@ export default ({
   const imgLoadingColor = useDominantColor(image.src)
   const imgSrc = `${image.src}?h=${Math.round(containerHeight * 1.75)}`
 
+  const imgRef = useImgOnLoad(() => setIsLoaded(true))
+
   return (
     <div>
       {containerHeight ? (
-        <img className="hidden" src={imgSrc} onLoad={() => setIsLoaded(true)} />
+        <img ref={imgRef} className="hidden" src={imgSrc} />
       ) : null}
       <div
         style={{

@@ -6,6 +6,7 @@ import Loading from "../components/Loading"
 import DownArrow from "../components/icons/down-arrow"
 import Head from "next/head"
 import "scroll-behavior-polyfill"
+import { useImgOnLoad } from "../components/Thumbnail"
 
 // TO DO: optimize background images for this page as well?
 
@@ -19,19 +20,11 @@ const Index = () => {
     lastScroll: "up" as "up" | "down",
   })
 
-  const img1 = useRef<HTMLImageElement>()
-  const img2 = useRef<HTMLImageElement>()
-  const scrollingElRef = useRef<HTMLDivElement>()
+  const handleLoad = () => setLoadCount((count) => count + 1)
+  const img1 = useImgOnLoad(handleLoad)
+  const img2 = useImgOnLoad(handleLoad)
 
-  // seems that with SSR image onLoad events might not fire (https://github.com/facebook/react/issues/15446)
-  useEffect(() => {
-    if (img1.current.complete) {
-      setLoadCount((count) => count + 1)
-    }
-    if (img2.current.complete) {
-      setLoadCount((count) => count + 1)
-    }
-  }, [])
+  const scrollingElRef = useRef<HTMLDivElement>()
 
   useEffect(() => {
     const timeoutId = setTimeout(() => setAllowPointerE(true), 250)
@@ -63,18 +56,8 @@ const Index = () => {
           content="forrestdickison.com showcases the art work of illustrator, animator, and fine artist Forrest Dickison."
         />
       </Head>
-      <img
-        ref={img1}
-        className="hidden"
-        src="boy.png"
-        onLoad={() => setLoadCount((count) => count + 1)}
-      />
-      <img
-        ref={img2}
-        className="hidden"
-        src="toad.png"
-        onLoad={() => setLoadCount((count) => count + 1)}
-      />
+      <img ref={img1} className="hidden" src="boy.png" />
+      <img ref={img2} className="hidden" src="toad.png" />
       {/* landscape layout (mostly just for mobile) */}
       <div className="hidden sm-landscape:block absolute top-0 right-0 w-full h-full">
         <div
