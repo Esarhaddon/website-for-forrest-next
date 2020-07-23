@@ -1,7 +1,7 @@
 import fetch from "node-fetch"
 import ErrorMessage from "../components/ErrorMessage"
 import { useState, useEffect, useRef } from "react"
-import { useDominantColor } from "../components/Thumbnail"
+import { useDominantColor } from "../hooks/useDominantColor"
 import LayoutPaddingContainer from "../components/LayoutPaddingContainer"
 import Head from "next/head"
 
