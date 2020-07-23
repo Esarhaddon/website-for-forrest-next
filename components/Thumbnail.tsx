@@ -1,50 +1,9 @@
-import React, {
-  useState,
-  useEffect,
-  MutableRefObject,
-  useRef,
-  useCallback,
-} from "react"
+import React, { useState } from "react"
 import Link from "next/link"
 import { Image } from "../utils/fetchImagesFor"
 import { GridType } from "../components/Layout"
-import Vibrant from "node-vibrant"
-
-export const useDominantColor = (src: string) => {
-  const [dominantColor, setDominantColor] = useState("#A9A9A9")
-  useEffect(() => {
-    Vibrant.from(`${src}?h=5`)
-      .getPalette()
-      .then((palette) => {
-        setDominantColor(palette.Vibrant.hex)
-      })
-      .catch((e) => setDominantColor("#696969"))
-  }, [src])
-
-  return dominantColor
-}
-
-// seems that with SSR image onLoad events sometimes might not fire (https://github.com/facebook/react/issues/15446)
-export const useImgOnLoad = (cb: () => void) => {
-  const listener = useRef<() => void>(null)
-  const prevImg = useRef<HTMLImageElement>(null)
-
-  const callbackRef = useCallback((img: HTMLImageElement | null) => {
-    if (img) {
-      prevImg.current = img
-      if (img.complete) {
-        cb()
-      } else {
-        listener.current = cb
-        img.addEventListener("load", listener.current)
-      }
-    } else if (prevImg.current && listener.current) {
-      prevImg.current.removeEventListener("load", listener.current)
-    }
-  }, [])
-
-  return callbackRef
-}
+import { useDominantColor } from "../hooks/useDominantColor"
+import { useImgOnLoad } from "../hooks/useImgOnLoad"
 
 interface ThumbnailProps {
   image: Image

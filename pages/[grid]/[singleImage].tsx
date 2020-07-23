@@ -8,7 +8,7 @@ import ErrorMessage from "../../components/ErrorMessage"
 import Head from "next/head"
 import { useScreenContext } from "../../providers/ScreenProvider"
 import LayoutPaddingContainer from "../../components/LayoutPaddingContainer"
-import { useDominantColor } from "../../components/Thumbnail"
+import { useDominantColor } from "../../hooks/useDominantColor"
 
 interface Dimensions {
   h: number

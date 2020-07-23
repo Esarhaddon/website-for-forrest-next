@@ -6,7 +6,7 @@ import Loading from "../components/Loading"
 import DownArrow from "../components/icons/down-arrow"
 import Head from "next/head"
 import "scroll-behavior-polyfill"
-import { useImgOnLoad } from "../components/Thumbnail"
+import { useImgOnLoad } from "../hooks/useImgOnLoad"
 
 // TO DO: optimize background images for this page as well?
 
