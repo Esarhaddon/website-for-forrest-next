@@ -5,16 +5,8 @@
 @tailwind utilities;
 
 @responsive {
-  .h-31 {
-    height: 7.75rem;
-  }
-
-  .h-43 {
-    height: 10.75rem;
-  }
-
-  .h-55 {
-    height: 13.75rem;
+  .indent-10 {
+    text-indent: 2.5rem;
   }
 }
 
