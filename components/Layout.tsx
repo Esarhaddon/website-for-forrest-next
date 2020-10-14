@@ -38,14 +38,8 @@ export default (props) => {
     return <Loading />
   }
 
-  if (isFor === "index" || isFor === "") {
-    return isLoading ? (
-      <div className="fixed top-0 right-0 w-full h-full bg-white z-50">
-        <Loading />
-      </div>
-    ) : (
-      props.children
-    )
+  if (isFor === "index") {
+    props.children
   }
 
   // this will have to change when pages for fine art etc. are added
