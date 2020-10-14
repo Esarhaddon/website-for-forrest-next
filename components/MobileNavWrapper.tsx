@@ -162,12 +162,12 @@ export default (props: MobileNavWrapperProps) => {
       <div
         className={`${
           showMobileNav ? "block" : "hidden"
-        } fixed sm:hidden top-0 right-0 h-screen w-full z-50`}
+        } fixed sm:hidden top-0 right-0 h-screen w-full z-50 pointer-events-none`}
       >
         <div className="absolute top-0 right-0 flex flex-col items-center justify-center h-full w-full">
           <Link href="/[grid]" as="/illustration">
             <a
-              className="leading-loose text-4xl font-bold text-gray-900 tracking-wider cursor-pointer"
+              className="pointer-events-auto leading-loose text-4xl font-bold text-gray-900 tracking-wider cursor-pointer"
               onClick={() => setShowMobileNav(false)}
             >
               ILLUSTRATION
@@ -175,7 +175,7 @@ export default (props: MobileNavWrapperProps) => {
           </Link>
           {/* <Link href="/[grid]" as="/animation">
               <a
-                className="leading-loose text-4xl font-bold text-gray-900 tracking-wider cursor-pointer"
+                className="pointer-events-auto leading-loose text-4xl font-bold text-gray-900 tracking-wider cursor-pointer"
                 onClick={() => setShowMobileNav(false)}
               >
                 ANIMATION
@@ -183,7 +183,7 @@ export default (props: MobileNavWrapperProps) => {
             </Link>
             <Link href="/[grid]" as="/fine-art">
               <a
-                className="leading-loose text-4xl font-bold text-gray-900 tracking-wider cursor-pointer"
+                className="pointer-events-auto leading-loose text-4xl font-bold text-gray-900 tracking-wider cursor-pointer"
                 onClick={() => setShowMobileNav(false)}
               >
                 FINE ART
@@ -191,7 +191,7 @@ export default (props: MobileNavWrapperProps) => {
             </Link> */}
           <Link href="/contact">
             <a
-              className="leading-loose text-4xl font-bold text-gray-900 tracking-wider cursor-pointer"
+              className="pointer-events-auto leading-loose text-4xl font-bold text-gray-900 tracking-wider cursor-pointer"
               onClick={() => setShowMobileNav(false)}
             >
               CONTACT
@@ -199,7 +199,7 @@ export default (props: MobileNavWrapperProps) => {
           </Link>
           <Link href="/about">
             <a
-              className="leading-loose text-4xl font-bold text-gray-900 tracking-wider cursor-pointer"
+              className="pointer-events-auto leading-loose text-4xl font-bold text-gray-900 tracking-wider cursor-pointer"
               onClick={() => setShowMobileNav(false)}
             >
               ABOUT

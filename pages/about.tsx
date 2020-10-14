@@ -58,7 +58,7 @@ const AboutPage = ({
       <img ref={imgRef} className="hidden" src={`${imageSrc}?h=400`} />
       <div className="max-w-3xl w-11/12 sm:w-7/12 md:w-6/12 leading-loose lg:text-left text-justify">
         <div
-          className="h-40 w-32 mx-auto mt-2 sm:mt-0 mb-6"
+          className="h-40 w-32 mx-auto mt-2 sm:mt-0 mb-10"
           style={{
             background: `center / cover no-repeat url(${imageSrc}?h=400)`,
           }}

@@ -10,7 +10,7 @@ import { useImgOnLoad } from "../hooks/useImgOnLoad"
 
 // TO DO: optimize background images for this page as well?
 
-const Index = () => {
+export default () => {
   const [imageLoadCount, setLoadCount] = useState(0)
   const [allowPointerE, setAllowPointerE] = useState(false)
   const [toggle, setToggle] = useState(true)
@@ -83,7 +83,7 @@ const Index = () => {
             className="flex items-center justify-center"
             style={{ marginTop: "calc(-1.66vh - 1rem)" }}
           >
-            <IndexNav />
+            <Nav />
           </div>
         </div>
         <BackgroundPlaceholder showPlaceholder={imageLoadCount < 2} />
@@ -138,7 +138,7 @@ const Index = () => {
             className="flex items-center justify-center"
             style={{ marginTop: "calc(-1.66vh - 1rem)" }}
           >
-            <IndexNav />
+            <Nav />
           </div>
         </div>
         <BackgroundPlaceholder showPlaceholder={imageLoadCount < 2} />
@@ -219,7 +219,7 @@ const Index = () => {
               className="flex items-center justify-center"
               style={{ marginTop: "calc(-1.66% - 1rem)" }}
             >
-              <IndexNav />
+              <Nav />
             </div>
           </div>
         </div>
@@ -248,7 +248,7 @@ const Index = () => {
   )
 }
 
-export default Index
+// export default Index
 
 interface BackgroundPlaceholderProps {
   showPlaceholder: boolean
@@ -280,7 +280,7 @@ const BackgroundPlaceholder = ({
   )
 }
 
-const IndexNav = () => (
+const Nav = () => (
   <div className="flex flex-col w-full -mt-4">
     <div className="flex justify-center flex-wrap">
       <Link href="/[grid]" as="/illustration">
