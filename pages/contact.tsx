@@ -2,7 +2,6 @@ import { useState, useEffect } from "react"
 import { Field, Form, Formik } from "formik"
 import { UserEmail } from "./api/contact"
 import fetch from "node-fetch"
-import LayoutPaddingContainer from "../components/LayoutPaddingContainer"
 import Head from "next/head"
 
 const validate = (value: string) => {
@@ -23,7 +22,7 @@ export default () => {
   }, [showSent])
 
   return (
-    <LayoutPaddingContainer>
+    <div>
       <Head>
         <title key="title">Contact</title>
       </Head>
@@ -178,6 +177,6 @@ export default () => {
           )
         }}
       </Formik>
-    </LayoutPaddingContainer>
+    </div>
   )
 }
