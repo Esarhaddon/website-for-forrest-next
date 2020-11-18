@@ -10,6 +10,7 @@ import { useScreenContext } from "../../providers/ScreenProvider"
 import LayoutPaddingContainer from "../../components/LayoutPaddingContainer"
 import { useDominantColor } from "../../hooks/useDominantColor"
 import { useImgOnLoad } from "../../hooks/useImgOnLoad"
+import Modal from '../../components/Modal'
 
 interface Dimensions {
   h: number
@@ -216,39 +217,8 @@ const SingleImage = ({
           )}
         </div>
       </LayoutPaddingContainer>
-      <div
-        className={`fixed top-0 left-0 w-full h-full z-50 flex itmes-center justify-center ${
-          hideModal ? "hidden" : ""
-        }`}
-        style={{
-          backgroundColor: "rgba(0, 0, 0, .95)",
-          paddingRight: "5vw",
-          paddingLeft: "5vw",
-          paddingTop: "2vh",
-          paddingBottom: "2vh",
-        }}
-        onClick={() => {
-          setHideModal(true)
-        }}
-      >
-        <ExitX
-          className="absolute z-10 text-gray-200 fill-current cursor-pointer"
-          style={{
-            top: "calc(2% + 1rem)",
-            right: "2%",
-            width: ".85rem",
-            height: ".85rem",
-          }}
-        />
-        <div
-          className="w-full h-full"
-          style={{
-            background: `center / contain no-repeat url(${current.src}?h=${
-              dimensions.h * 2
-            })`,
-          }}
-        />
-      </div>
+      {/* TO DO: make this its own component? */}
+      <Modal {...{hideModal, setHideModal}} imageHeight={dimensions.h} src={current.src}></Modal>
     </div>
   )
 }
