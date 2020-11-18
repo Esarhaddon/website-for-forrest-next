@@ -3,14 +3,13 @@ import { GridType } from "../../components/Layout"
 import fetchImagesFor, { Image } from "../../utils/fetchImagesFor"
 import Link from "next/link"
 import Arrow from "../../components/icons/arrow"
-import ExitX from "../../components/icons/close"
 import ErrorMessage from "../../components/ErrorMessage"
 import Head from "next/head"
 import { useScreenContext } from "../../providers/ScreenProvider"
 import LayoutPaddingContainer from "../../components/LayoutPaddingContainer"
 import { useDominantColor } from "../../hooks/useDominantColor"
 import { useImgOnLoad } from "../../hooks/useImgOnLoad"
-import Modal from '../../components/Modal'
+import Modal from "../../components/Modal"
 
 interface Dimensions {
   h: number
@@ -218,7 +217,11 @@ const SingleImage = ({
         </div>
       </LayoutPaddingContainer>
       {/* TO DO: make this its own component? */}
-      <Modal {...{hideModal, setHideModal}} imageHeight={dimensions.h} src={current.src}></Modal>
+      <Modal
+        {...{ hideModal, setHideModal }}
+        imageHeight={dimensions.h}
+        src={current.src}
+      ></Modal>
     </div>
   )
 }
