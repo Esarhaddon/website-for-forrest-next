@@ -1,15 +1,27 @@
 import ExitX from "./icons/close"
 import TallArrow from "./icons/tallArrow"
 import { useState, useEffect } from "react"
+import Link from "next/link"
 
 interface ModalProps {
   imageHeight: number
   src: string
   hideModal: boolean
   setHideModal: React.Dispatch<React.SetStateAction<boolean>>
+  nextTitle?: string
+  prevTitle?: string
+  fromGrid: string
 }
 
-export default ({ imageHeight, src, hideModal, setHideModal }: ModalProps) => {
+export default ({
+  imageHeight,
+  src,
+  hideModal,
+  setHideModal,
+  nextTitle,
+  prevTitle,
+  fromGrid,
+}: ModalProps) => {
   return (
     <div
       className={` fixed top-0 left-0 w-full h-full z-50 flex itmes-center justify-center ${
@@ -36,8 +48,16 @@ export default ({ imageHeight, src, hideModal, setHideModal }: ModalProps) => {
           }}
         ></div>
       </div>
-      <ArrowButtonArea action="prev" {...{ hideModal }} />
-      <ArrowButtonArea action="next" {...{ hideModal }} />
+      <ArrowButtonArea
+        action="prev"
+        title={prevTitle}
+        {...{ hideModal, fromGrid }}
+      />
+      <ArrowButtonArea
+        action="next"
+        title={nextTitle}
+        {...{ hideModal, fromGrid }}
+      />
       <ExitX
         className="absolute z-50 text-gray-200 fill-current cursor-pointer"
         style={{
@@ -54,9 +74,16 @@ export default ({ imageHeight, src, hideModal, setHideModal }: ModalProps) => {
 interface ArrowButtonAreaProps {
   action: "prev" | "next"
   hideModal: boolean
+  title?: string
+  fromGrid: string
 }
 
-const ArrowButtonArea = ({ action, hideModal }: ArrowButtonAreaProps) => {
+const ArrowButtonArea = ({
+  action,
+  hideModal,
+  fromGrid,
+  title,
+}: ArrowButtonAreaProps) => {
   const [showArrow, setShowArrow] = useState(false)
   const [timeoutId, setTimeoutId] = useState<NodeJS.Timeout>(null)
 
@@ -78,41 +105,51 @@ const ArrowButtonArea = ({ action, hideModal }: ArrowButtonAreaProps) => {
     }
   }, [hideModal])
 
+  if (!title) {
+    return null
+  }
+
   return (
-    <div
-      className={`z-50 absolute ${
-        action === "prev" ? "left-0 justify-start" : "right-0 justify-end"
-      } top-0 h-full w-1/3 text-white flex items-center`}
-      onClick={(e) => {
-        e.stopPropagation()
-        console.log("going ", action)
-      }}
-      onMouseMove={() => {
-        if (!showArrow) {
-          setShowArrow(true)
-          newTimeout()
-        } else {
-          newTimeout()
-        }
-      }}
-      onMouseLeave={() => {
-        clearTimeout(timeoutId)
-        setShowArrow(false)
-      }}
+    <Link
+      href="/[grid]/[singleImage]"
+      as={`/${fromGrid}/${title.replace(/ /g, "-").toLowerCase()}`}
     >
-      <TallArrow
-        className={`${
-          showArrow ? "opacity-100" : "opacity-0"
-        } mx-10 text-gray-200 fill-current h-10`}
-        style={{
-          ...(action === "prev"
-            ? {
-                transform: "scaleX(-1)",
-              }
-            : null),
-          filter: "drop-shadow( 1px 1px 2px rgba(0, 0, 0, .5))",
-        }}
-      />
-    </div>
+      <a className="cursor-default">
+        <div
+          className={`z-50 absolute ${
+            action === "prev" ? "left-0 justify-start" : "right-0 justify-end"
+          } top-0 h-full w-1/3 text-white flex items-center`}
+          onClick={(e) => {
+            e.stopPropagation()
+            console.log("going ", action)
+          }}
+          onMouseMove={() => {
+            if (!showArrow) {
+              setShowArrow(true)
+              newTimeout()
+            } else {
+              newTimeout()
+            }
+          }}
+          onMouseLeave={() => {
+            clearTimeout(timeoutId)
+            setShowArrow(false)
+          }}
+        >
+          <TallArrow
+            className={`${
+              showArrow ? "opacity-100" : "opacity-0"
+            } mx-10 text-gray-200 fill-current h-10`}
+            style={{
+              ...(action === "prev"
+                ? {
+                    transform: "scaleX(-1)",
+                  }
+                : null),
+            }}
+          />
+        </div>
+      </a>
+    </Link>
   )
 }

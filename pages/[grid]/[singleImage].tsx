@@ -216,9 +216,10 @@ const SingleImage = ({
           )}
         </div>
       </LayoutPaddingContainer>
-      {/* TO DO: make this its own component? */}
       <Modal
-        {...{ hideModal, setHideModal }}
+        prevTitle={previous?.title}
+        nextTitle={next?.title}
+        {...{ hideModal, setHideModal, fromGrid }}
         imageHeight={dimensions.h}
         src={current.src}
       ></Modal>
