@@ -1,6 +1,6 @@
 import ExitX from "./icons/close"
 import TallArrow from "./icons/tallArrow"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
 interface ModalProps {
   imageHeight: number
@@ -9,13 +9,13 @@ interface ModalProps {
   setHideModal: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-export default (props: ModalProps) => {
+export default ({ imageHeight, src, hideModal, setHideModal }: ModalProps) => {
   return (
     <div
-      className={`border border-solid border-red-500 fixed top-0 left-0 w-full h-full z-50 flex itmes-center justify-center ${
-        props.hideModal ? "hidden" : ""
+      className={` fixed top-0 left-0 w-full h-full z-50 flex itmes-center justify-center ${
+        hideModal ? "hidden" : ""
       }`}
-      onClick={() => props.setHideModal(true)}
+      onClick={() => setHideModal(true)}
     >
       <div
         className="relative top-0 left-0 w-full h-full z-50 flex itmes-center justify-center"
@@ -30,14 +30,14 @@ export default (props: ModalProps) => {
         <div
           className="w-full h-full relative"
           style={{
-            background: `center / contain no-repeat url(${props.src}?h=${
-              props.imageHeight * 2
+            background: `center / contain no-repeat url(${src}?h=${
+              imageHeight * 2
             })`,
           }}
         ></div>
       </div>
-      <ArrowButtonArea action="prev" />
-      <ArrowButtonArea action="next" />
+      <ArrowButtonArea action="prev" {...{ hideModal }} />
+      <ArrowButtonArea action="next" {...{ hideModal }} />
       <ExitX
         className="absolute z-50 text-gray-200 fill-current cursor-pointer"
         style={{
@@ -51,27 +51,67 @@ export default (props: ModalProps) => {
   )
 }
 
-const ArrowButtonArea = ({ action }: { action: "prev" | "next" }) => {
-  const [showArrow, setShowwArrow] = useState(false)
+interface ArrowButtonAreaProps {
+  action: "prev" | "next"
+  hideModal: boolean
+}
+
+const ArrowButtonArea = ({ action, hideModal }: ArrowButtonAreaProps) => {
+  const [showArrow, setShowArrow] = useState(false)
+  const [timeoutId, setTimeoutId] = useState<NodeJS.Timeout>(null)
+
+  const interval = 1500
+
+  const newTimeout = () => {
+    clearTimeout(timeoutId)
+    const id = setTimeout(() => {
+      setShowArrow(false)
+      setTimeoutId(null)
+    }, interval)
+    setTimeoutId(id)
+  }
+
+  useEffect(() => {
+    if (hideModal === false) {
+      setShowArrow(true)
+      newTimeout()
+    }
+  }, [hideModal])
+
   return (
     <div
       className={`z-50 absolute ${
-        action === "prev" ? "left" : "right"
-      }-0 top-0 h-full w-1/3 border border-solid border-red-500 text-white flex items-center justify-center`}
+        action === "prev" ? "left-0 justify-start" : "right-0 justify-end"
+      } top-0 h-full w-1/3 text-white flex items-center`}
       onClick={(e) => {
         e.stopPropagation()
         console.log("going ", action)
       }}
+      onMouseMove={() => {
+        if (!showArrow) {
+          setShowArrow(true)
+          newTimeout()
+        } else {
+          newTimeout()
+        }
+      }}
+      onMouseLeave={() => {
+        clearTimeout(timeoutId)
+        setShowArrow(false)
+      }}
     >
       <TallArrow
-        className="text-gray-300 fill-current h-10"
-        style={
-          action === "prev"
+        className={`${
+          showArrow ? "opacity-100" : "opacity-0"
+        } mx-10 text-gray-200 fill-current h-10`}
+        style={{
+          ...(action === "prev"
             ? {
                 transform: "scaleX(-1)",
               }
-            : null
-        }
+            : null),
+          filter: "drop-shadow( 1px 1px 2px rgba(0, 0, 0, .5))",
+        }}
       />
     </div>
   )
