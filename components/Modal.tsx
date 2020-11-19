@@ -1,13 +1,12 @@
 import ExitX from "./icons/close"
 import TallArrow from "./icons/tallArrow"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useCallback } from "react"
 import Link from "next/link"
+import { useModalContext } from "../providers/ModalProvider"
 
 interface ModalProps {
   imageHeight: number
   src: string
-  hideModal: boolean
-  setHideModal: React.Dispatch<React.SetStateAction<boolean>>
   nextTitle?: string
   prevTitle?: string
   fromGrid: string
@@ -16,12 +15,12 @@ interface ModalProps {
 const Modal = ({
   imageHeight,
   src,
-  hideModal,
-  setHideModal,
   nextTitle,
   prevTitle,
   fromGrid,
 }: ModalProps) => {
+  const { hideModal, setHideModal } = useModalContext()
+
   return (
     <div
       className={` fixed top-0 left-0 w-full h-full z-50 flex itmes-center justify-center ${
@@ -50,16 +49,8 @@ const Modal = ({
           }}
         ></div>
       </div>
-      <ArrowButtonArea
-        action="prev"
-        title={prevTitle}
-        {...{ hideModal, fromGrid }}
-      />
-      <ArrowButtonArea
-        action="next"
-        title={nextTitle}
-        {...{ hideModal, fromGrid }}
-      />
+      <ArrowButtonArea action="prev" title={prevTitle} {...{ fromGrid }} />
+      <ArrowButtonArea action="next" title={nextTitle} {...{ fromGrid }} />
       <ExitX
         className="absolute z-50 text-gray-200 fill-current cursor-pointer"
         style={{
@@ -80,19 +71,15 @@ export default Modal
 
 interface ArrowButtonAreaProps {
   action: "prev" | "next"
-  hideModal: boolean
   title?: string
   fromGrid: string
 }
 
-const ArrowButtonArea = ({
-  action,
-  hideModal,
-  fromGrid,
-  title,
-}: ArrowButtonAreaProps) => {
+const ArrowButtonArea = ({ action, fromGrid, title }: ArrowButtonAreaProps) => {
   const [showArrow, setShowArrow] = useState(false)
   const [timeoutId, setTimeoutId] = useState<NodeJS.Timeout>(null)
+
+  const { lastClicked, setLastClicked } = useModalContext()
 
   const interval = 1500
 
@@ -104,6 +91,13 @@ const ArrowButtonArea = ({
     }, interval)
     setTimeoutId(id)
   }
+
+  useEffect(() => {
+    if (lastClicked === action) {
+      setShowArrow(true)
+      newTimeout(interval)
+    }
+  }, [lastClicked])
 
   if (!title) {
     return null
@@ -119,6 +113,7 @@ const ArrowButtonArea = ({
           className={`z-50 absolute ${
             action === "prev" ? "left-0 justify-start" : "right-0 justify-end"
           } top-0 h-full w-1/3 text-white flex items-center`}
+          onClick={() => setLastClicked(action)}
           onMouseMove={() => {
             if (!showArrow) {
               setShowArrow(true)
