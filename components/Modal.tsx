@@ -13,26 +13,20 @@ interface ModalProps {
   fromGrid: string
 }
 
-const Modal = (
-  {
-    imageHeight,
-    src,
-    hideModal,
-    setHideModal,
-    nextTitle,
-    prevTitle,
-    fromGrid,
-  }: ModalProps
-) => {
+const Modal = ({
+  imageHeight,
+  src,
+  hideModal,
+  setHideModal,
+  nextTitle,
+  prevTitle,
+  fromGrid,
+}: ModalProps) => {
   return (
     <div
       className={` fixed top-0 left-0 w-full h-full z-50 flex itmes-center justify-center ${
         hideModal ? "hidden" : ""
       }`}
-      onClick={() => {
-        console.log("setting hideModal true")
-        // setHideModal(true)
-      }}
     >
       <div
         className="relative top-0 left-0 w-full h-full z-50 flex itmes-center justify-center"
@@ -71,12 +65,16 @@ const Modal = (
           width: ".85rem",
           height: ".85rem",
         }}
+        onClick={() => {
+          console.log("setting hideModal true")
+          setHideModal(true)
+        }}
       />
     </div>
   )
-};
+}
 
-export default Modal;
+export default Modal
 
 interface ArrowButtonAreaProps {
   action: "prev" | "next"
@@ -96,7 +94,7 @@ const ArrowButtonArea = ({
 
   const interval = 1500
 
-  const newTimeout = () => {
+  const newTimeout = (interval: number) => {
     clearTimeout(timeoutId)
     const id = setTimeout(() => {
       setShowArrow(false)
@@ -104,13 +102,6 @@ const ArrowButtonArea = ({
     }, interval)
     setTimeoutId(id)
   }
-
-  useEffect(() => {
-    if (hideModal === false) {
-      setShowArrow(true)
-      newTimeout()
-    }
-  }, [hideModal])
 
   if (!title) {
     return null
@@ -126,16 +117,12 @@ const ArrowButtonArea = ({
           className={`z-50 absolute ${
             action === "prev" ? "left-0 justify-start" : "right-0 justify-end"
           } top-0 h-full w-1/3 text-white flex items-center`}
-          onClick={(e) => {
-            e.stopPropagation()
-            console.log("going ", action)
-          }}
           onMouseMove={() => {
             if (!showArrow) {
               setShowArrow(true)
-              newTimeout()
+              newTimeout(interval)
             } else {
-              newTimeout()
+              newTimeout(interval)
             }
           }}
           onMouseLeave={() => {
@@ -159,5 +146,5 @@ const ArrowButtonArea = ({
         </div>
       </a>
     </Link>
-  );
+  )
 }

@@ -6,8 +6,6 @@ import ModalProvider from "../providers/ModalProvider"
 import "../styles/style.css"
 
 function MyApp({ Component, pageProps }) {
-  const [count, setCount] = useState(0)
-
   return (
     <div className="default-div-height-layout-container">
       <Head>
@@ -32,7 +30,7 @@ function MyApp({ Component, pageProps }) {
       <ScreenProvider>
         <ModalProvider>
           <Layout>
-            <Component {...{ ...pageProps, count, setCount }} />
+            <Component {...pageProps} />
           </Layout>
         </ModalProvider>
       </ScreenProvider>
