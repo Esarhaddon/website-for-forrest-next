@@ -39,6 +39,9 @@ const Modal = ({
         }}
       >
         <div
+          onClick={() => {
+            setHideModal(true)
+          }}
           className="w-full h-full relative"
           style={{
             background: `center / contain no-repeat url(${src}?h=${
@@ -66,7 +69,6 @@ const Modal = ({
           height: ".85rem",
         }}
         onClick={() => {
-          console.log("setting hideModal true")
           setHideModal(true)
         }}
       />

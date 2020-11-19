@@ -7,11 +7,12 @@ import { useState } from "react"
 import Loading from "../components/Loading"
 import { useRouter, Router } from "next/router"
 import MobileNavWrapper from "../components/MobileNavWrapper"
+import { useModalContext } from "../providers/ModalProvider"
 
 export type GridType = "illustration" // | "animation" | "fine art"
 export type PageType = GridType | "about" | "contact" | "index" | ""
 
-const Layout = props => {
+const Layout = (props) => {
   const [isFor, setIsFor] = useState<PageType | undefined>(undefined)
   const [isForSingle, setIsForSingle] = useState(false)
 
@@ -34,12 +35,24 @@ const Layout = props => {
     }
   }, [])
 
+  const { hideModal } = useModalContext()
+
   if (isFor === undefined) {
     return <Loading />
   }
 
   if (isFor === "index") {
     props.children
+  }
+
+  // TO DO: fix this for fine art page
+  if (isFor === "illustration" && hideModal === false && isLoading) {
+    return (
+      <div
+        className="w-full absolute top-0 right-0"
+        style={{ backgroundColor: "rgba(0, 0, 0, .95)", height: "105vh" }}
+      />
+    )
   }
 
   // this will have to change when pages for fine art etc. are added
@@ -163,6 +176,6 @@ const Layout = props => {
       </div>
     </div>
   )
-};
+}
 
-export default Layout;
+export default Layout
