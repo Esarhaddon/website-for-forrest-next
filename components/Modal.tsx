@@ -27,7 +27,10 @@ export default ({
       className={` fixed top-0 left-0 w-full h-full z-50 flex itmes-center justify-center ${
         hideModal ? "hidden" : ""
       }`}
-      onClick={() => setHideModal(true)}
+      onClick={() => {
+        console.log("setting hideModal true")
+        // setHideModal(true)
+      }}
     >
       <div
         className="relative top-0 left-0 w-full h-full z-50 flex itmes-center justify-center"
@@ -146,6 +149,7 @@ const ArrowButtonArea = ({
                     transform: "scaleX(-1)",
                   }
                 : null),
+              filter: "drop-shadow( 1px 1px 2px rgba(0, 0, 0, .5))",
             }}
           />
         </div>

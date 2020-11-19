@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState, Dispatch, SetStateAction } from "react"
 import { GridType } from "../../components/Layout"
 import fetchImagesFor, { Image } from "../../utils/fetchImagesFor"
 import Link from "next/link"
@@ -10,6 +10,7 @@ import LayoutPaddingContainer from "../../components/LayoutPaddingContainer"
 import { useDominantColor } from "../../hooks/useDominantColor"
 import { useImgOnLoad } from "../../hooks/useImgOnLoad"
 import Modal from "../../components/Modal"
+import { useModalContext } from "../../providers/ModalProvider"
 
 interface Dimensions {
   h: number
@@ -39,9 +40,9 @@ const SingleImage = ({
     w: 1,
   })
   const [imageHasLoaded, setImageHasLoaded] = useState(false)
-  const [hideModal, setHideModal] = useState(true)
-
   const imgRef = useImgOnLoad(() => setImageHasLoaded(true))
+
+  const { hideModal, setHideModal } = useModalContext()
 
   const screenCxt = useScreenContext()
   useEffect(() => {
