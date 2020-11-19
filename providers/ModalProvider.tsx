@@ -17,7 +17,7 @@ export const useModalContext = () => {
   return useContext(ModalContext)
 }
 
-export default (props: any) => {
+const ModalProvider = (props: any) => {
   const [hideModal, setHideModal] = useState(true)
   return (
     <ModalContext.Provider
@@ -29,4 +29,6 @@ export default (props: any) => {
       {props.children}
     </ModalContext.Provider>
   )
-}
+};
+
+export default ModalProvider;

@@ -10,7 +10,7 @@ const validate = (value: string) => {
   }
 }
 
-export default () => {
+const Contact = () => {
   const [mailError, setMailError] = useState<Error | undefined>(undefined)
   const [showSent, setShowSent] = useState(false)
   useEffect(() => {
@@ -179,4 +179,6 @@ export default () => {
       </Formik>
     </div>
   )
-}
+};
+
+export default Contact;

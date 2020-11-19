@@ -9,7 +9,7 @@ interface MobileNavWrapperProps {
   children: ReactNode
 }
 
-export default (props: MobileNavWrapperProps) => {
+const MobileNavWrapper = (props: MobileNavWrapperProps) => {
   const [showMobileNav, setShowMobileNav] = useState(false)
   const [lastScroll, setLastScroll] = useState<"up" | "down" | undefined>(
     undefined
@@ -209,4 +209,6 @@ export default (props: MobileNavWrapperProps) => {
       </div>
     </div>
   )
-}
+};
+
+export default MobileNavWrapper;

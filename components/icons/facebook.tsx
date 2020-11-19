@@ -1,14 +1,14 @@
-export default ({ className }: { className: string }) => (
-  <svg
-    {...{ className }}
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 3333 3333"
-    shapeRendering="geometricPrecision"
-    textRendering="geometricPrecision"
-    imageRendering="optimizeQuality"
-    fillRule="evenodd"
-    clipRule="evenodd"
-  >
-    <path d="M1667 0c920 0 1667 746 1667 1667 0 920-746 1667-1667 1667C747 3334 0 2588 0 1667 0 747 746 0 1667 0zm186 1117h311V744h-311c-240 0-435 195-435 435v186h-249v373h249v994h373v-994h311l62-373h-373v-186c0-34 28-62 62-62z" />
-  </svg>
-)
+const Facebook = ({ className }: { className: string }) => <svg
+  {...{ className }}
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 3333 3333"
+  shapeRendering="geometricPrecision"
+  textRendering="geometricPrecision"
+  imageRendering="optimizeQuality"
+  fillRule="evenodd"
+  clipRule="evenodd"
+>
+  <path d="M1667 0c920 0 1667 746 1667 1667 0 920-746 1667-1667 1667C747 3334 0 2588 0 1667 0 747 746 0 1667 0zm186 1117h311V744h-311c-240 0-435 195-435 435v186h-249v373h249v994h373v-994h311l62-373h-373v-186c0-34 28-62 62-62z" />
+</svg>;
+
+export default Facebook;

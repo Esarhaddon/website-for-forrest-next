@@ -12,12 +12,14 @@ interface ThumbnailProps {
   index: number
 }
 
-export default ({
-  image,
-  containerHeight,
-  gridType,
-  index,
-}: ThumbnailProps) => {
+const Thumbnail = (
+  {
+    image,
+    containerHeight,
+    gridType,
+    index,
+  }: ThumbnailProps
+) => {
   const [isLoaded, setIsLoaded] = useState(false)
   const imgLoadingColor = useDominantColor(image.src)
   const imgSrc = `${image.src}?h=${Math.round(containerHeight * 1.75)}`
@@ -71,5 +73,7 @@ export default ({
         </Link>
       </div>
     </div>
-  )
-}
+  );
+};
+
+export default Thumbnail;

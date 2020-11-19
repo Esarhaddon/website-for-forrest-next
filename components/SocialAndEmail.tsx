@@ -6,7 +6,7 @@ interface SocialAndEmailProps {
   isDark: boolean
 }
 
-export default (props: SocialAndEmailProps) => {
+const SocialAndEmail = (props: SocialAndEmailProps) => {
   const brightness = props.isDark ? "dark" : "light"
   const baseColor = props.isDark ? "gray-900" : "white"
 
@@ -60,4 +60,6 @@ export default (props: SocialAndEmailProps) => {
       </div>
     </div>
   )
-}
+};
+
+export default SocialAndEmail;

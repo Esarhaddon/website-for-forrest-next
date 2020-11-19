@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 
 type Breakpoint = "" | "md" | "lg"
 
-export default (props: any) => {
+const LayoutPaddingContainer = (props: any) => {
   const [winHeight, setWinHeight] = useState(0)
   const [breakpoint, setBreakpoint] = useState<Breakpoint>("")
 
@@ -72,4 +72,6 @@ export default (props: any) => {
       {props.children}
     </div>
   )
-}
+};
+
+export default LayoutPaddingContainer;

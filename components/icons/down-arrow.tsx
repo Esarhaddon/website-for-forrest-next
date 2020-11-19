@@ -5,7 +5,7 @@ interface DownArrowProps {
   style?: CSSProperties
 }
 
-export default ({ className, style }: DownArrowProps) => {
+const DownArrow = ({ className, style }: DownArrowProps) => {
   return (
     <svg
       {...{ className, style }}
@@ -22,4 +22,6 @@ export default ({ className, style }: DownArrowProps) => {
       <path d="M0 320C0 143.293 143.293 0 320 0s320 143.293 320 320-143.293 320-320 320S0 496.707 0 320zm181.337-85.737v95.635L320 430.6l138.699-100.702v-95.635L320 334.93 181.337 234.263z" />
     </svg>
   )
-}
+};
+
+export default DownArrow;

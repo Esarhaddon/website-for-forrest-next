@@ -8,9 +8,7 @@ import Head from "next/head"
 import "scroll-behavior-polyfill"
 import { useImgOnLoad } from "../hooks/useImgOnLoad"
 
-// TO DO: optimize background images for this page as well?
-
-export default () => {
+const Index = () => {
   const [imageLoadCount, setLoadCount] = useState(0)
   const [allowPointerE, setAllowPointerE] = useState(false)
   const [toggle, setToggle] = useState(true)
@@ -246,7 +244,11 @@ export default () => {
       </div>
     </div>
   )
-}
+};
+
+// TO DO: optimize background images for this page as well?
+
+export default Index;
 
 // export default Index
 

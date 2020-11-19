@@ -28,7 +28,7 @@ export const useScreenContext = (): IScreenContext => {
   return context
 }
 
-export default (props: ScreenProviderProps) => {
+const ScreenProvider = (props: ScreenProviderProps) => {
   const [context, setContext] = useState<IScreenContext>({})
 
   useEffect(() => {
@@ -104,4 +104,6 @@ export default (props: ScreenProviderProps) => {
       {props.children}
     </ScreenContext.Provider>
   )
-}
+};
+
+export default ScreenProvider;

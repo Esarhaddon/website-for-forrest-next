@@ -11,7 +11,7 @@ import MobileNavWrapper from "../components/MobileNavWrapper"
 export type GridType = "illustration" // | "animation" | "fine art"
 export type PageType = GridType | "about" | "contact" | "index" | ""
 
-export default (props) => {
+const Layout = props => {
   const [isFor, setIsFor] = useState<PageType | undefined>(undefined)
   const [isForSingle, setIsForSingle] = useState(false)
 
@@ -163,4 +163,6 @@ export default (props) => {
       </div>
     </div>
   )
-}
+};
+
+export default Layout;

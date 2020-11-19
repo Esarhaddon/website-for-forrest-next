@@ -13,15 +13,17 @@ interface ModalProps {
   fromGrid: string
 }
 
-export default ({
-  imageHeight,
-  src,
-  hideModal,
-  setHideModal,
-  nextTitle,
-  prevTitle,
-  fromGrid,
-}: ModalProps) => {
+const Modal = (
+  {
+    imageHeight,
+    src,
+    hideModal,
+    setHideModal,
+    nextTitle,
+    prevTitle,
+    fromGrid,
+  }: ModalProps
+) => {
   return (
     <div
       className={` fixed top-0 left-0 w-full h-full z-50 flex itmes-center justify-center ${
@@ -72,7 +74,9 @@ export default ({
       />
     </div>
   )
-}
+};
+
+export default Modal;
 
 interface ArrowButtonAreaProps {
   action: "prev" | "next"
@@ -155,5 +159,5 @@ const ArrowButtonArea = ({
         </div>
       </a>
     </Link>
-  )
+  );
 }

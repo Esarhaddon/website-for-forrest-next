@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react"
 
-export default () => {
+const Loading = () => {
   const [showText, setShowText] = useState(false)
   const timeoutRef = useRef<NodeJS.Timeout | undefined>(undefined)
   useEffect(() => {
@@ -46,4 +46,6 @@ export default () => {
       </span>
     </div>
   )
-}
+};
+
+export default Loading;

@@ -3,7 +3,7 @@ interface ErrorMessage {
   code?: number
 }
 
-export default ({ text, code }: ErrorMessage) => {
+const ErrorMessageComponent = ({ text, code }: ErrorMessage) => {
   return (
     <div className="flex items-center justify-center my-8 px-4">
       <div className="text-red-500">
@@ -19,4 +19,6 @@ export default ({ text, code }: ErrorMessage) => {
       </div>
     </div>
   )
-}
+};
+
+export default ErrorMessageComponent;
