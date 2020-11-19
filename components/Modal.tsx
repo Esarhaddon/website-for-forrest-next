@@ -43,9 +43,7 @@ const Modal = ({
           }}
           className="w-full h-full relative"
           style={{
-            background: `center / contain no-repeat url(${src}?h=${
-              imageHeight * 2
-            })`,
+            background: `center / contain no-repeat url(${src}?h=${imageHeight})`,
           }}
         ></div>
       </div>
