@@ -1,8 +1,5 @@
 import fetch from "node-fetch"
 import ErrorMessage from "../components/ErrorMessage"
-import { useState, useEffect, useRef } from "react"
-import { useDominantColor } from "../hooks/useDominantColor"
-import { useImgOnLoad } from "../hooks/useImgOnLoad"
 import LayoutPaddingContainer from "../components/LayoutPaddingContainer"
 import Head from "next/head"
 
@@ -37,11 +34,6 @@ const AboutPage = ({
   errorMessage,
   errorCode,
 }: AboutPageProps) => {
-  const imgLoadingColor: string = useDominantColor(imageSrc)
-  const [imgIsLoaded, setImgIsLoaded] = useState(false)
-
-  const imgRef = useImgOnLoad(() => setImgIsLoaded(true))
-
   if (errorMessage || errorCode) {
     return (
       <LayoutPaddingContainer>
@@ -55,21 +47,9 @@ const AboutPage = ({
       <Head>
         <title key="title">About</title>
       </Head>
-      <img ref={imgRef} className="hidden" src={`${imageSrc}?h=400`} />
       <div className="max-w-3xl w-11/12 sm:w-7/12 md:w-6/12 leading-loose lg:text-left text-justify">
-        <div
-          className="h-40 w-32 mx-auto mt-2 sm:mt-0 mb-10"
-          style={{
-            background: `center / cover no-repeat url(${imageSrc}?h=400)`,
-          }}
-        >
-          <div
-            className="w-full h-full"
-            style={{
-              backgroundColor: imgIsLoaded ? "transparent" : imgLoadingColor,
-              transition: "background-color 200ms ease-in",
-            }}
-          />
+        <div className="sm:px-20 px-16 mb-8">
+          <img src={imageSrc} className="max-w-xs w-full h-auto mx-auto" />
         </div>
         {textContent.map((paragraph, i) => (
           <p key={"paragraph_" + i} className="mb-4 lg:indent-10">
