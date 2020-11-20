@@ -1,3 +1,4 @@
+import React, { useState, useRef } from "react"
 import fetch from "node-fetch"
 import ErrorMessage from "../components/ErrorMessage"
 import LayoutPaddingContainer from "../components/LayoutPaddingContainer"
@@ -34,6 +35,9 @@ const AboutPage = ({
   errorMessage,
   errorCode,
 }: AboutPageProps) => {
+  const [imgLoading, setImgLoading] = useState(false)
+  const imgRef = useRef(null)
+
   if (errorMessage || errorCode) {
     return (
       <LayoutPaddingContainer>
@@ -47,6 +51,7 @@ const AboutPage = ({
       <Head>
         <title key="title">About</title>
       </Head>
+      <img ref={imgRef} src={imageSrc} className="hidden" />
       <div className="max-w-3xl w-11/12 sm:w-7/12 md:w-6/12 leading-loose lg:text-left text-justify">
         <div className="sm:px-20 px-16 mb-8">
           <img src={imageSrc} className="max-w-xs w-full h-auto mx-auto" />

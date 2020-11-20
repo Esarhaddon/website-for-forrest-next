@@ -9,7 +9,7 @@ import { useRouter, Router } from "next/router"
 import MobileNavWrapper from "../components/MobileNavWrapper"
 import { useModalContext } from "../providers/ModalProvider"
 
-export type GridType = "illustration" // | "animation" | "fine art"
+export type GridType = "illustration" | "fine-art" // | "animation"
 export type PageType = GridType | "about" | "contact" | "index" | ""
 
 const Layout = (props) => {
@@ -99,6 +99,18 @@ const Layout = (props) => {
                     } hover:text-gray-900`}
                   >
                     ILLUSTRATION
+                  </a>
+                </Link>
+              </div>
+              <div className="mr-8 font-semibold text-gray-900">/</div>
+              <div>
+                <Link href="/[grid]" as="/fine-art">
+                  <a
+                    className={`mr-8 ${
+                      isFor === "fine-art" ? "text-gray-900" : "text-gray-500"
+                    } hover:text-gray-900`}
+                  >
+                    FINE ART
                   </a>
                 </Link>
               </div>

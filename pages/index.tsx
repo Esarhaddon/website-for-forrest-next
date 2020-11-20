@@ -244,13 +244,11 @@ const Index = () => {
       </div>
     </div>
   )
-};
+}
 
 // TO DO: optimize background images for this page as well?
 
-export default Index;
-
-// export default Index
+export default Index
 
 interface BackgroundPlaceholderProps {
   showPlaceholder: boolean
@@ -293,7 +291,7 @@ const Nav = () => (
               "color 170ms ease-in-out, background-color 170ms ease-in-out",
           }}
         >
-          ILLUSTRATION
+          ART WORK
         </a>
       </Link>
       <Link href="/about">
