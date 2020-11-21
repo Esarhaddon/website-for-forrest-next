@@ -173,7 +173,7 @@ const MobileNavWrapper = (props: MobileNavWrapperProps) => {
               ILLUSTRATION
             </a>
           </Link>
-          <Link href="/[grid]" as="/fine art">
+          <Link href="/[grid]" as="/fine-art">
             <a
               className="pointer-events-auto leading-loose text-4xl font-bold text-gray-900 tracking-wider cursor-pointer"
               onClick={() => setShowMobileNav(false)}

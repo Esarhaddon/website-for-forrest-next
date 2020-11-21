@@ -46,7 +46,11 @@ const Layout = (props) => {
   }
 
   // TO DO: fix this for fine art page
-  if (isFor === "illustration" && hideModal === false && isLoading) {
+  if (
+    (isFor === "illustration" || isFor === "fine-art") &&
+    hideModal === false &&
+    isLoading
+  ) {
     return (
       <div
         className="w-full absolute top-0 right-0"
@@ -55,7 +59,6 @@ const Layout = (props) => {
     )
   }
 
-  // this will have to change when pages for fine art etc. are added
   return (
     <div>
       {/* div with no other purpose than to prevent scroll bar from flashing while pages load */}
@@ -138,30 +141,6 @@ const Layout = (props) => {
                   </a>
                 </Link>
               </div>
-              {/* <div className="mr-8 font-semibold text-gray-900">/</div>
-          <div>
-          <Link href="/[grid]" as="/animation">
-            <a
-              className={`mr-8 ${
-                isFor === "animation" ? "text-gray-900" : "text-gray-500"
-              } hover:text-gray-900`}
-            >
-              ANIMATION
-            </a>
-          </Link>
-          </div>
-          <div className="mr-8 font-semibold text-gray-900">/</div>
-          <div>
-          <Link href="/[grid]" as="/fine-art">
-            <a
-              className={`${
-                isFor === "fine-art" ? "text-gray-900" : "text-gray-500"
-              } hover:text-gray-900`}
-            >
-              FINE ART
-            </a>
-          </Link>
-          </div> */}
             </div>
           </div>
           {isLoading ? (
