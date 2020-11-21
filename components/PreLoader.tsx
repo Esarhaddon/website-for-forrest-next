@@ -95,7 +95,6 @@ function ImageItem({ image }: { image: Image }) {
         src={`${image.src}?h=${dimensions.h * 2}`}
         className="hidden h-0 w-0"
         onLoad={() => {
-          console.log("an image has been preloaded!")
           setPreLoaded((current) => {
             const changed = [...current]
             changed.push(image.title)

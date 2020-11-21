@@ -67,7 +67,6 @@ const ScreenProvider = (props: ScreenProviderProps) => {
     const setUpListenerFor = (orientation: Orientation) => {
       const listener = (e: MediaQueryListEvent) => {
         if (e.matches) {
-          console.log("event match!")
           setContext({
             value: {
               ...getDimensionsFor(orientation),
