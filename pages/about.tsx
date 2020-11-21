@@ -1,8 +1,9 @@
-import React, { useState, useRef } from "react"
+import React, { useState, useRef, useEffect } from "react"
 import fetch from "node-fetch"
 import ErrorMessage from "../components/ErrorMessage"
 import LayoutPaddingContainer from "../components/LayoutPaddingContainer"
 import Head from "next/head"
+import Loading from "../components/Loading"
 
 interface AboutPageProps {
   imageSrc: string
@@ -35,8 +36,14 @@ const AboutPage = ({
   errorMessage,
   errorCode,
 }: AboutPageProps) => {
-  const [imgLoading, setImgLoading] = useState(false)
-  const imgRef = useRef(null)
+  const [imgLoaded, setImgLoaded] = useState(false)
+  const imgRef = useRef<HTMLImageElement>(null)
+
+  useEffect(() => {
+    if (imgRef.current?.complete) {
+      setImgLoaded(true)
+    }
+  }, [])
 
   if (errorMessage || errorCode) {
     return (
@@ -46,12 +53,25 @@ const AboutPage = ({
     )
   }
 
+  if (!imgLoaded) {
+    return (
+      <LayoutPaddingContainer>
+        <img
+          ref={imgRef}
+          src={imageSrc}
+          className="hidden"
+          onLoad={() => setImgLoaded(true)}
+        />
+        <Loading />
+      </LayoutPaddingContainer>
+    )
+  }
+
   return (
     <div className="flex flex-col items-center px-4">
       <Head>
         <title key="title">About</title>
       </Head>
-      <img ref={imgRef} src={imageSrc} className="hidden" />
       <div className="max-w-3xl w-11/12 sm:w-7/12 md:w-6/12 leading-loose lg:text-left text-justify">
         <div className="sm:px-20 px-16 mb-8">
           <img src={imageSrc} className="max-w-xs w-full h-auto mx-auto" />
