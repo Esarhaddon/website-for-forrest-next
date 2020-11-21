@@ -92,6 +92,7 @@ const ArrowButtonArea = ({ action, fromGrid, title }: ArrowButtonAreaProps) => {
     setTimeoutId(id)
   }
 
+  // NB: pretty sure this causes cleanup warning, but also that it's unavoidable and harmless
   useEffect(() => {
     if (lastClicked === action) {
       setShowArrow(true)
