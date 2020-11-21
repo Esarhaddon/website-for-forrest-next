@@ -9,6 +9,7 @@ import { useScreenContext } from "../../providers/ScreenProvider"
 import LayoutPaddingContainer from "../../components/LayoutPaddingContainer"
 import { useDominantColor } from "../../hooks/useDominantColor"
 import { useImgOnLoad } from "../../hooks/useImgOnLoad"
+import PreLoader from "../../components/PreLoader"
 import Modal from "../../components/Modal"
 import { useModalContext } from "../../providers/ModalProvider"
 
@@ -106,6 +107,7 @@ const SingleImage = ({
         />
         <title key="title">{current.title}</title>
       </Head>
+      <PreLoader grid={fromGrid} />
       {dimensions.h ? (
         <img
           ref={imgRef}

@@ -3,6 +3,7 @@ import Head from "next/head"
 import Layout from "../components/Layout"
 import ScreenProvider from "../providers/ScreenProvider"
 import ModalProvider from "../providers/ModalProvider"
+import ImageProvider from "../providers/ImageProvider"
 import "../styles/style.css"
 
 function MyApp({ Component, pageProps }) {
@@ -28,11 +29,13 @@ function MyApp({ Component, pageProps }) {
         />
       </Head>
       <ScreenProvider>
-        <ModalProvider>
-          <Layout>
-            <Component {...pageProps} />
-          </Layout>
-        </ModalProvider>
+        <ImageProvider>
+          <ModalProvider>
+            <Layout>
+              <Component {...pageProps} />
+            </Layout>
+          </ModalProvider>
+        </ImageProvider>
       </ScreenProvider>
     </div>
   )

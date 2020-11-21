@@ -5,6 +5,7 @@ import Thumbnail from "../../components/Thumbnail"
 import ErrorMessage from "../../components/ErrorMessage"
 import LayoutPaddingContainer from "../../components/LayoutPaddingContainer"
 import toTitleCase from "../../utils/toTitleCase"
+import PreLoader from "../../components/PreLoader"
 import Head from "next/head"
 
 interface GridProps {
@@ -33,26 +34,31 @@ const Grid = ({ gridType, toDisplay, errorMessage, errorCode }: GridProps) => {
   }
 
   return (
-    <div
-      className="grid"
-      style={{
-        display: "grid",
-        paddingRight: "5vw",
-        paddingLeft: "5vw",
-      }}
-    >
-      <Head>
-        <title key="title">{toTitleCase(gridType.split("-").join(" "))}</title>
-      </Head>
-      {toDisplay.map((image, index) => {
-        return (
-          <Thumbnail
-            key={image.title}
-            {...{ image, index, gridType, containerHeight }}
-          />
-        )
-      })}
-    </div>
+    <>
+      <PreLoader grid={gridType} />
+      <div
+        className="grid"
+        style={{
+          display: "grid",
+          paddingRight: "5vw",
+          paddingLeft: "5vw",
+        }}
+      >
+        <Head>
+          <title key="title">
+            {toTitleCase(gridType.split("-").join(" "))}
+          </title>
+        </Head>
+        {toDisplay.map((image, index) => {
+          return (
+            <Thumbnail
+              key={image.title}
+              {...{ image, index, gridType, containerHeight }}
+            />
+          )
+        })}
+      </div>
+    </>
   )
 }
 

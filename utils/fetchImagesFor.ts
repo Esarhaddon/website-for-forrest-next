@@ -74,7 +74,7 @@ interface Asset {
   }
 }
 
-export default async (imagesFor: "illustration"): Promise<Image[]> => {
+export default async (imagesFor: GridType): Promise<Image[]> => {
   // not consistently named, but can't fix it at this point
   let contentType: "illustration" | "fineArtPage"
   let contentName: "illustrations" | "fineArtWorks"
