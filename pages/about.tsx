@@ -41,7 +41,7 @@ const AboutPage = ({
 
   useEffect(() => {
     if (imgRef.current?.complete) {
-      // setImgLoaded(true)
+      setImgLoaded(true)
     }
   }, [])
 
