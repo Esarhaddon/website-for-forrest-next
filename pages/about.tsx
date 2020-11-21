@@ -55,17 +55,21 @@ const AboutPage = ({
 
   if (!imgLoaded) {
     return (
-      <div
-        className="fixed bg-white"
-        style={{ width: "100vw", height: "50vh" }}
-      >
-        <img
-          ref={imgRef}
-          src={imageSrc}
-          className="hidden"
-          onLoad={() => setImgLoaded(true)}
-        />
-        <Loading />
+      <div>
+        <div className="absolute w-full bg-white" style={{ height: "85vh" }} />
+        <div
+          className="fixed bg-white"
+          // gotta keep that scroll bar
+          style={{ width: "100vw", height: "50vh" }}
+        >
+          <img
+            ref={imgRef}
+            src={imageSrc}
+            className="hidden"
+            onLoad={() => setImgLoaded(true)}
+          />
+          <Loading />
+        </div>
       </div>
     )
   }
