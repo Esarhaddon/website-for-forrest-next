@@ -13,7 +13,7 @@ import PreLoader from "../../components/PreLoader"
 import Modal from "../../components/Modal"
 import { useModalContext } from "../../providers/ModalProvider"
 
-interface Dimensions {
+export interface Dimensions {
   h: number
   w: number
 }
