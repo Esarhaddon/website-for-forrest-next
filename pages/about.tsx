@@ -41,7 +41,7 @@ const AboutPage = ({
 
   useEffect(() => {
     if (imgRef.current?.complete) {
-      setImgLoaded(true)
+      // setImgLoaded(true)
     }
   }, [])
 
@@ -55,7 +55,10 @@ const AboutPage = ({
 
   if (!imgLoaded) {
     return (
-      <LayoutPaddingContainer>
+      <div
+        className="fixed bg-white"
+        style={{ width: "100vw", height: "50vh" }}
+      >
         <img
           ref={imgRef}
           src={imageSrc}
@@ -63,7 +66,7 @@ const AboutPage = ({
           onLoad={() => setImgLoaded(true)}
         />
         <Loading />
-      </LayoutPaddingContainer>
+      </div>
     )
   }
 
