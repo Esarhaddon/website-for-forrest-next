@@ -42,7 +42,7 @@ const Grid = ({ gridType, toDisplay, errorMessage, errorCode }: GridProps) => {
       }}
     >
       <Head>
-        <title key="title">{toTitleCase(gridType)}</title>
+        <title key="title">{toTitleCase(gridType.split("-").join(" "))}</title>
       </Head>
       {toDisplay.map((image, index) => {
         return (

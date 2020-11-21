@@ -56,10 +56,10 @@ const AboutPage = ({
   if (!imgLoaded) {
     return (
       <div>
+        {/* gotta keep that scroll bar */}
         <div className="absolute w-full bg-white" style={{ height: "85vh" }} />
         <div
           className="fixed bg-white"
-          // gotta keep that scroll bar
           style={{ width: "100vw", height: "50vh" }}
         >
           <img
