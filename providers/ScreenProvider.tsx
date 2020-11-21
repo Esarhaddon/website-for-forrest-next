@@ -67,6 +67,7 @@ const ScreenProvider = (props: ScreenProviderProps) => {
     const setUpListenerFor = (orientation: Orientation) => {
       const listener = (e: MediaQueryListEvent) => {
         if (e.matches) {
+          console.log("event match!")
           setContext({
             value: {
               ...getDimensionsFor(orientation),
@@ -104,6 +105,6 @@ const ScreenProvider = (props: ScreenProviderProps) => {
       {props.children}
     </ScreenContext.Provider>
   )
-};
+}
 
-export default ScreenProvider;
+export default ScreenProvider

@@ -1,6 +1,6 @@
 import ExitX from "./icons/close"
 import TallArrow from "./icons/tallArrow"
-import { useState, useEffect, useCallback } from "react"
+import { useState, useEffect } from "react"
 import Link from "next/link"
 import { useModalContext } from "../providers/ModalProvider"
 

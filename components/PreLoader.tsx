@@ -11,7 +11,19 @@ interface PreLoaderProps {
 
 export default function PreLoader({ grid }: PreLoaderProps) {
   const [images, setImages] = useState<Image[]>()
-  const { preLoaded } = useImageContext()
+  const { preLoaded, setPreLoaded } = useImageContext()
+
+  const screenCxt = useScreenContext()
+  const {
+    value: { width },
+  } = screenCxt
+
+  const [dimensions, setDimensions] = useState<Dimensions>(null)
+
+  // re-preload if screen gets resized
+  useEffect(() => {
+    setPreLoaded([])
+  }, [width, setPreLoaded])
 
   useEffect(() => {
     fetchImagesFor(grid).then((images) => setImages(images))
@@ -23,7 +35,7 @@ export default function PreLoader({ grid }: PreLoaderProps) {
         {images
           .filter((image) => !preLoaded.includes(image.title))
           .map((image) => (
-            <ImageItem {...{ image }} />
+            <ImageItem {...{ image }} key={image.title} />
           ))}
       </div>
     )
@@ -36,6 +48,7 @@ function ImageItem({ image }: { image: Image }) {
   const { setPreLoaded } = useImageContext()
   const imgRef = useRef<HTMLImageElement>(null)
   const screenCxt = useScreenContext()
+
   const [dimensions, setDimensions] = useState<Dimensions>(null)
 
   // TO DO: this should be a custom hook since its repeated in [singleimage].tsx
