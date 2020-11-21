@@ -58,8 +58,9 @@ const Grid = ({ gridType, toDisplay, errorMessage, errorCode }: GridProps) => {
 
 Grid.getInitialProps = async (ctx): Promise<Partial<GridProps>> => {
   const gridType = ctx.query.grid
+
   try {
-    const toDisplay = await fetchImagesFor(gridType)
+    const toDisplay = await fetchImagesFor(ctx.query.grid)
 
     return { gridType, toDisplay }
   } catch (e) {

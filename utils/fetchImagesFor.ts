@@ -1,4 +1,5 @@
 import fetch from "node-fetch"
+import { GridType } from "../components/Layout"
 
 export interface Image {
   src: string
@@ -74,8 +75,23 @@ interface Asset {
 }
 
 export default async (imagesFor: "illustration"): Promise<Image[]> => {
+  // not consistently named, but can't fix it at this point
+  let contentType: "illustration" | "fineArtPage"
+  let contentName: "illustrations" | "fineArtWorks"
+
+  switch (imagesFor) {
+    case "illustration":
+      contentType = "illustration"
+      contentName = "illustrations"
+      break
+    case "fine-art" as any:
+      contentType = "fineArtPage"
+      contentName = "fineArtWorks"
+      break
+  }
+
   const res = await fetch(
-    `${process.env.CONTENTFUL_API}?content_type=${imagesFor}&include=2`,
+    `${process.env.CONTENTFUL_API}?content_type=${contentType}&include=2`,
     {
       method: "GET",
       headers: {
@@ -89,9 +105,9 @@ export default async (imagesFor: "illustration"): Promise<Image[]> => {
   }
 
   const content: IllustrationPageContent = await res.json()
-  const illustrations: Reference[] = content.items[0].fields.illustrations
-  const entries: ArtWork[] = illustrations.map((illustration) =>
-    content.includes.Entry.find((entry) => illustration.sys.id === entry.sys.id)
+  const artWorks: Reference[] = content.items[0].fields[contentName]
+  const entries: ArtWork[] = artWorks.map((artWork) =>
+    content.includes.Entry.find((entry) => artWork.sys.id === entry.sys.id)
   )
   const images: Image[] = entries.map((entry) => {
     const asset = content.includes.Asset.find(
