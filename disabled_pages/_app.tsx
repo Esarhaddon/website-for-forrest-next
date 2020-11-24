@@ -31,7 +31,9 @@ function MyApp({ Component, pageProps }) {
       <ScreenProvider>
         <ImageProvider>
           <ModalProvider>
-            <Component {...pageProps} />
+            <Layout>
+              <Component {...pageProps} />
+            </Layout>
           </ModalProvider>
         </ImageProvider>
       </ScreenProvider>
