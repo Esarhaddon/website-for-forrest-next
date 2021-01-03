@@ -7,6 +7,8 @@ module.exports = {
         "hover-text-transparent-light",
         "text-white",
         "text-gray-900",
+        "hover:text-gray-900",
+        "hover:text-gray-white",
       ],
     },
   },
