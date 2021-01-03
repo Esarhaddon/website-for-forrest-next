@@ -4,7 +4,7 @@ import Layout from "../components/Layout"
 import ScreenProvider from "../providers/ScreenProvider"
 import ModalProvider from "../providers/ModalProvider"
 import ImageProvider from "../providers/ImageProvider"
-import "../styles/style.css"
+import "../styles/global.css"
 
 function MyApp({ Component, pageProps }) {
   return (
