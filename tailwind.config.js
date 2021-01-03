@@ -1,5 +1,15 @@
 module.exports = {
-  purge: ["./components/**/*.tsx", "./pages/**/*.tsx"],
+  purge: {
+    content: ["./components/**/*.tsx", "./pages/**/*.tsx"],
+    options: {
+      safelist: [
+        "hover-text-transparent-dark",
+        "hover-text-transparent-light",
+        "text-white",
+        "text-gray-900",
+      ],
+    },
+  },
   theme: {
     screens: {
       xsm: "600px",

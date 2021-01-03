@@ -60,6 +60,6 @@ const SocialAndEmail = (props: SocialAndEmailProps) => {
       </div>
     </div>
   )
-};
+}
 
-export default SocialAndEmail;
+export default SocialAndEmail
