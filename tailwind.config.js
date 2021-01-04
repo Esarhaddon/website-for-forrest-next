@@ -1,16 +1,6 @@
 module.exports = {
   purge: {
     content: ["./components/**/*.tsx", "./pages/**/*.tsx"],
-    options: {
-      safelist: [
-        "hover-text-transparent-dark",
-        "hover-text-transparent-light",
-        "text-white",
-        "text-gray-900",
-        "hover:text-gray-900",
-        "hover:text-white",
-      ],
-    },
   },
   theme: {
     screens: {
